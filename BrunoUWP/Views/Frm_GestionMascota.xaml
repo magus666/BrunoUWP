@@ -1,4 +1,4 @@
-﻿<Page
+﻿<Page xmlns:my="using:Microsoft.UI.Xaml.Controls" 
     x:Class="BrunoUWP.Frm_GestionMascota"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,7 +17,7 @@
     <Grid x:Name="GrdPrincipal">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -30,22 +30,55 @@
               Margin="10">
             <StackPanel Orientation="Vertical">
                 <ComboBox x:Name="CmbTipoMascota"
-                          Header="Seleccione el Tipo de mascota"/>
+                          Header="Tipo de Mascota"
+                          HorizontalAlignment="Stretch"/>
                 <ComboBox x:Name="CmbRazaMascota"
-                          Header="Seleccione la Raza"/>
+                          Header="Raza"
+                          HorizontalAlignment="Stretch"/>
                 <TextBox x:Name="TxtNombreMascota" 
                          PlaceholderText="Digite el Nombre"
                          Header="Nombre de la Mascota"/>
+                <my:NumberBox x:Name="NbbEdad"
+                              Header="Edad"
+                              Value="1"
+                              SpinButtonPlacementMode="Inline"
+                              SmallChange="1" Minimum="0"
+                              Maximum="20"/>
+                <ComboBox x:Name="CmbPropietario"
+                          Header="Propietario"
+                          HorizontalAlignment="Stretch"/>
+                <TextBox x:Name="TxtTelefono" 
+                         PlaceholderText="Digite el Telefono"
+                         Header="Telefono"/>
+                <TextBox x:Name="TxtDireccion" 
+                         PlaceholderText="Digite la Direccion"
+                         Header="Direccion"/>
+                
+                <RichEditBox x:Name="RebObservaciones"
+                             Height="150"
+                             Header="Observaciones"
+                             PlaceholderText="Escriba las Observaciones"/>
+
+                <Button x:Name="BtnGuardar"
+                        ui:Effects.Shadow="{StaticResource CommonShadow}"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Guardar"/>
             </StackPanel>
 
         </Grid>
-        <Grid Grid.Column="1"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-              Padding="10"
-              x:Name="GrdDos"
-              Margin="0,10,10,10">
-
-            <controls:DataGrid x:Name="DtgMovimientoEquipos"
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                  ui:Effects.Shadow="{StaticResource CommonShadow}"
+                  Padding="10"
+                  x:Name="GrdDos"
+                  Margin="0,10,10,10">
+                <controls:DataGrid x:Name="DtgMovimientoEquipos"
                                    Margin="10"
                                    ClipboardCopyMode="IncludeHeader"
                                    AutoGenerateColumns="False"
@@ -59,18 +92,32 @@
                                    HorizontalAlignment="Stretch"
                                    GridLinesVisibility="Horizontal"
                                    SelectionMode="Extended">
-                <controls:DataGrid.Columns>
-                    <controls:DataGridTextColumn Header="Marca" Tag="Marca" />
-                    <controls:DataGridTextColumn Header="Modelo" Tag="Modelo" />
-                    <controls:DataGridTextColumn Header="Serial" Tag="Serial" />
-                    <controls:DataGridTextColumn Header="Documento" Tag="Documento" />
-                    <controls:DataGridTextColumn Header="Fecha" Tag="Fecha" />
-                    <controls:DataGridTextColumn Header="Hora" Tag="Hora" />
-                    <controls:DataGridTextColumn Header="Movimiento" Tag="Movimiento" />
-                    <controls:DataGridTextColumn Header="Descripcion" Tag="Descripcion" />
-                </controls:DataGrid.Columns>
-            </controls:DataGrid>
-
+                    <controls:DataGrid.Columns>
+                        <controls:DataGridTextColumn Header="Tipo" Tag="Tipo" />
+                        <controls:DataGridTextColumn Header="Raza" Tag="Raza" />
+                        <controls:DataGridTextColumn Header="Nombre" Tag="Nombre" />
+                        <controls:DataGridTextColumn Header="Edad" Tag="Edad" />
+                        <controls:DataGridTextColumn Header="Propietario" Tag="Propietario" />
+                        <controls:DataGridTextColumn Header="Telefono" Tag="Telefono" />
+                        <controls:DataGridTextColumn Header="Direccion" Tag="Direccion" />
+                        <controls:DataGridTextColumn Header="Observaciones" Tag="Observaciones" />
+                    </controls:DataGrid.Columns>
+                </controls:DataGrid>
+            </Grid>
+            <Grid Grid.Row="1"
+                  ui:Effects.Shadow="{StaticResource CommonShadow}"
+                  Padding="10"
+                  Margin="0,0,10,10">
+                <AppBarButton Label="Exportar"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Wingdings 2" Glyph="&#x002E;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                
+            </Grid>
+           
         </Grid>
 
 

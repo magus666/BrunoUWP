@@ -19,6 +19,8 @@ Public NotInheritable Class MainPage
                             sender.Content = New Frm_Inicio()
                         Case "Gestion de Mascotas"
                             sender.Content = New Frm_GestionMascota()
+                        Case "Inventario"
+                            sender.Content = New Frm_Inventario()
                     End Select
             End Select
         Catch ex As Exception

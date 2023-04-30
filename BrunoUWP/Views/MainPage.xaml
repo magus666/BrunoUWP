@@ -24,9 +24,14 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Icon="World" Content="Transacciones" Tag="Transacciones" />
+                <NavigationViewItem Content="Inventario" Tag="Inventario">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7BF;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.PaneCustomContent>
-                <Image x:Name="Header" Source="/Assets/ImageLogo.png" HorizontalAlignment="Center" Width="100" Height="100"/>
+                <Image x:Name="Header" Source="/Assets/LogoBruno.png" HorizontalAlignment="Center" Width="100" Height="100"/>
             </NavigationView.PaneCustomContent>
             <Frame x:Name="ContenFrameMenu" x:FieldModifier="Public"/>
 </NavigationView>
