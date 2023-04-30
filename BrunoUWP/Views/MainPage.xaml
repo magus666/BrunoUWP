@@ -18,7 +18,7 @@
                         Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}">
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="Home" Content="Inicio" Tag="Inicio" />
-                <NavigationViewItem Content="Gestion de Mascotas" Tag="GestionMascotas">
+                <NavigationViewItem Content="Mascotas" Tag="Mascotas">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="Webdings" Glyph="&#xF0F5;" />
                     </NavigationViewItem.Icon>

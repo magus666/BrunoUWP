@@ -17,8 +17,8 @@ Public NotInheritable Class MainPage
                     Select Case args.InvokedItem
                         Case "Inicio"
                             sender.Content = New Frm_Inicio()
-                        Case "Gestion de Mascotas"
-                            sender.Content = New Frm_GestionMascota()
+                        Case "Mascotas"
+                            sender.Content = New Frm_Mascota()
                         Case "Inventario"
                             sender.Content = New Frm_Inventario()
                     End Select
