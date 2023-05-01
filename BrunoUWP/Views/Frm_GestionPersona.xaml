@@ -1,5 +1,5 @@
 ﻿<Page xmlns:my="using:Microsoft.UI.Xaml.Controls" 
-    x:Class="BrunoUWP.Frm_GestionMascota"
+    x:Class="BrunoUWP.Frm_GestionPersona"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BrunoUWP"
@@ -10,6 +10,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
     <Page.Resources>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
     </Page.Resources>
@@ -17,7 +18,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
+        <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ScrollViewer>
@@ -26,14 +27,13 @@
                   x:Name="GrdUno"
                   Padding="10"
                   Margin="10,10,10,10">
-
                 <StackPanel x:Name="StpPrincipal">
                     <ComboBox x:Name="CmbTipoMascota"
-                              Header="Tipo de Mascota"
-                              HorizontalAlignment="Stretch"/>
+                          Header="Tipo de Mascota"
+                          HorizontalAlignment="Stretch"/>
                     <ComboBox x:Name="CmbRazaMascota"
-                              Header="Raza"
-                              HorizontalAlignment="Stretch"/>
+                          Header="Raza"
+                          HorizontalAlignment="Stretch"/>
                     <TextBox x:Name="TxtNombreMascota" 
                          PlaceholderText="Digite el Nombre"
                          Header="Nombre de la Mascota"/>

@@ -140,6 +140,9 @@
     <Compile Include="Views\Frm_GestionMascota.xaml.vb">
       <DependentUpon>Frm_GestionMascota.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm_GestionPersona.xaml.vb">
+      <DependentUpon>Frm_GestionPersona.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_Inicio.xaml.vb">
       <DependentUpon>Frm_Inicio.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,9 @@
     </Compile>
     <Compile Include="Views\Frm_Mascota.xaml.vb">
       <DependentUpon>Frm_Mascota.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_Persona.xaml.vb">
+      <DependentUpon>Frm_Persona.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.vb">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -236,6 +242,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Frm_GestionPersona.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frm_Inicio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -245,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_Mascota.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_Persona.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
