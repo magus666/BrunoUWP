@@ -24,7 +24,7 @@
                   ui:Effects.Shadow="{StaticResource CommonShadow}"
                   x:Name="GrdUno"
                   Padding="10"
-                  Margin="10">
+                  Margin="10,10,10,10">
                 <StackPanel x:Name="StpPrincipal">
                     <ComboBox x:Name="CmbTipoMascota"
                           Header="Tipo de Mascota"
