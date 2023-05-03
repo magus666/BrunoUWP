@@ -5,5 +5,13 @@
 ''' </summary>
 Public NotInheritable Class Frm_GestionMascota
     Inherits Page
+    Dim GetNotifications As New Cl_Notificaciones()
 
+    Private Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            GetNotifications.NotifiacionToast()
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
