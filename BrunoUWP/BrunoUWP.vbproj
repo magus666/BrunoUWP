@@ -18,7 +18,8 @@
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
-    <PackageCertificateKeyFile>BrunoUWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>
+    </PackageCertificateKeyFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
@@ -26,6 +27,7 @@
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <AppInstallerUri>C:\Users\black\OneDrive\Documentos\UWP Apps</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <PackageCertificateThumbprint>02351CD77291F1B2DAED86ABB6A1EB06617DAE0A</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
