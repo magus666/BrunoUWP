@@ -28,6 +28,12 @@
                   Margin="10,10,10,10">
 
                 <StackPanel x:Name="StpPrincipal">
+                    <my:PersonPicture x:Name="PrpMascota"
+                                      Width="150"
+                                      Height="150"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Tapped="PrpMascota_Tapped"/>
                     <ComboBox x:Name="CmbTipoMascota"
                               Header="Tipo de Mascota"
                               HorizontalAlignment="Stretch"/>
@@ -46,18 +52,10 @@
                     <ComboBox x:Name="CmbPropietario"
                           Header="Propietario"
                           HorizontalAlignment="Stretch"/>
-                    <TextBox x:Name="TxtTelefono" 
-                         PlaceholderText="Digite el Telefono"
-                         Header="Telefono"/>
-                    <TextBox x:Name="TxtDireccion" 
-                         PlaceholderText="Digite la Direccion"
-                         Header="Direccion"/>
-
                     <RichEditBox x:Name="RebObservaciones"
-                             Height="142"
+                             Height="100"
                              Header="Observaciones"
                              PlaceholderText="Escriba las Observaciones"/>
-
                     <Button x:Name="BtnGuardar"
                             ui:Effects.Shadow="{StaticResource CommonShadow}"
                             Margin="0,10,0,0"

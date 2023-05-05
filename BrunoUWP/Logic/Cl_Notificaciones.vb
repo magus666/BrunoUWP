@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.Toolkit.Uwp.Notifications
 
 Public Class Cl_Notificaciones
+    Dim GetMetodosDateTime As New Cl_DateTime()
 
     Public Function NotifiacionToast() As Boolean
         Try
@@ -10,7 +11,7 @@ Public Class Cl_Notificaciones
             LlamarNotificacionToast.AddArgument("eventId", 666)
             LlamarNotificacionToast.AddText("Spa para Perrita Ginebra")
             LlamarNotificacionToast.AddText("Se espera 15 minutos antes")
-            LlamarNotificacionToast.AddText(Date.Now)
+            LlamarNotificacionToast.AddText(GetMetodosDateTime.ObtenerHoraActual)
             LlamarNotificacionToast.AddComboBox("TiempoEspera", "15", ("1", "1 Munto"),
                                                                       ("5", "5 Munutos"),
                                                                       ("10", "10 Munutos"),

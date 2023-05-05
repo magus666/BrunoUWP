@@ -141,6 +141,7 @@
     <Compile Include="App.xaml.vb">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Cl_DateTime.vb" />
     <Compile Include="Logic\Cl_Notificaciones.vb" />
     <Compile Include="Logic\Md_Parametrizacion.vb" />
     <Compile Include="Views\Frm_Configuracion.xaml.vb">
