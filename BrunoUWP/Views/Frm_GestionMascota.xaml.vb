@@ -13,6 +13,8 @@ Public NotInheritable Class Frm_GestionMascota
     Private Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
             GetNotifications.NotifiacionToast()
+            'MarcoTrabajo = MainPage.Current.ContenFrameMenu
+            'MarcoTrabajo.Navigate(GetType(Frm_ConsultaMascota))
         Catch ex As Exception
 
         End Try

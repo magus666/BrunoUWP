@@ -7,7 +7,7 @@ Imports System.Security.Cryptography.X509Certificates
 ''' </summary>
 Public NotInheritable Class MainPage
     Inherits Page
-
+    Public Shared Current As MainPage
     Private Sub NvwBruno_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
         Try
             Select Case args.IsSettingsInvoked
