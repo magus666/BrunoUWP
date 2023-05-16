@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="Logic\Cl_DateTime.vb" />
     <Compile Include="Logic\Cl_Notificaciones.vb" />
+    <Compile Include="Logic\In_FechaHora.vb" />
     <Compile Include="Logic\Md_Parametrizacion.vb" />
     <Compile Include="Views\Frm_Configuracion.xaml.vb">
       <DependentUpon>Frm_Configuracion.xaml</DependentUpon>
