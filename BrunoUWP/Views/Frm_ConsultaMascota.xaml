@@ -9,13 +9,14 @@
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
     <Page.Resources>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
@@ -24,28 +25,26 @@
                   x:Name="GrdDos"
                   Margin="0,10,10,10">
             <controls:DataGrid x:Name="DtgMovimientoEquipos"
-                                   Margin="10"
-                                   ClipboardCopyMode="IncludeHeader"
-                                   AutoGenerateColumns="False"
-                                   AreRowDetailsFrozen="True"
-                                   ColumnHeaderHeight="32"
-                                   CanUserReorderColumns="True"
-                                   CanUserResizeColumns="True"
-                                   CanUserSortColumns="True"
-                                   HeadersVisibility="Column"
-                                   IsReadOnly="True"
-                                   HorizontalAlignment="Stretch"
-                                   GridLinesVisibility="Horizontal"
-                                   SelectionMode="Extended">
+                               Margin="10"
+                               ClipboardCopyMode="IncludeHeader"
+                               AutoGenerateColumns="False"
+                               AreRowDetailsFrozen="True"
+                               ColumnHeaderHeight="32"
+                               CanUserReorderColumns="True"
+                               CanUserResizeColumns="True"
+                               CanUserSortColumns="True"
+                               HeadersVisibility="Column"
+                               IsReadOnly="True"
+                               HorizontalAlignment="Stretch"
+                               GridLinesVisibility="Horizontal"
+                                SelectionMode="Extended">
                 <controls:DataGrid.Columns>
-                    <controls:DataGridTextColumn Header="Tipo" Tag="Tipo" />
-                    <controls:DataGridTextColumn Header="Raza" Tag="Raza" />
-                    <controls:DataGridTextColumn Header="Nombre" Tag="Nombre" />
-                    <controls:DataGridTextColumn Header="Edad" Tag="Edad" />
-                    <controls:DataGridTextColumn Header="Propietario" Tag="Propietario" />
-                    <controls:DataGridTextColumn Header="Telefono" Tag="Telefono" />
-                    <controls:DataGridTextColumn Header="Direccion" Tag="Direccion" />
-                    <controls:DataGridTextColumn Header="Observaciones" Tag="Observaciones" />
+                    <controls:DataGridTextColumn Header="Tipo" Tag="Tipo" Binding="{Binding Tipo_Mascota}" />
+                    <controls:DataGridTextColumn Header="Raza" Tag="Raza" Binding="{Binding Raza_Mascota}" />
+                    <controls:DataGridTextColumn Header="Nombre" Tag="Nombre" Binding="{Binding Nombre_Mascota}" />
+                    <controls:DataGridTextColumn Header="Edad" Tag="Edad" Binding="{Binding Edad_Mascota}" />
+                    <controls:DataGridTextColumn Header="Propietario" Tag="Propietario" Binding="{Binding Propietario_Mascota}" />
+                    <controls:DataGridTextColumn Header="Observaciones" Tag="Observaciones" Binding="{Binding Observaciones_Mascota}" />
                 </controls:DataGrid.Columns>
             </controls:DataGrid>
         </Grid>

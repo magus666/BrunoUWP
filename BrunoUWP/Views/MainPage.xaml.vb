@@ -1,13 +1,16 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
-
-Imports System.Security
-Imports System.Security.Cryptography.X509Certificates
+Imports Windows.UI.Xaml.Navigation
+Imports Windows.UI.Xaml.Media
+Imports Windows.UI
+Imports System.Security.Principal
 ''' <summary>
 ''' Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
 Public NotInheritable Class MainPage
     Inherits Page
     Public Shared Current As MainPage
+    Public GetWindowsHello As New Cl_WindowsHello
+
     Private Sub NvwBruno_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
         Try
             Select Case args.IsSettingsInvoked

@@ -8,7 +8,7 @@ Public Class Cl_DateTime
             Dim HoraActual As String = FechaHoraActual.ToString("hh:mm tt", CultureInfo.InvariantCulture)
             Return HoraActual
         Catch ex As Exception
-            Throw New Exception
+            Throw New Exception(ex.Message)
         End Try
     End Function
 End Class
