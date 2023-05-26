@@ -142,6 +142,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\AccountHelper.vb" />
+    <Compile Include="Logic\Cl_ManipulacionImagenes.vb" />
+    <Compile Include="Logic\Cl_Utilitarios.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
     <Compile Include="Models\ClienteModel.vb" />
@@ -155,6 +157,9 @@
     <Compile Include="Logic\In_FechaHora.vb" />
     <Compile Include="Logic\Md_Parametrizacion.vb" />
     <Compile Include="Models\Usuario.vb" />
+    <Compile Include="Views\Frm_Cliente.xaml.vb">
+      <DependentUpon>Frm_Cliente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_Configuracion.xaml.vb">
       <DependentUpon>Frm_Configuracion.xaml</DependentUpon>
     </Compile>
@@ -178,9 +183,6 @@
     </Compile>
     <Compile Include="Views\Frm_Mascota.xaml.vb">
       <DependentUpon>Frm_Mascota.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm_Persona.xaml.vb">
-      <DependentUpon>Frm_Persona.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.vb">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -257,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Frm_Cliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frm_Configuracion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -286,10 +292,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_Mascota.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Frm_Persona.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

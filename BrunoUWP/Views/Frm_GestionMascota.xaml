@@ -25,10 +25,10 @@
             <Grid Grid.Column="0"
                   ui:Effects.Shadow="{StaticResource CommonShadow}"
                   x:Name="GrdUno"
-                  Padding="10"
-                  Margin="10,10,10,10">
+                  Margin="50,10">
 
-                <StackPanel x:Name="StpPrincipal">
+                <StackPanel x:Name="StpPrincipal"
+                            Padding="20">
                     <my:PersonPicture x:Name="PrpMascota"
                                       Width="150"
                                       Height="150"
@@ -51,8 +51,9 @@
                               SmallChange="1" Minimum="0"
                               Maximum="20"/>
                     <ComboBox x:Name="CmbPropietario"
-                          Header="Propietario"
-                          HorizontalAlignment="Stretch"/>
+                              Header="Propietario"
+                              IsEditable="True"
+                              HorizontalAlignment="Stretch"/>
                     <RichEditBox x:Name="RebObservaciones"
                              Height="100"
                              Header="Observaciones"

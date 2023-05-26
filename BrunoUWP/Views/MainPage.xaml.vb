@@ -19,7 +19,7 @@ Public NotInheritable Class MainPage
                 Case False
                     Select Case args.InvokedItem
                         Case "Clientes"
-                            sender.Content = New Frm_Persona()
+                            sender.Content = New Frm_Cliente()
                         Case "Inicio"
                             sender.Content = New Frm_Inicio()
                         Case "Mascotas"
