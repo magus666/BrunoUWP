@@ -10,7 +10,7 @@
   <Identity
     Name="516b4f82-94e6-4c31-b8e2-0d6dfcdcf047"
     Publisher="CN=MetalZoneSolutions"
-    Version="1.0.1.0" />
+    Version="1.0.2.0" />
 
   <mp:PhoneIdentity PhoneProductId="516b4f82-94e6-4c31-b8e2-0d6dfcdcf047" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
