@@ -67,7 +67,7 @@
                           HorizontalAlignment="Center"
                           IsItemClickEnabled="True"
                           IsEnabled="False">
-                        <Grid Margin="5" Height="150" Width="440"
+                        <Grid Margin="5" Height="150" Width="435"
                           ui:Effects.Shadow="{StaticResource CommonShadow}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="150"/>
@@ -94,7 +94,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
-                        <Grid Margin="5" Height="150" Width="440"
+                        <Grid Margin="5" Height="150" Width="435"
                   ui:Effects.Shadow="{StaticResource CommonShadow}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="150"/>
@@ -121,7 +121,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
-                        <Grid Margin="5" Height="150" Width="440"
+                        <Grid Margin="5" Height="150" Width="435"
                   ui:Effects.Shadow="{StaticResource CommonShadow}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="150"/>
@@ -148,7 +148,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
-                        <Grid Margin="5" Height="150" Width="440"
+                        <Grid Margin="5" Height="150" Width="435"
                   ui:Effects.Shadow="{StaticResource CommonShadow}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="150"/>
