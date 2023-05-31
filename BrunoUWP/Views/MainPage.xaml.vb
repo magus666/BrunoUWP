@@ -8,7 +8,7 @@ Imports System.Security.Principal
 ''' </summary>
 Public NotInheritable Class MainPage
     Inherits Page
-    Public Shared Current As MainPage
+    Public Shared PaginaActual As MainPage
     Public GetWindowsHello As New Cl_WindowsHello
 
     Private Sub NvwBruno_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
@@ -36,7 +36,7 @@ Public NotInheritable Class MainPage
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
             MarcoTrabajo = ContenFrameMenu
-            ContenFrameMenu.Navigate(GetType(Frm_Inicio))
+            MarcoTrabajo.Navigate(GetType(Frm_Inicio))
         Catch ex As Exception
 
         End Try

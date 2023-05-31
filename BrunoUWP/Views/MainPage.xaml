@@ -9,6 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded">
     <Grid>
+        <TextBlock x:Name="LblTitulo" />
         <NavigationView x:Name="NvwBruno"
                         IsSettingsVisible="True"
                         ItemInvoked="NvwBruno_ItemInvoked"

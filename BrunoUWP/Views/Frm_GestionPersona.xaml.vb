@@ -6,4 +6,13 @@
 Public NotInheritable Class Frm_GestionPersona
     Inherits Page
 
+    Private Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            MarcoTrabajo = MainPage.PaginaActual.ContenFrameMenu
+            MarcoTrabajo.Navigate(GetType(Frm_ConsultaMascota))
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
 End Class

@@ -18,7 +18,7 @@
                 <NavigationViewItem  Content="Gestion de Mascotas" Tag="GestionMascota" />
                 <NavigationViewItem  Content="Consulta de Mascotas" Tag="ConsultamMascota" />
             </NavigationView.MenuItems>
-            <Frame x:Name="Contenido"/>
+            <Frame x:Name="Contenido" x:FieldModifier="Public"/>
         </NavigationView>
     </Grid>
 </Page>

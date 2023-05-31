@@ -13,8 +13,6 @@ Public NotInheritable Class Frm_GestionMascota
         Try
             Await GetMascota.InsertarMascota(1, 1, "Francisco Franco", 4, 3, "Gonorrea perro")
             'GetNotifications.NotifiacionToast()
-            'MarcoTrabajo = MainPage.Current.ContenFrameMenu
-            'MarcoTrabajo.Navigate(GetType(Frm_ConsultaMascota))
         Catch ex As Exception
 
         End Try

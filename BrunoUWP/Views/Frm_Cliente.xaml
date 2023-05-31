@@ -44,6 +44,11 @@
                               Minimum="1"/>
                 <ComboBox Header="Sexo"
                           HorizontalAlignment="Stretch"/>
+                <Button x:Name="BtnGuardar"
+                        Content="Guardar"
+                        HorizontalAlignment="Center"
+                        Margin="10"
+                        Click="BtnGuardar_Click"/>
             </StackPanel>
 
         </Grid>
