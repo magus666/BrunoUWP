@@ -48,7 +48,8 @@
                         <controls:RadioButtons x:Name="RdbTema"
                                                SelectedIndex="0"
                                                Margin="40,0,0,0"
-                                               MaxColumns="1" >
+                                               MaxColumns="1"
+                                               SelectionChanged="RdbTema_SelectionChanged">
                             <x:String>Claro</x:String>
                             <x:String>Oscuro</x:String>
                             <x:String>Configuracion del Sistema</x:String>
