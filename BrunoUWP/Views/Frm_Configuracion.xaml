@@ -46,7 +46,7 @@
                 <controls:Expander.Content>
                     <RelativePanel>
                         <controls:RadioButtons x:Name="RdbTema"
-                                               SelectedIndex="0"
+                                               SelectedIndex="1"
                                                Margin="40,0,0,0"
                                                MaxColumns="1"
                                                SelectionChanged="RdbTema_SelectionChanged">
