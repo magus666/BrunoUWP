@@ -11,6 +11,13 @@ Public NotInheritable Class Frm_Cliente
     Dim newViewId As Integer = 0
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        Dim localSettings = Windows.Storage.ApplicationData.Current.LocalSettings
+        Dim Value = localSettings.Values("NombreMascota")
+        If Value IsNot Nothing Then
+            TxtNombres.Text = Value
+        End If
+
+
         Dim CodigoAleatrorio As String = GetUtilitarios.GenerarCodigoAleatorio()
         TxtCodigo.Text = CodigoAleatrorio
     End Sub
@@ -21,7 +28,7 @@ Public NotInheritable Class Frm_Cliente
 
             Await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub()
                                                                                  Dim frame As Frame = New Frame()
-                                                                                 frame.Navigate(GetType(Frm_ConsultaMascota), Nothing)
+                                                                                 frame.Navigate(GetType(Frm_GestionMascota), Nothing)
                                                                                  Window.Current.Content = frame
                                                                                  ' You have to activate the window in order to show it later.
                                                                                  Window.Current.Activate()

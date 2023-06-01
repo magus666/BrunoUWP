@@ -13,7 +13,7 @@ Public NotInheritable Class Frm_Login
 
     Protected Overrides Async Sub OnNavigatedTo(ByVal e As NavigationEventArgs)
         Try
-            Me.NavigationCacheMode = NavigationCacheMode.Enabled
+
             If Await Gonorrita.MicrosoftPassportAvailableCheckAsync() Then
                 Dim RespuestaLogueo = Await SignInPassport()
                 If RespuestaLogueo = "Clave Correcta" Then

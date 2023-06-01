@@ -29,8 +29,8 @@
             <StackPanel Orientation="Vertical"
                         Padding="20">
                 <TextBox x:Name="TxtCodigo" Header="Codigo" />
-                <TextBox Header="Documento"/>
-                <TextBox Header="Nombres"/>
+                <TextBox x:Name="TxtDocumento" Header="Documento"/>
+                <TextBox x:Name="TxtNombres" Header="Nombres"/>
                 <TextBox Header="Apellidos"/>
                 <TextBox Header="Direccion"/>
                 <TextBox Header="Telefono"/>
