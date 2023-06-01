@@ -10,12 +10,63 @@
     Loaded="Page_Loaded">
 
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <controls:Expander x:Name="Expander2"
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="0"
+                    VerticalAlignment="Center">
+            <TextBlock x:Name="LblTituloConfiguracion" Text="Configuracion"
+                       FontSize="30"
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold"/>
+        </StackPanel>
+
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
+                    Margin="10,0,10,0">
+            <TextBlock x:Name="LblTituloTema" Text="Apariencia" Margin="0,10,0,0"/>
+            <controls:Expander x:Name="ExpApariencia"
                                HorizontalAlignment="Stretch"
+                               IsExpanded="True"
                                HorizontalContentAlignment="Stretch">
                 <controls:Expander.Header>
-                    <TextBlock x:Name="LblHeader" Text="Configuracion de Inicio" />
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Margin="0,0,10,0" FontFamily="Segoe Fluent Icons" Glyph="&#xE2B1;" />
+                        <TextBlock x:Name="LblHeaderApariencia" Text="Tema de la Aplicacion" />
+                    </StackPanel>
+                </controls:Expander.Header>
+                <controls:Expander.Content>
+                    <RelativePanel>
+                        <controls:RadioButtons x:Name="RdbTema"
+                                               SelectedIndex="0"
+                                               Margin="40,0,0,0"
+                                               MaxColumns="1" >
+                            <x:String>Claro</x:String>
+                            <x:String>Oscuro</x:String>
+                            <x:String>Configuracion del Sistema</x:String>
+                        </controls:RadioButtons>
+
+                    </RelativePanel>
+                </controls:Expander.Content>
+            </controls:Expander>
+            <TextBlock x:Name="LblTituloInicio" Text="Inicio Automatico" Margin="0,10,0,0"/>
+            <controls:Expander x:Name="Expander2"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Stretch"
+                               IsExpanded="True">
+                <controls:Expander.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Margin="0,0,10,0" FontFamily="Segoe Fluent Icons" Glyph="&#xE7F4;" />
+                        <TextBlock x:Name="LblHeader" Text="Configuracion de Inicio" />
+                    </StackPanel>
                 </controls:Expander.Header>
                 <controls:Expander.Content>
                     <RelativePanel>
