@@ -45,6 +45,7 @@
                     <controls:DataGridTextColumn Header="Edad" Tag="Edad" Binding="{Binding Edad_Mascota}" />
                     <controls:DataGridTextColumn Header="Propietario" Tag="Propietario" Binding="{Binding Propietario_Mascota}" />
                     <controls:DataGridTextColumn Header="Observaciones" Tag="Observaciones" Binding="{Binding Observaciones_Mascota}" />
+                    <controls:DataGridTextColumn Header="Fecha de Registro" Tag="FechaRegistro" Binding="{Binding FechaRegistro_Mascota}" />
                 </controls:DataGrid.Columns>
             </controls:DataGrid>
         </Grid>

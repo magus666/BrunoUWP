@@ -10,5 +10,6 @@ Public Class MascotaModel
     Public Property Edad_Mascota As Integer
     Public Property Propietario_Mascota As Integer
     Public Property Observaciones_Mascota As String
+    Public Property FechaRegistro_Mascota As Date
 
 End Class

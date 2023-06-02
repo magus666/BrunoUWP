@@ -4,6 +4,11 @@
 NotInheritable Class App
     Inherits Application
 
+    Public Sub New()
+        InitializeComponent()
+        RequestedTheme = ApplicationTheme.Dark
+    End Sub
+
     ''' <summary>
     ''' Se invoca cuando el usuario final inicia la aplicación normalmente. Se usarán otros puntos
     ''' cuando la aplicación se inicie para abrir un archivo específico, para mostrar
@@ -12,7 +17,6 @@ NotInheritable Class App
     ''' <param name="e">Información detallada acerca de la solicitud y el proceso de inicio.</param>
     Protected Overrides Sub OnLaunched(e As Windows.ApplicationModel.Activation.LaunchActivatedEventArgs)
         Dim rootFrame As Frame = TryCast(Window.Current.Content, Frame)
-
         ' No repetir la inicialización de la aplicación si la ventana tiene contenido todavía,
         ' solo asegurarse de que la ventana está activa.
 

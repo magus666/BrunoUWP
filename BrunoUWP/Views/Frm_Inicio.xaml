@@ -8,7 +8,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      Loaded="Page_Loaded">
     <Page.Resources>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
     </Page.Resources>
@@ -48,11 +49,12 @@
             <Grid Grid.Row="0"
               Margin="10,0,10,0">
                 <my:RadioButtons x:Name="RdbTiempo"
-                             VerticalAlignment="Center"
-                             Margin="70,0,0,0"
-                             SelectedIndex="0"  
-                             MaxColumns="4" 
-                             Header="Consulta la informacion Registrada De:">
+                                 VerticalAlignment="Center"
+                                 Margin="70,0,0,0"
+                                 SelectedIndex="0"
+                                 SelectionChanged="RdbTiempo_SelectionChanged"
+                                 MaxColumns="4" 
+                                 Header="Consulta la informacion Registrada De:">
                     <x:String>Hoy</x:String>
                     <x:String>Ultima Semana</x:String>
                     <x:String>Ultimo Mes</x:String>
@@ -81,16 +83,16 @@
                                 Grid.Column="1"
                                 VerticalAlignment="Center">
                                 <TextBlock Margin="20,0,0,0"
-                                   FontSize="16" 
-                                   FontStyle="Italic" 
-                                   FontWeight="SemiBold">
-                            <Run Text="Mascotas Consentidas"/>
+                                           FontSize="16" 
+                                           FontStyle="Italic" 
+                                           FontWeight="SemiBold">
+                                    <Run Text="Mascotas Consentidas"/>
                                 </TextBlock>
                                 <TextBlock Margin="20,0,0,0"
-                                   FontSize="30" 
-                                   FontStyle="Italic" 
-                                   FontWeight="Medium">
-                            <Run Text="10"/>
+                                           FontSize="30" 
+                                           FontStyle="Italic" 
+                                           FontWeight="Medium">
+                                    <Run x:Name="LblCantidadMascotas"  Text="10"/>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
