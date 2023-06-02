@@ -10,7 +10,7 @@ Public Class Cl_Mascota
                                           ObservacionesMenscota As String) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
-            Dim Cliente = New MascotaModel With {
+            Dim Mascota = New MascotaModel With {
                 .Tipo_Mascota = TipoMascota,
                 .Raza_Mascota = RazaMascota,
                 .Nombre_Mascota = NombreMascota,
@@ -19,7 +19,7 @@ Public Class Cl_Mascota
                 .Observaciones_Mascota = ObservacionesMenscota,
                 .FechaRegistro_Mascota = Date.Now
             }
-            Dim Id = Await ConexionDB.InsertAsync(Cliente)
+            Dim Id = Await ConexionDB.InsertAsync(Mascota)
             Return True
         Catch ex As Exception
             Throw New Exception(ex.Message)

@@ -51,6 +51,8 @@
                               SmallChange="1" Minimum="0"
                               Maximum="20"/>
                     <ComboBox x:Name="CmbPropietario"
+                              PlaceholderText="Seleccione Propietario"
+                              SelectionChanged="CmbPropietario_SelectionChanged"
                               Header="Propietario"
                               IsEditable="True"
                               HorizontalAlignment="Stretch"/>

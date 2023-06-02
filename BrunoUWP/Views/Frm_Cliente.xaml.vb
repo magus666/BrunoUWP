@@ -8,9 +8,11 @@ Imports Windows.UI.Core
 Public NotInheritable Class Frm_Cliente
     Inherits Page
     Dim GetUtilitarios As New Cl_Utilitarios
+    Dim GetCliente As New Cl_Cliente
     Dim newViewId As Integer = 0
 
-    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        Await GetCliente.ConsultaCliente()
         Dim localSettings = Windows.Storage.ApplicationData.Current.LocalSettings
         Dim Value = localSettings.Values("NombreMascota")
         If Value IsNot Nothing Then
@@ -24,17 +26,19 @@ Public NotInheritable Class Frm_Cliente
 
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
-            Dim newView As CoreApplicationView = CoreApplication.CreateNewView()
+            Await GetCliente.InsertarCliente("1032367921", "Nicolas", "Federman", 33, "M", "3dfff", True)
 
-            Await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub()
-                                                                                 Dim frame As Frame = New Frame()
-                                                                                 frame.Navigate(GetType(Frm_GestionMascota), Nothing)
-                                                                                 Window.Current.Content = frame
-                                                                                 ' You have to activate the window in order to show it later.
-                                                                                 Window.Current.Activate()
-                                                                                 newViewId = ApplicationView.GetForCurrentView().Id
-                                                                             End Sub)
-            Dim viewShown As Boolean = Await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId)
+            'Dim newView As CoreApplicationView = CoreApplication.CreateNewView()
+
+            'Await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub()
+            '                                                                     Dim frame As Frame = New Frame()
+            '                                                                     frame.Navigate(GetType(Frm_GestionMascota), Nothing)
+            '                                                                     Window.Current.Content = frame
+            '                                                                     ' You have to activate the window in order to show it later.
+            '                                                                     Window.Current.Activate()
+            '                                                                     newViewId = ApplicationView.GetForCurrentView().Id
+            '                                                                 End Sub)
+            'Dim viewShown As Boolean = Await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId)
         Catch ex As Exception
 
         End Try

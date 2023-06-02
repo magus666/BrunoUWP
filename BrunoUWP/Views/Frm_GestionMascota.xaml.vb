@@ -9,6 +9,7 @@ Public NotInheritable Class Frm_GestionMascota
     Inherits Page
     Dim GetNotifications As New Cl_Notificaciones()
     Dim GetMascota As New Cl_Mascota
+    Dim GetCliente As New Cl_Cliente
     Dim GetManipulacionImagens As New Cl_ManipulacionImagenes
 
 
@@ -33,14 +34,21 @@ Public NotInheritable Class Frm_GestionMascota
         Await GetManipulacionImagens.ImagenPicker(PrpMascota)
     End Sub
 
-    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            'Dim QueVemos = Await GetMascota.ConsultaMascotas()
-            'Dim Metal = QueVemos.ToList
-            'Dim Fnal = Metal
+            Dim ListaClientes = Await GetCliente.ConsultaCliente()
+            CmbPropietario.ItemsSource = ListaClientes
+            CmbPropietario.DisplayMemberPath = "NombreCompleto_Persona"
         Catch ex As Exception
 
         End Try
 
+    End Sub
+
+    Private Sub CmbPropietario_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Dim comboBox As ComboBox = CType(sender, ComboBox)
+        Dim selectedItem As ClienteModel = CType(comboBox.SelectedItem, ClienteModel)
+        Dim selectedId As Integer = selectedItem.Id_Persona
+        Dim Resultado = selectedId
     End Sub
 End Class

@@ -1,8 +1,8 @@
-﻿Public Class ClienteModel
-    Inherits PersonaModel
+﻿Imports SQLite
 
-    Public Property Id_Cliente As Integer
-    Public Property Codigo_Cliente As Integer
+Public Class ClienteModel
+    Inherits PersonaModel
+    Public Property Codigo_Cliente As String
     Public Property Estado_Cliente As Boolean
 
 End Class
