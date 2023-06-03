@@ -36,6 +36,8 @@
                                       VerticalAlignment="Center"
                                       Tapped="PrpMascota_Tapped"/>
                     <ComboBox x:Name="CmbTipoMascota"
+                              PlaceholderText="Seleccione Tipo de Mascota"
+                              SelectionChanged="CmbTipoMascota_SelectionChanged"
                               Header="Tipo de Mascota"
                               HorizontalAlignment="Stretch"/>
                     <ComboBox x:Name="CmbRazaMascota"
@@ -56,10 +58,11 @@
                               Header="Propietario"
                               IsEditable="True"
                               HorizontalAlignment="Stretch"/>
-                    <RichEditBox x:Name="RebObservaciones"
+                    <TextBox x:Name="TxtObservaciones" 
                              Height="100"
-                             Header="Observaciones"
-                             PlaceholderText="Escriba las Observaciones"/>
+                             PlaceholderText="Digite Observaciones"
+                             TextWrapping="Wrap"
+                             Header="Observaciones"/>
                     <Button x:Name="BtnGuardar"
                             ui:Effects.Shadow="{StaticResource CommonShadow}"
                             Margin="0,10,0,0"

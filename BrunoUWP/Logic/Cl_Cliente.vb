@@ -36,10 +36,7 @@
             Await ConfiguraSqlite()
             Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
             Dim ListaPersona = (From x In GetCliente
-                                Select New ClienteModel With {
-                                    .Id_Persona = x.Id_Persona,
-                                    .NombreCompleto_Persona = x.NombreCompleto_Persona
-                                }).ToList()
+                                Select x).ToList()
             Return ListaPersona
         Catch ex As Exception
             Throw New Exception(ex.Message)

@@ -160,12 +160,16 @@
     <Compile Include="Logic\Md_Parametrizacion.vb" />
     <Compile Include="Models\PropiedadesModel.vb" />
     <Compile Include="Models\SexoModel.vb" />
+    <Compile Include="Models\TipoMascotaModel.vb" />
     <Compile Include="Models\Usuario.vb" />
     <Compile Include="Views\Frm_Cliente.xaml.vb">
       <DependentUpon>Frm_Cliente.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_Configuracion.xaml.vb">
       <DependentUpon>Frm_Configuracion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_ConfiguracionAplicacion.xaml.vb">
+      <DependentUpon>Frm_ConfiguracionAplicacion.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_ConsultaMascota.xaml.vb">
       <DependentUpon>Frm_ConsultaMascota.xaml</DependentUpon>
@@ -272,6 +276,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_Configuracion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_ConfiguracionAplicacion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

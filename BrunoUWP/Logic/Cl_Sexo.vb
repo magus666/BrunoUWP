@@ -9,20 +9,12 @@
             Dim FemeninoExiste = (From x In GetSexo
                                   Where x.Nombre_Sexo = "Femenino"
                                   Select x).Count
-
-            ' Verificar si ya existen los registros de género "masculino" y "femenino"
-            'Dim MasculinoExistente = Await ConexionDB.Table(Of SexoModel)().Where(Function(x) x.Nombre_Sexo = "masculino").FirstOrDefaultAsync()
-            'Dim FemeninoExistente = Await ConexionDB.Table(Of SexoModel)().Where(Function(x) x.Nombre_Sexo = "femenino").FirstOrDefaultAsync()
-
-            ' Si no existe el registro "masculino", crearlo
             If MasculinoExiste = 0 Then
                 Dim Masculino = New SexoModel With {
                     .Nombre_Sexo = "Masculino"
                 }
                 Dim Id = Await ConexionDB.InsertAsync(Masculino)
             End If
-
-            ' Si no existe el registro "femenino", crearlo
             If FemeninoExiste = 0 Then
                 Dim Femenino = New SexoModel With {
                     .Nombre_Sexo = "Femenino"

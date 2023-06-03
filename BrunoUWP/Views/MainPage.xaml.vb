@@ -35,7 +35,7 @@ Public NotInheritable Class MainPage
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-
+            NvwBruno.SelectedItem = NviInicio
             MarcoTrabajo = ContenFrameMenu
             MarcoTrabajo.Navigate(GetType(Frm_Inicio))
         Catch ex As Exception
