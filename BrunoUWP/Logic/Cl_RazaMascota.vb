@@ -27,4 +27,17 @@
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+    Public Async Function ConsultaRazaMascotaId(IdTipoMascota As Integer) As Task(Of List(Of RazaModel))
+        Try
+            Await ConfiguraSqlite()
+            Dim GetRazaId = Await ConexionDB.Table(Of RazaModel)().ToListAsync()
+            Dim ListaRazaId = (From x In GetRazaId
+                               Where x.Id_TipoMascota = IdTipoMascota
+                               Select x).ToList
+            Return ListaRazaId
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

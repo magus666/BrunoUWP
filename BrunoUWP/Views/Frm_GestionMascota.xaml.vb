@@ -45,9 +45,7 @@ Public NotInheritable Class Frm_GestionMascota
         Try
             Await GetTipoMascota.InsertarActualizarMascota()
 
-            Dim LstaRazaMascota = Await GetRazaMascota.ConsultarRazaMascota()
-            CmbRazaMascota.ItemsSource = LstaRazaMascota
-            CmbRazaMascota.DisplayMemberPath = "Nombre_Raza"
+            CmbRazaMascota.IsEnabled = False
 
             Dim ListaTipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
             CmbTipoMascota.ItemsSource = ListaTipoMascota
@@ -73,11 +71,17 @@ Public NotInheritable Class Frm_GestionMascota
 
     End Sub
 
-    Private Sub CmbTipoMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+    Private Async Sub CmbTipoMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
             Dim comboBox As ComboBox = CType(sender, ComboBox)
             Dim selectedItem As TipoMascotaModel = CType(comboBox.SelectedItem, TipoMascotaModel)
             IdTipoMascota = selectedItem.Id_TipoMascota
+
+            CmbRazaMascota.IsEnabled = True
+            Dim LstaRazaMascota = Await GetRazaMascota.ConsultaRazaMascotaId(IdTipoMascota)
+            CmbRazaMascota.ItemsSource = LstaRazaMascota
+            CmbRazaMascota.DisplayMemberPath = "Nombre_Raza"
+
         Catch ex As Exception
 
         End Try
