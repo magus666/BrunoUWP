@@ -86,7 +86,7 @@
                                            FontSize="16" 
                                            FontStyle="Italic" 
                                            FontWeight="SemiBold">
-                                    <Run Text="Mascotas Consentidas"/>
+                                    <Run Text="Mascotas Registradas"/>
                                 </TextBlock>
                                 <TextBlock Margin="20,0,0,0"
                                            FontSize="30" 
@@ -164,16 +164,16 @@
                                 Grid.Column="1"
                                 VerticalAlignment="Center">
                                 <TextBlock Margin="20,0,0,0"
-                                   FontSize="16" 
-                                   FontStyle="Italic" 
-                                   FontWeight="SemiBold">
-                            <Run Text="Clientes Totales"/>
+                                           FontSize="16" 
+                                           FontStyle="Italic" 
+                                           FontWeight="SemiBold">
+                                    <Run Text="Clientes Totales"/>
                                 </TextBlock>
                                 <TextBlock Margin="20,0,0,0"
-                                   FontSize="30" 
-                                   FontStyle="Italic" 
-                                   FontWeight="Medium">
-                            <Run Text="40"/>
+                                           FontSize="30" 
+                                           FontStyle="Italic" 
+                                           FontWeight="Medium">
+                                    <Run x:Name="LblClientes"/>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>

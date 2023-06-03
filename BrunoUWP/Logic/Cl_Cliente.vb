@@ -46,4 +46,53 @@
         End Try
     End Function
 
+    Public Async Function CountClienteTotal() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().CountAsync()
+            Return GetCliente
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function CountClienteUltimoDia() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
+            Dim CoutCliente = (From x In GetCliente
+                               Where x.FechaCreacion_Persona >= Date.Now.AddDays(-1)
+                               Select x).Count
+            Return CoutCliente
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function CountClienteUltimaSemana() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
+            Dim CoutCliente = (From x In GetCliente
+                               Where x.FechaCreacion_Persona >= Date.Now.AddDays(-7)
+                               Select x).Count
+            Return CoutCliente
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function CountClienteUltimoMes() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
+            Dim CoutCliente = (From x In GetCliente
+                               Where x.FechaCreacion_Persona >= Date.Now.AddMonths(-1)
+                               Select x).Count
+            Return CoutCliente
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
 End Class

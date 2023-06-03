@@ -7,6 +7,7 @@ Imports Microsoft.UI.Xaml.Controls
 Public NotInheritable Class Frm_Inicio
     Inherits Page
     Dim GetMascotas As New Cl_Mascota
+    Dim GetClientes As New Cl_Cliente
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -21,18 +22,27 @@ Public NotInheritable Class Frm_Inicio
     Private Async Sub RdbTiempo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
             Dim ContadorMascotas As Integer
+            Dim ContadorClientes As Integer
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
             Select Case SeleccionRadio
                 Case "Hoy"
+                    ContadorClientes = Await GetClientes.CountClienteUltimoDia
+                    LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoDia
                     LblCantidadMascotas.Text = ContadorMascotas
                 Case "Ultima Semana"
+                    ContadorClientes = Await GetClientes.CountClienteUltimaSemana
+                    LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimaSemana
                     LblCantidadMascotas.Text = ContadorMascotas
                 Case "Ultimo Mes"
+                    ContadorClientes = Await GetClientes.CountClienteUltimoMes
+                    LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoMes
                     LblCantidadMascotas.Text = ContadorMascotas
                 Case "Siempre"
+                    ContadorClientes = Await GetClientes.CountClienteTotal
+                    LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotas
                     LblCantidadMascotas.Text = ContadorMascotas
             End Select
