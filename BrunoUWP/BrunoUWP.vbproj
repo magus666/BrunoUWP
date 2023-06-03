@@ -159,6 +159,7 @@
     <Compile Include="Logic\In_FechaHora.vb" />
     <Compile Include="Logic\Md_Parametrizacion.vb" />
     <Compile Include="Models\PropiedadesModel.vb" />
+    <Compile Include="Models\RazaModel.vb" />
     <Compile Include="Models\SexoModel.vb" />
     <Compile Include="Models\TipoMascotaModel.vb" />
     <Compile Include="Models\Usuario.vb" />
@@ -191,6 +192,9 @@
     </Compile>
     <Compile Include="Views\Frm_Mascota.xaml.vb">
       <DependentUpon>Frm_Mascota.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_Parametrizaciones.xaml.vb">
+      <DependentUpon>Frm_Parametrizaciones.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.vb">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -308,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_Mascota.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_Parametrizaciones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

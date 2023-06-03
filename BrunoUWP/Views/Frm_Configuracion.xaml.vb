@@ -12,7 +12,7 @@ Public NotInheritable Class Frm_Configuracion
                 Case "Configuracion de la Aplicacion"
                     sender.Content = New Frm_ConfiguracionAplicacion()
                 Case "Parametrizaciones"
-                    sender.Content = New Frm_ConsultaMascota()
+                    sender.Content = New Frm_Parametrizaciones()
             End Select
         Catch ex As Exception
 

@@ -12,6 +12,7 @@ Module Md_Parametrizacion
             Await ConexionDB.CreateTableAsync(Of ClienteModel)()
             Await ConexionDB.CreateTableAsync(Of SexoModel)()
             Await ConexionDB.CreateTableAsync(Of TipoMascotaModel)()
+            Await ConexionDB.CreateTableAsync(Of RazaModel)()
             Return True
         Catch ex As Exception
             Throw New Exception(ex.Message)

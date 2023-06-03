@@ -11,10 +11,12 @@ Public NotInheritable Class Frm_GestionMascota
     Dim GetNotifications As New Cl_Notificaciones()
     Dim GetMascota As New Cl_Mascota
     Dim GetCliente As New Cl_Cliente
+    Dim GetRazaMascota As New Cl_RazaMascota
     Dim GetTipoMascota As New CL_TipoMascota
     Dim GetManipulacionImagens As New Cl_ManipulacionImagenes
     Dim IdPropietario As Integer
     Dim IdTipoMascota As Integer
+    Dim IdRazaMascota As Integer
 
 
     Public Sub New()
@@ -27,7 +29,7 @@ Public NotInheritable Class Frm_GestionMascota
             Dim localSettings As ApplicationDataContainer
             localSettings = ApplicationData.Current.LocalSettings
             localSettings.Values("NombreMascota") = TxtNombreMascota.Text
-            Await GetMascota.InsertarMascota(IdTipoMascota, 1, TxtNombreMascota.Text,
+            Await GetMascota.InsertarMascota(IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
                                              NbbEdad.Text, IdPropietario, TxtObservaciones.Text)
             'GetNotifications.NotifiacionToast()
         Catch ex As Exception
@@ -42,6 +44,11 @@ Public NotInheritable Class Frm_GestionMascota
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
             Await GetTipoMascota.InsertarActualizarMascota()
+
+            Dim LstaRazaMascota = Await GetRazaMascota.ConsultarRazaMascota()
+            CmbRazaMascota.ItemsSource = LstaRazaMascota
+            CmbRazaMascota.DisplayMemberPath = "Nombre_Raza"
+
             Dim ListaTipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
             CmbTipoMascota.ItemsSource = ListaTipoMascota
             CmbTipoMascota.DisplayMemberPath = "Nombre_TipoMascota"
@@ -75,5 +82,15 @@ Public NotInheritable Class Frm_GestionMascota
 
         End Try
 
+    End Sub
+
+    Private Sub CmbRazaMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            Dim selectedItem As RazaModel = CType(comboBox.SelectedItem, RazaModel)
+            IdRazaMascota = selectedItem.Id_TipoMascota
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

@@ -41,7 +41,9 @@
                               Header="Tipo de Mascota"
                               HorizontalAlignment="Stretch"/>
                     <ComboBox x:Name="CmbRazaMascota"
+                              PlaceholderText="Seleccione Raza"
                               Header="Raza"
+                              SelectionChanged="CmbRazaMascota_SelectionChanged"
                               HorizontalAlignment="Stretch"/>
                     <TextBox x:Name="TxtNombreMascota" 
                          PlaceholderText="Digite el Nombre"
