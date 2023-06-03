@@ -144,6 +144,7 @@
     <Compile Include="Logic\AccountHelper.vb" />
     <Compile Include="Logic\Cl_Cliente.vb" />
     <Compile Include="Logic\Cl_ManipulacionImagenes.vb" />
+    <Compile Include="Logic\Cl_Sexo.vb" />
     <Compile Include="Logic\Cl_Utilitarios.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
@@ -158,6 +159,7 @@
     <Compile Include="Logic\In_FechaHora.vb" />
     <Compile Include="Logic\Md_Parametrizacion.vb" />
     <Compile Include="Models\PropiedadesModel.vb" />
+    <Compile Include="Models\SexoModel.vb" />
     <Compile Include="Models\Usuario.vb" />
     <Compile Include="Views\Frm_Cliente.xaml.vb">
       <DependentUpon>Frm_Cliente.xaml</DependentUpon>

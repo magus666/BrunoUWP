@@ -3,8 +3,10 @@
     Public Async Function InsertarCliente(DocumentoCliente As String,
                                           NombreCliente As String,
                                           ApellidoCliente As String,
+                                          DireccionCliente As String,
+                                          TelefonoCliente As String,
                                           EdadCliente As Integer,
-                                          SexoCliente As String,
+                                          SexoCliente As Integer,
                                           CodigoCliente As String,
                                           EstadoCliente As Boolean) As Task(Of Boolean)
         Try
@@ -13,9 +15,11 @@
                 .Documento_Persona = DocumentoCliente,
                 .Nombre_Persona = NombreCliente,
                 .Apellido_Persona = ApellidoCliente,
+                .Direccion_Persona = DireccionCliente,
+                .Telefono_Persona = TelefonoCliente,
                 .NombreCompleto_Persona = NombreCliente & " " & ApellidoCliente,
                 .Edad_Persona = EdadCliente,
-                .Sexo_Persona = SexoCliente,
+                .Id_Sexo = SexoCliente,
                 .Codigo_Cliente = CodigoCliente,
                 .Estado_Cliente = EstadoCliente,
                 .FechaCreacion_Persona = Date.Now

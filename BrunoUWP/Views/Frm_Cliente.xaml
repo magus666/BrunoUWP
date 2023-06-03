@@ -26,14 +26,15 @@
               ui:Effects.Shadow="{StaticResource CommonShadow}"
               Margin="50,10">
 
-            <StackPanel Orientation="Vertical"
+            <StackPanel x:Name="StpDatosCliente"
+                        Orientation="Vertical"
                         Padding="20">
                 <TextBox x:Name="TxtCodigo" Header="Codigo" />
                 <TextBox x:Name="TxtDocumento" Header="Documento"/>
                 <TextBox x:Name="TxtNombres" Header="Nombres"/>
-                <TextBox Header="Apellidos"/>
-                <TextBox Header="Direccion"/>
-                <TextBox Header="Telefono"/>
+                <TextBox x:Name="TxtApellidos" Header="Apellidos"/>
+                <TextBox x:Name="TxtDireccion" Header="Direccion"/>
+                <TextBox x:Name="TxtTelefono" Header="Telefono"/>
                 <my:NumberBox x:Name="NmbEdad"
                               Header="Edad"
                               Value="1"
@@ -42,7 +43,10 @@
                               LargeChange="20"
                               Maximum="90"
                               Minimum="1"/>
-                <ComboBox Header="Sexo"
+                <ComboBox x:Name="CmbSexo"
+                          SelectionChanged="CmbSexo_SelectionChanged"
+                          PlaceholderText="Seleccione Sexo"
+                          Header="Sexo"
                           HorizontalAlignment="Stretch"/>
                 <Button x:Name="BtnGuardar"
                         Content="Guardar"

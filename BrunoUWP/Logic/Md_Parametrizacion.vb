@@ -10,6 +10,7 @@ Module Md_Parametrizacion
             ConexionDB = New SQLiteAsyncConnection(CreacionBaseDatos)
             Await ConexionDB.CreateTableAsync(Of MascotaModel)()
             Await ConexionDB.CreateTableAsync(Of ClienteModel)()
+            Await ConexionDB.CreateTableAsync(Of SexoModel)()
             Return True
         Catch ex As Exception
             Throw New Exception(ex.Message)

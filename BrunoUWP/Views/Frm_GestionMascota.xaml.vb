@@ -46,9 +46,14 @@ Public NotInheritable Class Frm_GestionMascota
     End Sub
 
     Private Sub CmbPropietario_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-        Dim comboBox As ComboBox = CType(sender, ComboBox)
-        Dim selectedItem As ClienteModel = CType(comboBox.SelectedItem, ClienteModel)
-        Dim selectedId As Integer = selectedItem.Id_Persona
-        Dim Resultado = selectedId
+        Try
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            Dim selectedItem As ClienteModel = CType(comboBox.SelectedItem, ClienteModel)
+            Dim selectedId As Integer = selectedItem.Id_Persona
+            Dim Resultado = selectedId
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 End Class
