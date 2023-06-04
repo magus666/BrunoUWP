@@ -26,9 +26,9 @@
                   ui:Effects.Shadow="{StaticResource CommonShadow}"
                   x:Name="GrdUno"
                   Margin="50,10">
-                <my:InfoBar x:Name="InfAlerta"/>
                 <StackPanel x:Name="StpPrincipal"
                             Padding="20">
+                    <my:InfoBar x:Name="InfAlerta"/>
                     <my:PersonPicture x:Name="PrpMascota"
                                       Width="150"
                                       Height="150"
@@ -40,11 +40,58 @@
                               SelectionChanged="CmbTipoMascota_SelectionChanged"
                               Header="Tipo de Mascota"
                               HorizontalAlignment="Stretch"/>
-                    <ComboBox x:Name="CmbRazaMascota"
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <ComboBox x:Name="CmbRazaMascota"
+                                  Grid.Column="0"
                                   PlaceholderText="Seleccione Raza"
                                   Header="Raza"
                                   SelectionChanged="CmbRazaMascota_SelectionChanged"
                                   HorizontalAlignment="Stretch"/>
+                        <Button x:Name="BtnNuevaRaza"
+                                IsEnabled="False"
+                                Click="BtnNuevaRaza_Click"
+                                ToolTipService.ToolTip="Crear Nueva Raza"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Grid.Column="1">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE109;" />
+                            </StackPanel>
+                        </Button>
+                        <ContentDialog x:Name="CtdNuevaRaza"
+                                       Title="Nueva Raza"
+                                       PrimaryButtonText="Aceptar"
+                                       PrimaryButtonClick="CtdNuevaRaza_PrimaryButtonClick"
+                                       SecondaryButtonText="Cancelar">
+                            <StackPanel Orientation="Vertical">
+                                <ComboBox x:Name="CmbTipoMascotaDialog"
+                                          Header="Tipo de Mascota"
+                                          PlaceholderText="Seleccione Tipo de Mascota"
+                                          HorizontalAlignment="Stretch"
+                                          SelectionChanged="CmbTipoMascotaDialog_SelectionChanged"/>
+                                <TextBox x:Name="TxtNombreRazaDialog"
+                                         PlaceholderText="Raza" 
+                                         Header="Escriba la Nueva Raza" />
+                                <TextBox x:Name="TxtDescripcionRazaDialog"
+                                         PlaceholderText="Descipcion" 
+                                         Header="Escriba la Descripcion" />
+                            </StackPanel>
+                        </ContentDialog>
+
+
+
+                    </Grid>
+                    
+                    
                     <TextBox x:Name="TxtNombreMascota" 
                          PlaceholderText="Digite el Nombre"
                          Header="Nombre de la Mascota"/>
@@ -72,6 +119,8 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="Guardar"/>
+
+                    
                 </StackPanel>
             </Grid>
         </ScrollViewer>

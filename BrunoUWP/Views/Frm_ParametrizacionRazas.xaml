@@ -6,29 +6,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:my="using:Microsoft.UI.Xaml.Controls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded">
-
+    <Page.Resources>
+        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
+    </Page.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical"
+        <Grid Grid.Column="0"
+              ui:Effects.Shadow="{StaticResource CommonShadow}"
+              Margin="50,10">
+            <StackPanel Orientation="Vertical"
                     Margin="20,0,20,0">
-            <my:InfoBar x:Name="InfAlerta"/>
-            <ComboBox x:Name="CmbTipoMascota"
+                <my:InfoBar x:Name="InfAlerta"/>
+                <ComboBox x:Name="CmbTipoMascota"
                       Header="Tipo de Mascota"
                       PlaceholderText="Seleccione Tipo de Mascota"
                       HorizontalAlignment="Stretch"
                       SelectionChanged="CmbTipoMascota_SelectionChanged"/>
-            <TextBox x:Name="TxtNombreRaza" 
+                <TextBox x:Name="TxtNombreRaza" 
                      Header="Nombre"/>
-            <TextBox x:Name="TxtDescripcionRaza" 
+                <TextBox x:Name="TxtDescripcionRaza" 
                      Header="Descripcion"/>
-            <Button x:Name="BtnGuardar"
+                <Button x:Name="BtnGuardar"
                     Margin="0,10,0,0"
                     Content="Guardar"
                     HorizontalAlignment="Center"
                     Click="BtnGuardar_Click"/>
-        </StackPanel>
+            </StackPanel>
+        </Grid>
         <my:TeachingTip x:Name="TctAlerta"/>
     </Grid>
 </Page>

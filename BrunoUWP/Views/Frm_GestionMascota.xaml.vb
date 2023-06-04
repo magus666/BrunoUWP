@@ -1,7 +1,9 @@
 ﻿Imports System.Drawing
 Imports System.Net.Mime.MediaTypeNames
+Imports Windows.ApplicationModel.Core
 Imports Windows.Storage
 Imports Windows.Storage.Pickers
+Imports Windows.UI.Core
 Imports Windows.UI.Text
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
@@ -18,6 +20,7 @@ Public NotInheritable Class Frm_GestionMascota
     Dim IdPropietario As Integer
     Dim IdTipoMascota As Integer
     Dim IdRazaMascota As Integer
+    Dim IdTipoMascotaDialog As Integer
 
 
     Public Sub New()
@@ -86,6 +89,7 @@ Public NotInheritable Class Frm_GestionMascota
             IdTipoMascota = selectedItem.Id_TipoMascota
 
             CmbRazaMascota.IsEnabled = True
+            BtnNuevaRaza.IsEnabled = True
             Dim LstaRazaMascota = Await GetRazaMascota.ConsultaRazaMascotaId(IdTipoMascota)
             CmbRazaMascota.ItemsSource = LstaRazaMascota
             CmbRazaMascota.DisplayMemberPath = "Nombre_Raza"
@@ -101,6 +105,44 @@ Public NotInheritable Class Frm_GestionMascota
             Dim comboBox As ComboBox = CType(sender, ComboBox)
             Dim selectedItem As RazaModel = CType(comboBox.SelectedItem, RazaModel)
             IdRazaMascota = selectedItem.Id_TipoMascota
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Async Sub BtnNuevaRaza_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim ListaTipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
+            CmbTipoMascotaDialog.ItemsSource = ListaTipoMascota
+            CmbTipoMascotaDialog.DisplayMemberPath = "Nombre_TipoMascota"
+
+            Await CtdNuevaRaza.ShowAsync()
+
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Sub
+
+    Private Async Sub CtdNuevaRaza_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
+        Try
+            Await GetRazaMascota.InsertarRaza(TxtNombreRazaDialog.Text, TxtDescripcionRazaDialog.Text, IdTipoMascotaDialog)
+            GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La raza se ha Guardado con Exito.")
+
+            Dim LstaRazaMascota = Await GetRazaMascota.ConsultaRazaMascotaId(IdTipoMascota)
+            CmbRazaMascota.ItemsSource = LstaRazaMascota
+            CmbRazaMascota.DisplayMemberPath = "Nombre_Raza"
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub CmbTipoMascotaDialog_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            Dim selectedItem As TipoMascotaModel = CType(comboBox.SelectedItem, TipoMascotaModel)
+            IdTipoMascotaDialog = selectedItem.Id_TipoMascota
         Catch ex As Exception
 
         End Try

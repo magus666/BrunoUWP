@@ -27,7 +27,7 @@ Public Class Cl_Notificaciones
     End Function
 
     Public Function ValidacionControlesTeachingTip(TeachTipAlerta As TeachingTip, Titulo As String,
-                                            Subtitulo As String, Objetivo As FrameworkElement) As TeachingTip
+                                                   Subtitulo As String, Objetivo As FrameworkElement) As TeachingTip
         Try
             TeachTipAlerta.Title = Titulo
             TeachTipAlerta.Subtitle = Subtitulo
@@ -45,7 +45,7 @@ Public Class Cl_Notificaciones
     End Function
 
     Public Function TutorialTeachingTip(TeachTipAlerta As TeachingTip, Titulo As String,
-                                            Subtitulo As String, Objetivo As FrameworkElement) As TeachingTip
+                                        Subtitulo As String, Objetivo As FrameworkElement) As TeachingTip
         Try
             TeachTipAlerta.Title = Titulo
             TeachTipAlerta.Subtitle = Subtitulo
