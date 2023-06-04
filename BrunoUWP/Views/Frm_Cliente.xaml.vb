@@ -10,6 +10,7 @@ Imports Windows.UI.Core
 Public NotInheritable Class Frm_Cliente
     Inherits Page
     Dim GetUtilitarios As New Cl_Utilitarios
+    Dim GetNotificacionas As New Cl_Notificaciones
     Dim GetCliente As New Cl_Cliente
     Dim newViewId As Integer = 0
     Public GetSexo As New Cl_Sexo
@@ -35,29 +36,42 @@ Public NotInheritable Class Frm_Cliente
 
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
-            Dim IndexCmbSexo As String = CmbSexo.SelectedIndex
-            If IndexCmbSexo >= 0 Then
-                If Await GetCliente.InsertarCliente(TxtDocumento.Text, TxtNombres.Text, TxtApellidos.Text,
-                                                 TxtDireccion.Text, TxtTelefono.Text, NmbEdad.Text,
-                                                 IdSexoSeleccionado, TxtCodigo.Text, True) = True Then
-                    LimpiarTextbox()
-                End If
-            Else
-                Dim Mensaje = "Paila Perri"
+            If TxtDocumento.Text = String.Empty Then
+                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "El Documento no puede estar Vacio", TxtDocumento)
+                Exit Sub
+            End If
+            If TxtNombres.Text = String.Empty Then
+                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "El Nombre no puede estar Vacio", TxtNombres)
+                Exit Sub
+            End If
+            If TxtApellidos.Text = String.Empty Then
+                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "El Apellido no puede estar Vacio", TxtApellidos)
+                Exit Sub
+            End If
+            If TxtDireccion.Text = String.Empty Then
+                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "La Direccion no puede estar Vacia", TxtDireccion)
+                Exit Sub
+            End If
+            If TxtTelefono.Text = String.Empty Then
+                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "El Telefono no puede estar Vacio", TxtTelefono)
+                Exit Sub
+            End If
+            If NbbEdad.Text < 14 Then
+                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "No puede Ser Menor de 14 años", NbbEdad)
+                Exit Sub
             End If
 
+            If CmbSexo.SelectedIndex < 0 Then
+                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "Seleccione un Sexo Correcto", CmbSexo)
+                Exit Sub
+            End If
 
-            'Dim newView As CoreApplicationView = CoreApplication.CreateNewView()
-
-            'Await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub()
-            '                                                                     Dim frame As Frame = New Frame()
-            '                                                                     frame.Navigate(GetType(Frm_GestionMascota), Nothing)
-            '                                                                     Window.Current.Content = frame
-            '                                                                     ' You have to activate the window in order to show it later.
-            '                                                                     Window.Current.Activate()
-            '                                                                     newViewId = ApplicationView.GetForCurrentView().Id
-            '                                                                 End Sub)
-            'Dim viewShown As Boolean = Await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId)
+            If Await GetCliente.InsertarCliente(TxtDocumento.Text, TxtNombres.Text, TxtApellidos.Text,
+                                                 TxtDireccion.Text, TxtTelefono.Text, NbbEdad.Text,
+                                                 IdSexoSeleccionado, TxtCodigo.Text, True) = True Then
+                LimpiarTextbox()
+                GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El cliente se ha guardado con Exito")
+            End If
         Catch ex As Exception
 
         End Try
@@ -80,7 +94,7 @@ Public NotInheritable Class Frm_Cliente
                 End If
             Next
             TxtCodigo.Text = GetUtilitarios.GenerarCodigoAleatorio()
-            NmbEdad.Text = 1
+            NbbEdad.Text = 1
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try

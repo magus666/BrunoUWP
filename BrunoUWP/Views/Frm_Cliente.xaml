@@ -29,13 +29,14 @@
             <StackPanel x:Name="StpDatosCliente"
                         Orientation="Vertical"
                         Padding="20">
-                <TextBox x:Name="TxtCodigo" Header="Codigo" />
+                <my:InfoBar x:Name="InfAlerta"/>
+                <TextBox x:Name="TxtCodigo" Header="Codigo" IsEnabled="False" />
                 <TextBox x:Name="TxtDocumento" Header="Documento"/>
                 <TextBox x:Name="TxtNombres" Header="Nombres"/>
                 <TextBox x:Name="TxtApellidos" Header="Apellidos"/>
                 <TextBox x:Name="TxtDireccion" Header="Direccion"/>
                 <TextBox x:Name="TxtTelefono" Header="Telefono"/>
-                <my:NumberBox x:Name="NmbEdad"
+                <my:NumberBox x:Name="NbbEdad"
                               Header="Edad"
                               Value="1"
                               SpinButtonPlacementMode="Inline"
@@ -54,7 +55,7 @@
                         Margin="10"
                         Click="BtnGuardar_Click"/>
             </StackPanel>
-
+            <my:TeachingTip x:Name="TctAlerta"/>
         </Grid>
     </Grid>
 </Page>

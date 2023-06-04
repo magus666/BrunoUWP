@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Toolkit.Uwp.Notifications
+Imports Microsoft.UI.Xaml.Controls
 
 Public Class Cl_Notificaciones
     Dim GetMetodosDateTime As New Cl_DateTime()
@@ -21,6 +22,54 @@ Public Class Cl_Notificaciones
             Return True
         Catch ex As Exception
             Throw New Exception(ex.Message, ex)
+        End Try
+    End Function
+
+    Public Function AlertaTeachingTip(TechTipAlerta As TeachingTip, Titulo As String,
+                                            Subtitulo As String, Objetivo As FrameworkElement) As TeachingTip
+        Try
+            TechTipAlerta.Title = Titulo
+            TechTipAlerta.Subtitle = Subtitulo
+            TechTipAlerta.Target = Objetivo
+            TechTipAlerta.IsOpen = True
+            Return TechTipAlerta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Function AlertaExitoInfoBar(BarraInfo As InfoBar, Titulo As String, Mensaje As String) As InfoBar
+        Try
+            BarraInfo.IsOpen = True
+            BarraInfo.Title = Titulo
+            BarraInfo.Message = Mensaje
+            BarraInfo.Severity = InfoBarSeverity.Success
+            Return BarraInfo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+    Public Function AlertaErrorInfoBar(BarraInfo As InfoBar, Titulo As String, Mensaje As String) As InfoBar
+        Try
+            BarraInfo.IsOpen = True
+            BarraInfo.Title = Titulo
+            BarraInfo.Message = Mensaje
+            BarraInfo.Severity = InfoBarSeverity.Error
+            Return BarraInfo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Function AlertaAdvertenciaInfoBar(BarraInfo As InfoBar, Titulo As String, Mensaje As String) As InfoBar
+        Try
+            BarraInfo.IsOpen = True
+            BarraInfo.Title = Titulo
+            BarraInfo.Message = Mensaje
+            BarraInfo.Severity = InfoBarSeverity.Warning
+            Return BarraInfo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
         End Try
     End Function
 
