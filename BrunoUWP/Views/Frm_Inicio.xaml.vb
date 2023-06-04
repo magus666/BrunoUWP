@@ -8,9 +8,12 @@ Public NotInheritable Class Frm_Inicio
     Inherits Page
     Dim GetMascotas As New Cl_Mascota
     Dim GetClientes As New Cl_Cliente
+    Dim GetNotificaciones As New Cl_Notificaciones
+
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
+            TutorialTips()
             Dim ContadorMascotas As Integer = Await GetMascotas.CountMascotas
             LblCantidadMascotas.Text = ContadorMascotas
         Catch ex As Exception
@@ -48,6 +51,17 @@ Public NotInheritable Class Frm_Inicio
             End Select
         Catch ex As Exception
 
+        End Try
+    End Sub
+
+    Public Sub TutorialTips()
+        Try
+            GetNotificaciones.TutorialTeachingTip(TctTutorial, "Informacion",
+                                                  "Con estas opciones puede filtrar la informacion por diferentes periodos de Tiempo.", RdbTiempo)
+            'GetNotificaciones.TutorialTeachingTip(TctTutorial, "Informacion",
+            '                                      "Informacion de la cantidad de Mascotas Registradas.", GrdMascotas)
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
         End Try
     End Sub
 End Class

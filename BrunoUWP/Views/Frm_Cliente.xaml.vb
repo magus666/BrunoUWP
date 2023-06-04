@@ -37,32 +37,32 @@ Public NotInheritable Class Frm_Cliente
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
             If TxtDocumento.Text = String.Empty Then
-                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "El Documento no puede estar Vacio", TxtDocumento)
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Documento no puede estar Vacio", TxtDocumento)
                 Exit Sub
             End If
             If TxtNombres.Text = String.Empty Then
-                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "El Nombre no puede estar Vacio", TxtNombres)
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Nombre no puede estar Vacio", TxtNombres)
                 Exit Sub
             End If
             If TxtApellidos.Text = String.Empty Then
-                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "El Apellido no puede estar Vacio", TxtApellidos)
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Apellido no puede estar Vacio", TxtApellidos)
                 Exit Sub
             End If
             If TxtDireccion.Text = String.Empty Then
-                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "La Direccion no puede estar Vacia", TxtDireccion)
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La Direccion no puede estar Vacia", TxtDireccion)
                 Exit Sub
             End If
             If TxtTelefono.Text = String.Empty Then
-                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "El Telefono no puede estar Vacio", TxtTelefono)
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no puede estar Vacio", TxtTelefono)
                 Exit Sub
             End If
             If NbbEdad.Text < 14 Then
-                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "No puede Ser Menor de 14 años", NbbEdad)
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "No puede Ser Menor de 14 años", NbbEdad)
                 Exit Sub
             End If
 
             If CmbSexo.SelectedIndex < 0 Then
-                GetNotificacionas.AlertaTeachingTip(TctAlerta, "Alerta", "Seleccione un Sexo Correcto", CmbSexo)
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un Sexo Correcto", CmbSexo)
                 Exit Sub
             End If
 

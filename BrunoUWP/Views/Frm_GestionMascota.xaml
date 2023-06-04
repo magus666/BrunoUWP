@@ -26,7 +26,7 @@
                   ui:Effects.Shadow="{StaticResource CommonShadow}"
                   x:Name="GrdUno"
                   Margin="50,10">
-
+                <my:InfoBar x:Name="InfAlerta"/>
                 <StackPanel x:Name="StpPrincipal"
                             Padding="20">
                     <my:PersonPicture x:Name="PrpMascota"
@@ -75,5 +75,6 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
+        <my:TeachingTip x:Name="TctAlerta"/>
     </Grid>
 </Page>

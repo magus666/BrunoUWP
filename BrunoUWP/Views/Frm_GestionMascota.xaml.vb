@@ -13,6 +13,7 @@ Public NotInheritable Class Frm_GestionMascota
     Dim GetCliente As New Cl_Cliente
     Dim GetRazaMascota As New Cl_RazaMascota
     Dim GetTipoMascota As New CL_TipoMascota
+    Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetManipulacionImagens As New Cl_ManipulacionImagenes
     Dim IdPropietario As Integer
     Dim IdTipoMascota As Integer
@@ -31,7 +32,7 @@ Public NotInheritable Class Frm_GestionMascota
             localSettings.Values("NombreMascota") = TxtNombreMascota.Text
             Await GetMascota.InsertarMascota(IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
                                              NbbEdad.Text, IdPropietario, TxtObservaciones.Text)
-            'GetNotifications.NotifiacionToast()
+            GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
         Catch ex As Exception
 
         End Try
@@ -52,7 +53,9 @@ Public NotInheritable Class Frm_GestionMascota
             CmbTipoMascota.DisplayMemberPath = "Nombre_TipoMascota"
 
             Dim ListaClientes = Await GetCliente.ConsultaCliente()
-            CmbPropietario.ItemsSource = ListaClientes
+            CmbPropietario.ItemsSource = ListaClientes.OrderBy(Function(cliente)
+                                                                   Return cliente.NombreCompleto_Persona
+                                                               End Function).ToList()
             CmbPropietario.DisplayMemberPath = "NombreCompleto_Persona"
         Catch ex As Exception
 

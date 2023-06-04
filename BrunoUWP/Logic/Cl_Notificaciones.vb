@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Toolkit.Uwp.Notifications
 Imports Microsoft.UI.Xaml.Controls
+Imports Windows.UI
 
 Public Class Cl_Notificaciones
     Dim GetMetodosDateTime As New Cl_DateTime()
@@ -25,14 +26,37 @@ Public Class Cl_Notificaciones
         End Try
     End Function
 
-    Public Function AlertaTeachingTip(TechTipAlerta As TeachingTip, Titulo As String,
+    Public Function ValidacionControlesTeachingTip(TeachTipAlerta As TeachingTip, Titulo As String,
                                             Subtitulo As String, Objetivo As FrameworkElement) As TeachingTip
         Try
-            TechTipAlerta.Title = Titulo
-            TechTipAlerta.Subtitle = Subtitulo
-            TechTipAlerta.Target = Objetivo
-            TechTipAlerta.IsOpen = True
-            Return TechTipAlerta
+            TeachTipAlerta.Title = Titulo
+            TeachTipAlerta.Subtitle = Subtitulo
+            TeachTipAlerta.Target = Objetivo
+            TeachTipAlerta.IsOpen = True
+            TeachTipAlerta.IconSource = New FontIconSource() With {
+                .FontFamily = New FontFamily("Segoe Fluent Icons"),
+                .Glyph = ChrW(&HE7BA)
+            }
+            TeachTipAlerta.Background = New SolidColorBrush(Colors.DarkRed)
+            Return TeachTipAlerta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Function TutorialTeachingTip(TeachTipAlerta As TeachingTip, Titulo As String,
+                                            Subtitulo As String, Objetivo As FrameworkElement) As TeachingTip
+        Try
+            TeachTipAlerta.Title = Titulo
+            TeachTipAlerta.Subtitle = Subtitulo
+            TeachTipAlerta.Target = Objetivo
+            TeachTipAlerta.IsOpen = True
+            TeachTipAlerta.IconSource = New FontIconSource() With {
+                .FontFamily = New FontFamily("Segoe Fluent Icons"),
+                .Glyph = ChrW(&HEA80)
+            }
+            TeachTipAlerta.Background = New SolidColorBrush(Colors.Green)
+            Return TeachTipAlerta
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
