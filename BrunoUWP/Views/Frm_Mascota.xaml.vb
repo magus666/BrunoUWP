@@ -13,6 +13,8 @@ Public NotInheritable Class Frm_Mascota
                     sender.Content = New Frm_GestionMascota()
                 Case "Consulta de Mascotas"
                     sender.Content = New Frm_ConsultaMascota()
+                Case "Parametrizacion de Razas"
+                    sender.Content = New Frm_ParametrizacionRazas()
             End Select
         Catch ex As Exception
 

@@ -17,6 +17,7 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem  Content="Gestion de Mascotas" Tag="GestionMascota" />
                 <NavigationViewItem  Content="Consulta de Mascotas" Tag="ConsultamMascota" />
+                <NavigationViewItem  Content="Parametrizacion de Razas" Tag="CreacionRazas" />
             </NavigationView.MenuItems>
             <Frame x:Name="Contenido" x:FieldModifier="Public"/>
         </NavigationView>

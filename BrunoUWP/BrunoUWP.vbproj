@@ -194,8 +194,8 @@
     <Compile Include="Views\Frm_Mascota.xaml.vb">
       <DependentUpon>Frm_Mascota.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Frm_Parametrizaciones.xaml.vb">
-      <DependentUpon>Frm_Parametrizaciones.xaml</DependentUpon>
+    <Compile Include="Views\Frm_ParametrizacionRazas.xaml.vb">
+      <DependentUpon>Frm_ParametrizacionRazas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.vb">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -316,7 +316,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Frm_Parametrizaciones.xaml">
+    <Page Include="Views\Frm_ParametrizacionRazas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

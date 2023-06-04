@@ -3,15 +3,16 @@
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
-Public NotInheritable Class Frm_Parametrizaciones
+Public NotInheritable Class Frm_ParametrizacionRazas
     Inherits Page
     Dim IdTipoMascota As Integer
     Dim GetRaza As New Cl_RazaMascota
+    Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetTipoMascota As New CL_TipoMascota
-
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
             Await GetRaza.InsertarRaza(TxtNombreRaza.Text, TxtDescripcionRaza.Text, IdTipoMascota)
+            GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La raza se ha Guardado con Exito.")
         Catch ex As Exception
 
         End Try

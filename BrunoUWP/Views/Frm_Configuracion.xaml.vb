@@ -11,8 +11,6 @@ Public NotInheritable Class Frm_Configuracion
             Select Case args.InvokedItem
                 Case "Configuracion de la Aplicacion"
                     sender.Content = New Frm_ConfiguracionAplicacion()
-                Case "Parametrizaciones"
-                    sender.Content = New Frm_Parametrizaciones()
             End Select
         Catch ex As Exception
 

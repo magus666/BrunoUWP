@@ -53,10 +53,15 @@ Public NotInheritable Class Frm_GestionMascota
             CmbTipoMascota.DisplayMemberPath = "Nombre_TipoMascota"
 
             Dim ListaClientes = Await GetCliente.ConsultaCliente()
-            CmbPropietario.ItemsSource = ListaClientes.OrderBy(Function(cliente)
-                                                                   Return cliente.NombreCompleto_Persona
-                                                               End Function).ToList()
-            CmbPropietario.DisplayMemberPath = "NombreCompleto_Persona"
+            If ListaClientes.Count = 0 Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Aviso", "Cree un Propietario en el Modulo Clientes Antes de Continuar.",
+                                                                 CmbPropietario)
+            Else
+                CmbPropietario.ItemsSource = ListaClientes.OrderBy(Function(cliente)
+                                                                       Return cliente.NombreCompleto_Persona
+                                                                   End Function).ToList()
+                CmbPropietario.DisplayMemberPath = "NombreCompleto_Persona"
+            End If
         Catch ex As Exception
 
         End Try

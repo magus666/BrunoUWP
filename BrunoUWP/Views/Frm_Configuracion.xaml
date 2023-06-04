@@ -17,7 +17,6 @@
                         ItemInvoked="NvvConfiguracion_ItemInvoked">
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NviConfig"  Content="Configuracion de la Aplicacion" Tag="ConfiguracionAplicacion" />
-                <NavigationViewItem Content="Parametrizaciones" Tag="Parametrizaciones" />
             </NavigationView.MenuItems>
             <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
         </NavigationView>
