@@ -69,7 +69,7 @@
                         </Button>
                         <ContentDialog x:Name="CtdNuevaRaza"
                                        Title="Nueva Raza"
-                                       PrimaryButtonText="Aceptar"
+                                       PrimaryButtonText="Guardar"
                                        PrimaryButtonClick="CtdNuevaRaza_PrimaryButtonClick"
                                        SecondaryButtonText="Cancelar">
                             <StackPanel Orientation="Vertical">

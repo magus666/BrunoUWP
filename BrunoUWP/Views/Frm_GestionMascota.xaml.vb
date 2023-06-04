@@ -127,7 +127,6 @@ Public NotInheritable Class Frm_GestionMascota
     Private Async Sub CtdNuevaRaza_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
         Try
             Await GetRazaMascota.InsertarRaza(TxtNombreRazaDialog.Text, TxtDescripcionRazaDialog.Text, IdTipoMascotaDialog)
-            GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La raza se ha Guardado con Exito.")
 
             Dim LstaRazaMascota = Await GetRazaMascota.ConsultaRazaMascotaId(IdTipoMascota)
             CmbRazaMascota.ItemsSource = LstaRazaMascota
