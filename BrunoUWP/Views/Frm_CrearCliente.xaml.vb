@@ -26,7 +26,7 @@ Public NotInheritable Class Frm_CrearCliente
             Dim CodigoAleatrorio As String = GetUtilitarios.GenerarCodigoAleatorio()
             TxtCodigo.Text = CodigoAleatrorio
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -71,14 +71,18 @@ Public NotInheritable Class Frm_CrearCliente
                                                  TxtDireccion.Text, TxtTelefono.Text, TxtCorreo.Text, NbbEdad.Text,
                                                  IdSexoSeleccionado, TxtCodigo.Text, True) = True Then
                 Dim NombreCompleto = TxtNombres.Text & " " & TxtApellidos.Text
+                Dim CodigoCliente = TxtCodigo.Text
                 MensajeWha = "Bienvenida/o " & NombreCompleto & " " & "y gracias por ser parte del Club Bruno Spa.
-                                                                       Te esperan los mejores servicios y las mejores ofertas para el cuidado de tu peludito."
+                                                                       Te esperan los mejores servicios y las mejores ofertas para el cuidado de tu peludito.
+                                                                       Tu codigo de Cliente es: " & CodigoCliente & "."
                 Await GetIntegracionWhatsapp.EnviaMensajeWhatsapp(TxtTelefono.Text, MensajeWha)
                 LimpiarTextbox()
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El cliente se ha guardado con Exito")
+            Else
+                GetNotificacionas.AlertaAdvertenciaInfoBar(InfAlerta, "Atemcion", "El cliente no puedo ser Guardado.")
             End If
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -88,7 +92,7 @@ Public NotInheritable Class Frm_CrearCliente
             Dim ItemSeleccionado As SexoModel = CType(ComboBoxSexo.SelectedItem, SexoModel)
             IdSexoSeleccionado = ItemSeleccionado.Id_Sexo
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
     Public Sub LimpiarTextbox()
