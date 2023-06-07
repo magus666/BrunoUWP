@@ -14,8 +14,8 @@ Public Class Cl_ManipulacionImagenes
             Dim file = Await openPicker.PickSingleFileAsync()
             If file Is Nothing Then
                 Dim Retorno = "Cancelado"
+                Return Nothing
             Else
-
                 Dim stream = Await file.OpenAsync(Windows.Storage.FileAccessMode.Read)
                 Dim bitmapImage As New BitmapImage()
                 Await bitmapImage.SetSourceAsync(stream)
@@ -23,7 +23,7 @@ Public Class Cl_ManipulacionImagenes
                 Return PrpImagen
             End If
         Catch ex As Exception
-
+            Throw New Exception(ex.Message)
         End Try
     End Function
 
