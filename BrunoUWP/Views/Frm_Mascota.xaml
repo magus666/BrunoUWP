@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
 
     <Grid>
         <NavigationView x:Name="NvvMascota"
@@ -15,11 +16,11 @@
                         IsBackButtonVisible="Collapsed"
                         ItemInvoked="NvvMascota_ItemInvoked">
             <NavigationView.MenuItems>
-                <NavigationViewItem  Content="Gestion de Mascotas" Tag="GestionMascota" />
+                <NavigationViewItem x:Name="NvvGestionMascota"  Content="Gestion de Mascotas" Tag="GestionMascota" />
                 <NavigationViewItem  Content="Consulta de Mascotas" Tag="ConsultamMascota" />
                 <NavigationViewItem  Content="Parametrizacion de Razas" Tag="CreacionRazas" />
             </NavigationView.MenuItems>
-            <Frame x:Name="Contenido" x:FieldModifier="Public"/>
+            <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
         </NavigationView>
     </Grid>
 </Page>

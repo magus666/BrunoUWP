@@ -13,7 +13,6 @@ Public NotInheritable Class Frm_Inicio
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            TutorialTips()
             Dim ContadorMascotas As Integer = Await GetMascotas.CountMascotas
             LblCantidadMascotas.Text = ContadorMascotas
         Catch ex As Exception

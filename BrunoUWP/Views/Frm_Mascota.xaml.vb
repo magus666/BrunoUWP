@@ -20,4 +20,14 @@ Public NotInheritable Class Frm_Mascota
 
         End Try
     End Sub
+
+    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        Try
+            NvvMascota.SelectedItem = NvvGestionMascota
+            MarcoTrabajo = FrmContenido
+            MarcoTrabajo.Navigate(GetType(Frm_GestionMascota))
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
