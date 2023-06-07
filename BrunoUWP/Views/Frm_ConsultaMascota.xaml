@@ -39,11 +39,11 @@
                                GridLinesVisibility="Horizontal"
                                 SelectionMode="Extended">
                 <controls:DataGrid.Columns>
-                    <controls:DataGridTextColumn Header="Tipo" Tag="Tipo" Binding="{Binding Tipo_Mascota}" />
-                    <controls:DataGridTextColumn Header="Raza" Tag="Raza" Binding="{Binding Raza_Mascota}" />
                     <controls:DataGridTextColumn Header="Nombre" Tag="Nombre" Binding="{Binding Nombre_Mascota}" />
+                    <controls:DataGridTextColumn Header="Tipo de Mascota" Tag="Tipo" Binding="{Binding Nombre_TipoMascota}" />
+                    <controls:DataGridTextColumn Header="Raza" Tag="Raza" Binding="{Binding Nombre_Raza}" />
                     <controls:DataGridTextColumn Header="Edad" Tag="Edad" Binding="{Binding Edad_Mascota}" />
-                    <controls:DataGridTextColumn Header="Propietario" Tag="Propietario" Binding="{Binding Propietario_Mascota}" />
+                    <controls:DataGridTextColumn Header="Propietario" Tag="Propietario" Binding="{Binding NombreCompleto_Persona}" />
                     <controls:DataGridTextColumn Header="Observaciones" Tag="Observaciones" Binding="{Binding Observaciones_Mascota}" />
                     <controls:DataGridTextColumn Header="Fecha de Registro" Tag="FechaRegistro" Binding="{Binding FechaRegistro_Mascota}" />
                 </controls:DataGrid.Columns>
