@@ -51,6 +51,10 @@ Public NotInheritable Class Frm_CrearCliente
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no puede estar Vacio", TxtTelefono)
                 Exit Sub
             End If
+            If TxtCorreo.Text = String.Empty Then
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Correo no puede estar Vacio", TxtCorreo)
+                Exit Sub
+            End If
             If NbbEdad.Text < 14 Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "No puede Ser Menor de 14 años", NbbEdad)
                 Exit Sub
@@ -62,7 +66,7 @@ Public NotInheritable Class Frm_CrearCliente
             End If
 
             If Await GetCliente.InsertarCliente(TxtDocumento.Text, TxtNombres.Text, TxtApellidos.Text,
-                                                 TxtDireccion.Text, TxtTelefono.Text, NbbEdad.Text,
+                                                 TxtDireccion.Text, TxtTelefono.Text, TxtCorreo.Text, NbbEdad.Text,
                                                  IdSexoSeleccionado, TxtCodigo.Text, True) = True Then
                 LimpiarTextbox()
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El cliente se ha guardado con Exito")

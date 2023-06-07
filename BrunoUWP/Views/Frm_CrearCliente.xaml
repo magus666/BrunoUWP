@@ -38,6 +38,7 @@
                 <TextBox x:Name="TxtApellidos" Header="Apellidos"/>
                 <TextBox x:Name="TxtDireccion" Header="Direccion"/>
                 <TextBox x:Name="TxtTelefono" Header="Telefono"/>
+                <TextBox x:Name="TxtCorreo" Header="Correo Electronico"/>
                 <my:NumberBox x:Name="NbbEdad"
                               Header="Edad"
                               Value="1"

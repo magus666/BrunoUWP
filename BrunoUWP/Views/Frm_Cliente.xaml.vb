@@ -11,6 +11,8 @@ Public NotInheritable Class Frm_Cliente
             Select Case args.InvokedItem
                 Case "Creacion de Clientes"
                     sender.Content = New Frm_CrearCliente()
+                Case "Consulta de Clientes"
+                    sender.Content = New Frm_ConsultaCliente()
             End Select
         Catch ex As Exception
 
