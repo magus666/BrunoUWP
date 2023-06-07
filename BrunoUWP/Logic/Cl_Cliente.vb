@@ -31,6 +31,45 @@
         End Try
     End Function
 
+    Public Async Function ActualizarCliente(IdCliente As Integer,
+                                            EstadoCliente As Boolean) As Task(Of Boolean)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
+            Dim Cliente = (From x In GetCliente
+                           Where x.Id_Persona = IdCliente
+                           Select x).FirstOrDefault
+            If Cliente IsNot Nothing Then
+                Cliente.Estado_Cliente = EstadoCliente
+                Cliente.NombreCompleto_Persona = Cliente.Nombre_Persona & " " & Cliente.Apellido_Persona
+                Await ConexionDB.UpdateAsync(Cliente)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function ÉliminarCliente(IdCliente As Integer) As Task(Of Boolean)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
+            Dim Cliente = (From x In GetCliente
+                           Where x.Id_Persona = IdCliente
+                           Select x).FirstOrDefault
+            If Cliente IsNot Nothing Then
+                Await ConexionDB.DeleteAsync(Cliente)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
     Public Async Function ConsultaCliente() As Task(Of List(Of ClienteModel))
         Try
             Await ConfiguraSqlite()
