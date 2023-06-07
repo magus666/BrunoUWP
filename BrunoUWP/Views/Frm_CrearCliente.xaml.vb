@@ -71,9 +71,8 @@ Public NotInheritable Class Frm_CrearCliente
                                                  TxtDireccion.Text, TxtTelefono.Text, TxtCorreo.Text, NbbEdad.Text,
                                                  IdSexoSeleccionado, TxtCodigo.Text, True) = True Then
                 Dim NombreCompleto = TxtNombres.Text & " " & TxtApellidos.Text
-                MensajeWha = "Bienvenida/o " & NombreCompleto & " " & "y gracias por ser parte del Club Bruno Spa, 
-                                                                       te esperan los mejores servicios y las mejores ofertas 
-                                                                       para el cuidado de tu peludito."
+                MensajeWha = "Bienvenida/o " & NombreCompleto & " " & "y gracias por ser parte del Club Bruno Spa.
+                                                                       Te esperan los mejores servicios y las mejores ofertas para el cuidado de tu peludito."
                 Await GetIntegracionWhatsapp.EnviaMensajeWhatsapp(TxtTelefono.Text, MensajeWha)
                 LimpiarTextbox()
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El cliente se ha guardado con Exito")

@@ -25,7 +25,9 @@ Public NotInheritable Class Frm_ConsultaCliente
                                                    Cli.Edad_Persona,
                                                    Sex.Nombre_Sexo,
                                                    .Estado_Cliente = If(Cli.Estado_Cliente, "Activo", "Inactivo")})
-            LsvCliente.ItemsSource = ListadoCliente
+            LsvCliente.ItemsSource = ListadoCliente.OrderBy(Function(cliente)
+                                                             Return cliente.NombreCompleto_Persona
+                                                            End Function).ToList()
         Catch ex As Exception
 
         End Try
