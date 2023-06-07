@@ -8,6 +8,7 @@ Public NotInheritable Class Frm_CrearCliente
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetNotificacionas As New Cl_Notificaciones
     Dim GetCliente As New Cl_Cliente
+    Dim GetIntegracionWhatsapp As New Cl_IntegracionWhatsapp
     Dim newViewId As Integer = 0
     Public GetSexo As New Cl_Sexo
     Dim IdSexoSeleccionado As Integer
@@ -31,6 +32,7 @@ Public NotInheritable Class Frm_CrearCliente
 
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
+            Dim MensajeWha As String
             If TxtDocumento.Text = String.Empty Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Documento no puede estar Vacio", TxtDocumento)
                 Exit Sub
@@ -68,6 +70,11 @@ Public NotInheritable Class Frm_CrearCliente
             If Await GetCliente.InsertarCliente(TxtDocumento.Text, TxtNombres.Text, TxtApellidos.Text,
                                                  TxtDireccion.Text, TxtTelefono.Text, TxtCorreo.Text, NbbEdad.Text,
                                                  IdSexoSeleccionado, TxtCodigo.Text, True) = True Then
+                Dim NombreCompleto = TxtNombres.Text & " " & TxtApellidos.Text
+                MensajeWha = "Bienvenida/o " & NombreCompleto & " " & "y gracias por ser parte del Club Bruno Spa, 
+                                                                       te esperan los mejores servicios y las mejores ofertas 
+                                                                       para el cuidado de tu peludito."
+                Await GetIntegracionWhatsapp.EnviaMensajeWhatsapp(TxtTelefono.Text, MensajeWha)
                 LimpiarTextbox()
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El cliente se ha guardado con Exito")
             End If
