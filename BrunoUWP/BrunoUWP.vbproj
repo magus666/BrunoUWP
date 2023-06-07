@@ -176,6 +176,9 @@
     <Compile Include="Views\Frm_ConsultaMascota.xaml.vb">
       <DependentUpon>Frm_ConsultaMascota.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm_CrearCliente.xaml.vb">
+      <DependentUpon>Frm_CrearCliente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_GestionMascota.xaml.vb">
       <DependentUpon>Frm_GestionMascota.xaml</DependentUpon>
     </Compile>
@@ -289,6 +292,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_ConsultaMascota.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_CrearCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
