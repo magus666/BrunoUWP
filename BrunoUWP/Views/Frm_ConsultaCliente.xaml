@@ -23,10 +23,21 @@
             <RowDefinition Height="8*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" 
-              Margin="10" 
-              ui:Effects.Shadow="{StaticResource CommonShadow}">
-            <StackPanel>
+
+        <Grid Grid.Row="0"
+              ui:Effects.Shadow="{StaticResource CommonShadow}"
+              Margin="0,0,10,10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Row="0">
                 <AutoSuggestBox x:Name="AsbBusueda"
                             Height="35"
                             Width="250"
@@ -34,8 +45,9 @@
                             TextChanged="AsbBusueda_TextChanged"
                             HorizontalAlignment="Right"
                             PlaceholderText="Digite Documento"
-                            QueryIcon="Find"
-                            QuerySubmitted="AsbBusueda_QuerySubmitted"/>
+                            QueryIcon="Find"/>
+            </Grid>
+            <Grid Grid.Row="1">
                 <ScrollViewer VerticalScrollBarVisibility="Auto"
                       Grid.Column="0"
                       Padding="20">
@@ -96,11 +108,22 @@
                         </ListView>
                     </StackPanel>
                 </ScrollViewer>
-            </StackPanel>
+            </Grid>
         </Grid>
-        <Grid Grid.Row="0" 
-              Margin="10" 
-              ui:Effects.Shadow="{StaticResource CommonShadow}">
+        
+        
+        
+        <Grid Grid.Row="1"
+              ui:Effects.Shadow="{StaticResource CommonShadow}"
+              Margin="0,0,10,10">
+            <AppBarButton Label="Exportar"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Wingdings 2" Glyph="&#x002E;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+
         </Grid>
     </Grid>
 </Page>

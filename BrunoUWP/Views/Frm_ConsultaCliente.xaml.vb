@@ -60,16 +60,4 @@ Public NotInheritable Class Frm_ConsultaCliente
 
         End Try
     End Sub
-
-    Private Async Sub AsbBusueda_QuerySubmitted(sender As AutoSuggestBox, args As AutoSuggestBoxQuerySubmittedEventArgs)
-        Try
-            Dim ListaClientes = Await GetCliente.ConsultaCliente()
-            Dim RetornoListaClientes = (From x In ListaClientes
-                                        Where x.Documento_Persona = AsbBusueda.Text
-                                        Select x)
-            LsvCliente.ItemsSource = RetornoListaClientes
-        Catch ex As Exception
-
-        End Try
-    End Sub
 End Class
