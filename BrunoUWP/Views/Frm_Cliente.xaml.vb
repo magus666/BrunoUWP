@@ -12,8 +12,6 @@ Public NotInheritable Class Frm_Cliente
                 Case "Consulta de Clientes"
                     FrmContenido.Navigate(GetType(Frm_ConsultaCliente))
                 Case "Creacion de Clientes"
-                    NvvCliente.IsBackEnabled = True
-                    NvvCliente.SelectedItem = NvmNuevoCliente
                     FrmContenido.Navigate(GetType(Frm_CrearCliente))
             End Select
         Catch ex As Exception
@@ -26,17 +24,6 @@ Public NotInheritable Class Frm_Cliente
             NvvCliente.SelectedItem = NvmConsultaCliente
             MarcoTrabajo = FrmContenido
             MarcoTrabajo.Navigate(GetType(Frm_ConsultaCliente))
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub NvvCliente_BackRequested(sender As NavigationView, args As NavigationViewBackRequestedEventArgs)
-        Try
-            If FrmContenido.CanGoBack Then
-                FrmContenido.GoBack()
-            End If
-
         Catch ex As Exception
 
         End Try

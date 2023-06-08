@@ -53,24 +53,11 @@ Public NotInheritable Class Frm_ConsultaCliente
         End Try
     End Sub
 
-    Private Function FindParent(Of T As DependencyObject)(child As DependencyObject) As T
-        Try
-            Dim parent As DependencyObject = VisualTreeHelper.GetParent(child)
-            If TypeOf parent Is T Then
-                Return CType(parent, T)
-            End If
-            Return FindParent(Of T)(parent)
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
-    End Function
-
     Private Sub LsvCliente_ItemClick(sender As Object, e As ItemClickEventArgs)
         Try
-            Dim frame As Frame = FindParent(Of Frame)(Me)
             Dim GetClienteModel As New NewPersonaModel
             GetClienteModel = e.ClickedItem
-            frame.Navigate(GetType(Frm_DetalleCliente), GetClienteModel)
+            Frame.Navigate(GetType(Frm_DetalleCliente), GetClienteModel)
         Catch ex As Exception
 
         End Try

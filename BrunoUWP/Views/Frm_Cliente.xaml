@@ -13,9 +13,8 @@
         <NavigationView x:Name="NvvCliente"
                         PaneDisplayMode="Top"
                         IsSettingsVisible="False"
-                        IsBackButtonVisible="Auto"
-                        IsBackEnabled="True"
-                        BackRequested="NvvCliente_BackRequested"
+                        IsBackButtonVisible="Collapsed"
+                        IsBackEnabled="False"
                         ItemInvoked="NvvCliente_ItemInvoked">
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NvmConsultaCliente" Content="Consulta de Clientes" Tag="ComsultaCliente" />
