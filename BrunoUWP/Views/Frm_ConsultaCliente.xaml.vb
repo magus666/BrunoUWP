@@ -1,6 +1,5 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
-Imports Microsoft.Toolkit.Uwp.UI
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -17,15 +16,15 @@ Public NotInheritable Class Frm_ConsultaCliente
             Dim ListadoCliente = (From Cli In Clientes
                                   Join Sex In Sexo On
                                        Cli.Id_Sexo Equals Sex.Id_Sexo
-                                  Select New With {Cli.Codigo_Cliente,
-                                                   Cli.Documento_Persona,
-                                                   Cli.NombreCompleto_Persona,
-                                                   Cli.Direccion_Persona,
-                                                   Cli.Telefono_Persona,
-                                                   Cli.Correo_Persona,
-                                                   Cli.Edad_Persona,
-                                                   Sex.Nombre_Sexo,
-                                                   .Estado_Cliente = If(Cli.Estado_Cliente, "Activo", "Inactivo")})
+                                  Select New NewPersonaModel With {.Codigo_Cliente = Cli.Codigo_Cliente,
+                                                                .Documento_Persona = Cli.Documento_Persona,
+                                                                .NombreCompleto_Persona = Cli.NombreCompleto_Persona,
+                                                                .Direccion_Persona = Cli.Direccion_Persona,
+                                                                .Telefono_Persona = Cli.Telefono_Persona,
+                                                                .Correo_Persona = Cli.Correo_Persona,
+                                                                .Edad_Persona = Cli.Edad_Persona,
+                                                                .Nombre_Sexo = Sex.Nombre_Sexo,
+                                                                .NombreEstado_Cliente = If(Cli.Estado_Cliente, "Activo", "Inactivo")})
             ListadoFinalClientes = ListadoCliente.OrderBy(Function(cliente)
                                                               Return cliente.NombreCompleto_Persona
                                                           End Function).ToList()
@@ -34,16 +33,6 @@ Public NotInheritable Class Frm_ConsultaCliente
 
         End Try
 
-    End Sub
-    Private Sub LsvCliente_DoubleTapped(sender As Object, e As DoubleTappedRoutedEventArgs)
-        Try
-            Dim frame As Frame = FindParent(Of Frame)(Me)
-
-            ' Navega a la página de detalles del cliente
-            frame.Navigate(GetType(Frm_DetalleCliente))
-        Catch ex As Exception
-
-        End Try
     End Sub
 
     Private Async Sub AsbBusueda_TextChanged(sender As AutoSuggestBox, args As AutoSuggestBoxTextChangedEventArgs)
@@ -65,15 +54,25 @@ Public NotInheritable Class Frm_ConsultaCliente
     End Sub
 
     Private Function FindParent(Of T As DependencyObject)(child As DependencyObject) As T
-        ' Obtiene el padre del objeto actual
-        Dim parent As DependencyObject = VisualTreeHelper.GetParent(child)
-
-        ' Si el padre es del tipo buscado, lo devuelve
-        If TypeOf parent Is T Then
-            Return CType(parent, T)
-        End If
-
-        ' Si no se ha encontrado el padre buscado, busca en el siguiente nivel
-        Return FindParent(Of T)(parent)
+        Try
+            Dim parent As DependencyObject = VisualTreeHelper.GetParent(child)
+            If TypeOf parent Is T Then
+                Return CType(parent, T)
+            End If
+            Return FindParent(Of T)(parent)
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Function
+
+    Private Sub LsvCliente_ItemClick(sender As Object, e As ItemClickEventArgs)
+        Try
+            Dim frame As Frame = FindParent(Of Frame)(Me)
+            Dim GetClienteModel As New NewPersonaModel
+            GetClienteModel = e.ClickedItem
+            frame.Navigate(GetType(Frm_DetalleCliente), GetClienteModel)
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

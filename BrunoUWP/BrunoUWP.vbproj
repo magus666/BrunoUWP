@@ -155,6 +155,7 @@
     <Compile Include="Logic\Cl_Mascota.vb" />
     <Compile Include="Models\MascotaModel.vb" />
     <Compile Include="Logic\Cl_Notificaciones.vb" />
+    <Compile Include="Models\NewPersonaModel.vb" />
     <Compile Include="Models\PersonaModel.vb" />
     <Compile Include="Logic\Cl_RazaMascota.vb" />
     <Compile Include="Logic\CL_TipoMascota.vb" />
@@ -188,9 +189,6 @@
     </Compile>
     <Compile Include="Views\Frm_GestionMascota.xaml.vb">
       <DependentUpon>Frm_GestionMascota.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm_GestionPersona.xaml.vb">
-      <DependentUpon>Frm_GestionPersona.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_Inicio.xaml.vb">
       <DependentUpon>Frm_Inicio.xaml</DependentUpon>
@@ -315,10 +313,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_GestionMascota.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Frm_GestionPersona.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

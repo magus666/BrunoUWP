@@ -66,7 +66,7 @@ Public NotInheritable Class Frm_CrearCliente
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un Sexo Correcto", CmbSexo)
                 Exit Sub
             End If
-
+            PgrGuardarCliente.IsActive = True
             If Await GetCliente.InsertarCliente(TxtDocumento.Text, TxtNombres.Text, TxtApellidos.Text,
                                                  TxtDireccion.Text, TxtTelefono.Text, TxtCorreo.Text, NbbEdad.Text,
                                                  IdSexoSeleccionado, TxtCodigo.Text, True) = True Then
@@ -77,6 +77,7 @@ Public NotInheritable Class Frm_CrearCliente
                                                                        Tu codigo de Cliente es: " & CodigoCliente & "."
                 Await GetIntegracionWhatsapp.EnviaMensajeWhatsapp(TxtTelefono.Text, MensajeWha)
                 LimpiarTextbox()
+                PgrGuardarCliente.IsActive = False
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El cliente se ha guardado con Exito")
             Else
                 GetNotificacionas.AlertaAdvertenciaInfoBar(InfAlerta, "Atemcion", "El cliente no puedo ser Guardado.")

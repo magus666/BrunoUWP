@@ -5,4 +5,13 @@
 ''' </summary>
 Public NotInheritable Class Frm_DetalleCliente
     Inherits Page
+
+    Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
+        MyBase.OnNavigatedTo(e)
+
+        Dim data As NewPersonaModel = TryCast(e.Parameter, NewPersonaModel)
+        If data IsNot Nothing Then
+            TxtNombreCliente.Text = data.NombreCompleto_Persona
+        End If
+    End Sub
 End Class

@@ -24,22 +24,23 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0"
+        <ScrollViewer>
+            <Grid Grid.Column="0"
               ui:Effects.Shadow="{StaticResource CommonShadow}"
               Margin="50,10">
 
-            <StackPanel x:Name="StpDatosCliente"
+                <StackPanel x:Name="StpDatosCliente"
                         Orientation="Vertical"
                         Padding="20">
-                <my:InfoBar x:Name="InfAlerta"/>
-                <TextBox x:Name="TxtCodigo" Header="Codigo" IsEnabled="False" />
-                <TextBox x:Name="TxtDocumento" Header="Documento"/>
-                <TextBox x:Name="TxtNombres" Header="Nombres"/>
-                <TextBox x:Name="TxtApellidos" Header="Apellidos"/>
-                <TextBox x:Name="TxtDireccion" Header="Direccion"/>
-                <TextBox x:Name="TxtTelefono" Header="Telefono"/>
-                <TextBox x:Name="TxtCorreo" Header="Correo Electronico"/>
-                <my:NumberBox x:Name="NbbEdad"
+                    <my:InfoBar x:Name="InfAlerta"/>
+                    <TextBox x:Name="TxtCodigo" Header="Codigo" IsEnabled="False" />
+                    <TextBox x:Name="TxtDocumento" Header="Documento"/>
+                    <TextBox x:Name="TxtNombres" Header="Nombres"/>
+                    <TextBox x:Name="TxtApellidos" Header="Apellidos"/>
+                    <TextBox x:Name="TxtDireccion" Header="Direccion"/>
+                    <TextBox x:Name="TxtTelefono" Header="Telefono"/>
+                    <TextBox x:Name="TxtCorreo" Header="Correo Electronico"/>
+                    <my:NumberBox x:Name="NbbEdad"
                               Header="Edad"
                               Value="1"
                               SpinButtonPlacementMode="Inline"
@@ -47,18 +48,24 @@
                               LargeChange="20"
                               Maximum="90"
                               Minimum="1"/>
-                <ComboBox x:Name="CmbSexo"
+                    <ComboBox x:Name="CmbSexo"
                           SelectionChanged="CmbSexo_SelectionChanged"
                           PlaceholderText="Seleccione Sexo"
                           Header="Sexo"
                           HorizontalAlignment="Stretch"/>
-                <Button x:Name="BtnGuardar"
+                    <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                        <Button x:Name="BtnGuardar"
                         Content="Guardar"
                         HorizontalAlignment="Center"
                         Margin="10"
                         Click="BtnGuardar_Click"/>
-            </StackPanel>
-            <my:TeachingTip x:Name="TctAlerta"/>
-        </Grid>
+                        <my:ProgressRing x:Name="PgrGuardarCliente"
+                                     IsActive="False"/>
+                    </StackPanel>
+                </StackPanel>
+                <my:TeachingTip x:Name="TctAlerta"/>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -53,54 +53,76 @@
                       Padding="20">
                     <StackPanel Orientation="Vertical">
                         <ListView x:Name="LsvCliente" 
-                          IsItemClickEnabled="True"
-                          DoubleTapped="LsvCliente_DoubleTapped">
+                                  IsItemClickEnabled="True"
+                                  ItemClick="LsvCliente_ItemClick">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="0,12,0,12">
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock
+                                        <StackPanel Orientation="Horizontal">
+                                            <my:PersonPicture x:Name="PrpCliente"
+                                                              Margin="0,0,10,0"
+                                                              Height="130"
+                                                              Width="130"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock
+                                                    FontSize="16" 
+                                                    FontStyle="Italic" 
+                                                    FontWeight="SemiBold">
+                                                <Run Text="Codigo:" FontWeight="Bold"/>
+                                                <Run Text="{Binding Codigo_Cliente}"/>
+                                                </TextBlock>
+                                                <TextBlock
                                            FontSize="16" 
                                            FontStyle="Italic" 
                                            FontWeight="SemiBold">
-                                    <Run Text="Codigo:" FontWeight="Bold"/>
-                                    <Run Text="{Binding Codigo_Cliente}"/>
-                                            </TextBlock>
-                                            <TextBlock
-                                           FontSize="16" 
-                                           FontStyle="Italic" 
-                                           FontWeight="SemiBold">
-                                    <Run Text="Documento:" FontWeight="Bold"/>
-                                    <Run Text="{Binding Documento_Persona}"/>
-                                            </TextBlock>
-                                            <TextBlock
-                                           FontSize="16" 
-                                           FontStyle="Italic" 
-                                           FontWeight="SemiBold">
-                                    <Run Text="Nombre:" FontWeight="Bold"/>
-                                    <Run Text="{Binding NombreCompleto_Persona}"/>
-                                            </TextBlock>
-                                            <TextBlock
-                                               FontSize="16"
-                                               FontStyle="Italic" 
-                                               FontWeight="SemiBold">
-                                        <Run Text="Direccion:" FontWeight="Bold"/>
-                                        <Run Text="{Binding Direccion_Persona}"/>
-                                            </TextBlock>
-                                            <TextBlock
+                                                <Run Text="Documento:" FontWeight="Bold"/>
+                                                <Run Text="{Binding Documento_Persona}"/>
+                                                </TextBlock>
+
+                                                <TextBlock
+                                                    FontSize="16" 
+                                                    FontStyle="Italic" 
+                                                    FontWeight="SemiBold">
+                                                    <Run Text="Nombre:" FontWeight="Bold"/>
+                                                    <Run Text="{Binding NombreCompleto_Persona}"/>
+                                                </TextBlock>
+
+                                                <TextBlock Visibility="Collapsed"
+                                                    FontSize="16" 
+                                                    FontStyle="Italic" 
+                                                    FontWeight="SemiBold">
+                                                    <Run Text="Nombre:" FontWeight="Bold"/>
+                                                    <Run Text="{Binding Nombre_Persona}"/>
+                                                </TextBlock>
+                                                <TextBlock Visibility="Collapsed"
+                                                    FontSize="16" 
+                                                    FontStyle="Italic" 
+                                                    FontWeight="SemiBold">
+                                                    <Run Text="Nombre:" FontWeight="Bold"/>
+                                                    <Run Text="{Binding Apellido_Persona}"/>
+                                                </TextBlock>
+                                                <TextBlock
+                                                    FontSize="16"
+                                                    FontStyle="Italic" 
+                                                    FontWeight="SemiBold">
+                                                    <Run Text="Direccion:" FontWeight="Bold"/>
+                                                    <Run Text="{Binding Direccion_Persona}"/>
+                                                </TextBlock>
+                                                <TextBlock
                                                FontSize="16" 
                                                FontStyle="Italic" 
                                                FontWeight="SemiBold">
                                         <Run Text="Telefono:" FontWeight="Bold"/>
                                         <Run Text="{Binding Telefono_Persona}"/>
-                                            </TextBlock>
-                                            <TextBlock
+                                                </TextBlock>
+                                                <TextBlock
                                                FontSize="16" 
                                                FontStyle="Italic" 
                                                FontWeight="SemiBold">
                                         <Run Text="Correo:" FontWeight="Bold"/>
                                         <Run Text="{Binding Correo_Persona}"/>
-                                            </TextBlock>
+                                                </TextBlock>
+                                            </StackPanel>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>

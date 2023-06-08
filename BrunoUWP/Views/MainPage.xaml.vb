@@ -27,7 +27,6 @@ Public NotInheritable Class MainPage
                             ContenFrameMenu.Navigate(GetType(Frm_Mascota))
                         Case "Inventario"
                             ContenFrameMenu.Navigate(GetType(Frm_Inventario))
-
                     End Select
             End Select
         Catch ex As Exception
