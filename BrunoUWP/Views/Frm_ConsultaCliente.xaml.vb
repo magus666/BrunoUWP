@@ -1,6 +1,5 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
-Imports System.ServiceModel.Security
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -8,6 +7,7 @@ Public NotInheritable Class Frm_ConsultaCliente
     Inherits Page
     Dim GetCliente As New Cl_Cliente
     Dim GetSexo As New Cl_Sexo
+    Dim ListadoFinalClientes As IEnumerable(Of Object)
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -25,9 +25,10 @@ Public NotInheritable Class Frm_ConsultaCliente
                                                    Cli.Edad_Persona,
                                                    Sex.Nombre_Sexo,
                                                    .Estado_Cliente = If(Cli.Estado_Cliente, "Activo", "Inactivo")})
-            LsvCliente.ItemsSource = ListadoCliente.OrderBy(Function(cliente)
-                                                             Return cliente.NombreCompleto_Persona
-                                                            End Function).ToList()
+            ListadoFinalClientes = ListadoCliente.OrderBy(Function(cliente)
+                                                              Return cliente.NombreCompleto_Persona
+                                                          End Function).ToList()
+            LsvCliente.ItemsSource = ListadoFinalClientes
         Catch ex As Exception
 
         End Try
@@ -37,6 +38,36 @@ Public NotInheritable Class Frm_ConsultaCliente
         Try
             Dim Mensaje = "Perrita"
             Dim Escucha = Mensaje
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Async Sub AsbBusueda_TextChanged(sender As AutoSuggestBox, args As AutoSuggestBoxTextChangedEventArgs)
+        Try
+            If AsbBusueda.Text.Count = 0 Then
+                LsvCliente.ItemsSource = ListadoFinalClientes
+            Else
+                If args.Reason = AutoSuggestionBoxTextChangeReason.UserInput Then
+                    Dim ListaClientes = Await GetCliente.ConsultaCliente()
+                    Dim RetornoListaClientes = (From x In ListaClientes
+                                                Where x.Documento_Persona.Contains(AsbBusueda.Text)
+                                                Select x).ToList
+                    LsvCliente.ItemsSource = RetornoListaClientes
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Async Sub AsbBusueda_QuerySubmitted(sender As AutoSuggestBox, args As AutoSuggestBoxQuerySubmittedEventArgs)
+        Try
+            Dim ListaClientes = Await GetCliente.ConsultaCliente()
+            Dim RetornoListaClientes = (From x In ListaClientes
+                                        Where x.Documento_Persona = AsbBusueda.Text
+                                        Select x)
+            LsvCliente.ItemsSource = RetornoListaClientes
         Catch ex As Exception
 
         End Try
