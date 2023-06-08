@@ -13,6 +13,7 @@ Public NotInheritable Class MainPage
 
     Private Sub NvwBruno_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
         Try
+            NvwBruno.IsBackEnabled = True
             Select Case args.IsSettingsInvoked
                 Case True
                     ContenFrameMenu.Navigate(GetType(Frm_Configuracion))
@@ -36,6 +37,7 @@ Public NotInheritable Class MainPage
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
+            NvwBruno.IsBackEnabled = False
             NvwBruno.SelectedItem = NviInicio
             MarcoTrabajo = ContenFrameMenu
             MarcoTrabajo.Navigate(GetType(Frm_Inicio))
@@ -65,8 +67,15 @@ Public NotInheritable Class MainPage
 
     Private Sub NvwBruno_BackRequested(sender As NavigationView, args As NavigationViewBackRequestedEventArgs)
         Try
-            ContenFrameMenu.GoBack()
-            NvwBruno.SelectedItem = NviInicio
+            If ContenFrameMenu.CanGoBack Then
+                ContenFrameMenu.GoBack()
+                NvwBruno.SelectedItem = NviInicio
+                If Not ContenFrameMenu.CanGoBack Then
+                    NvwBruno.IsBackEnabled = False
+                End If
+            Else
+                NvwBruno.IsBackEnabled = True
+            End If
         Catch ex As Exception
 
         End Try
