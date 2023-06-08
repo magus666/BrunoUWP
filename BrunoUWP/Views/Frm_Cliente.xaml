@@ -13,11 +13,13 @@
         <NavigationView x:Name="NvvCliente"
                         PaneDisplayMode="Top"
                         IsSettingsVisible="False"
-                        IsBackButtonVisible="Collapsed"
+                        IsBackButtonVisible="Auto"
+                        IsBackEnabled="True"
+                        BackRequested="NvvCliente_BackRequested"
                         ItemInvoked="NvvCliente_ItemInvoked">
             <NavigationView.MenuItems>
+                <NavigationViewItem x:Name="NvmConsultaCliente" Content="Consulta de Clientes" Tag="ComsultaCliente" />
                 <NavigationViewItem x:Name="NvmNuevoCliente" Content="Creacion de Clientes" Tag="CreacionCliente" />
-                <NavigationViewItem  Content="Consulta de Clientes" Tag="ComsultaCliente" />
             </NavigationView.MenuItems>
             <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
         </NavigationView>

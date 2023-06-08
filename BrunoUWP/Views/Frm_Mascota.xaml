@@ -16,8 +16,8 @@
                         IsBackButtonVisible="Collapsed"
                         ItemInvoked="NvvMascota_ItemInvoked">
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="NvvGestionMascota"  Content="Gestion de Mascotas" Tag="GestionMascota" />
-                <NavigationViewItem  Content="Consulta de Mascotas" Tag="ConsultamMascota" />
+                <NavigationViewItem x:Name="NvvConsultaMascota" Content="Consulta de Mascotas" Tag="ConsultamMascota" />
+                <NavigationViewItem x:Name="NvvCrearMascota" Content="Creacion de Mascotas" Tag="CreacionMascotas" />
                 <NavigationViewItem  Content="Parametrizacion de Razas" Tag="CreacionRazas" />
             </NavigationView.MenuItems>
             <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>

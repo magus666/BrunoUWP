@@ -9,12 +9,12 @@ Public NotInheritable Class Frm_Mascota
     Private Sub NvvMascota_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
         Try
             Select Case args.InvokedItem
-                Case "Gestion de Mascotas"
-                    sender.Content = New Frm_GestionMascota()
                 Case "Consulta de Mascotas"
-                    sender.Content = New Frm_ConsultaMascota()
+                    FrmContenido.Navigate(GetType(Frm_ConsultaMascota))
+                Case "Creacion de Mascotas"
+                    FrmContenido.Navigate(GetType(Frm_CrearMascota))
                 Case "Parametrizacion de Razas"
-                    sender.Content = New Frm_ParametrizacionRazas()
+                    FrmContenido.Navigate(GetType(Frm_ParametrizacionRazas))
             End Select
         Catch ex As Exception
 
@@ -23,9 +23,9 @@ Public NotInheritable Class Frm_Mascota
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            NvvMascota.SelectedItem = NvvGestionMascota
+            NvvMascota.SelectedItem = NvvConsultaMascota
             MarcoTrabajo = FrmContenido
-            MarcoTrabajo.Navigate(GetType(Frm_GestionMascota))
+            MarcoTrabajo.Navigate(GetType(Frm_ConsultaMascota))
         Catch ex As Exception
 
         End Try

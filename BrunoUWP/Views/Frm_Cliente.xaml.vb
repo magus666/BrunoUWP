@@ -9,10 +9,12 @@ Public NotInheritable Class Frm_Cliente
     Private Sub NvvCliente_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
         Try
             Select Case args.InvokedItem
-                Case "Creacion de Clientes"
-                    sender.Content = New Frm_CrearCliente()
                 Case "Consulta de Clientes"
-                    sender.Content = New Frm_ConsultaCliente()
+                    FrmContenido.Navigate(GetType(Frm_ConsultaCliente))
+                Case "Creacion de Clientes"
+                    NvvCliente.IsBackEnabled = True
+                    NvvCliente.SelectedItem = NvmNuevoCliente
+                    FrmContenido.Navigate(GetType(Frm_CrearCliente))
             End Select
         Catch ex As Exception
 
@@ -21,9 +23,20 @@ Public NotInheritable Class Frm_Cliente
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            NvvCliente.SelectedItem = NvmNuevoCliente
+            NvvCliente.SelectedItem = NvmConsultaCliente
             MarcoTrabajo = FrmContenido
-            MarcoTrabajo.Navigate(GetType(Frm_CrearCliente))
+            MarcoTrabajo.Navigate(GetType(Frm_ConsultaCliente))
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub NvvCliente_BackRequested(sender As NavigationView, args As NavigationViewBackRequestedEventArgs)
+        Try
+            If FrmContenido.CanGoBack Then
+                FrmContenido.GoBack()
+            End If
+
         Catch ex As Exception
 
         End Try

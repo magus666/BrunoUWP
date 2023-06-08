@@ -4,13 +4,103 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BrunoUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:my="using:Microsoft.UI.Xaml.Controls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
+    </Page.Resources>
     <Grid>
-        <StackPanel>
-            <TextBox x:Name="TxtNombreCliente" />
-        </StackPanel>
+        <ScrollViewer>
+            <Grid Grid.Column="0"
+              ui:Effects.Shadow="{StaticResource CommonShadow}"
+              Margin="50,10">
+
+                <StackPanel x:Name="StpDatosCliente"
+                        Orientation="Vertical"
+                        Padding="20">
+                    <my:InfoBar x:Name="InfAlerta"/>
+                    <TextBox x:Name="TxtCodigo" Header="Codigo" IsEnabled="False" />
+                    <TextBox x:Name="TxtDocumento" Header="Documento" IsEnabled="False"/>
+                    <TextBox x:Name="TxtNombreCompleto" Header="Nombres" IsEnabled="False"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="TxtDireccion"
+                                 Grid.Column="0"
+                                 Header="Direccion" IsEnabled="False"/>
+                        <Button x:Name="BtnEditarDireccion"
+                                Grid.Column="1"
+                                Click="BtnEditarDireccion_Click"
+                                ToolTipService.ToolTip="Editar Direccion"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="TxtTelefono"
+                                 Grid.Column="0"
+                                 Header="Telefono" 
+                                 IsEnabled="False"/>
+                        <Button x:Name="BtnEditarTelefono"
+                                Grid.Column="1"
+                                Click="BtnEditarTelefono_Click"
+                                ToolTipService.ToolTip="Editar Telefono"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="TxtCorreo"
+                                 Grid.Column="0"
+                                 Header="Correo Electronico" 
+                                 IsEnabled="False"/>
+                        <Button x:Name="BtnEditarCorreo"
+                                Grid.Column="1"
+                                Click="BtnEditarCorreo_Click"
+                                ToolTipService.ToolTip="Editar Correo"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <TextBox x:Name="TxtEdad" Header="Edad" IsEnabled="False"/>
+                    <TextBox x:Name="TxtSexo" Header="Sexo" IsEnabled="False"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

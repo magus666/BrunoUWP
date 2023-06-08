@@ -184,6 +184,9 @@
     <Compile Include="Views\Frm_CrearCliente.xaml.vb">
       <DependentUpon>Frm_CrearCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm_CrearMascota.xaml.vb">
+      <DependentUpon>Frm_CrearMascota.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_DetalleCliente.xaml.vb">
       <DependentUpon>Frm_DetalleCliente.xaml</DependentUpon>
     </Compile>
@@ -305,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_CrearCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_CrearMascota.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
