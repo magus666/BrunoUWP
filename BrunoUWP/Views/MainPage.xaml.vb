@@ -15,17 +15,18 @@ Public NotInheritable Class MainPage
         Try
             Select Case args.IsSettingsInvoked
                 Case True
-                    sender.Content = New Frm_Configuracion()
+                    ContenFrameMenu.Navigate(GetType(Frm_Configuracion))
                 Case False
                     Select Case args.InvokedItem
                         Case "Clientes"
-                            sender.Content = New Frm_Cliente()
+                            ContenFrameMenu.Navigate(GetType(Frm_Cliente))
                         Case "Inicio"
-                            sender.Content = New Frm_Inicio()
+                            ContenFrameMenu.Navigate(GetType(Frm_Inicio))
                         Case "Mascotas"
-                            sender.Content = New Frm_Mascota()
+                            ContenFrameMenu.Navigate(GetType(Frm_Mascota))
                         Case "Inventario"
-                            sender.Content = New Frm_Inventario()
+                            ContenFrameMenu.Navigate(GetType(Frm_Inventario))
+
                     End Select
             End Select
         Catch ex As Exception
@@ -60,5 +61,14 @@ Public NotInheritable Class MainPage
 
         End Try
 
+    End Sub
+
+    Private Sub NvwBruno_BackRequested(sender As NavigationView, args As NavigationViewBackRequestedEventArgs)
+        Try
+            ContenFrameMenu.GoBack()
+            NvwBruno.SelectedItem = NviInicio
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

@@ -15,7 +15,9 @@
                         ItemInvoked="NvwBruno_ItemInvoked"
                         PaneOpening="NvwBruno_PaneOpening"
                         PaneClosing="NvwBruno_PaneClosing"
-                        IsBackButtonVisible="Collapsed"
+                        IsBackButtonVisible="Visible"
+                        IsBackEnabled="True"
+                        BackRequested="NvwBruno_BackRequested"
                         Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}">
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NviInicio" Icon="Home" Content="Inicio" Tag="Inicio" />
