@@ -34,6 +34,9 @@
     End Function
 
     Public Async Function ActualizarCliente(IdCliente As Integer,
+                                            DireccionCLiente As String,
+                                            TelefonoCliente As String,
+                                            CorreoCliente As String,
                                             EstadoCliente As Boolean) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
@@ -42,6 +45,9 @@
                            Where x.Id_Persona = IdCliente
                            Select x).FirstOrDefault
             If Cliente IsNot Nothing Then
+                Cliente.Direccion_Persona = DireccionCLiente
+                Cliente.Telefono_Persona = TelefonoCliente
+                Cliente.Correo_Persona = CorreoCliente
                 Cliente.Estado_Cliente = EstadoCliente
                 Cliente.NombreCompleto_Persona = Cliente.Nombre_Persona & " " & Cliente.Apellido_Persona
                 Await ConexionDB.UpdateAsync(Cliente)

@@ -115,6 +115,32 @@
                         </Grid>
                         <TextBox x:Name="TxtEdad" Header="Edad" IsEnabled="False"/>
                         <TextBox x:Name="TxtSexo" Header="Sexo" IsEnabled="False"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="9*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="LblEstadoCliente"
+                                       Grid.Column="0"
+                                       Margin="0,10,0,0"
+                                       VerticalAlignment="Top"
+                                       FontSize="14"
+                                       Text="Estado Actual del Cliente" />
+                            <ToggleSwitch x:Name="TgsEstadoCliente"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          OnContent="Activo"
+                                          RelativePanel.AlignRightWithPanel="True"
+                                          OffContent="Inactivo"/>
+                        </Grid>
+                        <StackPanel HorizontalAlignment="Center">
+                            <Button x:Name="BtnActualizarCliente"
+                                    Content="Actualizar"
+                                    Click="BtnActualizarCliente_Click"/>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>

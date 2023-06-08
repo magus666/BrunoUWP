@@ -1,4 +1,5 @@
 ﻿Public Class NewPersonaModel
+    Public Property Id_Cliente As Integer
     Public Property Codigo_Cliente As String
     Public Property Documento_Persona As String
     Public Property NombreCompleto_Persona As String

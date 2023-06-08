@@ -16,15 +16,16 @@ Public NotInheritable Class Frm_ConsultaCliente
             Dim ListadoCliente = (From Cli In Clientes
                                   Join Sex In Sexo On
                                        Cli.Id_Sexo Equals Sex.Id_Sexo
-                                  Select New NewPersonaModel With {.Codigo_Cliente = Cli.Codigo_Cliente,
-                                                                .Documento_Persona = Cli.Documento_Persona,
-                                                                .NombreCompleto_Persona = Cli.NombreCompleto_Persona,
-                                                                .Direccion_Persona = Cli.Direccion_Persona,
-                                                                .Telefono_Persona = Cli.Telefono_Persona,
-                                                                .Correo_Persona = Cli.Correo_Persona,
-                                                                .Edad_Persona = Cli.Edad_Persona,
-                                                                .Nombre_Sexo = Sex.Nombre_Sexo,
-                                                                .NombreEstado_Cliente = If(Cli.Estado_Cliente, "Activo", "Inactivo")})
+                                  Select New NewPersonaModel With {.Id_Cliente = Cli.Id_Persona,
+                                                                   .Codigo_Cliente = Cli.Codigo_Cliente,
+                                                                    .Documento_Persona = Cli.Documento_Persona,
+                                                                    .NombreCompleto_Persona = Cli.NombreCompleto_Persona,
+                                                                    .Direccion_Persona = Cli.Direccion_Persona,
+                                                                    .Telefono_Persona = Cli.Telefono_Persona,
+                                                                    .Correo_Persona = Cli.Correo_Persona,
+                                                                    .Edad_Persona = Cli.Edad_Persona,
+                                                                    .Nombre_Sexo = Sex.Nombre_Sexo,
+                                                                    .NombreEstado_Cliente = If(Cli.Estado_Cliente, "Activo", "Inactivo")})
             ListadoFinalClientes = ListadoCliente.OrderBy(Function(cliente)
                                                               Return cliente.NombreCompleto_Persona
                                                           End Function).ToList()
