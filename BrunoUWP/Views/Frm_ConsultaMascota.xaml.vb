@@ -20,26 +20,32 @@ Public NotInheritable Class Frm_ConsultaMascota
     End Sub
 
     Public Async Function LlenarGrilla() As Task
-        Dim Mascota = Await GetMascota.ConsultaMascotas()
-        Dim TipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
-        Dim Raza = Await GetRaza.ConsultarRazaMascota()
-        Dim Propietario = Await GetPersona.ConsultaCliente()
+        Try
+            Dim Mascota = Await GetMascota.ConsultaMascotas()
+            Dim TipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
+            Dim Raza = Await GetRaza.ConsultarRazaMascota()
+            Dim Propietario = Await GetPersona.ConsultaCliente()
 
-        Dim RetornoMascota = (From Mas In Mascota
-                              Join Tmc In TipoMascota On
-                                   Mas.Tipo_Mascota Equals Tmc.Id_TipoMascota
-                              Join Rza In Raza On
-                                   Mas.Raza_Mascota Equals Rza.Id_Raza
-                              Join Ppo In Propietario On
-                                   Mas.Propietario_Mascota Equals Ppo.Id_Persona
-                              Select New With {Tmc.Nombre_TipoMascota,
-                                               Rza.Nombre_Raza,
-                                               Mas.Nombre_Mascota,
-                                               Mas.Edad_Mascota,
-                                               Ppo.NombreCompleto_Persona,
-                                               Mas.Observaciones_Mascota,
-                                               Mas.FechaRegistro_Mascota})
+            Dim RetornoMascota = (From Mas In Mascota
+                                  Join Tmc In TipoMascota On
+                                       Mas.Id_TipoMascota Equals Tmc.Id_TipoMascota
+                                  Join Rza In Raza On
+                                       Mas.Id_Raza Equals Rza.Id_Raza
+                                  Join Ppo In Propietario On
+                                       Mas.Id_Persona Equals Ppo.Id_Persona
+                                  Select New With {Tmc.Nombre_TipoMascota,
+                                                   Rza.Nombre_Raza,
+                                                   Mas.Nombre_Mascota,
+                                                   Mas.Edad_Mascota,
+                                                   Ppo.NombreCompleto_Persona,
+                                                   Mas.Observaciones_Mascota,
+                                                   Mas.FechaRegistro_Mascota}).ToList
 
-        DtgMovimientoEquipos.ItemsSource = RetornoMascota
+            Dim ListaCompletaRetornoMascota = RetornoMascota
+
+            DtgMovimientoEquipos.ItemsSource = ListaCompletaRetornoMascota
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Function
 End Class

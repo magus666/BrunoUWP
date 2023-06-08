@@ -2,20 +2,20 @@
 
 Public Class Cl_Mascota
 
-    Public Async Function InsertarMascota(TipoMascota As Integer,
-                                          RazaMascota As Integer,
+    Public Async Function InsertarMascota(IdTipoMascota As Integer,
+                                          IdRazaMascota As Integer,
                                           NombreMascota As String,
                                           EdadMascota As Integer,
-                                          PropietarioMascota As Integer,
+                                          IdPersona As Integer,
                                           ObservacionesMenscota As String) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
             Dim Mascota = New MascotaModel With {
-                .Tipo_Mascota = TipoMascota,
-                .Raza_Mascota = RazaMascota,
+                .Id_TipoMascota = IdTipoMascota,
+                .Id_Raza = IdRazaMascota,
                 .Nombre_Mascota = NombreMascota,
                 .Edad_Mascota = EdadMascota,
-                .Propietario_Mascota = PropietarioMascota,
+                .Id_Persona = IdPersona,
                 .Observaciones_Mascota = ObservacionesMenscota,
                 .FechaRegistro_Mascota = Date.Now
             }
