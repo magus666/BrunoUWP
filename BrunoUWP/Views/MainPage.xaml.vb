@@ -1,8 +1,4 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
-Imports Windows.UI.Xaml.Navigation
-Imports Windows.UI.Xaml.Media
-Imports Windows.UI
-Imports System.Security.Principal
 ''' <summary>
 ''' Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -11,7 +7,7 @@ Public NotInheritable Class MainPage
     Public Shared PaginaActual As MainPage
     Public GetWindowsHello As New Cl_WindowsHello
 
-    Private Sub NvwBruno_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
+    Private Sub NvwBruno_ItemInvoked(sender As Microsoft.UI.Xaml.Controls.NavigationView, args As Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs)
         Try
             NvwBruno.IsBackEnabled = True
             Select Case args.IsSettingsInvoked
@@ -25,6 +21,10 @@ Public NotInheritable Class MainPage
                             ContenFrameMenu.Navigate(GetType(Frm_Inicio))
                         Case "Mascotas"
                             ContenFrameMenu.Navigate(GetType(Frm_Mascota))
+                        Case "Servicio Spa"
+                            ContenFrameMenu.Navigate(GetType(Frm_ServicioSpa))
+                        Case "Citas"
+                            ContenFrameMenu.Navigate(GetType(Frm_Citas))
                         Case "Inventario"
                             ContenFrameMenu.Navigate(GetType(Frm_Inventario))
                     End Select
@@ -46,25 +46,23 @@ Public NotInheritable Class MainPage
 
     End Sub
 
-    Private Sub NvwBruno_PaneOpening(sender As NavigationView, args As Object)
+    Private Sub NvwBruno_PaneOpening(sender As Microsoft.UI.Xaml.Controls.NavigationView, args As Object)
         Try
             NvwBruno.PaneCustomContent.Visibility = Visibility.Visible
         Catch ex As Exception
 
         End Try
-
     End Sub
 
-    Private Sub NvwBruno_PaneClosing(sender As NavigationView, args As NavigationViewPaneClosingEventArgs)
+    Private Sub NvwBruno_PaneClosing(sender As Microsoft.UI.Xaml.Controls.NavigationView, args As Microsoft.UI.Xaml.Controls.NavigationViewPaneClosingEventArgs)
         Try
             NvwBruno.PaneCustomContent.Visibility = Visibility.Collapsed
         Catch ex As Exception
 
         End Try
-
     End Sub
 
-    Private Sub NvwBruno_BackRequested(sender As NavigationView, args As NavigationViewBackRequestedEventArgs)
+    Private Sub NvwBruno_BackRequested(sender As Microsoft.UI.Xaml.Controls.NavigationView, args As Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs)
         Try
             If ContenFrameMenu.CanGoBack Then
                 ContenFrameMenu.GoBack()

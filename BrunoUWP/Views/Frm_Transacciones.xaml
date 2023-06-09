@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="BrunoUWP.Frm_Transacciones"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BrunoUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
+
+    <Grid>
+        <NavigationView x:Name="NvvTransacciones"
+                        PaneDisplayMode="Top"
+                        IsSettingsVisible="False"
+                        IsBackButtonVisible="Collapsed"
+                        IsBackEnabled="False"
+                        ItemInvoked="NvvTransacciones_ItemInvoked">
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Name="NvmServicios" Content="Servicios Spa" Tag="ServiciosSpa" />
+                <NavigationViewItem x:Name="NvmVentaArticulos" Content="Venta de Articulos" Tag="VentaArticulos" />
+                <NavigationViewItem x:Name="NvmConsultas" Content="Consultas" Tag="Consultas" />
+            </NavigationView.MenuItems>
+            <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
+        </NavigationView>
+    </Grid>
+</Page>

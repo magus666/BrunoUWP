@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="BrunoUWP.Frm_Citas"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BrunoUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:my="using:Microsoft.UI.Xaml.Controls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0"
+              ui:Effects.Shadow="{StaticResource CommonShadow}"
+              Margin="10,0,0,10">
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
+                <TextBlock x:Name="LblTituloCita"
+                           Text="Citas"
+                           HorizontalAlignment="Center"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Margin="0,10,0,10"/>
+                <CalendarView x:Name="ClvCitas"
+                              Language="es"
+                              SelectedDatesChanged="ClvCitas_SelectedDatesChanged"/>
+                <TextBox x:Name="TxtFecha" />
+                
+                
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1"
+              ui:Effects.Shadow="{StaticResource CommonShadow}"
+              Margin="10,0,10,10">
+            <StackPanel>
+                <controls:Expander x:Name="ExpApariencia"
+                               HorizontalAlignment="Stretch"
+                               IsExpanded="True"
+                               HorizontalContentAlignment="Stretch">
+                    <controls:Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE163;" />
+                            <TextBlock x:Name="LblTituloEvento" Text="CIta" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </controls:Expander.Header>
+                </controls:Expander>
+            </StackPanel>
+            
+            
+            
+        </Grid>
+    </Grid>
+</Page>

@@ -166,6 +166,9 @@
     <Compile Include="Models\SexoModel.vb" />
     <Compile Include="Models\TipoMascotaModel.vb" />
     <Compile Include="Models\Usuario.vb" />
+    <Compile Include="Views\Frm_Citas.xaml.vb">
+      <DependentUpon>Frm_Citas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_Cliente.xaml.vb">
       <DependentUpon>Frm_Cliente.xaml</DependentUpon>
     </Compile>
@@ -207,6 +210,12 @@
     </Compile>
     <Compile Include="Views\Frm_ParametrizacionRazas.xaml.vb">
       <DependentUpon>Frm_ParametrizacionRazas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_ServicioSpa.xaml.vb">
+      <DependentUpon>Frm_ServicioSpa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_Transacciones.xaml.vb">
+      <DependentUpon>Frm_Transacciones.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.vb">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -287,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Frm_Citas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frm_Cliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -343,6 +356,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Frm_ServicioSpa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_Transacciones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -395,7 +416,7 @@
       <Version>7.1.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.8.3</Version>
+      <Version>2.8.4</Version>
     </PackageReference>
     <PackageReference Include="RestSharp">
       <Version>110.2.0</Version>
