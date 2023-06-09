@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="Logic\AccountHelper.vb" />
     <Compile Include="Logic\Cl_BlobStorage.vb" />
+    <Compile Include="Logic\Cl_Cita.vb" />
     <Compile Include="Logic\Cl_Cliente.vb" />
     <Compile Include="Logic\Cl_IntegracionWhatsapp.vb" />
     <Compile Include="Logic\Cl_ManipulacionImagenes.vb" />
@@ -150,6 +151,7 @@
     <Compile Include="Logic\Cl_Utilitarios.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
+    <Compile Include="Models\CitaModel.vb" />
     <Compile Include="Models\ClienteModel.vb" />
     <Compile Include="Logic\Cl_DateTime.vb" />
     <Compile Include="Logic\Cl_Mascota.vb" />
@@ -192,9 +194,6 @@
     </Compile>
     <Compile Include="Views\Frm_DetalleCliente.xaml.vb">
       <DependentUpon>Frm_DetalleCliente.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm_GestionMascota.xaml.vb">
-      <DependentUpon>Frm_GestionMascota.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_Inicio.xaml.vb">
       <DependentUpon>Frm_Inicio.xaml</DependentUpon>
@@ -329,10 +328,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_DetalleCliente.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Frm_GestionMascota.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

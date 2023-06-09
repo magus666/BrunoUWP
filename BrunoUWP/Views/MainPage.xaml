@@ -30,7 +30,13 @@
                 </controls:NavigationViewItem>
                 <controls:NavigationViewItem x:Name="NviTransaciones" Icon="World" Content="Transacciones" Tag="Transacciones">
                     <controls:NavigationViewItem.MenuItems>
-                        <controls:NavigationViewItem x:Name="NviServicioSpa" Content="Servicio Spa" Icon="Mail" Tag="ServicioSpa"/>
+                        <controls:NavigationViewItem x:Name="NviServicioSpa" Content="Servicio Spa" Tag="ServicioSpa">
+                            <controls:NavigationViewItem.Icon>
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE939;" />
+                            </controls:NavigationViewItem.Icon>
+                        </controls:NavigationViewItem>
+                        <controls:NavigationViewItem x:Name="NvmVentaArticulos" Content="Venta de Articulos" Tag="VentaArticulos" />
+                        <controls:NavigationViewItem x:Name="NvmConsultas" Content="Consultas" Tag="Consultas" />
                     </controls:NavigationViewItem.MenuItems>
                 </controls:NavigationViewItem>
                     <controls:NavigationViewItem Icon="Calendar" Content="Citas" Tag="Citas" />

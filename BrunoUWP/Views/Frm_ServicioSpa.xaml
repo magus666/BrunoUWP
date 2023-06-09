@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" 
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:my="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     mc:Ignorable="d"
@@ -16,11 +16,18 @@
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
     </Page.Resources>
     <Grid>
-        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
             <ScrollViewer>
                 <Grid Grid.Column="0"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-              Margin="50,10">
+                      ui:Effects.Shadow="{StaticResource CommonShadow}"
+                      Margin="10,10">
                     <StackPanel x:Name="StpDatosCliente"
                         Orientation="Vertical"
                         Padding="20">
@@ -37,11 +44,96 @@
                         <TimePicker x:Name="TmpHoraServicio" 
                                     Header="Hora" 
                                     MinuteIncrement="30"/>
-
+                      <Button x:Name="BtnComprobar"
+                              HorizontalAlignment="Right"
+                              Content="Verificar Agenta"
+                              Click="BtnComprobar_Click"/>
                     </StackPanel>
                     <my:TeachingTip x:Name="TctAlerta"/>
                 </Grid>
             </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="1"
+              Margin="10,0,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0"
+                  Margin="0,0,10,0"
+                  ui:Effects.Shadow="{StaticResource CommonShadow}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Grid.Column="0"
+                      Padding="20">
+                    <StackPanel Orientation="Vertical">
+                        <ListView x:Name="LsvCita" 
+                                  IsItemClickEnabled="True"
+                                  ItemClick="LsvCita_ItemClick">
+                            <ListView.Resources>
+                                <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="ForestGreen" />
+                                <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="DarkGreen" />
+                                <SolidColorBrush x:Key="ListViewItemBackgroundPointerOver" Color="DarkGreen" />
+                                <SolidColorBrush x:Key="ListViewItemBackgroundPressed" Color="Green" />
+                                <SolidColorBrush x:Key="ListViewItemBackground" Color="Green" />
+                            </ListView.Resources>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,12,0,12">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock FontSize="12" 
+                                                       FontStyle="Normal" 
+                                                       FontWeight="SemiBold">
+                                                <Run Text="Cliente:" FontWeight="Bold"/>
+                                                <Run Text="{Binding NombreCompleto_Persona}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12" 
+                                                       FontStyle="Normal" 
+                                                       FontWeight="SemiBold">
+                                                <Run Text="Mascota:" FontWeight="Bold"/>
+                                                <Run Text="{Binding Nombre_Mascota}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12" 
+                                                       FontStyle="Normal" 
+                                                       FontWeight="SemiBold">
+                                                <Run Text="Codigo:" FontWeight="Bold"/>
+                                                <Run Text="{Binding Codigo_Cita}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12" 
+                                                       FontStyle="Normal" 
+                                                       FontWeight="SemiBold">
+                                                <Run Text="Fecha:" FontWeight="Bold"/>
+                                                <Run Text="{Binding Fecha_Cita}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12" 
+                                                       FontStyle="Normal" 
+                                                       FontWeight="SemiBold">
+                                                <Run Text="Hora:" FontWeight="Bold"/>
+                                                <Run Text="{Binding Hora_Cita}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12" 
+                                                       FontStyle="Normal" 
+                                                       FontWeight="SemiBold">
+                                                <Run Text="Estado de la Cita:" FontWeight="Bold"/>
+                                                <Run Text="{Binding Estado_Cita}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Column="1"
+                  Margin="0,0,0,0"
+                  ui:Effects.Shadow="{StaticResource CommonShadow}">
+                <StackPanel Padding="20">
+                    <TextBox />
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
