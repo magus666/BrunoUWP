@@ -32,12 +32,51 @@
                         Orientation="Vertical"
                         Padding="20">
                         <my:InfoBar x:Name="InfAlerta"/>
-                        <ComboBox x:Name="CmbTIpoServicio"
-                                  Header="Tio de Servicio"
-                                  HorizontalAlignment="Stretch" />
+
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="9*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <ComboBox x:Name="CmbTIpoServicio"
+                                      Grid.Column="0"
+                                      Header="Tio de Servicio"
+                                      PlaceholderText="Seleccione Tipo de Servicio"
+                                      SelectionChanged="CmbTIpoServicio_SelectionChanged"
+                                      HorizontalAlignment="Stretch" />
+                            <Button x:Name="BtnNuevoTipoServicio"
+                                    Grid.Column="1"
+                                    Click="BtnNuevoTipoServicio_Click"
+                                    ToolTipService.ToolTip="Crear Nuevo Tipo de Servicio"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE109;" />
+                                </StackPanel>
+                            </Button>
+
+                            <ContentDialog x:Name="CtdTipoServicio"
+                                       Title="Nuevo Tipo de Sercicio"
+                                       PrimaryButtonText="Guardar"
+                                       PrimaryButtonClick="CtdTipoServicio_PrimaryButtonClick"
+                                       SecondaryButtonText="Cancelar">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBox x:Name="TxtNombreTipoSerivicio"
+                                         PlaceholderText="Escriba el Nuevo Tipo de Servicio" 
+                                         Header="Tipo de Servicio" />
+                                </StackPanel>
+                            </ContentDialog>
+
+                        </Grid>
                         <ComboBox x:Name="CmbMascota"
                                   Header="Mascota"
-                                  HorizontalAlignment="Stretch" />
+                                  PlaceholderText="Seleccione Mascota"
+                                  HorizontalAlignment="Stretch"
+                                  SelectionChanged="CmbMascota_SelectionChanged"/>
                         <CalendarDatePicker x:Name="CdpFechaServicio" 
                                             Header="Fecha"
                                             DateChanged="CdpFechaServicio_DateChanged"
@@ -109,6 +148,12 @@
                                                        FontWeight="SemiBold">
                                                 <Run Text="Hora:" FontWeight="Bold"/>
                                                 <Run Text="{Binding Hora_Cita}"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="12" 
+                                                       FontStyle="Normal" 
+                                                       FontWeight="SemiBold">
+                                                <Run Text="Tipo de Servicio:" FontWeight="Bold"/>
+                                                <Run Text="{Binding Nombre_TipoServicio}"/>
                                             </TextBlock>
                                         </StackPanel>
                                         </Grid>

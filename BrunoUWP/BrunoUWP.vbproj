@@ -148,6 +148,7 @@
     <Compile Include="Logic\Cl_IntegracionWhatsapp.vb" />
     <Compile Include="Logic\Cl_ManipulacionImagenes.vb" />
     <Compile Include="Logic\Cl_Sexo.vb" />
+    <Compile Include="Logic\Cl_TipoServicio.vb" />
     <Compile Include="Logic\Cl_Utilitarios.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
@@ -165,8 +166,10 @@
     <Compile Include="Logic\Md_Parametrizacion.vb" />
     <Compile Include="Models\PropiedadesModel.vb" />
     <Compile Include="Models\RazaModel.vb" />
+    <Compile Include="Models\TipoServicioMascotaModel.vb" />
     <Compile Include="Models\SexoModel.vb" />
     <Compile Include="Models\TipoMascotaModel.vb" />
+    <Compile Include="Models\TipoServicioModel.vb" />
     <Compile Include="Models\Usuario.vb" />
     <Compile Include="Views\Frm_Citas.xaml.vb">
       <DependentUpon>Frm_Citas.xaml</DependentUpon>

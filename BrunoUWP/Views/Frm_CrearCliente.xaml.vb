@@ -23,7 +23,7 @@ Public NotInheritable Class Frm_CrearCliente
             'If Value IsNot Nothing Then
             '    TxtNombres.Text = Value
             'End If
-            Dim CodigoAleatrorio As String = GetUtilitarios.GenerarCodigoAleatorio()
+            Dim CodigoAleatrorio As String = GetUtilitarios.GenerarCodigoCliente()
             TxtCodigo.Text = CodigoAleatrorio
         Catch ex As Exception
             GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
@@ -103,7 +103,7 @@ Public NotInheritable Class Frm_CrearCliente
                     DirectCast(element, TextBox).Text = String.Empty
                 End If
             Next
-            TxtCodigo.Text = GetUtilitarios.GenerarCodigoAleatorio()
+            TxtCodigo.Text = GetUtilitarios.GenerarCodigoCliente()
             NbbEdad.Text = 1
         Catch ex As Exception
             Throw New Exception(ex.Message)

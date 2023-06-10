@@ -3,14 +3,16 @@
     Public Async Function InsertCita(CodigoCita As String,
                                      FechaHoraCita As Date,
                                      EstadoCita As Boolean,
-                                     IdMascota As Integer) As Task(Of Boolean)
+                                     IdMascota As Integer,
+                                     IdTipoServicio As Integer) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
             Dim Cita = New CitaModel With {
                 .Codigo_Cita = CodigoCita,
                 .FechaHora_Cita = FechaHoraCita,
                 .Estado_Cita = EstadoCita,
-                .Id_Mascota = IdMascota
+                .Id_Mascota = IdMascota,
+                .Id_TipoServicio = IdTipoServicio
             }
             Dim Id = Await ConexionDB.InsertAsync(Cita)
             Return True
