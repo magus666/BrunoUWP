@@ -40,6 +40,7 @@
                                   HorizontalAlignment="Stretch" />
                         <CalendarDatePicker x:Name="CdpFechaServicio" 
                                             Header="Fecha"
+                                            DateChanged="CdpFechaServicio_DateChanged"
                                             HorizontalAlignment="Stretch"/>
                         <TimePicker x:Name="TmpHoraServicio" 
                                     Header="Hora" 
@@ -62,71 +63,61 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Column="0"
+            
+                <Grid Grid.Column="0"
                   Margin="0,0,10,0"
                   ui:Effects.Shadow="{StaticResource CommonShadow}">
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      Grid.Column="0"
+                <StackPanel Margin="0,0,0,0">
+                    <TextBlock x:Name="LblTituloCitas"
+                               FontSize="25"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  Grid.Column="0"
+                                  Margin="0,17,0,0"
                       Padding="20">
-                    <StackPanel Orientation="Vertical">
-                        <ListView x:Name="LsvCita" 
-                                  IsItemClickEnabled="True"
-                                  ItemClick="LsvCita_ItemClick">
-                            <ListView.Resources>
-                                <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="ForestGreen" />
-                                <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="DarkGreen" />
-                                <SolidColorBrush x:Key="ListViewItemBackgroundPointerOver" Color="DarkGreen" />
-                                <SolidColorBrush x:Key="ListViewItemBackgroundPressed" Color="Green" />
-                                <SolidColorBrush x:Key="ListViewItemBackground" Color="Green" />
-                            </ListView.Resources>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="0,12,0,12">
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock FontSize="12" 
+                        <StackPanel Orientation="Vertical">
+                            <ListView x:Name="LsvCita" 
+                                      IsItemClickEnabled="True"
+                                      Margin="0,0,0,0">
+                                <ListView.Resources>
+                                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="ForestGreen" />
+                                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="DarkGreen" />
+                                    <SolidColorBrush x:Key="ListViewItemBackgroundPointerOver" Color="DarkGreen" />
+                                    <SolidColorBrush x:Key="ListViewItemBackgroundPressed" Color="Green" />
+                                    <SolidColorBrush x:Key="ListViewItemBackground" Color="Green" />
+                                </ListView.Resources>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,12,0,12">
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock FontSize="12" 
                                                        FontStyle="Normal" 
                                                        FontWeight="SemiBold">
                                                 <Run Text="Cliente:" FontWeight="Bold"/>
                                                 <Run Text="{Binding NombreCompleto_Persona}"/>
-                                            </TextBlock>
-                                            <TextBlock FontSize="12" 
+                                                </TextBlock>
+                                                <TextBlock FontSize="12" 
                                                        FontStyle="Normal" 
                                                        FontWeight="SemiBold">
                                                 <Run Text="Mascota:" FontWeight="Bold"/>
                                                 <Run Text="{Binding Nombre_Mascota}"/>
-                                            </TextBlock>
-                                            <TextBlock FontSize="12" 
-                                                       FontStyle="Normal" 
-                                                       FontWeight="SemiBold">
-                                                <Run Text="Codigo:" FontWeight="Bold"/>
-                                                <Run Text="{Binding Codigo_Cita}"/>
-                                            </TextBlock>
-                                            <TextBlock FontSize="12" 
-                                                       FontStyle="Normal" 
-                                                       FontWeight="SemiBold">
-                                                <Run Text="Fecha:" FontWeight="Bold"/>
-                                                <Run Text="{Binding Fecha_Cita}"/>
-                                            </TextBlock>
+                                                </TextBlock>
                                             <TextBlock FontSize="12" 
                                                        FontStyle="Normal" 
                                                        FontWeight="SemiBold">
                                                 <Run Text="Hora:" FontWeight="Bold"/>
                                                 <Run Text="{Binding Hora_Cita}"/>
                                             </TextBlock>
-                                            <TextBlock FontSize="12" 
-                                                       FontStyle="Normal" 
-                                                       FontWeight="SemiBold">
-                                                <Run Text="Estado de la Cita:" FontWeight="Bold"/>
-                                                <Run Text="{Binding Estado_Cita}"/>
-                                            </TextBlock>
                                         </StackPanel>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackPanel>
-                </ScrollViewer>
-            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
             <Grid Grid.Column="1"
                   Margin="0,0,0,0"
                   ui:Effects.Shadow="{StaticResource CommonShadow}">
