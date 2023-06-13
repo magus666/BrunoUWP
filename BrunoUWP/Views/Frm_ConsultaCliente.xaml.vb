@@ -29,6 +29,11 @@ Public NotInheritable Class Frm_ConsultaCliente
             ListadoFinalClientes = ListadoCliente.OrderBy(Function(cliente)
                                                               Return cliente.NombreCompleto_Persona
                                                           End Function).ToList()
+            Dim ConteoClientes As Integer = ListadoFinalClientes.Count
+            Dim SumaEdades As Integer = ListadoFinalClientes.Sum(Function(cliente)
+                                                                     Return cliente.Edad_Persona
+                                                                 End Function)
+            Dim PromedioEdades = SumaEdades / ConteoClientes
             LsvCliente.ItemsSource = ListadoFinalClientes
         Catch ex As Exception
 

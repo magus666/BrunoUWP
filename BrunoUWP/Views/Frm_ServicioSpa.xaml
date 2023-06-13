@@ -117,19 +117,24 @@
                                   Margin="0,17,0,0"
                       Padding="20">
                         <StackPanel Orientation="Vertical">
-                            <ListView x:Name="LsvCita" 
+                        <ListView x:Name="LsvCita" 
                                       IsItemClickEnabled="True"
                                       Margin="0,0,0,0">
-                                <ListView.Resources>
-                                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="ForestGreen" />
-                                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="DarkGreen" />
-                                    <SolidColorBrush x:Key="ListViewItemBackgroundPointerOver" Color="DarkGreen" />
-                                    <SolidColorBrush x:Key="ListViewItemBackgroundPressed" Color="Green" />
-                                    <SolidColorBrush x:Key="ListViewItemBackground" Color="Green" />
-                                </ListView.Resources>
-                                <ListView.ItemTemplate>
+                            <ListView.Resources>
+                                <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="SlateGray" />
+                                <SolidColorBrush x:Key="ListViewItemBackground" Color="DimGray" />
+                            </ListView.Resources>
+                            <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Margin="0,12,0,12">
+                                    <Grid Margin="0,12,0,12">
+                                        <StackPanel Orientation="Horizontal">
+                                            <ContentControl VerticalAlignment="Center"
+                                                            Margin="0,0,10,0">
+                                                <ContentControl.Content>
+                                                    <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE930;" 
+                                                              FontSize="55" />
+                                                </ContentControl.Content>
+                                            </ContentControl>
                                             <StackPanel Orientation="Vertical">
                                                 <TextBlock FontSize="12" 
                                                        FontStyle="Normal" 
@@ -143,20 +148,21 @@
                                                 <Run Text="Mascota:" FontWeight="Bold"/>
                                                 <Run Text="{Binding Nombre_Mascota}"/>
                                                 </TextBlock>
-                                            <TextBlock FontSize="12" 
+                                                <TextBlock FontSize="12" 
                                                        FontStyle="Normal" 
                                                        FontWeight="SemiBold">
                                                 <Run Text="Hora:" FontWeight="Bold"/>
                                                 <Run Text="{Binding Hora_Cita}"/>
-                                            </TextBlock>
-                                            <TextBlock FontSize="12" 
+                                                </TextBlock>
+                                                <TextBlock FontSize="12" 
                                                        FontStyle="Normal" 
                                                        FontWeight="SemiBold">
                                                 <Run Text="Tipo de Servicio:" FontWeight="Bold"/>
                                                 <Run Text="{Binding Nombre_TipoServicio}"/>
-                                            </TextBlock>
+                                                </TextBlock>
+                                            </StackPanel>
                                         </StackPanel>
-                                        </Grid>
+                                    </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
