@@ -8,5 +8,6 @@ Public Class CitaModel
     Public Property Estado_Cita As Boolean
     Public Property Id_TipoServicio As Integer
     Public Property Id_Mascota As Integer
+    Public Property Id_DimensionMascota As Integer
 
 End Class

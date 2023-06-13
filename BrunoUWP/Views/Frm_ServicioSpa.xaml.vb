@@ -11,26 +11,34 @@ Public NotInheritable Class Frm_ServicioSpa
     Dim GetFechaHora As New Cl_DateTime
     Dim GetTipoServicio As New Cl_TipoServicio
     Dim GetUtilitarios As New Cl_Utilitarios
+    Dim GetDimensionMascota As New Cl_DimensionMascota
     Dim FechaCalendarPicker As String
     Dim IdTipoServicio As Integer
     Dim IdMascota As Integer
+    Dim IdDimensionMascota As Integer
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
+            Await GetDimensionMascota.InsertarActualizarDimensionMascota()
             TmpHoraServicio.SelectedTime = Date.Now.TimeOfDay
             CdpFechaServicio.Date = Date.Now
-            CmbMascota.ItemsSource = Await GetMascota.ConsultaMascotas
-            CmbMascota.DisplayMemberPath = "Nombre_Mascota"
 
             CmbTIpoServicio.ItemsSource = Await GetTipoServicio.ConsultaTipoServicio
             CmbTIpoServicio.DisplayMemberPath = "Nombre_TipoServicio"
-            Await ConsultaCitas()
+
+            CmbMascota.ItemsSource = Await GetMascota.ConsultaMascotas
+            CmbMascota.DisplayMemberPath = "Nombre_Mascota"
+
+            CmbDimensionMascota.ItemsSource = Await GetDimensionMascota.ConsultaDimensionMascota
+            CmbDimensionMascota.DisplayMemberPath = "Nombre_DimensionMascota"
+
+            LsvCita.ItemsSource = Await ConsultaCitas()
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Public Async Function ConsultaCitas() As Task
+    Public Async Function ConsultaCitas() As Task(Of Object)
         Try
             FechaCalendarPicker = CdpFechaServicio.Date.Value.Date.ToShortDateString()
             Dim Mascota = Await GetMascota.ConsultaMascotas()
@@ -56,7 +64,7 @@ Public NotInheritable Class Frm_ServicioSpa
                                                     .Hora_Cita = Cit.FechaHora_Cita.ToString("hh:mm tt"),
                                                     .Estado_Cita = If(Cit.Estado_Cita, "Activo", "Inactivo")}).ToList
 
-            LsvCita.ItemsSource = GetRetornoCitas
+            Return GetRetornoCitas
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -67,9 +75,9 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim CodigoCita As String = GetUtilitarios.GenearCodigoCita
             Dim HoraServicio As String = TmpHoraServicio.SelectedTime.ToString
             Dim FechaHoraConcatenada As String = FechaCalendarPicker & " " & HoraServicio
-            If Await GetCita.InsertCita(CodigoCita, FechaHoraConcatenada, True, IdMascota, IdTipoServicio) = True Then
+            If Await GetCita.InsertCita(CodigoCita, FechaHoraConcatenada, True, IdMascota, IdDimensionMascota, IdTipoServicio) = True Then
                 Dim Respuesa = "Excelente"
-                Await ConsultaCitas()
+                LsvCita.ItemsSource = Await ConsultaCitas()
             End If
         Catch ex As Exception
 
@@ -80,7 +88,7 @@ Public NotInheritable Class Frm_ServicioSpa
         Try
             Dim FechaCdp = CdpFechaServicio.Date
             LblTituloCitas.Text = GetFechaHora.MostrarFechaLarga(FechaCdp.ToString)
-            Await ConsultaCitas()
+            LsvCita.ItemsSource = Await ConsultaCitas()
         Catch ex As Exception
 
         End Try
@@ -121,6 +129,16 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim comboBox As ComboBox = CType(sender, ComboBox)
             Dim selectedItem As MascotaModel = CType(comboBox.SelectedItem, MascotaModel)
             IdMascota = selectedItem.Id_Mascota
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub CmbDimensionMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            Dim selectedItem As DimensionMascotaModel = CType(comboBox.SelectedItem, DimensionMascotaModel)
+            IdDimensionMascota = selectedItem.Id_DimensionMascota
         Catch ex As Exception
 
         End Try

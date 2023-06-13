@@ -19,7 +19,7 @@ Public Class Cl_IntegracionWhatsapp
             Dim output As String = response.Content
             Console.WriteLine(output)
         Catch ex As Exception
-
+            Throw New Exception(ex.Message)
         End Try
 
     End Function

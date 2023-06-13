@@ -20,7 +20,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.3*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -32,8 +32,6 @@
                         Orientation="Vertical"
                         Padding="20">
                         <my:InfoBar x:Name="InfAlerta"/>
-
-
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="9*"/>
@@ -77,6 +75,11 @@
                                   PlaceholderText="Seleccione Mascota"
                                   HorizontalAlignment="Stretch"
                                   SelectionChanged="CmbMascota_SelectionChanged"/>
+                        <ComboBox x:Name="CmbDimensionMascota"
+                                  Header="Tamaño"
+                                  PlaceholderText="Seleccione el Tamaño de la Mascota"
+                                  HorizontalAlignment="Stretch"
+                                  SelectionChanged="CmbDimensionMascota_SelectionChanged"/>
                         <CalendarDatePicker x:Name="CdpFechaServicio" 
                                             Header="Fecha"
                                             DateChanged="CdpFechaServicio_DateChanged"
