@@ -156,6 +156,7 @@
     <Compile Include="Models\ClienteModel.vb" />
     <Compile Include="Logic\Cl_DateTime.vb" />
     <Compile Include="Logic\Cl_Mascota.vb" />
+    <Compile Include="Models\DimensionMascotaModel.vb" />
     <Compile Include="Models\MascotaModel.vb" />
     <Compile Include="Logic\Cl_Notificaciones.vb" />
     <Compile Include="Models\NewPersonaModel.vb" />
@@ -163,7 +164,7 @@
     <Compile Include="Logic\Cl_RazaMascota.vb" />
     <Compile Include="Logic\CL_TipoMascota.vb" />
     <Compile Include="Logic\In_FechaHora.vb" />
-    <Compile Include="Logic\Md_Parametrizacion.vb" />
+    <Compile Include="Logic\Md_ParametrizacionSqlite.vb" />
     <Compile Include="Models\PropiedadesModel.vb" />
     <Compile Include="Models\RazaModel.vb" />
     <Compile Include="Models\TipoServicioMascotaModel.vb" />

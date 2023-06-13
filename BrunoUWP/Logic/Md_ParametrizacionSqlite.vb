@@ -1,7 +1,7 @@
 ﻿Imports SQLite
 Imports Windows.Storage
 
-Module Md_Parametrizacion
+Module Md_ParametrizacionSqlite
     Public Property MarcoTrabajo As Frame
     Public ConexionDB As SQLiteAsyncConnection
     Public Async Function ConfiguraSqlite() As Task(Of Boolean)
@@ -16,6 +16,7 @@ Module Md_Parametrizacion
             Await ConexionDB.CreateTableAsync(Of CitaModel)()
             Await ConexionDB.CreateTableAsync(Of TipoServicioModel)()
             Await ConexionDB.CreateTableAsync(Of TipoServicioMascotaModel)()
+            Await ConexionDB.CreateTableAsync(Of DimensionMascotaModel)()
             Return True
         Catch ex As Exception
             Throw New Exception(ex.Message)
