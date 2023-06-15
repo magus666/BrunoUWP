@@ -7,6 +7,10 @@ Imports Microsoft.AppCenter.Crashes
 
 NotInheritable Class App
     Inherits Application
+    Dim GetTipoServicio As New Cl_TipoServicio
+    Dim GetTipoMascota As New CL_TipoMascota
+    Dim GetDimensionMascota As New Cl_DimensionMascota
+    Dim GetMetodoPago As New Cl_MetodoPago
 
     Public Sub New()
         InitializeComponent()
@@ -20,10 +24,17 @@ NotInheritable Class App
     ''' resultados de la búsqueda, etc.
     ''' </summary>
     ''' <param name="e">Información detallada acerca de la solicitud y el proceso de inicio.</param>
-    Protected Overrides Sub OnLaunched(e As Windows.ApplicationModel.Activation.LaunchActivatedEventArgs)
+    Protected Overrides Async Sub OnLaunched(e As Windows.ApplicationModel.Activation.LaunchActivatedEventArgs)
         Dim rootFrame As Frame = TryCast(Window.Current.Content, Frame)
         ' No repetir la inicialización de la aplicación si la ventana tiene contenido todavía,
         ' solo asegurarse de que la ventana está activa.
+
+        Await ConfiguraSqlite()
+
+        Await GetDimensionMascota.InsertarActualizarDimensionMascota()
+        Await GetTipoServicio.InsertarActualizarTipoServicio()
+        Await GetMetodoPago.InsertarActualizarMetodoPago()
+        Await GetTipoMascota.InsertarActualizarTipoMascota()
 
         If rootFrame Is Nothing Then
             ' Crear un marco para que actúe como contexto de navegación y navegar a la primera página.

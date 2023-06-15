@@ -8,6 +8,8 @@
     Public Property Nombre_TipoServicio As String
     Public Property Id_Mascota As Integer
     Public Property Nombre_Mascota As String
+    Public Property Id_TipoMascota As Integer
+    Public Property Nombre_TipoMascota As String
     Public Property Id_DimensionMascota As Integer
     Public Property Nombre_DimensionMascota As String
     Public Property Nombre_Cliente As String

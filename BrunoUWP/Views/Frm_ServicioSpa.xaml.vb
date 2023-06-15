@@ -10,9 +10,10 @@ Public NotInheritable Class Frm_ServicioSpa
     Dim GetPersona As New Cl_Cliente
     Dim GetFechaHora As New Cl_DateTime
     Dim GetTipoServicio As New Cl_TipoServicio
-    Dim GetUtilitarios As New Cl_Utilitarios
+    Dim GetTipoMascota As New CL_TipoMascota
     Dim GetDimensionMascota As New Cl_DimensionMascota
     Dim GetMetodoPago As New Cl_MetodoPago
+    Dim GetUtilitarios As New Cl_Utilitarios
     Dim FechaCalendarPicker As String
     Dim IdTipoServicio As Integer
     Dim IdMascota As Integer
@@ -20,9 +21,8 @@ Public NotInheritable Class Frm_ServicioSpa
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Await GetDimensionMascota.InsertarActualizarDimensionMascota()
-            Await GetTipoServicio.InsertarActualizarTipoServicio()
-            Await GetMetodoPago.InsertarActualizarMetodoPago()
+            Dim TipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
+
             TmpHoraServicio.SelectedTime = Date.Now.TimeOfDay
             CdpFechaServicio.Date = Date.Now
 
@@ -47,11 +47,14 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim Mascota = Await GetMascota.ConsultaMascotas()
             Dim Cliente = Await GetPersona.ConsultaCliente()
             Dim Citas = Await GetCita.ConsultarCitas()
+            Dim TipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
             Dim DimensionMascota = Await GetDimensionMascota.ConsultaDimensionMascota()
             Dim TipoServicio = Await GetTipoServicio.ConsultaTipoServicio()
             Dim GetRetornoCitas = (From Cit In Citas
                                    Join Mas In Mascota On
                                        Cit.Id_Mascota Equals Mas.Id_Mascota
+                                   Join Tms In TipoMascota On
+                                        Mas.Id_TipoMascota Equals Tms.Id_TipoMascota
                                    Join Cli In Cliente On
                                        Mas.Id_Persona Equals Cli.Id_Persona
                                    Join Tps In TipoServicio On
@@ -63,6 +66,7 @@ Public NotInheritable Class Frm_ServicioSpa
                                    Select New NewCitaModel With {.Id_Cita = Cit.Id_Cita,
                                                                  .Nombre_Cliente = Cli.NombreCompleto_Persona,
                                                                  .Nombre_Mascota = Mas.Nombre_Mascota,
+                                                                 .Nombre_TipoMascota = Tms.Nombre_TipoMascota,
                                                                  .Codigo_Cita = Cit.Codigo_Cita,
                                                                  .Id_TipoServicio = Tps.Id_TipoSerivicio,
                                                                  .Nombre_TipoServicio = Tps.Nombre_TipoServicio,
@@ -148,8 +152,9 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim IdDimenensionMascota = GetCitasModel.Id_DimensionMascota
             Dim IdTipoServicioCIta = GetCitasModel.Id_TipoServicio
 
-            LblNombreCliente.Text = "Mascota: " & GetCitasModel.Nombre_Mascota
-            LblNombreMascota.Text = "Dueño: " & GetCitasModel.Nombre_Cliente
+            LblTipoMascota.Text = "Tipo de Mascota: " & GetCitasModel.Nombre_TipoMascota
+            LblNombreMascota.Text = "Nombre de la Mascota: " & GetCitasModel.Nombre_Mascota
+            LblNombreCliente.Text = "Dueño: " & GetCitasModel.Nombre_Cliente
             LblDimension.Text = "Tamaño: " & GetCitasModel.Nombre_DimensionMascota
             LblFecha.Text = "Fecha: " & GetCitasModel.Fecha_Cita
             LblHora.Text = "Hora: " & GetCitasModel.Hora_Cita
@@ -163,29 +168,38 @@ Public NotInheritable Class Frm_ServicioSpa
     End Sub
 
     Public Function CalculaValorServicio(TipoServicio As Integer, Optional DimensionoPerro As Integer = Nothing) As Integer
+        Dim RetornoValor As Integer
         Try
-            Dim RetornoValor As Integer
-            Select Case TipoServicio And DimensionoPerro
+            Select Case TipoServicio
                 Case 1
                     RetornoValor = 4000
-                Case 2 And 1
-                    RetornoValor = 15000
-                Case 2 And 2
-                    RetornoValor = 22000
-                Case 2 And 3
-                    RetornoValor = 30000
-                Case 3 And 1
-                    RetornoValor = 20000
-                Case 3 And 2
-                    RetornoValor = 35000
-                Case 3 And 3
-                    RetornoValor = 50000
-                Case 4 And 1
-                    RetornoValor = 15000
-                Case 4 And 2
-                    RetornoValor = 22000
-                Case 4 And 3
-                    RetornoValor = 30000
+                Case 2
+                    Select Case DimensionoPerro
+                        Case 1
+                            RetornoValor = 15000
+                        Case 2
+                            RetornoValor = 22000
+                        Case 3
+                            RetornoValor = 30000
+                    End Select
+                Case 3
+                    Select Case DimensionoPerro
+                        Case 1
+                            RetornoValor = 20000
+                        Case 2
+                            RetornoValor = 35000
+                        Case 3
+                            RetornoValor = 50000
+                    End Select
+                Case 4
+                    Select Case DimensionoPerro
+                        Case 1
+                            RetornoValor = 15000
+                        Case 2
+                            RetornoValor = 22000
+                        Case 3
+                            RetornoValor = 30000
+                    End Select
             End Select
             Return RetornoValor
         Catch ex As Exception

@@ -24,7 +24,7 @@ Public NotInheritable Class Frm_CrearMascota
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Await GetTipoMascota.InsertarActualizarMascota()
+            Await GetTipoMascota.InsertarActualizarTipoMascota()
 
             CmbRazaMascota.IsEnabled = False
 

@@ -1,5 +1,5 @@
 ﻿Public Class CL_TipoMascota
-    Public Async Function InsertarActualizarMascota() As Task(Of Boolean)
+    Public Async Function InsertarActualizarTipoMascota() As Task(Of Boolean)
         Try
             Dim GetTipoMascota = Await ConexionDB.Table(Of TipoMascotaModel)().ToListAsync()
             Dim PerroExiste = (From x In GetTipoMascota

@@ -154,6 +154,7 @@
                                Text="Detalle del Servicio"
                                FontSize="25"
                                HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="LblTipoMascota" Text="Tipo de Mascota:" />
                     <TextBlock x:Name="LblNombreMascota" Text="Nombre:" />
                     <TextBlock x:Name="LblNombreCliente" Text="Dueño:" />
                     <TextBlock x:Name="LblDimension" Text="Tamaño:"/>

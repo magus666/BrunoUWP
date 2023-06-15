@@ -4,8 +4,8 @@
                                      FechaHoraCita As Date,
                                      EstadoCita As Boolean,
                                      IdMascota As Integer,
-                                     IdTipoServicio As Integer,
-                                     IdDimensionMascota As Integer) As Task(Of Boolean)
+                                     IdDimensionMascota As Integer,
+                                     IdTipoServicio As Integer) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
             Dim Cita = New CitaModel With {
