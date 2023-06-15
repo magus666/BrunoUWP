@@ -87,7 +87,7 @@
                         <TimePicker x:Name="TmpHoraServicio" 
                                     Header="Hora" 
                                     MinuteIncrement="30"/>
-                      <Button x:Name="BtnComprobar"
+                        <Button x:Name="BtnComprobar"
                               HorizontalAlignment="Right"
                               Content="Verificar Agenta"
                               Click="BtnComprobar_Click"/>
@@ -121,8 +121,9 @@
                       Padding="20">
                         <StackPanel Orientation="Vertical">
                         <ListView x:Name="LsvCita" 
-                                      IsItemClickEnabled="True"
-                                      Margin="0,0,0,0">
+                                  IsItemClickEnabled="True"
+                                  Margin="0,0,0,0"
+                                  ItemClick="LsvCita_ItemClick">
                             <ListView.Resources>
                                 <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="SlateGray" />
                                 <SolidColorBrush x:Key="ListViewItemBackground" Color="DimGray" />
@@ -139,12 +140,6 @@
                                                 </ContentControl.Content>
                                             </ContentControl>
                                             <StackPanel Orientation="Vertical">
-                                                <TextBlock FontSize="12" 
-                                                       FontStyle="Normal" 
-                                                       FontWeight="SemiBold">
-                                                <Run Text="Cliente:" FontWeight="Bold"/>
-                                                <Run Text="{Binding NombreCompleto_Persona}"/>
-                                                </TextBlock>
                                                 <TextBlock FontSize="12" 
                                                        FontStyle="Normal" 
                                                        FontWeight="SemiBold">
@@ -175,8 +170,40 @@
             <Grid Grid.Column="1"
                   Margin="0,0,0,0"
                   ui:Effects.Shadow="{StaticResource CommonShadow}">
-                <StackPanel Padding="20">
-                    <TextBox />
+
+                <StackPanel x:Name="StpMensajeServicio"
+                            Visibility="Visible"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <TextBlock FontSize="25"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               Text="Seleccione una Cita de la Izquierda para mas Detalles" />
+                </StackPanel>
+
+                    <StackPanel x:Name="StpFinalizarServicio"
+                            Visibility="Collapsed">
+                    <TextBlock Margin="0,0,0,0"
+                               Text="Detalle del Servicio"
+                               FontSize="25"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="LblNombreMascota" Text="Nombre:" />
+                    <TextBlock x:Name="LblNombreCliente" Text="Dueño:" />
+                    <TextBlock Text="Tamaño:"/>
+                    <TextBlock Text="Fecha:"/>
+                    <TextBlock Text="Hora:"/>
+                    <TextBlock Text="Servicio:"/>
+                    <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" Margin="0,5"/>
+                    <TextBlock HorizontalAlignment="Right">
+                        <Run Text="TOTAL:"/>
+                        <Run x:Name="LblValorTotal"/>
+                    </TextBlock>
+                    <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" Margin="0,5"/>
+                    <Button x:Name="BtnFinalizarServicio"
+                            Margin="0,10,0,0"
+                              HorizontalAlignment="Center"
+                              Content="Finalizar"
+                              Click="BtnFinalizarServicio_Click"/>
                 </StackPanel>
             </Grid>
         </Grid>

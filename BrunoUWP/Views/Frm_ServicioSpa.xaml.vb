@@ -44,6 +44,7 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim Mascota = Await GetMascota.ConsultaMascotas()
             Dim Cliente = Await GetPersona.ConsultaCliente()
             Dim Citas = Await GetCita.ConsultarCitas()
+            Dim DimensionMascota = Await GetDimensionMascota.ConsultaDimensionMascota()
             Dim TipoServicio = Await GetTipoServicio.ConsultaTipoServicio()
             Dim fechaHoraCita As New List(Of Date)
             Dim GetRetornoCitas = (From Cit In Citas
@@ -53,16 +54,20 @@ Public NotInheritable Class Frm_ServicioSpa
                                        Mas.Id_Persona Equals Cli.Id_Persona
                                    Join Tps In TipoServicio On
                                        Cit.Id_TipoServicio Equals Tps.Id_TipoSerivicio
+                                   Join Dsm In DimensionMascota On
+                                       Cit.Id_DimensionMascota Equals Dsm.Id_DimensionMascota
                                    Where Cit.FechaHora_Cita.Date.ToShortDateString() = FechaCalendarPicker
                                    Order By Cit.FechaHora_Cita
-                                   Select New With {Cli.NombreCompleto_Persona,
-                                                    Mas.Nombre_Mascota,
-                                                    Cit.Codigo_Cita,
-                                                    Cit.FechaHora_Cita,
-                                                    Tps.Nombre_TipoServicio,
-                                                    .Fecha_Cita = Cit.FechaHora_Cita.Date.ToShortDateString(),
-                                                    .Hora_Cita = Cit.FechaHora_Cita.ToString("hh:mm tt"),
-                                                    .Estado_Cita = If(Cit.Estado_Cita, "Activo", "Inactivo")}).ToList
+                                   Select New NewCitaModel With {.Id_Cita = Cit.Id_Cita,
+                                                                 .Nombre_Cliente = Cli.NombreCompleto_Persona,
+                                                                 .Nombre_Mascota = Mas.Nombre_Mascota,
+                                                                 .Codigo_Cita = Cit.Codigo_Cita,
+                                                                 .Id_TipoServicio = Tps.Id_TipoSerivicio,
+                                                                 .Nombre_TipoServicio = Tps.Nombre_TipoServicio,
+                                                                 .Id_DimensionMascota = Dsm.Id_DimensionMascota,
+                                                                 .Fecha_Cita = Cit.FechaHora_Cita.Date.ToShortDateString(),
+                                                                 .Hora_Cita = Cit.FechaHora_Cita.ToString("hh:mm tt"),
+                                                                 .Estado_Cita = If(Cit.Estado_Cita, "Activo", "Inactivo")}).ToList
 
             Return GetRetornoCitas
         Catch ex As Exception
@@ -143,4 +148,45 @@ Public NotInheritable Class Frm_ServicioSpa
 
         End Try
     End Sub
+
+    Private Sub BtnFinalizarServicio_Click(sender As Object, e As RoutedEventArgs)
+
+    End Sub
+
+    Private Sub LsvCita_ItemClick(sender As Object, e As ItemClickEventArgs)
+        Try
+            StpMensajeServicio.Visibility = Visibility.Collapsed
+            StpFinalizarServicio.Visibility = Visibility.Visible
+
+            Dim GetCitasModel As New NewCitaModel
+            GetCitasModel = e.ClickedItem
+
+
+            Dim IdDimenensionMascota = GetCitasModel.Id_DimensionMascota
+            Dim IdTipoServicioCIta = GetCitasModel.Id_TipoServicio
+
+            LblNombreCliente.Text = "Mascota: " & GetCitasModel.Nombre_Mascota
+            LblNombreMascota.Text = "Dueño: " & GetCitasModel.Nombre_Cliente
+            LblValorTotal.Text = CalculaValorServicio(IdDimenensionMascota, IdTipoServicioCIta).ToString
+
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Public Function CalculaValorServicio(DimensionoPerro As Integer, TipoServicio As Integer) As Integer
+        Try
+            Dim RetornoValor As Integer
+            Select Case DimensionoPerro And TipoServicio
+                Case 1, 1
+                    RetornoValor = 45000
+                Case 3, 3
+                    RetornoValor = 70000
+            End Select
+            Return RetornoValor
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

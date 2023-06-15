@@ -1,12 +1,17 @@
-﻿''' <summary>
+﻿Imports Microsoft.AppCenter
+Imports Microsoft.AppCenter.Analytics
+Imports Microsoft.AppCenter.Crashes
+''' <summary>
 ''' Proporciona un comportamiento específico de la aplicación para complementar la clase Application predeterminada.
 ''' </summary>
+
 NotInheritable Class App
     Inherits Application
 
     Public Sub New()
         InitializeComponent()
-        RequestedTheme = ApplicationTheme.Dark
+
+        AppCenter.Start("57ad1245-685a-4348-9a03-11dd362d6fb7", GetType(Analytics), GetType(Crashes))
     End Sub
 
     ''' <summary>

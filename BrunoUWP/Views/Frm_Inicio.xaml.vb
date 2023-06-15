@@ -1,5 +1,6 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
+Imports Microsoft.AppCenter.Analytics
 Imports Microsoft.UI.Xaml.Controls
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
@@ -13,6 +14,7 @@ Public NotInheritable Class Frm_Inicio
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
+
             Dim ContadorMascotas As Integer = Await GetMascotas.CountMascotas
             LblCantidadMascotas.Text = ContadorMascotas
         Catch ex As Exception

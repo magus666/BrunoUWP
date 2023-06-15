@@ -34,7 +34,7 @@ Public NotInheritable Class MainPage
         End Try
     End Sub
 
-    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
             NvwBruno.IsBackEnabled = False
             NvwBruno.SelectedItem = NviInicio
