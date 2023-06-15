@@ -148,6 +148,7 @@
     <Compile Include="Logic\Cl_DimensionMascota.vb" />
     <Compile Include="Logic\Cl_IntegracionWhatsapp.vb" />
     <Compile Include="Logic\Cl_ManipulacionImagenes.vb" />
+    <Compile Include="Logic\Cl_MetodoPago.vb" />
     <Compile Include="Logic\Cl_Sexo.vb" />
     <Compile Include="Logic\Cl_TipoServicio.vb" />
     <Compile Include="Logic\Cl_Utilitarios.vb" />
@@ -160,6 +161,7 @@
     <Compile Include="Models\DimensionMascotaModel.vb" />
     <Compile Include="Models\MascotaModel.vb" />
     <Compile Include="Logic\Cl_Notificaciones.vb" />
+    <Compile Include="Models\MetodoPagoModel.vb" />
     <Compile Include="Models\NewCitaModel.vb" />
     <Compile Include="Models\NewPersonaModel.vb" />
     <Compile Include="Models\PersonaModel.vb" />

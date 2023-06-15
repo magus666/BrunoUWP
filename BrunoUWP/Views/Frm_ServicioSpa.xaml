@@ -32,44 +32,11 @@
                         Orientation="Vertical"
                         Padding="20">
                         <my:InfoBar x:Name="InfAlerta"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="9*"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <ComboBox x:Name="CmbTIpoServicio"
-                                      Grid.Column="0"
-                                      Header="Tio de Servicio"
-                                      PlaceholderText="Seleccione Tipo de Servicio"
-                                      SelectionChanged="CmbTIpoServicio_SelectionChanged"
-                                      HorizontalAlignment="Stretch" />
-                            <Button x:Name="BtnNuevoTipoServicio"
-                                    Grid.Column="1"
-                                    Click="BtnNuevoTipoServicio_Click"
-                                    ToolTipService.ToolTip="Crear Nuevo Tipo de Servicio"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Bottom">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE109;" />
-                                </StackPanel>
-                            </Button>
-
-                            <ContentDialog x:Name="CtdTipoServicio"
-                                       Title="Nuevo Tipo de Sercicio"
-                                       PrimaryButtonText="Guardar"
-                                       PrimaryButtonClick="CtdTipoServicio_PrimaryButtonClick"
-                                       SecondaryButtonText="Cancelar">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBox x:Name="TxtNombreTipoSerivicio"
-                                         PlaceholderText="Escriba el Nuevo Tipo de Servicio" 
-                                         Header="Tipo de Servicio" />
-                                </StackPanel>
-                            </ContentDialog>
-
-                        </Grid>
+                        <ComboBox x:Name="CmbTIpoServicio"
+                                  Header="Tio de Servicio"
+                                  PlaceholderText="Seleccione Tipo de Servicio"
+                                  SelectionChanged="CmbTIpoServicio_SelectionChanged"
+                                  HorizontalAlignment="Stretch" />
                         <ComboBox x:Name="CmbMascota"
                                   Header="Mascota"
                                   PlaceholderText="Seleccione Mascota"
@@ -189,10 +156,10 @@
                                HorizontalAlignment="Center"/>
                     <TextBlock x:Name="LblNombreMascota" Text="Nombre:" />
                     <TextBlock x:Name="LblNombreCliente" Text="Dueño:" />
-                    <TextBlock Text="Tamaño:"/>
-                    <TextBlock Text="Fecha:"/>
-                    <TextBlock Text="Hora:"/>
-                    <TextBlock Text="Servicio:"/>
+                    <TextBlock x:Name="LblDimension" Text="Tamaño:"/>
+                    <TextBlock x:Name="LblFecha" Text="Fecha:"/>
+                    <TextBlock x:Name="LblHora" Text="Hora:"/>
+                    <TextBlock x:Name="LblServicio" Text="Servicio:"/>
                     <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" Margin="0,5"/>
                     <TextBlock HorizontalAlignment="Right">
                         <Run Text="TOTAL:"/>

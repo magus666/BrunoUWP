@@ -12,6 +12,7 @@ Public NotInheritable Class Frm_ServicioSpa
     Dim GetTipoServicio As New Cl_TipoServicio
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetDimensionMascota As New Cl_DimensionMascota
+    Dim GetMetodoPago As New Cl_MetodoPago
     Dim FechaCalendarPicker As String
     Dim IdTipoServicio As Integer
     Dim IdMascota As Integer
@@ -20,6 +21,8 @@ Public NotInheritable Class Frm_ServicioSpa
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
             Await GetDimensionMascota.InsertarActualizarDimensionMascota()
+            Await GetTipoServicio.InsertarActualizarTipoServicio()
+            Await GetMetodoPago.InsertarActualizarMetodoPago()
             TmpHoraServicio.SelectedTime = Date.Now.TimeOfDay
             CdpFechaServicio.Date = Date.Now
 
@@ -46,7 +49,6 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim Citas = Await GetCita.ConsultarCitas()
             Dim DimensionMascota = Await GetDimensionMascota.ConsultaDimensionMascota()
             Dim TipoServicio = Await GetTipoServicio.ConsultaTipoServicio()
-            Dim fechaHoraCita As New List(Of Date)
             Dim GetRetornoCitas = (From Cit In Citas
                                    Join Mas In Mascota On
                                        Cit.Id_Mascota Equals Mas.Id_Mascota
@@ -65,6 +67,7 @@ Public NotInheritable Class Frm_ServicioSpa
                                                                  .Id_TipoServicio = Tps.Id_TipoSerivicio,
                                                                  .Nombre_TipoServicio = Tps.Nombre_TipoServicio,
                                                                  .Id_DimensionMascota = Dsm.Id_DimensionMascota,
+                                                                 .Nombre_DimensionMascota = Dsm.Nombre_DimensionMascota,
                                                                  .Fecha_Cita = Cit.FechaHora_Cita.Date.ToShortDateString(),
                                                                  .Hora_Cita = Cit.FechaHora_Cita.ToString("hh:mm tt"),
                                                                  .Estado_Cita = If(Cit.Estado_Cita, "Activo", "Inactivo")}).ToList
@@ -94,26 +97,6 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim FechaCdp = CdpFechaServicio.Date
             LblTituloCitas.Text = GetFechaHora.MostrarFechaLarga(FechaCdp.ToString)
             LsvCita.ItemsSource = Await ConsultaCitas()
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Async Sub BtnNuevoTipoServicio_Click(sender As Object, e As RoutedEventArgs)
-        Try
-            Await CtdTipoServicio.ShowAsync()
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
-    End Sub
-    Private Async Sub CtdTipoServicio_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
-        Try
-            If Await GetTipoServicio.InsertTipoServicio(TxtNombreTipoSerivicio.Text) Then
-                Dim Respuesta = "Buena la Ñolita"
-
-                CmbTIpoServicio.ItemsSource = Await GetTipoServicio.ConsultaTipoServicio
-                CmbTIpoServicio.DisplayMemberPath = "Nombre_TipoServicio"
-            End If
         Catch ex As Exception
 
         End Try
@@ -167,7 +150,11 @@ Public NotInheritable Class Frm_ServicioSpa
 
             LblNombreCliente.Text = "Mascota: " & GetCitasModel.Nombre_Mascota
             LblNombreMascota.Text = "Dueño: " & GetCitasModel.Nombre_Cliente
-            LblValorTotal.Text = CalculaValorServicio(IdDimenensionMascota, IdTipoServicioCIta).ToString
+            LblDimension.Text = "Tamaño: " & GetCitasModel.Nombre_DimensionMascota
+            LblFecha.Text = "Fecha: " & GetCitasModel.Fecha_Cita
+            LblHora.Text = "Hora: " & GetCitasModel.Hora_Cita
+            LblServicio.Text = "Servicio: " & GetCitasModel.Nombre_TipoServicio
+            LblValorTotal.Text = CalculaValorServicio(IdTipoServicioCIta, IdDimenensionMascota).ToString("C0")
 
 
         Catch ex As Exception
@@ -175,14 +162,30 @@ Public NotInheritable Class Frm_ServicioSpa
         End Try
     End Sub
 
-    Public Function CalculaValorServicio(DimensionoPerro As Integer, TipoServicio As Integer) As Integer
+    Public Function CalculaValorServicio(TipoServicio As Integer, Optional DimensionoPerro As Integer = Nothing) As Integer
         Try
             Dim RetornoValor As Integer
-            Select Case DimensionoPerro And TipoServicio
-                Case 1, 1
-                    RetornoValor = 45000
-                Case 3, 3
-                    RetornoValor = 70000
+            Select Case TipoServicio And DimensionoPerro
+                Case 1
+                    RetornoValor = 4000
+                Case 2 And 1
+                    RetornoValor = 15000
+                Case 2 And 2
+                    RetornoValor = 22000
+                Case 2 And 3
+                    RetornoValor = 30000
+                Case 3 And 1
+                    RetornoValor = 20000
+                Case 3 And 2
+                    RetornoValor = 35000
+                Case 3 And 3
+                    RetornoValor = 50000
+                Case 4 And 1
+                    RetornoValor = 15000
+                Case 4 And 2
+                    RetornoValor = 22000
+                Case 4 And 3
+                    RetornoValor = 30000
             End Select
             Return RetornoValor
         Catch ex As Exception
