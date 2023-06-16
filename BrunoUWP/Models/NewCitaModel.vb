@@ -13,4 +13,5 @@
     Public Property Id_DimensionMascota As Integer
     Public Property Nombre_DimensionMascota As String
     Public Property Nombre_Cliente As String
+    Public Property EstadoVenta_Cita As String
 End Class

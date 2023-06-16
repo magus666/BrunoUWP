@@ -10,5 +10,6 @@ Public Class CitaModel
     Public Property Id_Mascota As Integer
     Public Property Id_DimensionMascota As Integer
     Public Property Id_TipoTransaccion As Integer
+    Public Property EstadoVenta_Cita As Boolean
 
 End Class

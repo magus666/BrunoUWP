@@ -19,6 +19,7 @@ Public NotInheritable Class Frm_ServicioSpa
     Dim GetVenta As New Cl_Venta
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim FechaCalendarPicker As String
+    Dim IdCita As Integer
     Dim IdTipoServicio As Integer
     Dim IdMascota As Integer
     Dim IdMetodoPago As Integer
@@ -78,7 +79,8 @@ Public NotInheritable Class Frm_ServicioSpa
                                                                  .Nombre_DimensionMascota = Dsm.Nombre_DimensionMascota,
                                                                  .Fecha_Cita = Cit.FechaHora_Cita.Date.ToShortDateString(),
                                                                  .Hora_Cita = Cit.FechaHora_Cita.ToString("hh:mm tt"),
-                                                                 .Estado_Cita = If(Cit.Estado_Cita, "Activo", "Inactivo")}).ToList
+                                                                 .Estado_Cita = If(Cit.Estado_Cita, "Activo", "Inactivo"),
+                                                                 .EstadoVenta_Cita = If(Cit.EstadoVenta_Cita, "Pagada", "Por Pagar")}).ToList
 
             Return GetRetornoCitas
         Catch ex As Exception
@@ -91,7 +93,7 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim CodigoCita As String = GetUtilitarios.GenearCodigoCita
             Dim HoraServicio As String = TmpHoraServicio.SelectedTime.ToString
             Dim FechaHoraConcatenada As String = FechaCalendarPicker & " " & HoraServicio
-            If Await GetCita.InsertCita(CodigoCita, FechaHoraConcatenada, True, IdMascota, IdDimensionMascota, IdTipoServicio, 1) = True Then
+            If Await GetCita.InsertCita(CodigoCita, FechaHoraConcatenada, True, IdMascota, IdDimensionMascota, IdTipoServicio, 1, False) = True Then
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "La cita Se Agrego Correctamente")
                 Await ValidaCitas()
                 LsvCita.ItemsSource = Await ConsultaCitas()
@@ -173,7 +175,7 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim GetCitasModel As New NewCitaModel
             GetCitasModel = e.ClickedItem
 
-
+            IdCita = GetCitasModel.Id_Cita
             Dim IdDimenensionMascota = GetCitasModel.Id_DimensionMascota
             Dim IdTipoServicioCIta = GetCitasModel.Id_TipoServicio
 
@@ -184,6 +186,13 @@ Public NotInheritable Class Frm_ServicioSpa
             LblFecha.Text = "Fecha: " & GetCitasModel.Fecha_Cita
             LblHora.Text = "Hora: " & GetCitasModel.Hora_Cita
             LblServicio.Text = "Servicio: " & GetCitasModel.Nombre_TipoServicio
+            LblEstadoVenta.Text = "Estado del Pago: " & GetCitasModel.EstadoVenta_Cita
+            If GetCitasModel.EstadoVenta_Cita = "Por Pagar" Then
+                BtnFinalizarServicio.Visibility = Visibility.Visible
+            Else
+                BtnFinalizarServicio.Visibility = Visibility.Collapsed
+            End If
+
             LblValorTotal.Text = CalculaValorServicio(IdTipoServicioCIta, IdDimenensionMascota).ToString("C0")
 
 
@@ -246,7 +255,10 @@ Public NotInheritable Class Frm_ServicioSpa
     Private Async Sub CtdFinalizaPago_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
         Try
             Dim CodigoVenta As String = GetUtilitarios.GenearCodigoVenta()
+            Dim GetIdCita = IdCita
             If Await GetVenta.InsertVenta(CodigoVenta, GetDateTime.ObtenerHoraActual, 1, IdMetodoPago, RetornoValor) = True Then
+                Await GetCita.ActualizarCita(GetIdCita, True)
+                LsvCita.ItemsSource = Await ConsultaCitas()
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El Pago Se realizó Correctamente")
             End If
         Catch ex As Exception

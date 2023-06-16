@@ -6,7 +6,8 @@
                                      IdMascota As Integer,
                                      IdDimensionMascota As Integer,
                                      IdTipoServicio As Integer,
-                                     IdTipoTransaccion As Integer) As Task(Of Boolean)
+                                     IdTipoTransaccion As Integer,
+                                     EstadoVentaCita As Boolean) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
             Dim Cita = New CitaModel With {
@@ -16,7 +17,8 @@
                 .Id_Mascota = IdMascota,
                 .Id_DimensionMascota = IdDimensionMascota,
                 .Id_TipoServicio = IdTipoServicio,
-                .Id_TipoTransaccion = IdTipoTransaccion
+                .Id_TipoTransaccion = IdTipoTransaccion,
+                .EstadoVenta_Cita = EstadoVentaCita
             }
             Dim Id = Await ConexionDB.InsertAsync(Cita)
             Return True
@@ -37,4 +39,23 @@
         End Try
     End Function
 
+    Public Async Function ActualizarCita(IdCita As Integer,
+                                         EstadoVenta As Boolean) As Task(Of Boolean)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCita = Await ConexionDB.Table(Of CitaModel)().ToListAsync()
+            Dim Cita = (From x In GetCita
+                        Where x.Id_Cita = IdCita
+                        Select x).FirstOrDefault
+            If Cita IsNot Nothing Then
+                Cita.EstadoVenta_Cita = EstadoVenta
+                Await ConexionDB.UpdateAsync(Cita)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class
