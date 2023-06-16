@@ -151,7 +151,9 @@
     <Compile Include="Logic\Cl_MetodoPago.vb" />
     <Compile Include="Logic\Cl_Sexo.vb" />
     <Compile Include="Logic\Cl_TipoServicio.vb" />
+    <Compile Include="Logic\Cl_TipoTransaccion.vb" />
     <Compile Include="Logic\Cl_Utilitarios.vb" />
+    <Compile Include="Logic\Cl_Venta.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
     <Compile Include="Models\CitaModel.vb" />
@@ -164,6 +166,7 @@
     <Compile Include="Models\MetodoPagoModel.vb" />
     <Compile Include="Models\NewCitaModel.vb" />
     <Compile Include="Models\NewPersonaModel.vb" />
+    <Compile Include="Models\PagosModel.vb" />
     <Compile Include="Models\PersonaModel.vb" />
     <Compile Include="Logic\Cl_RazaMascota.vb" />
     <Compile Include="Logic\CL_TipoMascota.vb" />
@@ -175,7 +178,9 @@
     <Compile Include="Models\SexoModel.vb" />
     <Compile Include="Models\TipoMascotaModel.vb" />
     <Compile Include="Models\TipoServicioModel.vb" />
+    <Compile Include="Models\TipoTransaccionModel.vb" />
     <Compile Include="Models\Usuario.vb" />
+    <Compile Include="Models\VentaModel.vb" />
     <Compile Include="Views\Frm_Citas.xaml.vb">
       <DependentUpon>Frm_Citas.xaml</DependentUpon>
     </Compile>

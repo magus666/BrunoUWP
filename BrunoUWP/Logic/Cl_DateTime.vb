@@ -12,6 +12,16 @@ Public Class Cl_DateTime
         End Try
     End Function
 
+    Public Function ObtenerFechaActual() As Date Implements In_FechaHora.ObtenerFechaActual
+        Try
+            Dim FechaActual As Date
+            FechaActual = Date.Now.Date
+            Return FechaActual
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
     Public Function MostrarFechaLarga(FechaAconvertir As String) As String
         Try
             Dim FechaSeleccionada = Date.Parse(FechaAconvertir)
@@ -30,5 +40,6 @@ Public Class Cl_DateTime
             Throw New Exception(ex.Message)
         End Try
     End Function
+
 
 End Class

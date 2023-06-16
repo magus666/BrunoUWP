@@ -5,7 +5,8 @@
                                      EstadoCita As Boolean,
                                      IdMascota As Integer,
                                      IdDimensionMascota As Integer,
-                                     IdTipoServicio As Integer) As Task(Of Boolean)
+                                     IdTipoServicio As Integer,
+                                     IdTipoTransaccion As Integer) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
             Dim Cita = New CitaModel With {
@@ -14,7 +15,8 @@
                 .Estado_Cita = EstadoCita,
                 .Id_Mascota = IdMascota,
                 .Id_DimensionMascota = IdDimensionMascota,
-                .Id_TipoServicio = IdTipoServicio
+                .Id_TipoServicio = IdTipoServicio,
+                .Id_TipoTransaccion = IdTipoTransaccion
             }
             Dim Id = Await ConexionDB.InsertAsync(Cita)
             Return True

@@ -56,7 +56,7 @@
                                     MinuteIncrement="30"/>
                         <Button x:Name="BtnComprobar"
                               HorizontalAlignment="Right"
-                              Content="Verificar Agenta"
+                              Content="Verificar Agenda"
                               Click="BtnComprobar_Click"/>
                     </StackPanel>
                     <my:TeachingTip x:Name="TctAlerta"/>
@@ -81,12 +81,24 @@
                                FontSize="25"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                </StackPanel>
+
+                <StackPanel x:Name="StpContenidoCitas" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <TextBlock x:Name="LblInformacionCitas"
+                               Text="No hay Ninguna Cita Asignada para esta Fecha"
+                               FontSize="25"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                </StackPanel>
+                    <ScrollViewer x:Name="ScvCitas"
+                                  VerticalScrollBarVisibility="Auto"
                                   Grid.Column="0"
+                                  Visibility="Collapsed"
                                   Margin="0,17,0,0"
-                      Padding="20">
-                        <StackPanel Orientation="Vertical">
+                                  Padding="20">
+                    <StackPanel Orientation="Vertical">
                         <ListView x:Name="LsvCita" 
                                   IsItemClickEnabled="True"
                                   Margin="0,0,0,0"
@@ -96,7 +108,7 @@
                                 <SolidColorBrush x:Key="ListViewItemBackground" Color="DimGray" />
                             </ListView.Resources>
                             <ListView.ItemTemplate>
-                                    <DataTemplate>
+                                <DataTemplate>
                                     <Grid Margin="0,12,0,12">
                                         <StackPanel Orientation="Horizontal">
                                             <ContentControl VerticalAlignment="Center"
@@ -128,13 +140,19 @@
                                             </StackPanel>
                                         </StackPanel>
                                     </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </StackPanel>
-                    </ScrollViewer>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                </StackPanel>
+                </ScrollViewer>
+                    <TextBlock x:Name="LblCantidadCitas" 
+                               Margin="0,0,20,3"
+                               FontSize="10"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Right"/>
                 </Grid>
-            <Grid Grid.Column="1"
+            <Grid x:Name="GrdDetalleServicio"
+                  Grid.Column="1"
                   Margin="0,0,0,0"
                   ui:Effects.Shadow="{StaticResource CommonShadow}">
 
@@ -149,7 +167,8 @@
                 </StackPanel>
 
                     <StackPanel x:Name="StpFinalizarServicio"
-                            Visibility="Collapsed">
+                                Visibility="Collapsed"
+                                Padding="10,0,10,10">
                     <TextBlock Margin="0,0,0,0"
                                Text="Detalle del Servicio"
                                FontSize="25"
@@ -172,6 +191,28 @@
                               HorizontalAlignment="Center"
                               Content="Finalizar"
                               Click="BtnFinalizarServicio_Click"/>
+
+                    <ContentDialog x:Name="CtdFinalizaPago"
+                                       Title="Pagar"
+                                       PrimaryButtonText="Pagar"
+                                       PrimaryButtonClick="CtdFinalizaPago_PrimaryButtonClick"
+                                       SecondaryButtonText="Cancelar">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Margin="0,0,0,10">
+                                <Run Text="Valor total a Pagar: "/>
+                                <Run x:Name="LblValorTotalPago"
+                                     FontSize="14"
+                                     FontWeight="Bold"/>
+                            </TextBlock>
+                            <ComboBox x:Name="CmbMetodoPago"
+                                      Header="Por favor seleccione un Metodo de Pago"
+                                      PlaceholderText="Metodo de Pago"
+                                      HorizontalAlignment="Stretch"
+                                      SelectionChanged="CmbMetodoPago_SelectionChanged"/>
+                        </StackPanel>
+                    </ContentDialog>
+
+
                 </StackPanel>
             </Grid>
         </Grid>

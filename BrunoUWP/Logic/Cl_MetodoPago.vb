@@ -36,4 +36,16 @@
         End Try
     End Function
 
+    Public Async Function ConsultaMetodoPago() As Task(Of List(Of MetodoPagoModel))
+        Try
+            Await ConfiguraSqlite()
+            Dim GetMetodoPago = Await ConexionDB.Table(Of MetodoPagoModel)().ToListAsync()
+            Dim ListaMetodoPago = (From x In GetMetodoPago
+                                   Select x).ToList
+            Return ListaMetodoPago
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
 End Class

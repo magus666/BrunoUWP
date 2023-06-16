@@ -11,6 +11,7 @@ NotInheritable Class App
     Dim GetTipoMascota As New CL_TipoMascota
     Dim GetDimensionMascota As New Cl_DimensionMascota
     Dim GetMetodoPago As New Cl_MetodoPago
+    Dim GetTipoTransaccion As New Cl_TipoTransaccion
 
     Public Sub New()
         InitializeComponent()
@@ -35,6 +36,7 @@ NotInheritable Class App
         Await GetTipoServicio.InsertarActualizarTipoServicio()
         Await GetMetodoPago.InsertarActualizarMetodoPago()
         Await GetTipoMascota.InsertarActualizarTipoMascota()
+        Await GetTipoTransaccion.InsertarActualizarTipoTransaccion()
 
         If rootFrame Is Nothing Then
             ' Crear un marco para que actúe como contexto de navegación y navegar a la primera página.

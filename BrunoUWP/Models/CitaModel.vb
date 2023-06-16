@@ -9,5 +9,6 @@ Public Class CitaModel
     Public Property Id_TipoServicio As Integer
     Public Property Id_Mascota As Integer
     Public Property Id_DimensionMascota As Integer
+    Public Property Id_TipoTransaccion As Integer
 
 End Class

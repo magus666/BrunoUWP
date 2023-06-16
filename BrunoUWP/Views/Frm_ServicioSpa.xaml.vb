@@ -1,10 +1,12 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
+Imports SQLitePCL
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
 Public NotInheritable Class Frm_ServicioSpa
     Inherits Page
+    Dim GetNotificacionas As New Cl_Notificaciones
     Dim GetCita As New Cl_Cita
     Dim GetMascota As New Cl_Mascota
     Dim GetPersona As New Cl_Cliente
@@ -13,16 +15,18 @@ Public NotInheritable Class Frm_ServicioSpa
     Dim GetTipoMascota As New CL_TipoMascota
     Dim GetDimensionMascota As New Cl_DimensionMascota
     Dim GetMetodoPago As New Cl_MetodoPago
+    Dim GetDateTime As New Cl_DateTime
+    Dim GetVenta As New Cl_Venta
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim FechaCalendarPicker As String
     Dim IdTipoServicio As Integer
     Dim IdMascota As Integer
+    Dim IdMetodoPago As Integer
     Dim IdDimensionMascota As Integer
+    Dim RetornoValor As Double
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Dim TipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
-
             TmpHoraServicio.SelectedTime = Date.Now.TimeOfDay
             CdpFechaServicio.Date = Date.Now
 
@@ -37,7 +41,7 @@ Public NotInheritable Class Frm_ServicioSpa
 
             LsvCita.ItemsSource = Await ConsultaCitas()
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -87,12 +91,13 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim CodigoCita As String = GetUtilitarios.GenearCodigoCita
             Dim HoraServicio As String = TmpHoraServicio.SelectedTime.ToString
             Dim FechaHoraConcatenada As String = FechaCalendarPicker & " " & HoraServicio
-            If Await GetCita.InsertCita(CodigoCita, FechaHoraConcatenada, True, IdMascota, IdDimensionMascota, IdTipoServicio) = True Then
-                Dim Respuesa = "Excelente"
+            If Await GetCita.InsertCita(CodigoCita, FechaHoraConcatenada, True, IdMascota, IdDimensionMascota, IdTipoServicio, 1) = True Then
+                GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "La cita Se Agrego Correctamente")
+                Await ValidaCitas()
                 LsvCita.ItemsSource = Await ConsultaCitas()
             End If
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -100,11 +105,35 @@ Public NotInheritable Class Frm_ServicioSpa
         Try
             Dim FechaCdp = CdpFechaServicio.Date
             LblTituloCitas.Text = GetFechaHora.MostrarFechaLarga(FechaCdp.ToString)
+
+            Await ValidaCitas()
+
             LsvCita.ItemsSource = Await ConsultaCitas()
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
+
+    Public Async Function ValidaCitas() As Task
+        Try
+            Dim resultado = Await ConsultaCitas()
+            Dim listaDeResultados = CType(resultado, List(Of NewCitaModel))
+            Dim cantidadDeRegistros = listaDeResultados.Count
+            If cantidadDeRegistros = 0 Then
+                StpContenidoCitas.Visibility = Visibility.Visible
+                ScvCitas.Visibility = Visibility.Collapsed
+                GrdDetalleServicio.Visibility = Visibility.Collapsed
+            Else
+                StpContenidoCitas.Visibility = Visibility.Collapsed
+                ScvCitas.Visibility = Visibility.Visible
+                LblCantidadCitas.Text = "Cantidad de Citas: " & cantidadDeRegistros
+                GrdDetalleServicio.Visibility = Visibility.Visible
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+
+    End Function
 
     Private Sub CmbTIpoServicio_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
@@ -112,7 +141,7 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim selectedItem As TipoServicioModel = CType(comboBox.SelectedItem, TipoServicioModel)
             IdTipoServicio = selectedItem.Id_TipoSerivicio
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -122,7 +151,7 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim selectedItem As MascotaModel = CType(comboBox.SelectedItem, MascotaModel)
             IdMascota = selectedItem.Id_Mascota
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -132,12 +161,8 @@ Public NotInheritable Class Frm_ServicioSpa
             Dim selectedItem As DimensionMascotaModel = CType(comboBox.SelectedItem, DimensionMascotaModel)
             IdDimensionMascota = selectedItem.Id_DimensionMascota
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
-    End Sub
-
-    Private Sub BtnFinalizarServicio_Click(sender As Object, e As RoutedEventArgs)
-
     End Sub
 
     Private Sub LsvCita_ItemClick(sender As Object, e As ItemClickEventArgs)
@@ -163,12 +188,11 @@ Public NotInheritable Class Frm_ServicioSpa
 
 
         Catch ex As Exception
-
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
     Public Function CalculaValorServicio(TipoServicio As Integer, Optional DimensionoPerro As Integer = Nothing) As Integer
-        Dim RetornoValor As Integer
         Try
             Select Case TipoServicio
                 Case 1
@@ -206,4 +230,41 @@ Public NotInheritable Class Frm_ServicioSpa
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+    Private Async Sub BtnFinalizarServicio_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            CmbMetodoPago.ItemsSource = Await GetMetodoPago.ConsultaMetodoPago
+            CmbMetodoPago.DisplayMemberPath = "Nombre_MetodoPago"
+            LblValorTotalPago.Text = RetornoValor.ToString("c")
+            CtdFinalizaPago.IsPrimaryButtonEnabled = False
+            Await CtdFinalizaPago.ShowAsync()
+        Catch ex As Exception
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Private Async Sub CtdFinalizaPago_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
+        Try
+            Dim CodigoVenta As String = GetUtilitarios.GenearCodigoVenta()
+            If Await GetVenta.InsertVenta(CodigoVenta, GetDateTime.ObtenerHoraActual, 1, IdMetodoPago, RetornoValor) = True Then
+                GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El Pago Se realizó Correctamente")
+            End If
+        Catch ex As Exception
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Private Sub CmbMetodoPago_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            If CmbMetodoPago.SelectedItem IsNot Nothing Then
+                CtdFinalizaPago.IsPrimaryButtonEnabled = True
+            End If
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            Dim selectedItem As MetodoPagoModel = CType(comboBox.SelectedItem, MetodoPagoModel)
+            IdMetodoPago = selectedItem.Id_MetodoPago
+
+        Catch ex As Exception
+            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
 End Class
