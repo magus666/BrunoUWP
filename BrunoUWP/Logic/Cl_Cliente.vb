@@ -1,4 +1,13 @@
-﻿Public Class Cl_Cliente
+﻿Imports System.Drawing
+Imports System.Reflection
+Imports OfficeOpenXml
+Imports OfficeOpenXml.Style
+Imports OfficeOpenXml.Table
+Imports Windows.Storage
+Imports Windows.Storage.Pickers
+
+Public Class Cl_Cliente
+    Dim GetPickers As New Cl_Pickers
 
     Public Async Function InsertarCliente(DocumentoCliente As String,
                                           NombreCliente As String,
@@ -139,4 +148,47 @@
         End Try
     End Function
 
+    Public Async Function CreaExcelCliente() As Task(Of ExcelPackage)
+        Try
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+            Dim xlPackage As New ExcelPackage()
+            Dim oBook As ExcelWorkbook = xlPackage.Workbook
+            Dim ws As ExcelWorksheet = oBook.Worksheets.Add("Clients")
+
+            Dim GetCLiente As New List(Of ClienteModel)
+            Dim ListaCliente = Await ConsultaCliente()
+            Dim ListaFiltrada = (From x In ListaCliente
+                                 Order By x.NombreCompleto_Persona
+                                 Select x.Codigo_Cliente,
+                                     x.Documento_Persona,
+                                     x.NombreCompleto_Persona,
+                                     x.Direccion_Persona,
+                                     x.Telefono_Persona,
+                                     x.Correo_Persona)
+            ws.InsertRow(1, 1)
+            ws.Cells("A1:F1").Merge = True
+            ws.Cells("A1").Value = "Clientes Bruno Spa"
+            With ws.Cells("A1")
+                .Style.Font.Bold = True
+                .Style.Font.Size = 22
+                .Style.HorizontalAlignment = ExcelHorizontalAlignment.Center
+            End With
+
+            ws.Cells("A2").LoadFromCollection(ListaFiltrada, True, TableStyles.Medium1)
+            Dim GuardarArchvo = GetPickers.CrearFileSavePicker("ListadoClientes")
+
+            Dim file = Await GuardarArchvo.PickSaveFileAsync()
+            If file IsNot Nothing Then
+                CachedFileManager.DeferUpdates(file)
+                Using stream = Await file.OpenAsync(FileAccessMode.ReadWrite)
+                    Await xlPackage.SaveAsAsync(stream.AsStream())
+                End Using
+                Dim status = Await CachedFileManager.CompleteUpdatesAsync(file)
+                Dim success = Await Windows.System.Launcher.LaunchFileAsync(file)
+            End If
+            Return xlPackage
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

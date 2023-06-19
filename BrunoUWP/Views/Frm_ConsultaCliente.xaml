@@ -38,7 +38,9 @@
 
 
             <Grid Grid.Row="0">
-                <AutoSuggestBox x:Name="AsbBusueda"
+                <StackPanel Orientation="Vertical">
+                    <my:InfoBar x:Name="InfAlerta"/>
+                    <AutoSuggestBox x:Name="AsbBusueda"
                             Height="35"
                             Width="250"
                             Margin="0,10,25,0"
@@ -46,6 +48,8 @@
                             HorizontalAlignment="Right"
                             PlaceholderText="Digite Documento"
                             QueryIcon="Find"/>
+                </StackPanel>
+                
             </Grid>
             <Grid Grid.Row="1">
                 <ScrollViewer VerticalScrollBarVisibility="Auto"
@@ -138,14 +142,19 @@
         <Grid Grid.Row="1"
               ui:Effects.Shadow="{StaticResource CommonShadow}"
               Margin="0,0,10,10">
-            <AppBarButton Label="Exportar"
-                              HorizontalAlignment="Right"
-                              VerticalAlignment="Center">
-                <AppBarButton.Icon>
-                    <FontIcon FontFamily="Wingdings 2" Glyph="&#x002E;" />
-                </AppBarButton.Icon>
-            </AppBarButton>
-
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <my:ProgressRing x:Name="PgrGeneraExcel"
+                                 IsActive="False"/>
+                <AppBarButton Label="Exportar"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Center"
+                          Click="AppBarButton_Click">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Wingdings 2" Glyph="&#x002E;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

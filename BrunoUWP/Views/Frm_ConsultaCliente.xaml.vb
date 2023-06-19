@@ -6,6 +6,7 @@
 Public NotInheritable Class Frm_ConsultaCliente
     Inherits Page
     Dim GetCliente As New Cl_Cliente
+    Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetSexo As New Cl_Sexo
     Dim ListadoFinalClientes As IEnumerable(Of Object)
 
@@ -67,5 +68,17 @@ Public NotInheritable Class Frm_ConsultaCliente
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            PgrGeneraExcel.IsActive = True
+            Await GetCliente.CreaExcelCliente
+            PgrGeneraExcel.IsActive = False
+            GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La informacion Se exportó con exito a excel")
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 End Class
