@@ -16,7 +16,8 @@
                         IsBackButtonVisible="Collapsed"
                         ItemInvoked="NvvConfiguracion_ItemInvoked">
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="NviConfig"  Content="Configuracion de la Aplicacion" Tag="ConfiguracionAplicacion" />
+                <NavigationViewItem x:Name="NviConfig" Content="Configuracion de la Aplicacion" Tag="ConfiguracionAplicacion" />
+                <NavigationViewItem x:Name="NviConfigEntorno" Content="Configuraciones Global" Tag="ConfiguracionesEntorno" />
             </NavigationView.MenuItems>
             <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
         </NavigationView>

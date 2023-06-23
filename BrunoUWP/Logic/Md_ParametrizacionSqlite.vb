@@ -1,5 +1,6 @@
 ﻿Imports SQLite
 Imports Windows.Storage
+Imports Windows.Storage.Pickers
 
 Module Md_ParametrizacionSqlite
     Public Property MarcoTrabajo As Frame
@@ -22,6 +23,26 @@ Module Md_ParametrizacionSqlite
             Await ConexionDB.CreateTableAsync(Of TipoTransaccionModel)()
             Await ConexionDB.CreateTableAsync(Of VentaModel)()
             Return True
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function BackUpDatabase() As Task(Of Boolean)
+        Try
+            Dim fileToCopy As StorageFile = Await StorageFile.GetFileFromApplicationUriAsync(New Uri("ms-appdata:///local/BrunoUWP.db"))
+            Dim folderPicker As New FolderPicker()
+            folderPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+            folderPicker.FileTypeFilter.Add("*")
+            Dim destinationFolder As StorageFolder = Await folderPicker.PickSingleFolderAsync()
+            If destinationFolder IsNot Nothing Then
+                Await fileToCopy.CopyAsync(destinationFolder, "BrunoUWP.db", NameCollisionOption.ReplaceExisting)
+                Return True
+            Else
+                Return False
+            End If
+            'Dim DirectorioDestino = "C:\Users\ivan.marin\Pictures\BrunoUWP.db"
+            'Await ConexionDB.BackupAsync(DirectorioDestino)
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try

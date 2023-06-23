@@ -21,4 +21,41 @@
         End Try
     End Function
 
+    Public Async Function ConsultaVenta() As Task(Of List(Of VentaModel))
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaModel)().ToListAsync()
+            Dim ListaVenta = (From x In GetVenta
+                              Select x).ToList()
+            Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function ConsultaVentaTotal() As Task(Of Double)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaModel)().ToListAsync()
+            Dim ListaVenta = (From x In GetVenta
+                              Select x.Valor_Venta).Sum
+            Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function ConsultaVentaUltimoDia() As Task(Of Double)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaModel)().ToListAsync()
+            Dim ListaVenta = (From x In GetVenta
+                              Where x.Fecha_Venta.Date = Date.Today
+                              Select x.Valor_Venta).Sum
+            Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
 End Class

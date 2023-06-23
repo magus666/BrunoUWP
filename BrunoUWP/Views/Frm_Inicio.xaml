@@ -147,7 +147,8 @@
                                    FontSize="30" 
                                    FontStyle="Italic" 
                                    FontWeight="Medium">
-                            <Run Text="$ 20.000"/>
+                            <Run x:Name="LblGananciasTotales"
+                                 Foreground="LimeGreen"/>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>

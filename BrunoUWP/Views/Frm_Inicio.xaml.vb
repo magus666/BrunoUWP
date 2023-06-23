@@ -9,6 +9,7 @@ Public NotInheritable Class Frm_Inicio
     Inherits Page
     Dim GetMascotas As New Cl_Mascota
     Dim GetClientes As New Cl_Cliente
+    Dim GetVenta As New Cl_Venta
     Dim GetNotificaciones As New Cl_Notificaciones
 
 
@@ -27,6 +28,7 @@ Public NotInheritable Class Frm_Inicio
         Try
             Dim ContadorMascotas As Integer
             Dim ContadorClientes As Integer
+            Dim VentasTotales As Double
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
             Select Case SeleccionRadio
                 Case "Hoy"
@@ -34,6 +36,8 @@ Public NotInheritable Class Frm_Inicio
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoDia
                     LblCantidadMascotas.Text = ContadorMascotas
+                    VentasTotales = Await GetVenta.ConsultaVentaUltimoDia
+                    LblGananciasTotales.Text = VentasTotales.ToString("c")
                 Case "Ultima Semana"
                     ContadorClientes = Await GetClientes.CountClienteUltimaSemana
                     LblClientes.Text = ContadorClientes
@@ -49,6 +53,8 @@ Public NotInheritable Class Frm_Inicio
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotas
                     LblCantidadMascotas.Text = ContadorMascotas
+                    VentasTotales = Await GetVenta.ConsultaVentaTotal
+                    LblGananciasTotales.Text = VentasTotales.ToString("c")
             End Select
         Catch ex As Exception
 

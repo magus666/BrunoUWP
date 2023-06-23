@@ -48,4 +48,16 @@ Public NotInheritable Class Frm_ConsultaMascota
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+    Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            If Await GetMascota.CrearExcelMascota = True Then
+                Dim Respuesta = "Buena"
+            Else
+                Dim Respuesta = "No tan Buena"
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
