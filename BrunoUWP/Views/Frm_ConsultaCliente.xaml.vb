@@ -73,9 +73,14 @@ Public NotInheritable Class Frm_ConsultaCliente
     Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
         Try
             PgrGeneraExcel.IsActive = True
-            Await GetCliente.CreaExcelCliente
-            PgrGeneraExcel.IsActive = False
-            GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La informacion Se exportó con exito a excel")
+            If Await GetCliente.CreaExcelCliente = True Then
+                PgrGeneraExcel.IsActive = False
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La informacion Se exportó con exito a Excel")
+            Else
+                GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Advertencia", "Se canceló la Exportacion a Excel")
+                PgrGeneraExcel.IsActive = False
+            End If
+
         Catch ex As Exception
 
         End Try

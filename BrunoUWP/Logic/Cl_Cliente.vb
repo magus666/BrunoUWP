@@ -148,7 +148,7 @@ Public Class Cl_Cliente
         End Try
     End Function
 
-    Public Async Function CreaExcelCliente() As Task(Of ExcelPackage)
+    Public Async Function CreaExcelCliente() As Task(Of Boolean)
         Try
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial
             Dim xlPackage As New ExcelPackage()
@@ -185,8 +185,11 @@ Public Class Cl_Cliente
                 End Using
                 Dim status = Await CachedFileManager.CompleteUpdatesAsync(file)
                 Dim success = Await Windows.System.Launcher.LaunchFileAsync(file)
+                Return True
+            Else
+                Return False
             End If
-            Return xlPackage
+
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try

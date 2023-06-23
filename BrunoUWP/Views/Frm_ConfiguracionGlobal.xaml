@@ -4,13 +4,50 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BrunoUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:Name="BtnRespaldar"
-                Content="BackUp"
-                Click="BtnRespaldar_Click"/>
+        <StackPanel Orientation="Vertical"
+                    Margin="10">
+            <controls:Expander x:Name="Expander2"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Stretch"
+                               IsExpanded="True">
+                <controls:Expander.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Margin="0,0,10,0" FontFamily="MS Outlook" Glyph="&#x0043;" />
+                        <TextBlock x:Name="LblHeader" Text="BackUp de la Base de Datos" />
+                    </StackPanel>
+                </controls:Expander.Header>
+                <controls:Expander.Content>
+                    <RelativePanel>
+                        <Button x:Name="BtnRespaldar"
+                                Content="BackUp"
+                                RelativePanel.AlignRightWithPanel="True"
+                                Click="BtnRespaldar_Click"/>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock x:Name="LblNombreInicio"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       Text="Respaldar Base de Datos" />
+                            <TextBlock x:Name="LblDescripcion"
+                                       FontSize="12"
+                                   VerticalAlignment="Center"
+                                   Text="Da click en el Botón para Hacer una Copia de Seguridad de la Base de datos." />
+                        </StackPanel>
+
+                    </RelativePanel>
+                </controls:Expander.Content>
+            </controls:Expander>
+        </StackPanel>
+        
+        
+        
+        
+        
     </Grid>
 </Page>

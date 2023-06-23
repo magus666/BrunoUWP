@@ -10,6 +10,7 @@ Public NotInheritable Class Frm_ConsultaMascota
     Dim GetTipoMascota As New CL_TipoMascota
     Dim GetRaza As New Cl_RazaMascota
     Dim GetPersona As New Cl_Cliente
+    Dim GetNotificaciones As New Cl_Notificaciones
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -51,10 +52,13 @@ Public NotInheritable Class Frm_ConsultaMascota
 
     Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
         Try
+            PgrGeneraExcel.IsActive = True
             If Await GetMascota.CrearExcelMascota = True Then
-                Dim Respuesta = "Buena"
+                PgrGeneraExcel.IsActive = False
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La informacion Se exportó con exito a Excel")
             Else
-                Dim Respuesta = "No tan Buena"
+                GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Advertencia", "Se canceló la Exportacion a Excel")
+                PgrGeneraExcel.IsActive = False
             End If
         Catch ex As Exception
 
