@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BrunoUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:my="using:Microsoft.UI.Xaml.Controls"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -12,6 +13,7 @@
     <Grid>
         <StackPanel Orientation="Vertical"
                     Margin="10">
+            <my:InfoBar x:Name="InfAlerta"/>
             <controls:Expander x:Name="Expander2"
                                HorizontalAlignment="Stretch"
                                HorizontalContentAlignment="Stretch"
@@ -24,10 +26,14 @@
                 </controls:Expander.Header>
                 <controls:Expander.Content>
                     <RelativePanel>
-                        <Button x:Name="BtnRespaldar"
+                        <StackPanel Orientation="Horizontal"
+                                    RelativePanel.AlignRightWithPanel="True">
+                            <my:ProgressRing x:Name="PgrBackUpBd"
+                                 IsActive="False"/>
+                            <Button x:Name="BtnRespaldar"
                                 Content="BackUp"
-                                RelativePanel.AlignRightWithPanel="True"
                                 Click="BtnRespaldar_Click"/>
+                        </StackPanel>
                         <StackPanel Orientation="Vertical">
                             <TextBlock x:Name="LblNombreInicio"
                                        FontSize="14"

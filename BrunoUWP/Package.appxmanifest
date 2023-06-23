@@ -71,5 +71,6 @@
     <Capability Name="internetClient" />
     <uap:Capability Name="picturesLibrary"/>
     <uap:Capability Name="removableStorage"/>
+    <uap:Capability Name="videosLibrary"/>
   </Capabilities>
 </Package>

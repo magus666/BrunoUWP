@@ -5,6 +5,8 @@ Imports Windows.Storage.Pickers
 Module Md_ParametrizacionSqlite
     Public Property MarcoTrabajo As Frame
     Public ConexionDB As SQLiteAsyncConnection
+    Dim GetPickers As New Cl_Pickers
+
     Public Async Function ConfiguraSqlite() As Task(Of Boolean)
         Try
             Dim CreacionBaseDatos = Path.Combine(ApplicationData.Current.LocalFolder.Path, "BrunoUWP.db")
@@ -31,6 +33,22 @@ Module Md_ParametrizacionSqlite
     Public Async Function BackUpDatabase() As Task(Of Boolean)
         Try
             Dim fileToCopy As StorageFile = Await StorageFile.GetFileFromApplicationUriAsync(New Uri("ms-appdata:///local/BrunoUWP.db"))
+            Dim RutaCarpeta = Await GetPickers.CrearCarpetaBackUpBd("BackUpBd")
+            If RutaCarpeta IsNot Nothing Then
+                Await fileToCopy.CopyAsync(RutaCarpeta, "BrunoUWP.db", NameCollisionOption.ReplaceExisting)
+                Dim success As Boolean = Await Windows.System.Launcher.LaunchFolderAsync(RutaCarpeta)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function BackUpDatabaseV2() As Task(Of Boolean)
+        Try
+            Dim fileToCopy As StorageFile = Await StorageFile.GetFileFromApplicationUriAsync(New Uri("ms-appdata:///local/BrunoUWP.db"))
             Dim folderPicker As New FolderPicker()
             folderPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary
             folderPicker.FileTypeFilter.Add("*")
@@ -47,4 +65,7 @@ Module Md_ParametrizacionSqlite
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+
+
 End Module
