@@ -97,7 +97,7 @@ Public NotInheritable Class Frm_CrearMascota
         Try
             Dim comboBox As ComboBox = CType(sender, ComboBox)
             Dim selectedItem As RazaModel = CType(comboBox.SelectedItem, RazaModel)
-            IdRazaMascota = selectedItem.Id_TipoMascota
+            IdRazaMascota = selectedItem.Id_Raza
         Catch ex As Exception
 
         End Try
