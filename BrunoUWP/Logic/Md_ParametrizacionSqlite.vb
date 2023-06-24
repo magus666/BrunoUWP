@@ -6,6 +6,7 @@ Module Md_ParametrizacionSqlite
     Public Property MarcoTrabajo As Frame
     Public ConexionDB As SQLiteAsyncConnection
     Dim GetPickers As New Cl_Pickers
+    Dim GetAuditoria As New Cl_Auditoria
 
     Public Async Function ConfiguraSqlite() As Task(Of Boolean)
         Try
@@ -24,7 +25,25 @@ Module Md_ParametrizacionSqlite
             Await ConexionDB.CreateTableAsync(Of PagosModel)()
             Await ConexionDB.CreateTableAsync(Of TipoTransaccionModel)()
             Await ConexionDB.CreateTableAsync(Of VentaModel)()
+            Await ConexionDB.CreateTableAsync(Of AuditoriaModel)()
             Return True
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function BackUpDatabaseOpenFolder() As Task(Of Boolean)
+        Try
+            Await GetAuditoria.InsertDataBaseStamp(Date.Now)
+            Dim fileToCopy As StorageFile = Await StorageFile.GetFileFromApplicationUriAsync(New Uri("ms-appdata:///local/BrunoUWP.db"))
+            Dim RutaCarpeta = Await GetPickers.CrearCarpetaBackUpBd("BackUpBd")
+            If RutaCarpeta IsNot Nothing Then
+                Await fileToCopy.CopyAsync(RutaCarpeta, "BrunoUWP.db", NameCollisionOption.ReplaceExisting)
+                Dim success As Boolean = Await Windows.System.Launcher.LaunchFolderAsync(RutaCarpeta)
+                Return True
+            Else
+                Return False
+            End If
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -32,11 +51,11 @@ Module Md_ParametrizacionSqlite
 
     Public Async Function BackUpDatabase() As Task(Of Boolean)
         Try
+            Await GetAuditoria.InsertDataBaseStamp(Date.Now)
             Dim fileToCopy As StorageFile = Await StorageFile.GetFileFromApplicationUriAsync(New Uri("ms-appdata:///local/BrunoUWP.db"))
             Dim RutaCarpeta = Await GetPickers.CrearCarpetaBackUpBd("BackUpBd")
             If RutaCarpeta IsNot Nothing Then
                 Await fileToCopy.CopyAsync(RutaCarpeta, "BrunoUWP.db", NameCollisionOption.ReplaceExisting)
-                Dim success As Boolean = Await Windows.System.Launcher.LaunchFolderAsync(RutaCarpeta)
                 Return True
             Else
                 Return False

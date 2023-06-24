@@ -1,5 +1,7 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
+Imports Windows.Storage
+Imports Windows.System
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -10,7 +12,7 @@ Public NotInheritable Class Frm_ConfiguracionGlobal
 
     Private Async Sub BtnRespaldar_Click(sender As Object, e As RoutedEventArgs)
         Try
-            If Await BackUpDatabase() = True Then
+            If Await BackUpDatabaseOpenFolder() = True Then
                 PgrBackUpBd.IsActive = True
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Base de Datos se Importó Correctamnete")
             Else
@@ -22,5 +24,9 @@ Public NotInheritable Class Frm_ConfiguracionGlobal
 
         End Try
 
+    End Sub
+
+    Private Async Sub BtnAbrirCarpeta_Click(sender As Object, e As RoutedEventArgs)
+        Await Launcher.LaunchFolderAsync(ApplicationData.Current.LocalFolder)
     End Sub
 End Class

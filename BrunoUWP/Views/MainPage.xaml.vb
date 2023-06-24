@@ -6,6 +6,7 @@ Public NotInheritable Class MainPage
     Inherits Page
     Public Shared PaginaActual As MainPage
     Public GetWindowsHello As New Cl_WindowsHello
+    Dim GetNotificaciones As New Cl_Notificaciones
 
     Private Sub NvwBruno_ItemInvoked(sender As Microsoft.UI.Xaml.Controls.NavigationView, args As Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs)
         Try
@@ -36,6 +37,7 @@ Public NotInheritable Class MainPage
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
+            IniciarTimerBackUp()
             NvwBruno.IsBackEnabled = False
             NvwBruno.SelectedItem = NviInicio
             MarcoTrabajo = ContenFrameMenu
@@ -73,6 +75,20 @@ Public NotInheritable Class MainPage
             Else
                 NvwBruno.IsBackEnabled = True
             End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Sub IniciarTimerBackUp()
+        Dim Timer As New DispatcherTimer()
+        AddHandler Timer.Tick, AddressOf Timer_Tick
+        Timer.Interval = TimeSpan.FromMinutes(5)
+        Timer.Start()
+    End Sub
+
+    Private Async Sub Timer_Tick(sender As Object, e As Object)
+        Try
+            Await BackUpDatabase()
         Catch ex As Exception
 
         End Try

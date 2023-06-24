@@ -45,10 +45,13 @@
                                    VerticalAlignment="Center"
                                    Text="Da click en el Botón para Hacer una Copia de Seguridad de la Base de datos." />
                         </StackPanel>
-
                     </RelativePanel>
                 </controls:Expander.Content>
             </controls:Expander>
+            <Button x:Name="BtnAbrirCarpeta"
+                    Content="Abrir Carpeta"
+                    Click="BtnAbrirCarpeta_Click"/>
+            
         </StackPanel>
         
         

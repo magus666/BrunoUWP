@@ -142,6 +142,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\AccountHelper.vb" />
+    <Compile Include="Logic\Cl_Auditoria.vb" />
     <Compile Include="Logic\Cl_BlobStorage.vb" />
     <Compile Include="Logic\Cl_Cita.vb" />
     <Compile Include="Logic\Cl_Cliente.vb" />
@@ -157,6 +158,7 @@
     <Compile Include="Logic\Cl_Venta.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
+    <Compile Include="Models\AuditoriaModel.vb" />
     <Compile Include="Models\CitaModel.vb" />
     <Compile Include="Models\ClienteModel.vb" />
     <Compile Include="Logic\Cl_DateTime.vb" />
