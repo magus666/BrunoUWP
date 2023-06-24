@@ -25,38 +25,49 @@
                     </StackPanel>
                 </controls:Expander.Header>
                 <controls:Expander.Content>
-                    <RelativePanel>
-                        <StackPanel Orientation="Horizontal"
+                    <StackPanel>
+                        <RelativePanel>
+                            <StackPanel Orientation="Horizontal"
                                     RelativePanel.AlignRightWithPanel="True">
-                            <my:ProgressRing x:Name="PgrBackUpBd"
+                                <my:ProgressRing x:Name="PgrBackUpBd"
                                  IsActive="False"/>
-                            <Button x:Name="BtnRespaldar"
+                                <Button x:Name="BtnRespaldar"
                                 Content="BackUp"
                                 Click="BtnRespaldar_Click"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock x:Name="LblNombreInicio"
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock x:Name="LblNombreInicio"
                                        FontSize="14"
                                        FontWeight="Bold"
                                        VerticalAlignment="Center"
                                        Text="Respaldar Base de Datos" />
-                            <TextBlock x:Name="LblDescripcion"
+                                <TextBlock x:Name="LblDescripcion"
                                        FontSize="12"
                                    VerticalAlignment="Center"
                                    Text="Da click en el Botón para Hacer una Copia de Seguridad de la Base de datos." />
-                        </StackPanel>
-                    </RelativePanel>
+                            </StackPanel>
+                        </RelativePanel>
+
+                        <RelativePanel Margin="0,10,0,0">
+                            <StackPanel Orientation="Horizontal"
+                                    RelativePanel.AlignRightWithPanel="True">
+                                <Button x:Name="BtnAbrirCarpeta"
+                                        Content="Abrir Carpeta"
+                                        Click="BtnAbrirCarpeta_Click"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock FontSize="14"
+                                           FontWeight="Bold"
+                                           VerticalAlignment="Center"
+                                           Text="Importar Base de Datos" />
+                                <TextBlock FontSize="12"
+                                           VerticalAlignment="Center"
+                                           Text="Da click en el Botón para abrir la carpeta de la aplicacion y luego mover la Base de Datos." />
+                            </StackPanel>
+                        </RelativePanel>
+                    </StackPanel>
                 </controls:Expander.Content>
             </controls:Expander>
-            <Button x:Name="BtnAbrirCarpeta"
-                    Content="Abrir Carpeta"
-                    Click="BtnAbrirCarpeta_Click"/>
-            
         </StackPanel>
-        
-        
-        
-        
-        
     </Grid>
 </Page>

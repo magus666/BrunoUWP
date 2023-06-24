@@ -2,6 +2,7 @@
 
 Imports Microsoft.AppCenter.Analytics
 Imports Microsoft.UI.Xaml.Controls
+Imports Windows.UI
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -37,7 +38,14 @@ Public NotInheritable Class Frm_Inicio
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoDia
                     LblCantidadMascotas.Text = ContadorMascotas
                     VentasTotales = Await GetVenta.ConsultaVentaUltimoDia
-                    LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    If VentasTotales = 0 Then
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    Else
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.LimeGreen)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    End If
+
                 Case "Ultima Semana"
                     ContadorClientes = Await GetClientes.CountClienteUltimaSemana
                     LblClientes.Text = ContadorClientes
@@ -54,7 +62,13 @@ Public NotInheritable Class Frm_Inicio
                     ContadorMascotas = Await GetMascotas.CountMascotas
                     LblCantidadMascotas.Text = ContadorMascotas
                     VentasTotales = Await GetVenta.ConsultaVentaTotal
-                    LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    If VentasTotales = 0 Then
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    Else
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.LimeGreen)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    End If
             End Select
         Catch ex As Exception
 

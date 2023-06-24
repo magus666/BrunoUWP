@@ -82,7 +82,7 @@ Public NotInheritable Class MainPage
     Public Sub IniciarTimerBackUp()
         Dim Timer As New DispatcherTimer()
         AddHandler Timer.Tick, AddressOf Timer_Tick
-        Timer.Interval = TimeSpan.FromMinutes(5)
+        Timer.Interval = TimeSpan.FromHours(1)
         Timer.Start()
     End Sub
 
