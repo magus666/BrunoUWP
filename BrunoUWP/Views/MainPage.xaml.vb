@@ -7,6 +7,7 @@ Public NotInheritable Class MainPage
     Public Shared PaginaActual As MainPage
     Public GetWindowsHello As New Cl_WindowsHello
     Dim GetNotificaciones As New Cl_Notificaciones
+    Public NombreUsuario As String = Security.Principal.WindowsIdentity.GetCurrent().Name
 
     Private Sub NvwBruno_ItemInvoked(sender As Microsoft.UI.Xaml.Controls.NavigationView, args As Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs)
         Try

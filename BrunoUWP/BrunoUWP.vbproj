@@ -205,6 +205,9 @@
     <Compile Include="Views\Frm_ConsultaMascota.xaml.vb">
       <DependentUpon>Frm_ConsultaMascota.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm_ConsultaServicioSpa.xaml.vb">
+      <DependentUpon>Frm_ConsultaServicioSpa.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_CrearCliente.xaml.vb">
       <DependentUpon>Frm_CrearCliente.xaml</DependentUpon>
     </Compile>
@@ -234,6 +237,9 @@
     </Compile>
     <Compile Include="Views\Frm_Transacciones.xaml.vb">
       <DependentUpon>Frm_Transacciones.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_VentaServicioSpa.xaml.vb">
+      <DependentUpon>Frm_VentaServicioSpa.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.vb">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -342,6 +348,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Frm_ConsultaServicioSpa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frm_CrearCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -379,6 +389,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_Transacciones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_VentaServicioSpa.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

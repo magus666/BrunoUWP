@@ -14,27 +14,9 @@
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
     </Page.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="5*"/>
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-              Margin="10,0,10,0">
-            <TextBlock x:Name="LblTitulo" 
-                       Text="Inicio"
-                       FontSize="35"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
-        </Grid>
 
-        <Grid Grid.Row="1"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
+        <Grid ui:Effects.Shadow="{StaticResource CommonShadow}"
               Margin="10,10,10,10">
 
             <Grid.ColumnDefinitions>
