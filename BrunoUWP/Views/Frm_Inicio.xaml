@@ -51,6 +51,62 @@
                           HorizontalAlignment="Center"
                           IsItemClickEnabled="True"
                           IsEnabled="False">
+
+                        <Grid Margin="5" Height="150" Width="435"
+                              ui:Effects.Shadow="{StaticResource CommonShadow}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="150"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <PersonPicture x:Name="PrpCitasPendientes"
+                                   Grid.Column="0"
+                                   BorderThickness="0"
+                                   ProfilePicture="/Assets/Calendario.png"/>
+                            <StackPanel Orientation="Vertical"
+                                Grid.Column="1"
+                                VerticalAlignment="Center">
+                                <TextBlock Margin="20,0,0,0"
+                                           FontSize="16" 
+                                           FontStyle="Italic" 
+                                           FontWeight="SemiBold">
+                                    <Run Text="Citas Pendientes"/>
+                                </TextBlock>
+                                <TextBlock Margin="20,0,0,0"
+                                           FontSize="30" 
+                                           FontStyle="Italic" 
+                                           FontWeight="Medium">
+                                    <Run x:Name="LblCitasPendientes"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Margin="5" Height="150" Width="435"
+                              ui:Effects.Shadow="{StaticResource CommonShadow}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="150"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <PersonPicture x:Name="PrpSpas"
+                                   Grid.Column="0"
+                                   BorderThickness="0"
+                                   ProfilePicture="/Assets/PetSpa.png"/>
+                            <StackPanel Orientation="Vertical"
+                                Grid.Column="1"
+                                VerticalAlignment="Center">
+                                <TextBlock Margin="20,0,0,0"
+                                           FontSize="16" 
+                                           FontStyle="Italic" 
+                                           FontWeight="SemiBold">
+                                    <Run Text="Spas Realizados"/>
+                                </TextBlock>
+                                <TextBlock Margin="20,0,0,0"
+                                           FontSize="30" 
+                                           FontStyle="Italic" 
+                                           FontWeight="Medium">
+                                    <Run x:Name="LblCantidadSpas"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
                         <Grid x:Name="GrdMascotas"
                               Margin="5" Height="150" Width="435"
                               ui:Effects.Shadow="{StaticResource CommonShadow}">
@@ -80,7 +136,7 @@
                             </StackPanel>
                         </Grid>
                         <Grid Margin="5" Height="150" Width="435"
-                  ui:Effects.Shadow="{StaticResource CommonShadow}">
+                              ui:Effects.Shadow="{StaticResource CommonShadow}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="150"/>
                                 <ColumnDefinition Width="*" />

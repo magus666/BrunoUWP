@@ -34,14 +34,17 @@
                                 <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE939;" />
                             </controls:NavigationViewItem.Icon>
                         </controls:NavigationViewItem>
-                        <controls:NavigationViewItem x:Name="NvmVentaArticulos" Content="Venta de Articulos" Tag="VentaArticulos" />
-                        <controls:NavigationViewItem x:Name="NvmConsultas" Content="Consultas" Tag="Consultas" />
+                        <controls:NavigationViewItem x:Name="NvmVentaArticulos" Content="Venta de Articulos" Tag="VentaArticulos">
+                            <controls:NavigationViewItem.Icon>
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7BF;" />
+                            </controls:NavigationViewItem.Icon>
+                        </controls:NavigationViewItem>
                     </controls:NavigationViewItem.MenuItems>
                 </controls:NavigationViewItem>
                     <controls:NavigationViewItem Icon="Calendar" Content="Citas" Tag="Citas" />
                 <controls:NavigationViewItem Content="Inventario" Tag="Inventario">
                     <controls:NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7BF;" />
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE679;" />
                     </controls:NavigationViewItem.Icon>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>

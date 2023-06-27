@@ -20,7 +20,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -32,7 +32,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top">
                 <TextBlock x:Name="LblTituloCita"
-                           Text="Citas"
+                           Text="Calendario de Citas"
                            HorizontalAlignment="Center"
                            FontSize="24"
                            FontWeight="Bold"
@@ -40,30 +40,69 @@
                 <CalendarView x:Name="ClvCitas"
                               Language="es"
                               SelectedDatesChanged="ClvCitas_SelectedDatesChanged"/>
-                <TextBox x:Name="TxtFecha" />
-                
-                
+                <TextBlock Text="Cantidad total de Citas"
+                           Margin="0,10,0,0"
+                           FontSize="25"
+                           HorizontalAlignment="Center"/>
+                <TextBlock x:Name="LblContadorCitas"
+                           FontSize="70"
+                           FontWeight="Bold"
+                           Margin="0,60,0,0"
+                           HorizontalAlignment="Center"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1"
               ui:Effects.Shadow="{StaticResource CommonShadow}"
               Margin="10,0,10,10">
-            <StackPanel>
-                <controls:Expander x:Name="ExpApariencia"
-                               HorizontalAlignment="Stretch"
-                               IsExpanded="True"
-                               HorizontalContentAlignment="Stretch">
-                    <controls:Expander.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE163;" />
-                            <TextBlock x:Name="LblTituloEvento" Text="CIta" Margin="10,0,0,0" />
-                        </StackPanel>
-                    </controls:Expander.Header>
-                </controls:Expander>
-            </StackPanel>
-            
-            
-            
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Grid.Column="0"
+                      Padding="20">
+                <StackPanel Orientation="Vertical">
+                    <controls:ItemsRepeater x:Name="ItrCitas">
+                        <controls:ItemsRepeater.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,10">
+                                    <controls:Expander x:Name="ExpApariencia"
+                                                       HorizontalAlignment="Stretch"
+                                                       IsExpanded="True"
+                                                       HorizontalContentAlignment="Stretch">
+                                        <controls:Expander.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE163;" />
+                                                <TextBlock x:Name="LblTituloEvento" Margin="10,0,0,0">
+                                                    <Run Text="{Binding TipoServ}"/>
+                                                    <Run Text="para"/>
+                                                    <Run Text="{Binding NombreMascota}" Foreground="LimeGreen"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </controls:Expander.Header>
+                                        <controls:Expander.Content>
+                                            <StackPanel>
+                                                <TextBlock>
+                                                    <Run Text="Codigo:"/>
+                                                    <Run Text="{Binding Codigo}"/>
+                                                </TextBlock>
+                                                <TextBlock>
+                                                    <Run Text="Cliente:"/>
+                                                    <Run Text="{Binding Cliente}"/>
+                                                </TextBlock>
+                                                <TextBlock>
+                                                    <Run Text="Hora:"/>
+                                                    <Run Text="{Binding Hora}"/>
+                                                </TextBlock>
+                                                <TextBlock>
+                                                    <Run Text="Estado:"/>
+                                                    <Run Text="{Binding Estado}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </controls:Expander.Content>
+                                    </controls:Expander>
+                                </StackPanel>
+                            </DataTemplate>
+                        </controls:ItemsRepeater.ItemTemplate>
+                    </controls:ItemsRepeater>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Page>

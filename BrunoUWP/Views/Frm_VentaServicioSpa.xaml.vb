@@ -92,7 +92,7 @@ Public NotInheritable Class Frm_VentaServicioSpa
             Dim CodigoCita As String = GetUtilitarios.GenearCodigoCita
             Dim HoraServicio As String = TmpHoraServicio.SelectedTime.ToString
             Dim FechaHoraConcatenada As String = FechaCalendarPicker & " " & HoraServicio
-            If Await GetCita.InsertCita(CodigoCita, FechaHoraConcatenada, True, IdMascota, IdDimensionMascota, IdTipoServicio, 1, False) = True Then
+            If Await GetCita.InsertCita(CodigoCita, FechaHoraConcatenada, False, IdMascota, IdDimensionMascota, IdTipoServicio, 1, False) = True Then
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "La cita Se Agrego Correctamente")
                 Await ValidaCitas()
                 LsvCita.ItemsSource = Await ConsultaCitas()

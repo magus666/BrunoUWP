@@ -39,6 +39,31 @@
         End Try
     End Function
 
+    Public Async Function ContadorCitasPorFecha(Fecha As Date) As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCita = Await ConexionDB.Table(Of CitaModel)().ToListAsync()
+            Dim ListaCita = (From x In GetCita
+                             Where x.FechaHora_Cita.ToShortDateString = Fecha.ToShortDateString
+                             Select x).Count
+            Return ListaCita
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+    Public Async Function ContadorCitasPendientes() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCita = Await ConexionDB.Table(Of CitaModel)().ToListAsync()
+            Dim ListaCita = (From x In GetCita
+                             Where x.Estado_Cita = False
+                             Select x).Count
+            Return ListaCita
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
     Public Async Function ActualizarCita(IdCita As Integer,
                                          EstadoVenta As Boolean) As Task(Of Boolean)
         Try

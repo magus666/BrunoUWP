@@ -11,6 +11,7 @@ Public NotInheritable Class Frm_Inicio
     Dim GetMascotas As New Cl_Mascota
     Dim GetClientes As New Cl_Cliente
     Dim GetVenta As New Cl_Venta
+    Dim GetCita As New Cl_Cita
     Dim GetNotificaciones As New Cl_Notificaciones
 
 
@@ -28,11 +29,14 @@ Public NotInheritable Class Frm_Inicio
     Private Async Sub RdbTiempo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
             Dim ContadorMascotas As Integer
+            Dim ContadorCitas As Integer
             Dim ContadorClientes As Integer
             Dim VentasTotales As Double
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
             Select Case SeleccionRadio
                 Case "Hoy"
+                    ContadorCitas = Await GetCita.ContadorCitasPendientes()
+                    LblCitasPendientes.Text = ContadorCitas
                     ContadorClientes = Await GetClientes.CountClienteUltimoDia
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoDia
