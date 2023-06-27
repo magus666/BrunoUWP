@@ -14,13 +14,13 @@ Public NotInheritable Class Frm_ConsultaMascota
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Await LlenarGrilla()
+            Await LlenarListview()
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Public Async Function LlenarGrilla() As Task
+    Public Async Function LlenarListview() As Task
         Try
             Dim Mascota = Await GetMascota.ConsultaMascotas()
             Dim TipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
@@ -34,17 +34,15 @@ Public NotInheritable Class Frm_ConsultaMascota
                                        Mas.Id_Raza Equals Rza.Id_Raza
                                   Join Ppo In Propietario On
                                        Mas.Id_Persona Equals Ppo.Id_Persona
-                                  Select New With {Tmc.Nombre_TipoMascota,
+                                  Select New With {Mas.Codigo_Mascota,
+                                                   Tmc.Nombre_TipoMascota,
                                                    Rza.Nombre_Raza,
                                                    Mas.Nombre_Mascota,
                                                    Mas.Edad_Mascota,
                                                    Ppo.NombreCompleto_Persona,
                                                    Mas.Observaciones_Mascota,
                                                    Mas.FechaRegistro_Mascota}).ToList
-
-            Dim ListaCompletaRetornoMascota = RetornoMascota
-
-            DtgMovimientoEquipos.ItemsSource = ListaCompletaRetornoMascota
+            LsvMascota.ItemsSource = RetornoMascota
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -63,5 +61,13 @@ Public NotInheritable Class Frm_ConsultaMascota
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub AsbBusueda_TextChanged(sender As AutoSuggestBox, args As AutoSuggestBoxTextChangedEventArgs)
+
+    End Sub
+
+    Private Sub LsvMascota_ItemClick(sender As Object, e As ItemClickEventArgs)
+
     End Sub
 End Class

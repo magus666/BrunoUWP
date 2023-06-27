@@ -6,7 +6,8 @@ Imports Windows.Storage
 ''' </summary>
 Public NotInheritable Class Frm_CrearMascota
     Inherits Page
-    Dim GetNotifications As New Cl_Notificaciones()
+    Dim GetNotifications As New Cl_Notificaciones
+    Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetMascota As New Cl_Mascota
     Dim GetCliente As New Cl_Cliente
     Dim GetRazaMascota As New Cl_RazaMascota
@@ -49,10 +50,11 @@ Public NotInheritable Class Frm_CrearMascota
 
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
+            Dim CodigoMascota As String = GetUtilitarios.GenerarCodigoMascota
             Dim localSettings As ApplicationDataContainer
             localSettings = ApplicationData.Current.LocalSettings
             localSettings.Values("NombreMascota") = TxtNombreMascota.Text
-            Await GetMascota.InsertarMascota(IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
+            Await GetMascota.InsertarMascota(CodigoMascota, IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
                                              NbbEdad.Text, IdPropietario, TxtObservaciones.Text)
             GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
         Catch ex As Exception

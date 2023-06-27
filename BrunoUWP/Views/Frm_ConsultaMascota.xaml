@@ -20,38 +20,106 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
         <Grid Grid.Row="0"
-                  ui:Effects.Shadow="{StaticResource CommonShadow}"
-                  Padding="10"
-                  x:Name="GrdDos"
-                  Margin="0,10,10,10">
-            <StackPanel>
-                <my:InfoBar x:Name="InfAlerta"/>
-                <controls:DataGrid x:Name="DtgMovimientoEquipos"
-                               Margin="10"
-                               ClipboardCopyMode="IncludeHeader"
-                               AutoGenerateColumns="False"
-                               AreRowDetailsFrozen="True"
-                               ColumnHeaderHeight="32"
-                               CanUserReorderColumns="True"
-                               CanUserResizeColumns="True"
-                               CanUserSortColumns="True"
-                               HeadersVisibility="Column"
-                               IsReadOnly="True"
-                               HorizontalAlignment="Stretch"
-                               GridLinesVisibility="Horizontal"
-                                SelectionMode="Extended">
-                    <controls:DataGrid.Columns>
-                        <controls:DataGridTextColumn Header="Nombre" Tag="Nombre" Binding="{Binding Nombre_Mascota}" />
-                        <controls:DataGridTextColumn Header="Tipo de Mascota" Tag="Tipo" Binding="{Binding Nombre_TipoMascota}" />
-                        <controls:DataGridTextColumn Header="Raza" Tag="Raza" Binding="{Binding Nombre_Raza}" />
-                        <controls:DataGridTextColumn Header="Edad" Tag="Edad" Binding="{Binding Edad_Mascota}" />
-                        <controls:DataGridTextColumn Header="Propietario" Tag="Propietario" Binding="{Binding NombreCompleto_Persona}" />
-                        <controls:DataGridTextColumn Header="Observaciones" Tag="Observaciones" Binding="{Binding Observaciones_Mascota}" />
-                        <controls:DataGridTextColumn Header="Fecha de Registro" Tag="FechaRegistro" Binding="{Binding FechaRegistro_Mascota}" />
-                    </controls:DataGrid.Columns>
-                </controls:DataGrid>
-            </StackPanel>
+              ui:Effects.Shadow="{StaticResource CommonShadow}"
+              Margin="0,0,10,10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Vertical">
+                    <my:InfoBar x:Name="InfAlerta"/>
+                    <AutoSuggestBox x:Name="AsbBusueda"
+                            Height="35"
+                            Width="250"
+                            Margin="0,10,25,0"
+                            TextChanged="AsbBusueda_TextChanged"
+                            HorizontalAlignment="Right"
+                            PlaceholderText="Digite Nombre"
+                            QueryIcon="Find"/>
+                </StackPanel>
+
+            </Grid>
+            <Grid Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Grid.Column="0"
+                      Padding="20">
+                    <StackPanel Orientation="Vertical">
+                        <ListView x:Name="LsvMascota" 
+                                  IsItemClickEnabled="True"
+                                  ItemClick="LsvMascota_ItemClick">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,12,0,12">
+                                        <StackPanel Orientation="Horizontal">
+                                            <my:PersonPicture x:Name="PrpCliente"
+                                                              Margin="0,0,10,0"
+                                                              ProfilePicture="/Assets/Mascotas2.png"
+                                                              Height="130"
+                                                              Width="130"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock FontSize="14" 
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="Codigo:" FontWeight="SemiBold"/>
+                                                    <Run Text="{Binding Codigo_Mascota}"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="14" 
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="Tipo de Mascota:" FontWeight="SemiBold"/>
+                                                    <Run Text="{Binding Nombre_TipoMascota}"/>
+                                                </TextBlock>
+
+                                                <TextBlock FontSize="14" 
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="Raza:" FontWeight="SemiBold"/>
+                                                    <Run Text="{Binding Nombre_Raza}"/>
+                                                </TextBlock>
+
+                                                <TextBlock FontSize="14" 
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="Edad:" FontWeight="SemiBold"/>
+                                                    <Run Text="{Binding Edad_Mascota}"/>
+                                                    <Run Text="Años"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="14" 
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="Propietario:" FontWeight="SemiBold"/>
+                                                    <Run Text="{Binding NombreCompleto_Persona}"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="14"
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="Observaciones:" FontWeight="SemiBold"/>
+                                                    <Run Text="{Binding Observaciones_Mascota}"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="14" 
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="Fecha de Registro:" FontWeight="SemiBold"/>
+                                                    <Run Text="{Binding FechaRegistro_Mascota}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
         </Grid>
         <Grid Grid.Row="1"
               ui:Effects.Shadow="{StaticResource CommonShadow}"
@@ -70,8 +138,6 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
             </StackPanel>
-            
-
         </Grid>
     </Grid>
 </Page>

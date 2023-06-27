@@ -10,7 +10,8 @@ Public Class Cl_Mascota
     Dim GetRazaMascota As New Cl_RazaMascota
     Dim GetPickers As New Cl_Pickers
 
-    Public Async Function InsertarMascota(IdTipoMascota As Integer,
+    Public Async Function InsertarMascota(CodigoMascota As String,
+                                          IdTipoMascota As Integer,
                                           IdRazaMascota As Integer,
                                           NombreMascota As String,
                                           EdadMascota As Integer,
@@ -19,6 +20,7 @@ Public Class Cl_Mascota
         Try
             Await ConfiguraSqlite()
             Dim Mascota = New MascotaModel With {
+                .Codigo_Mascota = CodigoMascota,
                 .Id_TipoMascota = IdTipoMascota,
                 .Id_Raza = IdRazaMascota,
                 .Nombre_Mascota = NombreMascota,
@@ -114,15 +116,16 @@ Public Class Cl_Mascota
                                        Mas.Id_Raza Equals Rza.Id_Raza
                                  Join Ppo In Propietario On
                                        Mas.Id_Persona Equals Ppo.Id_Persona
-                                 Select Tipo = Tmc.Nombre_TipoMascota,
-                                    Raza = Rza.Nombre_Raza,
-                                    Nombre = Mas.Nombre_Mascota,
-                                    Edad = Mas.Edad_Mascota,
-                                    Dueño = Ppo.NombreCompleto_Persona,
-                                    Observaciones = Mas.Observaciones_Mascota,
-                                    Fecha_Creacion = Mas.FechaRegistro_Mascota)
+                                 Select Codigo = Mas.Codigo_Mascota,
+                                        Tipo = Tmc.Nombre_TipoMascota,
+                                        Raza = Rza.Nombre_Raza,
+                                        Nombre = Mas.Nombre_Mascota,
+                                        Edad = Mas.Edad_Mascota,
+                                        Dueño = Ppo.NombreCompleto_Persona,
+                                        Observaciones = Mas.Observaciones_Mascota,
+                                        Fecha_Creacion = Mas.FechaRegistro_Mascota)
             ws.InsertRow(1, 1)
-            ws.Cells("A1:G1").Merge = True
+            ws.Cells("A1:H1").Merge = True
             ws.Cells("A1").Value = "Mascotas Bruno Spa"
             With ws.Cells("A1")
                 .Style.Font.Bold = True
