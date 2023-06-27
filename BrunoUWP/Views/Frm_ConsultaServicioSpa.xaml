@@ -29,7 +29,7 @@
                 <controls:DataGrid x:Name="DtgVentaServicioSpa"
                                Margin="10"
                                ClipboardCopyMode="IncludeHeader"
-                               AutoGenerateColumns="True"
+                               AutoGenerateColumns="False"
                                AreRowDetailsFrozen="True"
                                ColumnHeaderHeight="32"
                                CanUserReorderColumns="True"
@@ -40,6 +40,13 @@
                                HorizontalAlignment="Stretch"
                                GridLinesVisibility="Horizontal"
                                 SelectionMode="Extended">
+                    <controls:DataGrid.Columns>
+                        <controls:DataGridTextColumn Header="Codigo" Tag="Codigo" Binding="{Binding Codigo}" />
+                        <controls:DataGridTextColumn Header="Fecha de Venta" Tag="FechaVenta" Binding="{Binding Fecha}" />
+                        <controls:DataGridTextColumn Header="Tipo de Servicio" Tag="TipoServicio" Binding="{Binding TipoServicio}" />
+                        <controls:DataGridTextColumn Header="Metodo de Pago" Tag="MetodoPago" Binding="{Binding MetodoPago}" />
+                        <controls:DataGridTextColumn Header="Valor Total" Tag="ValorTotal" Binding="{Binding VarlorTotal}" />
+                    </controls:DataGrid.Columns>
                 </controls:DataGrid>
                 <TextBlock x:Name="LblVentaTotal"
                            HorizontalAlignment="Right"/>

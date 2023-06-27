@@ -28,10 +28,10 @@
         End Try
     End Function
 
-    Public Async Function ConsultaTipoTransaccion() As Task(Of List(Of TipoMascotaModel))
+    Public Async Function ConsultaTipoTransaccion() As Task(Of List(Of TipoTransaccionModel))
         Try
             Await ConfiguraSqlite()
-            Dim GetTipoTransaccion = Await ConexionDB.Table(Of TipoMascotaModel)().ToListAsync()
+            Dim GetTipoTransaccion = Await ConexionDB.Table(Of TipoTransaccionModel)().ToListAsync()
             Dim ListaTipoTransaccion = (From x In GetTipoTransaccion
                                         Select x).ToList
             Return ListaTipoTransaccion
