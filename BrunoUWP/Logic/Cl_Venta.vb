@@ -4,6 +4,7 @@
                                       FechaVenta As Date,
                                       IdTipoServicio As Integer,
                                       IdTipoTransaccion As Integer,
+                                      IdMascota As Integer,
                                       IdMetodoPago As Integer,
                                       ValorVenta As Double) As Task(Of Boolean)
         Try
@@ -13,6 +14,7 @@
                 .Fecha_Venta = FechaVenta,
                 .Id_TipoServicio = IdTipoServicio,
                 .Id_TipoTransaccion = IdTipoTransaccion,
+                .Id_Mascota = IdMascota,
                 .Id_MetodoPago = IdMetodoPago,
                 .Valor_Venta = ValorVenta
             }

@@ -44,6 +44,8 @@
                         <controls:DataGridTextColumn Header="Codigo" Tag="Codigo" Binding="{Binding Codigo}" />
                         <controls:DataGridTextColumn Header="Fecha de Venta" Tag="FechaVenta" Binding="{Binding Fecha}" />
                         <controls:DataGridTextColumn Header="Tipo de Servicio" Tag="TipoServicio" Binding="{Binding TipoServicio}" />
+                        <controls:DataGridTextColumn Header="Mascota" Tag="Mascota" Binding="{Binding Mascota}" />
+                        <controls:DataGridTextColumn Header="Propietario" Tag="Prpietario" Binding="{Binding Propietario}" />
                         <controls:DataGridTextColumn Header="Metodo de Pago" Tag="MetodoPago" Binding="{Binding MetodoPago}" />
                         <controls:DataGridTextColumn Header="Valor Total" Tag="ValorTotal" Binding="{Binding VarlorTotal}" />
                     </controls:DataGrid.Columns>

@@ -255,7 +255,8 @@ Public NotInheritable Class Frm_VentaServicioSpa
         Try
             Dim CodigoVenta As String = GetUtilitarios.GenearCodigoVenta()
             Dim GetIdCita = IdCita
-            If Await GetVenta.InsertVenta(CodigoVenta, GetDateTime.ObtenerFechaActual, IdTipoServicio, 1, IdMetodoPago, RetornoValor) = True Then
+            If Await GetVenta.InsertVenta(CodigoVenta, GetDateTime.ObtenerFechaActual, IdTipoServicio, 1,
+                                          IdMascota, IdMetodoPago, RetornoValor) = True Then
                 Await GetCita.ActualizarCita(GetIdCita, True)
                 LsvCita.ItemsSource = Await ConsultaCitas()
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El Pago Se realizó Correctamente")
