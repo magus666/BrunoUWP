@@ -19,6 +19,7 @@ Public NotInheritable Class Frm_VentaServicioSpa
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim FechaCalendarPicker As String
     Dim IdCita As Integer
+    Dim CodigoCita As String
     Dim IdTipoServicio As Integer
     Dim IdMascota As Integer
     Dim IdMetodoPago As Integer
@@ -178,6 +179,8 @@ Public NotInheritable Class Frm_VentaServicioSpa
             Dim IdDimenensionMascota = GetCitasModel.Id_DimensionMascota
             Dim IdTipoServicioCIta = GetCitasModel.Id_TipoServicio
 
+            CodigoCita = GetCitasModel.Codigo_Cita
+
             LblTipoMascota.Text = "Tipo de Mascota: " & GetCitasModel.Nombre_TipoMascota
             LblNombreMascota.Text = "Nombre de la Mascota: " & GetCitasModel.Nombre_Mascota
             LblNombreCliente.Text = "Dueño: " & GetCitasModel.Nombre_Cliente
@@ -257,7 +260,15 @@ Public NotInheritable Class Frm_VentaServicioSpa
             Dim GetIdCita = IdCita
             If Await GetVenta.InsertVenta(CodigoVenta, GetDateTime.ObtenerFechaActual, IdTipoServicio, 1,
                                           IdMascota, IdMetodoPago, RetornoValor) = True Then
+
                 Await GetCita.ActualizarCita(GetIdCita, True)
+                If Await GetCita.ActualizarEstadoCita(CodigoCita, True) = True Then
+                    Dim Retorno = "Buena Perrito"
+                Else
+                    Dim Retorno = "La Cago Perrito"
+                End If
+
+
                 LsvCita.ItemsSource = Await ConsultaCitas()
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El Pago Se realizó Correctamente")
             End If

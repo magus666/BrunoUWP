@@ -83,4 +83,24 @@
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+    Public Async Function ActualizarEstadoCita(CodigoCita As String,
+                                               EstadoCita As Boolean) As Task(Of Boolean)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCita = Await ConexionDB.Table(Of CitaModel)().ToListAsync()
+            Dim Cita = (From x In GetCita
+                        Where x.Codigo_Cita = CodigoCita
+                        Select x).FirstOrDefault
+            If Cita IsNot Nothing Then
+                Cita.Estado_Cita = EstadoCita
+                Await ConexionDB.UpdateAsync(Cita)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

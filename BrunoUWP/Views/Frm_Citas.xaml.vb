@@ -16,6 +16,7 @@ Public NotInheritable Class Frm_Citas
     Dim GetDateTime As New Cl_DateTime
     Dim GetVenta As New Cl_Venta
     Dim GetUtilitarios As New Cl_Utilitarios
+    Dim GetBotonBuleano As New Cl_BotonBuleano
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -27,8 +28,6 @@ Public NotInheritable Class Frm_Citas
 
     Private Async Sub ClvCitas_SelectedDatesChanged(sender As CalendarView, args As CalendarViewSelectedDatesChangedEventArgs)
         Try
-
-
             Dim metal = ClvCitas.SelectedDates
             Dim Retorno = (From x In metal
                            Select x.Date)
@@ -46,15 +45,16 @@ Public NotInheritable Class Frm_Citas
                                   Cit.Id_Mascota Equals Msc.Id_Mascota
                               Join Cli In Propietario On
                                   Msc.Id_Persona Equals Cli.Id_Persona
-                              Where (Cit.Estado_Cita = False) And Cit.FechaHora_Cita.ToShortDateString = FechaActual
+                              Where Cit.FechaHora_Cita.ToShortDateString = FechaActual
                               Order By Cit.FechaHora_Cita
                               Select Codigo = Cit.Codigo_Cita,
+                                     Visibilidad = Cit.EsVisible,
                                      TipoServ = Tps.Nombre_TipoServicio,
                                      NombreMascota = Msc.Nombre_Mascota,
                                      Cliente = Cli.NombreCompleto_Persona,
                                      Hora = Cit.FechaHora_Cita.ToShortTimeString,
                                      Estado = If(Cit.Estado_Cita, "Terminado", "Pendiente")).ToList
-            ItrCitas.ItemsSource = ListaCitas
+            lsvCitas.ItemsSource = ListaCitas
         Catch ex As Exception
 
         End Try
