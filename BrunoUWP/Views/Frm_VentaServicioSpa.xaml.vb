@@ -262,9 +262,9 @@ Public NotInheritable Class Frm_VentaServicioSpa
                                           IdMascota, IdMetodoPago, RetornoValor) = True Then
 
                 Await GetCita.ActualizarCita(GetIdCita, True)
-                Await GetCita.ActualizarEstadoCita(CodigoCita, True)
 
                 LsvCita.ItemsSource = Await ConsultaCitas()
+                BtnFinalizarServicio.Visibility = Visibility.Collapsed
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El Pago Se realizó Correctamente")
             End If
         Catch ex As Exception

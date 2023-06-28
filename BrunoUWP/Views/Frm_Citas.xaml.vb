@@ -1,5 +1,7 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
+Imports Windows.UI
+Imports Windows.UI.Xaml.Documents
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -16,6 +18,7 @@ Public NotInheritable Class Frm_Citas
     Dim GetDateTime As New Cl_DateTime
     Dim GetVenta As New Cl_Venta
     Dim GetUtilitarios As New Cl_Utilitarios
+    Dim FechaActual As String
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -30,33 +33,51 @@ Public NotInheritable Class Frm_Citas
             Dim metal = ClvCitas.SelectedDates
             Dim Retorno = (From x In metal
                            Select x.Date)
-            Dim FechaActual = Retorno(0).ToShortDateString
+            FechaActual = Retorno(0).ToShortDateString
             Dim ContadorCitas = Await GetCita.ContadorCitasPorFecha(FechaActual)
             LblContadorCitas.Text = ContadorCitas
-            Dim TipoServicio = Await GetTipoServicio.ConsultaTipoServicio()
-            Dim Mascota = Await GetMascota.ConsultaMascotas()
-            Dim Propietario = Await GetPersona.ConsultaCliente()
-            Dim Citas = Await GetCita.ConsultarCitas()
-            Dim ListaCitas = (From Cit In Citas
-                              Join Tps In TipoServicio On
-                                  Cit.Id_TipoServicio Equals Tps.Id_TipoSerivicio
-                              Join Msc In Mascota On
-                                  Cit.Id_Mascota Equals Msc.Id_Mascota
-                              Join Cli In Propietario On
-                                  Msc.Id_Persona Equals Cli.Id_Persona
-                              Where Cit.FechaHora_Cita.ToShortDateString = FechaActual
-                              Order By Cit.FechaHora_Cita
-                              Select Codigo = Cit.Codigo_Cita,
-                                     Visibilidad = Cit.EsVisible,
-                                     TipoServ = Tps.Nombre_TipoServicio,
-                                     NombreMascota = Msc.Nombre_Mascota,
-                                     Cliente = Cli.NombreCompleto_Persona,
-                                     Hora = Cit.FechaHora_Cita.ToShortTimeString,
-                                     Estado = If(Cit.Estado_Cita, "Terminado", "Pendiente")).ToList
-            lsvCitas.ItemsSource = ListaCitas
+            Await LlenaListViewCitas(FechaActual)
         Catch ex As Exception
 
         End Try
 
     End Sub
+
+    Private Async Sub BtnFinalizarCita_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim button = TryCast(sender, Button)
+            Dim ElementoSeleccionado = button.DataContext
+            Dim CodigoCita As String = ElementoSeleccionado.Codigo
+            Await GetCita.ActualizarEstadoCita(CodigoCita, True)
+            button.Visibility = Visibility.Collapsed
+            Await LlenaListViewCitas(FechaActual)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Public Async Function LlenaListViewCitas(FechaActual As String) As Task(Of ListView)
+        Dim TipoServicio = Await GetTipoServicio.ConsultaTipoServicio()
+        Dim Mascota = Await GetMascota.ConsultaMascotas()
+        Dim Propietario = Await GetPersona.ConsultaCliente()
+        Dim Citas = Await GetCita.ConsultarCitas()
+        Dim ListaCitas = (From Cit In Citas
+                          Join Tps In TipoServicio On
+                              Cit.Id_TipoServicio Equals Tps.Id_TipoSerivicio
+                          Join Msc In Mascota On
+                              Cit.Id_Mascota Equals Msc.Id_Mascota
+                          Join Cli In Propietario On
+                              Msc.Id_Persona Equals Cli.Id_Persona
+                          Where Cit.FechaHora_Cita.ToShortDateString = FechaActual
+                          Order By Cit.FechaHora_Cita
+                          Select Codigo = Cit.Codigo_Cita,
+                                 Visibilidad = Cit.EsVisible,
+                                 TipoServ = Tps.Nombre_TipoServicio,
+                                 NombreMascota = Msc.Nombre_Mascota,
+                                 Cliente = Cli.NombreCompleto_Persona,
+                                 Hora = Cit.FechaHora_Cita.ToShortTimeString,
+                                 Estado = If(Cit.Estado_Cita, "Terminado", "Pendiente")).ToList
+        lsvCitas.ItemsSource = ListaCitas
+        Return lsvCitas
+    End Function
 End Class

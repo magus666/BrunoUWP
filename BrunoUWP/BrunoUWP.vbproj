@@ -157,6 +157,7 @@
     <Compile Include="Logic\Cl_TipoTransaccion.vb" />
     <Compile Include="Logic\Cl_Utilitarios.vb" />
     <Compile Include="Logic\Cl_Venta.vb" />
+    <Compile Include="Logic\Cl_VisibilidadBotonFinalizarCita.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
     <Compile Include="Models\AuditoriaModel.vb" />

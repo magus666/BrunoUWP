@@ -17,6 +17,7 @@
     <Page.Resources>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
         <MyClass:Cl_ColorLetraEstadoCita x:Key="Cl_ColorLetraEstadoCita"/>
+        <MyClass:Cl_VisibilidadBotonFinalizarCita x:Key="Cl_VisibilidadBotonFinalizarCita"/>
     </Page.Resources>
 
     <Grid>
@@ -99,6 +100,10 @@
                                                     <Run x:Name="LblEstado" Text="{Binding Estado}" 
                                                          Foreground="{Binding Estado, Converter={StaticResource Cl_ColorLetraEstadoCita}}"/>
                                                 </TextBlock>
+                                                <Button x:Name="BtnFinalizarCita" 
+                                                        Content="Finalizar"
+                                                        Click="BtnFinalizarCita_Click"
+                                                        Visibility="{Binding Estado, Converter={StaticResource Cl_VisibilidadBotonFinalizarCita}}"/>
                                             </StackPanel>
                                         </controls:Expander.Content>
                                     </controls:Expander>
