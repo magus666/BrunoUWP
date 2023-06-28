@@ -100,7 +100,9 @@
                                                     <Run x:Name="LblEstado" Text="{Binding Estado}" 
                                                          Foreground="{Binding Estado, Converter={StaticResource Cl_ColorLetraEstadoCita}}"/>
                                                 </TextBlock>
-                                                <Button x:Name="BtnFinalizarCita" 
+                                                <Button x:Name="BtnFinalizarCita"
+                                                        HorizontalAlignment="Center"
+                                                        Margin="0,10,0,0"
                                                         Content="Finalizar"
                                                         Click="BtnFinalizarCita_Click"
                                                         Visibility="{Binding Estado, Converter={StaticResource Cl_VisibilidadBotonFinalizarCita}}"/>
