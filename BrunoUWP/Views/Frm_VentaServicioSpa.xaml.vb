@@ -262,12 +262,7 @@ Public NotInheritable Class Frm_VentaServicioSpa
                                           IdMascota, IdMetodoPago, RetornoValor) = True Then
 
                 Await GetCita.ActualizarCita(GetIdCita, True)
-                If Await GetCita.ActualizarEstadoCita(CodigoCita, True) = True Then
-                    Dim Retorno = "Buena Perrito"
-                Else
-                    Dim Retorno = "La Cago Perrito"
-                End If
-
+                Await GetCita.ActualizarEstadoCita(CodigoCita, True)
 
                 LsvCita.ItemsSource = Await ConsultaCitas()
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El Pago Se realizó Correctamente")

@@ -16,7 +16,6 @@ Public NotInheritable Class Frm_Citas
     Dim GetDateTime As New Cl_DateTime
     Dim GetVenta As New Cl_Venta
     Dim GetUtilitarios As New Cl_Utilitarios
-    Dim GetBotonBuleano As New Cl_BotonBuleano
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try

@@ -142,7 +142,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\AccountHelper.vb" />
-    <Compile Include="Logic\Cl_BotonBuleano.vb" />
+    <Compile Include="Logic\Cl_ColorLetraEstadoCita.vb" />
     <Compile Include="Logic\Cl_Auditoria.vb" />
     <Compile Include="Logic\Cl_BlobStorage.vb" />
     <Compile Include="Logic\Cl_Cita.vb" />

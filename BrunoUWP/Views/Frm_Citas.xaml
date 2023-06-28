@@ -16,7 +16,7 @@
 
     <Page.Resources>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
-        <MyClass:Cl_BotonBuleano x:Key="Cl_BotonBuleano"/>
+        <MyClass:Cl_ColorLetraEstadoCita x:Key="Cl_ColorLetraEstadoCita"/>
     </Page.Resources>
 
     <Grid>
@@ -96,7 +96,8 @@
                                                 </TextBlock>
                                                 <TextBlock>
                                                     <Run Text="Estado:"/>
-                                                    <Run x:Name="LblEstado" Text="{Binding Estado}"/>
+                                                    <Run x:Name="LblEstado" Text="{Binding Estado}" 
+                                                         Foreground="{Binding Estado, Converter={StaticResource Cl_ColorLetraEstadoCita}}"/>
                                                 </TextBlock>
                                             </StackPanel>
                                         </controls:Expander.Content>
