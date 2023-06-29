@@ -68,14 +68,15 @@ Public NotInheritable Class Frm_Citas
                               Cit.Id_Mascota Equals Msc.Id_Mascota
                           Join Cli In Propietario On
                               Msc.Id_Persona Equals Cli.Id_Persona
-                          Where Cit.FechaHora_Cita.ToShortDateString = FechaActual
-                          Order By Cit.FechaHora_Cita
+                          Where Cit.FechaHoraInicio_Cita.ToShortDateString = FechaActual
+                          Order By Cit.FechaHoraInicio_Cita
                           Select Codigo = Cit.Codigo_Cita,
                                  Visibilidad = Cit.EsVisible,
                                  TipoServ = Tps.Nombre_TipoServicio,
                                  NombreMascota = Msc.Nombre_Mascota,
                                  Cliente = Cli.NombreCompleto_Persona,
-                                 Hora = Cit.FechaHora_Cita.ToShortTimeString,
+                                 HoraInicio = Cit.FechaHoraInicio_Cita.ToShortTimeString,
+                                 HoraFin = Cit.FechaHoraFin_Cita.ToShortTimeString,
                                  Estado = If(Cit.Estado_Cita, "Terminado", "Pendiente")).ToList
         lsvCitas.ItemsSource = ListaCitas
         Return lsvCitas

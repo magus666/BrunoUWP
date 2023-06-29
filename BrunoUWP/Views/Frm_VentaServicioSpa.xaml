@@ -129,7 +129,7 @@
                                                        FontStyle="Normal" 
                                                        FontWeight="SemiBold">
                                                 <Run Text="Hora:" FontWeight="Bold"/>
-                                                <Run Text="{Binding Hora_Cita}"/>
+                                                <Run Text="{Binding HoraInicio_Cita}"/>
                                                 </TextBlock>
                                                 <TextBlock FontSize="12" 
                                                        FontStyle="Normal" 
@@ -178,8 +178,9 @@
                         <TextBlock x:Name="LblNombreMascota" Text="Nombre:" />
                         <TextBlock x:Name="LblNombreCliente" Text="Dueño:" />
                         <TextBlock x:Name="LblDimension" Text="Tamaño:"/>
-                        <TextBlock x:Name="LblFecha" Text="Fecha:"/>
-                        <TextBlock x:Name="LblHora" Text="Hora:"/>
+                        <TextBlock x:Name="LblFechaInicio" Text="Fecha:"/>
+                        <TextBlock x:Name="LblHoraInicio" Text="Hora:"/>
+                        <TextBlock x:Name="LblHoraFin" Text="Hora:"/>
                         <TextBlock x:Name="LblServicio" Text="Servicio:"/>
                         <TextBlock x:Name="LblEstadoVenta" Text="Estado de la Venta:"/>
                         <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" Margin="0,5"/>

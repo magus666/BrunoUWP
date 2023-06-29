@@ -25,9 +25,12 @@ Public NotInheritable Class Frm_VentaServicioSpa
     Dim IdMetodoPago As Integer
     Dim IdDimensionMascota As Integer
     Dim RetornoValor As Double
+    Dim FechaHoraFinServicio As String
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
+            FechaCalendarPicker = Date.Now.Date.ToShortDateString()
+
             TmpHoraServicio.SelectedTime = Date.Now.TimeOfDay
             CdpFechaServicio.Date = Date.Now
 
@@ -66,8 +69,8 @@ Public NotInheritable Class Frm_VentaServicioSpa
                                        Cit.Id_TipoServicio Equals Tps.Id_TipoSerivicio
                                    Join Dsm In DimensionMascota On
                                        Cit.Id_DimensionMascota Equals Dsm.Id_DimensionMascota
-                                   Where Cit.FechaHora_Cita.Date.ToShortDateString() = FechaCalendarPicker
-                                   Order By Cit.FechaHora_Cita
+                                   Where Cit.FechaHoraInicio_Cita.Date.ToShortDateString() = FechaCalendarPicker
+                                   Order By Cit.FechaHoraInicio_Cita
                                    Select New NewCitaModel With {.Id_Cita = Cit.Id_Cita,
                                                                  .Nombre_Cliente = Cli.NombreCompleto_Persona,
                                                                  .Nombre_Mascota = Mas.Nombre_Mascota,
@@ -77,8 +80,10 @@ Public NotInheritable Class Frm_VentaServicioSpa
                                                                  .Nombre_TipoServicio = Tps.Nombre_TipoServicio,
                                                                  .Id_DimensionMascota = Dsm.Id_DimensionMascota,
                                                                  .Nombre_DimensionMascota = Dsm.Nombre_DimensionMascota,
-                                                                 .Fecha_Cita = Cit.FechaHora_Cita.Date.ToShortDateString(),
-                                                                 .Hora_Cita = Cit.FechaHora_Cita.ToString("hh:mm tt"),
+                                                                 .FechaInicio_Cita = Cit.FechaHoraInicio_Cita.Date.ToShortDateString(),
+                                                                 .HoraInicio_Cita = Cit.FechaHoraInicio_Cita.ToString("hh:mm tt"),
+                                                                 .FechaFin_Cita = Cit.FechaHoraFin_Cita.Date.ToShortDateString(),
+                                                                 .HoraFin_Cita = Cit.FechaHoraFin_Cita.ToString("hh:mm tt"),
                                                                  .Estado_Cita = If(Cit.Estado_Cita, "Activo", "Inactivo"),
                                                                  .EstadoVenta_Cita = If(Cit.EstadoVenta_Cita, "Pagada", "Por Pagar")}).ToList
 
@@ -92,8 +97,10 @@ Public NotInheritable Class Frm_VentaServicioSpa
         Try
             Dim CodigoCita As String = GetUtilitarios.GenearCodigoCita
             Dim HoraServicio As String = TmpHoraServicio.SelectedTime.ToString
-            Dim FechaHoraConcatenada As String = FechaCalendarPicker & " " & HoraServicio
-            If Await GetCita.InsertCita(CodigoCita, FechaHoraConcatenada, False, IdMascota, IdDimensionMascota, IdTipoServicio, 1, False) = True Then
+            Dim FechaHoraIncioCita As String = FechaCalendarPicker & " " & HoraServicio
+            Dim FechaHoraFinCita As String = ObtenerHoraFinalServicio()
+
+            If Await GetCita.InsertCita(CodigoCita, FechaHoraIncioCita, FechaHoraFinCita, False, IdMascota, IdDimensionMascota, IdTipoServicio, 1, False) = True Then
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "La cita Se Agrego Correctamente")
                 Await ValidaCitas()
                 LsvCita.ItemsSource = Await ConsultaCitas()
@@ -185,8 +192,9 @@ Public NotInheritable Class Frm_VentaServicioSpa
             LblNombreMascota.Text = "Nombre de la Mascota: " & GetCitasModel.Nombre_Mascota
             LblNombreCliente.Text = "Dueño: " & GetCitasModel.Nombre_Cliente
             LblDimension.Text = "Tamaño: " & GetCitasModel.Nombre_DimensionMascota
-            LblFecha.Text = "Fecha: " & GetCitasModel.Fecha_Cita
-            LblHora.Text = "Hora: " & GetCitasModel.Hora_Cita
+            LblFechaInicio.Text = "Fecha: " & GetCitasModel.FechaInicio_Cita
+            LblHoraInicio.Text = "Hora de Inicio: " & GetCitasModel.HoraInicio_Cita
+            LblHoraFin.Text = "Hora estimada de Finalizacion: " & GetCitasModel.HoraFin_Cita
             LblServicio.Text = "Servicio: " & GetCitasModel.Nombre_TipoServicio
             LblEstadoVenta.Text = "Estado del Pago: " & GetCitasModel.EstadoVenta_Cita
             If GetCitasModel.EstadoVenta_Cita = "Por Pagar" Then
@@ -264,6 +272,7 @@ Public NotInheritable Class Frm_VentaServicioSpa
                 Await GetCita.ActualizarCita(GetIdCita, True)
 
                 LsvCita.ItemsSource = Await ConsultaCitas()
+                LblEstadoVenta.Text = "Estado del Pago: " & "Pagada"
                 BtnFinalizarServicio.Visibility = Visibility.Collapsed
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El Pago Se realizó Correctamente")
             End If
@@ -285,4 +294,55 @@ Public NotInheritable Class Frm_VentaServicioSpa
             GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
+
+    Public Function ObtenerHoraFinalServicio() As String
+        Try
+            Dim HoraInicio As TimeSpan = TmpHoraServicio.SelectedTime
+
+            Select Case IdTipoServicio
+                Case 1
+                    Dim HoraFin = HoraInicio.Add(New TimeSpan(1, 0, 0))
+                    FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                Case 2
+                    Select Case IdDimensionMascota
+                        Case 1
+                            Dim HoraFin = HoraInicio.Add(New TimeSpan(1, 0, 0))
+                            FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                        Case 2
+                            Dim HoraFin = HoraInicio.Add(New TimeSpan(2, 0, 0))
+                            FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                        Case 3
+                            Dim HoraFin = HoraInicio.Add(New TimeSpan(3, 0, 0))
+                            FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                    End Select
+                Case 3
+                    Select Case IdDimensionMascota
+                        Case 1
+                            Dim HoraFin = HoraInicio.Add(New TimeSpan(2, 0, 0))
+                            FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                        Case 2
+                            Dim HoraFin = HoraInicio.Add(New TimeSpan(3, 0, 0))
+                            FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                        Case 3
+                            Dim HoraFin = HoraInicio.Add(New TimeSpan(4, 0, 0))
+                            FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                    End Select
+                Case 4
+                    Select Case IdDimensionMascota
+                        Case 1
+                            Dim HoraFin = HoraInicio.Add(New TimeSpan(1, 0, 0))
+                            FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                        Case 2
+                            Dim HoraFin = HoraInicio.Add(New TimeSpan(2, 0, 0))
+                            FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                        Case 3
+                            Dim HoraFin = HoraInicio.Add(New TimeSpan(3, 0, 0))
+                            FechaHoraFinServicio = FechaCalendarPicker & " " & HoraFin.ToString
+                    End Select
+            End Select
+            Return FechaHoraFinServicio
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

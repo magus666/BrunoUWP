@@ -1,7 +1,8 @@
 ﻿Public Class Cl_Cita
 
     Public Async Function InsertCita(CodigoCita As String,
-                                     FechaHoraCita As Date,
+                                     FechaHoraInicioCita As Date,
+                                     FechaHoraFinCita As Date,
                                      EstadoCita As Boolean,
                                      IdMascota As Integer,
                                      IdDimensionMascota As Integer,
@@ -12,7 +13,8 @@
             Await ConfiguraSqlite()
             Dim Cita = New CitaModel With {
                 .Codigo_Cita = CodigoCita,
-                .FechaHora_Cita = FechaHoraCita,
+                .FechaHoraInicio_Cita = FechaHoraInicioCita,
+                .FechaHoraFin_Cita = FechaHoraFinCita,
                 .Estado_Cita = EstadoCita,
                 .Id_Mascota = IdMascota,
                 .Id_DimensionMascota = IdDimensionMascota,
@@ -44,7 +46,7 @@
             Await ConfiguraSqlite()
             Dim GetCita = Await ConexionDB.Table(Of CitaModel)().ToListAsync()
             Dim ListaCita = (From x In GetCita
-                             Where x.FechaHora_Cita.ToShortDateString = Fecha.ToShortDateString
+                             Where x.FechaHoraInicio_Cita.ToShortDateString = Fecha.ToShortDateString
                              Select x).Count
             Return ListaCita
         Catch ex As Exception

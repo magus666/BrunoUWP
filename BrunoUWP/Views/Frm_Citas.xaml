@@ -92,8 +92,12 @@
                                                     <Run Text="{Binding Cliente}"/>
                                                 </TextBlock>
                                                 <TextBlock>
-                                                    <Run Text="Hora:"/>
-                                                    <Run Text="{Binding Hora}"/>
+                                                    <Run Text="Hora de Inicio:"/>
+                                                    <Run Text="{Binding HoraInicio}"/>
+                                                </TextBlock>
+                                                <TextBlock>
+                                                    <Run Text="Hora estimada de Finalizacion:"/>
+                                                    <Run Text="{Binding HoraFin}"/>
                                                 </TextBlock>
                                                 <TextBlock>
                                                     <Run Text="Estado:"/>
