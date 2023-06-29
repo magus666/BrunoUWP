@@ -119,12 +119,17 @@
                                         <Run Text="Telefono:" FontWeight="Bold"/>
                                         <Run Text="{Binding Telefono_Persona}"/>
                                                 </TextBlock>
-                                                <TextBlock
-                                               FontSize="16" 
-                                               FontStyle="Italic" 
-                                               FontWeight="SemiBold">
-                                        <Run Text="Correo:" FontWeight="Bold"/>
-                                        <Run Text="{Binding Correo_Persona}"/>
+                                                <TextBlock FontSize="16" 
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="Correo:" FontWeight="Bold"/>
+                                                    <Run Text="{Binding Correo_Persona}"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="16" 
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="Fecha de Creacion:" FontWeight="Bold"/>
+                                                    <Run Text="{Binding FechaCreacion_Persona}"/>
                                                 </TextBlock>
                                             </StackPanel>
                                         </StackPanel>

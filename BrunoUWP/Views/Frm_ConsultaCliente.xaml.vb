@@ -26,6 +26,7 @@ Public NotInheritable Class Frm_ConsultaCliente
                                                                     .Correo_Persona = Cli.Correo_Persona,
                                                                     .Edad_Persona = Cli.Edad_Persona,
                                                                     .Nombre_Sexo = Sex.Nombre_Sexo,
+                                                                    .FechaCreacion_Persona = Cli.FechaCreacion_Persona,
                                                                     .NombreEstado_Cliente = If(Cli.Estado_Cliente, "Activo", "Inactivo")})
             ListadoFinalClientes = ListadoCliente.OrderBy(Function(cliente)
                                                               Return cliente.NombreCompleto_Persona

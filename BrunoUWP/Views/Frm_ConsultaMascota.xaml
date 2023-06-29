@@ -75,6 +75,12 @@
                                                 <TextBlock FontSize="14" 
                                                            FontStyle="Italic" 
                                                            FontWeight="SemiBold">
+                                                    <Run Text="Nombre:" FontWeight="SemiBold"/>
+                                                    <Run Text="{Binding Nombre_Mascota}"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="14" 
+                                                           FontStyle="Italic" 
+                                                           FontWeight="SemiBold">
                                                     <Run Text="Tipo de Mascota:" FontWeight="SemiBold"/>
                                                     <Run Text="{Binding Nombre_TipoMascota}"/>
                                                 </TextBlock>
@@ -109,7 +115,7 @@
                                                            FontStyle="Italic" 
                                                            FontWeight="SemiBold">
                                                     <Run Text="Fecha de Registro:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding FechaRegistro_Mascota}"/>
+                                                    <Run Text="{Binding FechaRegistro}"/>
                                                 </TextBlock>
                                             </StackPanel>
                                         </StackPanel>

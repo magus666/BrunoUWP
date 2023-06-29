@@ -9,5 +9,6 @@
     Public Property Edad_Persona As Integer
     Public Property Nombre_Sexo As String
     Public Property NombreEstado_Cliente As String
+    Public Property FechaCreacion_Persona As Date
 
 End Class

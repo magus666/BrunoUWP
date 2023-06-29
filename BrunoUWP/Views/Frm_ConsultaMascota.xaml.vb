@@ -41,7 +41,7 @@ Public NotInheritable Class Frm_ConsultaMascota
                                                    Mas.Edad_Mascota,
                                                    Ppo.NombreCompleto_Persona,
                                                    Mas.Observaciones_Mascota,
-                                                   Mas.FechaRegistro_Mascota}).ToList
+                                                   .FechaRegistro = Mas.FechaRegistro_Mascota.ToShortDateString}).ToList
             LsvMascota.ItemsSource = RetornoMascota
         Catch ex As Exception
             Throw New Exception(ex.Message)
