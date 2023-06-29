@@ -43,7 +43,7 @@ Public Class Cl_DateTime
     End Function
 
     Public Function PonerFecha() As String
-        Dim appointment = New Appointments.Appointment()
+        Dim appointment = New Appointment()
         Dim Fecha = Date.Now
         Dim time = Date.Now.TimeOfDay
         Dim timeZoneOffset = TimeZoneInfo.Local.GetUtcOffset(DateTime.Now)
@@ -54,6 +54,7 @@ Public Class Cl_DateTime
         appointment.Details = "dfs"
         appointment.Duration = TimeSpan.FromHours(1)
         appointment.Reminder = TimeSpan.FromMinutes(15)
+        Return "Hola"
     End Function
 
     Public Function GetElementRect(element As FrameworkElement) As Rect

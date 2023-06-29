@@ -65,7 +65,9 @@
                             <StackPanel Orientation="Vertical"
                                 Grid.Column="1"
                                 VerticalAlignment="Center">
-                                <TextBlock Margin="20,0,0,0"
+                                <TextBlock x:Name="LblTituloCitasPendientes" 
+                                           x:Uid="LblTituloCitasPendientes"
+                                           Margin="20,0,0,0"
                                            FontSize="16" 
                                            FontStyle="Italic" 
                                            FontWeight="SemiBold">
