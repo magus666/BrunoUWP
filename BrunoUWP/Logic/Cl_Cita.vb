@@ -31,11 +31,22 @@
 
     Public Async Function ConsultarCitas() As Task(Of List(Of CitaModel))
         Try
-            Await ConfiguraSqlite()
             Dim GetCita = Await ConexionDB.Table(Of CitaModel)().ToListAsync()
             Dim ListaCita = (From x In GetCita
                              Select x).ToList
             Return ListaCita
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function ConsultaFechasDisponibles() As Task(Of Double)
+        Try
+            Dim GetCita = Await ConexionDB.Table(Of CitaModel)().ToListAsync()
+            Dim Cantidad = (From x In GetCita
+                             Group x By x.FechaHoraInicio_Cita Into Group
+                             Select Group).Count()
+            Return Cantidad
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
