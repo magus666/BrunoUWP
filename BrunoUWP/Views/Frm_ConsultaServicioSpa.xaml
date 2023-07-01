@@ -64,7 +64,8 @@
                                  IsActive="False"/>
                 <AppBarButton Label="Exportar"
                               HorizontalAlignment="Right"
-                              VerticalAlignment="Center">
+                              VerticalAlignment="Center"
+                              Click="AppBarButton_Click">
                     <AppBarButton.Icon>
                         <FontIcon FontFamily="Wingdings 2" Glyph="&#x002E;" />
                     </AppBarButton.Icon>

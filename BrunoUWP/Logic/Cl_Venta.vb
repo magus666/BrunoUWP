@@ -1,4 +1,15 @@
-﻿Public Class Cl_Venta
+﻿Imports OfficeOpenXml
+Imports OfficeOpenXml.Style
+Imports OfficeOpenXml.Table
+Imports Windows.Storage
+
+Public Class Cl_Venta
+    Dim GetCliente As New Cl_Cliente
+    Dim GetTipoServicio As New Cl_TipoServicio
+    Dim GetTipoTransaccion As New Cl_TipoTransaccion
+    Dim GetMascota As New Cl_Mascota
+    Dim GetMetodoPago As New Cl_MetodoPago
+    Dim GetPickers As New Cl_Pickers
 
     Public Async Function InsertVenta(CodigoVenta As String,
                                       FechaVenta As Date,
@@ -83,6 +94,72 @@
                               Where x.Id_TipoTransaccion = IdTipoTransaccion
                               Select x.Valor_Venta).Sum()
             Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function CrearExcelVenta() As Task(Of Boolean)
+        Try
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+            Dim xlPackage As New ExcelPackage()
+            Dim oBook As ExcelWorkbook = xlPackage.Workbook
+            Dim ws As ExcelWorksheet = oBook.Worksheets.Add("Ventas")
+
+            Dim VentaTotal As Double = Await ConsultaSumatoriaVentaPorTipoTransaccion(1)
+            Dim Venta = Await ConsultaVentaPorTipoTransaccion(1)
+            Dim TipoServicio = Await GetTipoServicio.ConsultaTipoServicio()
+            Dim TipoTransaccion = Await GetTipoTransaccion.ConsultaTipoTransaccion()
+            Dim Mascota = Await GetMascota.ConsultaMascotas()
+            Dim Cliente = Await GetCliente.ConsultaCliente()
+            Dim MetodoPagao = Await GetMetodoPago.ConsultaMetodoPago()
+            Dim RetornoFiltroVenta = (From Vtn In Venta
+                                      Join Tps In TipoServicio On
+                                              Vtn.Id_TipoServicio Equals Tps.Id_TipoSerivicio
+                                      Join Ttc In TipoTransaccion On
+                                          Vtn.Id_TipoTransaccion Equals Ttc.Id_TipoTransaccion
+                                      Join Msc In Mascota On
+                                          Vtn.Id_Mascota Equals Msc.Id_Mascota
+                                      Join Cli In Cliente On
+                                          Msc.Id_Persona Equals Cli.Id_Persona
+                                      Join Mdp In MetodoPagao On
+                                          Vtn.Id_MetodoPago Equals Mdp.Id_MetodoPago
+                                      Select New With {.Codigo = Vtn.Codigo_Venta,
+                                                       .Fecha = Vtn.Fecha_Venta.ToShortDateString,
+                                                       .Tipo_de_Servicio = Tps.Nombre_TipoServicio,
+                                                       .Mascota = Msc.Nombre_Mascota,
+                                                       .Propietario = Cli.NombreCompleto_Persona,
+                                                       .Metodo_de_Pago = Mdp.Nombre_MetodoPago,
+                                                       .Varlor_Total = CDbl(Vtn.Valor_Venta)})
+            ws.InsertRow(1, 1)
+            ws.Cells("A1:G1").Merge = True
+            ws.Cells("A1").Value = "Ventas Bruno Spa"
+            With ws.Cells("A1")
+                .Style.Font.Bold = True
+                .Style.Font.Size = 22
+                .Style.HorizontalAlignment = ExcelHorizontalAlignment.Center
+            End With
+
+            ws.Cells("A2").LoadFromCollection(RetornoFiltroVenta, True, TableStyles.Medium1)
+            Dim lastRow = ws.Dimension.End.Row
+            ws.Cells(lastRow + 1, 7).Formula = "=SUM(G2:G" & lastRow & ")"
+            ws.Cells(lastRow + 1, 6).Value = "Total"
+
+
+            Dim GuardarArchvo = GetPickers.CrearFileSavePicker("ListadoVentas")
+            Dim file = Await GuardarArchvo.PickSaveFileAsync()
+            If file IsNot Nothing Then
+                CachedFileManager.DeferUpdates(file)
+                Using stream = Await file.OpenAsync(FileAccessMode.ReadWrite)
+                    Await xlPackage.SaveAsAsync(stream.AsStream())
+                End Using
+                Dim status = Await CachedFileManager.CompleteUpdatesAsync(file)
+                Dim success = Await Windows.System.Launcher.LaunchFileAsync(file)
+                Return True
+            Else
+                Return False
+            End If
+
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try

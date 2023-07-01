@@ -11,6 +11,7 @@ Public NotInheritable Class Frm_ConsultaServicioSpa
     Dim GetMascota As New Cl_Mascota
     Dim GetCliente As New Cl_Cliente
     Dim GetMetodoPago As New Cl_MetodoPago
+    Dim GetNotificaciones As New Cl_Notificaciones
 
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
@@ -42,6 +43,21 @@ Public NotInheritable Class Frm_ConsultaServicioSpa
                                                        .VarlorTotal = Vtn.Valor_Venta.ToString("c")})
             DtgVentaServicioSpa.ItemsSource = RetornoFiltroVenta
                 LblVentaTotal.Text = "Ventas Totales: " & VentaTotal.ToString("c")
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            PgrGeneraExcel.IsActive = True
+            If Await GetVenta.CrearExcelVenta() = True Then
+                PgrGeneraExcel.IsActive = False
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La informacion Se exportó con exito a Excel")
+            Else
+                GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Advertencia", "Se canceló la Exportacion a Excel")
+                PgrGeneraExcel.IsActive = False
+            End If
         Catch ex As Exception
 
         End Try
