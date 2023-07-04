@@ -1,4 +1,5 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
+Imports Windows.Storage
 ''' <summary>
 ''' Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -43,6 +44,18 @@ Public NotInheritable Class MainPage
             NvwBruno.SelectedItem = NviInicio
             MarcoTrabajo = ContenFrameMenu
             MarcoTrabajo.Navigate(GetType(Frm_Inicio))
+            Dim localSettings As ApplicationDataContainer = ApplicationData.Current.LocalSettings
+            If localSettings.Values.ContainsKey("TemaSeleccionado") Then
+                Dim temaSeleccionado As String = localSettings.Values("TemaSeleccionado")
+                Select Case temaSeleccionado
+                    Case "Claro"
+                        CType(Window.Current.Content, FrameworkElement).RequestedTheme = ElementTheme.Light
+                    Case "Oscuro"
+                        CType(Window.Current.Content, FrameworkElement).RequestedTheme = ElementTheme.Dark
+                    Case "Configuracion del Sistema"
+                        CType(Window.Current.Content, FrameworkElement).RequestedTheme = ElementTheme.Default
+                End Select
+            End If
         Catch ex As Exception
 
         End Try

@@ -1,11 +1,22 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
 Imports Microsoft.UI.Xaml.Controls
+Imports Windows.Storage
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
 Public NotInheritable Class Frm_ConfiguracionAplicacion
     Inherits Page
+
+    Public Sub New()
+
+        ' Esta llamada es exigida por el diseñador.
+        InitializeComponent()
+
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+    End Sub
 
     Private Async Sub TglInicioAplicacion_Toggled(sender As Object, e As RoutedEventArgs)
         Try
@@ -42,6 +53,20 @@ Public NotInheritable Class Frm_ConfiguracionAplicacion
                 Case Else
                     TglInicioAplicacion.IsOn = False
             End Select
+
+            Dim localSettings As ApplicationDataContainer = ApplicationData.Current.LocalSettings
+            If localSettings.Values.ContainsKey("TemaSeleccionado") Then
+                Dim temaSeleccionado As String = localSettings.Values("TemaSeleccionado")
+                Select Case temaSeleccionado
+                    Case "Claro"
+                        RdbTema.SelectedIndex = 0
+                    Case "Oscuro"
+                        RdbTema.SelectedIndex = 1
+                    Case "Configuracion del Sistema"
+                        RdbTema.SelectedIndex = 2
+                End Select
+                Dim Honorra = RdbTema.SelectedIndex
+            End If
         Catch ex As Exception
 
         End Try
@@ -58,6 +83,9 @@ Public NotInheritable Class Frm_ConfiguracionAplicacion
                 Case "Configuracion del Sistema"
                     CType(Window.Current.Content, FrameworkElement).RequestedTheme = ElementTheme.Default
             End Select
+
+            Dim localSettings As ApplicationDataContainer = ApplicationData.Current.LocalSettings
+            localSettings.Values("TemaSeleccionado") = SeleccionRadio
 
         Catch ex As Exception
             Dim MensajeError = ex.Message
