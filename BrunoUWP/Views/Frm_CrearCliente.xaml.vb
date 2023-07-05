@@ -41,12 +41,21 @@ Public NotInheritable Class Frm_CrearCliente
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Apellido no puede estar Vacio", TxtApellidos)
                 Exit Sub
             End If
+            If GetValidaciones.ValidarApellidos(TxtApellidos.Text) = False Then
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Debe contener dos Apellidos Validos", TxtApellidos)
+                Exit Sub
+            End If
             If GetValidaciones.ValidaTextBoxVacio(TxtDireccion) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La Direccion no puede estar Vacia", TxtDireccion)
                 Exit Sub
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtTelefono) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no puede estar Vacio", TxtTelefono)
+                Exit Sub
+            End If
+
+            If GetValidaciones.ValidarNumeroTelefonico(TxtTelefono.Text) = False Then
+                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no tiene el Formato correcto", TxtTelefono)
                 Exit Sub
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtCorreo) = False Then
@@ -62,7 +71,7 @@ Public NotInheritable Class Frm_CrearCliente
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "No puede Ser Menor de 14 años", NbbEdad)
                 Exit Sub
             End If
-            If CmbSexo.SelectedIndex < 0 Then
+            If GetValidaciones.ValidaComboBoxVacio(CmbSexo) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un Sexo Correcto", CmbSexo)
                 Exit Sub
             End If
