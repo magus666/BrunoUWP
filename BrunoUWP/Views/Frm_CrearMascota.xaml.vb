@@ -16,6 +16,7 @@ Public NotInheritable Class Frm_CrearMascota
     Dim GetManipulacionImagens As New Cl_ManipulacionImagenes
     Dim IdPropietario As Integer
     Dim IdTipoMascota As Integer
+    Dim IndexTipoMascota As Integer
     Dim IdRazaMascota As Integer
     Dim IdTipoMascotaDialog As Integer
     Public Sub New()
@@ -125,6 +126,7 @@ Public NotInheritable Class Frm_CrearMascota
                 IdTipoMascota = 0
             Else
                 IdTipoMascota = selectedItem.Id_TipoMascota
+                IndexTipoMascota = CmbTipoMascota.SelectedIndex
             End If
             CmbRazaMascota.IsEnabled = True
             BtnNuevaRaza.IsEnabled = True
@@ -157,6 +159,8 @@ Public NotInheritable Class Frm_CrearMascota
             Dim ListaTipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
             CmbTipoMascotaDialog.ItemsSource = ListaTipoMascota
             CmbTipoMascotaDialog.DisplayMemberPath = "Nombre_TipoMascota"
+            CmbTipoMascotaDialog.SelectedIndex = IndexTipoMascota
+            CmbTipoMascotaDialog.IsEnabled = False
             Await CtdNuevaRaza.ShowAsync()
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
