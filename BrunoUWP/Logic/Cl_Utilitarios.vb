@@ -1,4 +1,6 @@
-﻿Public Class Cl_Utilitarios
+﻿Imports Microsoft.UI.Xaml.Controls
+
+Public Class Cl_Utilitarios
 
     Public Function GenerarCodigoCliente() As String
         Dim Iniciales As String = "CLI-"
@@ -59,5 +61,23 @@
         RetornoCodigo = Iniciales & codigo
         Return RetornoCodigo
     End Function
+
+    Public Sub LimpiarControles(StpDatos As StackPanel)
+        Try
+            For Each element As UIElement In StpDatos.Children
+                If (TypeOf element Is TextBox) Then
+                    DirectCast(element, TextBox).Text = String.Empty
+                End If
+                If (TypeOf element Is ComboBox) Then
+                    DirectCast(element, ComboBox).PlaceholderText = "Seleccione Sexo"
+                End If
+                If (TypeOf element Is NumberBox) Then
+                    DirectCast(element, NumberBox).Text = 1
+                End If
+            Next
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Sub
 
 End Class

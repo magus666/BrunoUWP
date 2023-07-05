@@ -1,4 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
+Imports Windows.UI.Popups
 
 Public Class Cl_Validaciones
     Public Function ValidaCorreo(CorreoElectronico As String) As Boolean
@@ -67,6 +68,21 @@ Public Class Cl_Validaciones
     Public Function ValidacionDosFechas(FechaInicio As Date, FechaFin As Date) As Boolean
         Try
             If FechaFin < FechaInicio Then
+                Return False
+            Else
+                Return True
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Function ValidaHoraTimePicker(ElementoTimePiker As TimePicker, HoraPrevia As Date) As Boolean
+        Try
+            Dim selectedTime As TimeSpan = ElementoTimePiker.Time
+            Dim dbTime As TimeSpan = HoraPrevia.TimeOfDay
+            Dim twoHoursLater As TimeSpan = dbTime.Add(TimeSpan.FromHours(2))
+            If selectedTime >= dbTime AndAlso selectedTime <= twoHoursLater Then
                 Return False
             Else
                 Return True

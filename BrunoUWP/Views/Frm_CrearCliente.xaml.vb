@@ -20,7 +20,6 @@ Public NotInheritable Class Frm_CrearCliente
             CmbSexo.ItemsSource = Await GetSexo.ConsultaSexo()
             CmbSexo.DisplayMemberPath = "Nombre_Sexo"
             Dim CodigoAleatrorio As String = GetUtilitarios.GenerarCodigoCliente()
-            TxtCodigo.Text = CodigoAleatrorio
         Catch ex As Exception
             GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
@@ -29,6 +28,7 @@ Public NotInheritable Class Frm_CrearCliente
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
             Dim MensajeWha As String
+            Dim CodigoCliente As String = GetUtilitarios.GenerarCodigoCliente()
             If GetValidaciones.ValidaTextBoxVacio(TxtDocumento) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Documento no puede estar Vacio", TxtDocumento)
                 Exit Sub
@@ -78,14 +78,13 @@ Public NotInheritable Class Frm_CrearCliente
             PgrGuardarCliente.IsActive = True
             If Await GetCliente.InsertarCliente(TxtDocumento.Text, TxtNombres.Text, TxtApellidos.Text,
                                                  TxtDireccion.Text, TxtTelefono.Text, TxtCorreo.Text, NbbEdad.Text,
-                                                 IdSexoSeleccionado, TxtCodigo.Text, True) = True Then
+                                                 IdSexoSeleccionado, CodigoCliente, True) = True Then
                 Dim NombreCompleto = TxtNombres.Text & " " & TxtApellidos.Text
-                Dim CodigoCliente = TxtCodigo.Text
                 MensajeWha = "Bienvenida/o " & NombreCompleto & " " & "y gracias por ser parte del Club Bruno Spa.
                                                                        Te esperan los mejores servicios y las mejores ofertas para el cuidado de tu peludito.
                                                                        Tu codigo de Cliente es: " & CodigoCliente & "."
                 Await GetIntegracionWhatsapp.EnviaMensajeWhatsapp(TxtTelefono.Text, MensajeWha)
-                LimpiarTextbox()
+                GetUtilitarios.LimpiarControles(StpDatosCliente)
                 PgrGuardarCliente.IsActive = False
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El cliente se ha guardado con Exito")
             Else
@@ -104,20 +103,5 @@ Public NotInheritable Class Frm_CrearCliente
         Catch ex As Exception
             GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
-    End Sub
-    Public Sub LimpiarTextbox()
-        Try
-            For Each element As UIElement In StpDatosCliente.Children
-                If (TypeOf element Is TextBox) Then
-                    DirectCast(element, TextBox).Text = String.Empty
-                End If
-            Next
-            TxtCodigo.Text = GetUtilitarios.GenerarCodigoCliente()
-            NbbEdad.Text = 1
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
-
-
     End Sub
 End Class

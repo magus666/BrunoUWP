@@ -6,13 +6,13 @@ Imports Windows.Storage
 ''' </summary>
 Public NotInheritable Class Frm_CrearMascota
     Inherits Page
-    Dim GetNotifications As New Cl_Notificaciones
+    Dim GetValidaciones As New Cl_Validaciones
+    Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetMascota As New Cl_Mascota
     Dim GetCliente As New Cl_Cliente
     Dim GetRazaMascota As New Cl_RazaMascota
     Dim GetTipoMascota As New CL_TipoMascota
-    Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetManipulacionImagens As New Cl_ManipulacionImagenes
     Dim IdPropietario As Integer
     Dim IdTipoMascota As Integer
@@ -33,6 +33,7 @@ Public NotInheritable Class Frm_CrearMascota
             CmbTipoMascota.ItemsSource = ListaTipoMascota
             CmbTipoMascota.DisplayMemberPath = "Nombre_TipoMascota"
 
+
             Dim ListaClientes = Await GetCliente.ConsultaCliente()
             If ListaClientes.Count = 0 Then
                 GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Aviso", "Cree un Propietario en el Modulo Clientes Antes de Continuar.",
@@ -44,23 +45,56 @@ Public NotInheritable Class Frm_CrearMascota
                 CmbPropietario.DisplayMemberPath = "NombreCompleto_Persona"
             End If
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
             Dim CodigoMascota As String = GetUtilitarios.GenerarCodigoMascota
-            Dim localSettings As ApplicationDataContainer
-            localSettings = ApplicationData.Current.LocalSettings
-            localSettings.Values("NombreMascota") = TxtNombreMascota.Text
-            Await GetMascota.InsertarMascota(CodigoMascota, IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
+            If ValidaDatos() = True Then
+                Await GetMascota.InsertarMascota(CodigoMascota, IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
                                              NbbEdad.Text, IdPropietario, TxtObservaciones.Text)
-            GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
+                GetUtilitarios.LimpiarControles(StpPrincipal)
+            End If
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
+
+    Public Function ValidaDatos() As Boolean
+        Try
+            If GetValidaciones.ValidaComboBoxVacio(CmbTipoMascota) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un tipo de mascota valido", CmbTipoMascota)
+                Return False
+                Exit Function
+            End If
+            If GetValidaciones.ValidaComboBoxVacio(CmbRazaMascota) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione una Raza valida", CmbRazaMascota)
+                Return False
+                Exit Function
+            End If
+            If GetValidaciones.ValidaTextBoxVacio(TxtNombreMascota) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El nombre de la mascota no puede estar Vacio", TxtNombreMascota)
+                Return False
+                Exit Function
+            End If
+            If GetValidaciones.ValidaComboBoxVacio(CmbPropietario) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un propietario valido", CmbPropietario)
+                Return False
+                Exit Function
+            End If
+            If GetValidaciones.ValidaTextBoxVacio(TxtObservaciones) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "las observaciones no pueden estar Vacias", TxtObservaciones)
+                Return False
+                Exit Function
+            End If
+            Return True
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 
     Private Async Sub PrpMascota_Tapped(sender As Object, e As TappedRoutedEventArgs)
         Await GetManipulacionImagens.ImagenPicker(PrpMascota)
@@ -72,13 +106,14 @@ Public NotInheritable Class Frm_CrearMascota
             Dim selectedItem As ClienteModel = CType(comboBox.SelectedItem, ClienteModel)
             IdPropietario = selectedItem.Id_Persona
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
 
     End Sub
 
     Private Async Sub CmbTipoMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
+            Await GetTipoMascota.InsertarActualizarTipoMascota()
             Dim comboBox As ComboBox = CType(sender, ComboBox)
             Dim selectedItem As TipoMascotaModel = CType(comboBox.SelectedItem, TipoMascotaModel)
             IdTipoMascota = selectedItem.Id_TipoMascota
@@ -90,7 +125,7 @@ Public NotInheritable Class Frm_CrearMascota
             CmbRazaMascota.DisplayMemberPath = "Nombre_Raza"
 
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
 
     End Sub
@@ -101,7 +136,7 @@ Public NotInheritable Class Frm_CrearMascota
             Dim selectedItem As RazaModel = CType(comboBox.SelectedItem, RazaModel)
             IdRazaMascota = selectedItem.Id_Raza
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -110,12 +145,9 @@ Public NotInheritable Class Frm_CrearMascota
             Dim ListaTipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
             CmbTipoMascotaDialog.ItemsSource = ListaTipoMascota
             CmbTipoMascotaDialog.DisplayMemberPath = "Nombre_TipoMascota"
-
             Await CtdNuevaRaza.ShowAsync()
-
-
         Catch ex As Exception
-            Throw New Exception(ex.Message)
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -128,7 +160,7 @@ Public NotInheritable Class Frm_CrearMascota
             CmbRazaMascota.DisplayMemberPath = "Nombre_Raza"
 
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -138,7 +170,7 @@ Public NotInheritable Class Frm_CrearMascota
             Dim selectedItem As TipoMascotaModel = CType(comboBox.SelectedItem, TipoMascotaModel)
             IdTipoMascotaDialog = selectedItem.Id_TipoMascota
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 End Class

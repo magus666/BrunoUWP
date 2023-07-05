@@ -33,7 +33,6 @@
                         Orientation="Vertical"
                         Padding="20">
                     <my:InfoBar x:Name="InfAlerta"/>
-                    <TextBox x:Name="TxtCodigo" Header="Codigo" IsEnabled="False" />
                     <TextBox x:Name="TxtDocumento" Header="Documento"/>
                     <TextBox x:Name="TxtNombres" Header="Nombres"/>
                     <TextBox x:Name="TxtApellidos" Header="Apellidos"/>
