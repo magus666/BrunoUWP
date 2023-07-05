@@ -69,7 +69,7 @@ Public Class Cl_Utilitarios
                     DirectCast(element, TextBox).Text = String.Empty
                 End If
                 If (TypeOf element Is ComboBox) Then
-                    DirectCast(element, ComboBox).PlaceholderText = "Seleccione Sexo"
+                    DirectCast(element, ComboBox).SelectedIndex = -1
                 End If
                 If (TypeOf element Is NumberBox) Then
                     DirectCast(element, NumberBox).Text = 1

@@ -104,7 +104,12 @@ Public NotInheritable Class Frm_CrearMascota
         Try
             Dim comboBox As ComboBox = CType(sender, ComboBox)
             Dim selectedItem As ClienteModel = CType(comboBox.SelectedItem, ClienteModel)
-            IdPropietario = selectedItem.Id_Persona
+            If CmbPropietario.SelectedIndex = -1 Then
+                IdPropietario = 0
+            Else
+                IdPropietario = selectedItem.Id_Persona
+            End If
+
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
@@ -116,8 +121,11 @@ Public NotInheritable Class Frm_CrearMascota
             Await GetTipoMascota.InsertarActualizarTipoMascota()
             Dim comboBox As ComboBox = CType(sender, ComboBox)
             Dim selectedItem As TipoMascotaModel = CType(comboBox.SelectedItem, TipoMascotaModel)
-            IdTipoMascota = selectedItem.Id_TipoMascota
-
+            If CmbTipoMascota.SelectedIndex = -1 Then
+                IdTipoMascota = 0
+            Else
+                IdTipoMascota = selectedItem.Id_TipoMascota
+            End If
             CmbRazaMascota.IsEnabled = True
             BtnNuevaRaza.IsEnabled = True
             Dim LstaRazaMascota = Await GetRazaMascota.ConsultaRazaMascotaId(IdTipoMascota)
@@ -134,7 +142,11 @@ Public NotInheritable Class Frm_CrearMascota
         Try
             Dim comboBox As ComboBox = CType(sender, ComboBox)
             Dim selectedItem As RazaModel = CType(comboBox.SelectedItem, RazaModel)
-            IdRazaMascota = selectedItem.Id_Raza
+            If CmbRazaMascota.SelectedIndex = -1 Then
+                IdRazaMascota = 0
+            Else
+                IdRazaMascota = selectedItem.Id_Raza
+            End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
