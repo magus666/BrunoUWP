@@ -6,6 +6,7 @@ Imports Windows.ApplicationModel.Appointments
 ''' </summary>
 Public NotInheritable Class Frm_VentaServicioSpa
     Inherits Page
+    Dim getValidaciones As New Cl_Validaciones
     Dim GetNotificacionas As New Cl_Notificaciones
     Dim GetCita As New Cl_Cita
     Dim GetMascota As New Cl_Mascota
@@ -31,9 +32,8 @@ Public NotInheritable Class Frm_VentaServicioSpa
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
             FechaCalendarPicker = Date.Now.Date.ToShortDateString()
-
-            TmpHoraServicio.SelectedTime = Date.Now.TimeOfDay
             CdpFechaServicio.Date = Date.Now
+            CdpFechaServicio.MinDate = Date.Now
 
             CmbTIpoServicio.ItemsSource = Await GetTipoServicio.ConsultaTipoServicio
             CmbTIpoServicio.DisplayMemberPath = "Nombre_TipoServicio"
@@ -100,17 +100,46 @@ Public NotInheritable Class Frm_VentaServicioSpa
             Dim HoraServicio As String = TmpHoraServicio.SelectedTime.ToString
             Dim HoraTimeSpan = TmpHoraServicio.SelectedTime
             Dim FechaHoraIncioCita As String = FechaCalendarPicker & " " & HoraServicio
-            Dim FechaHoraFinCita As String = ObtenerHoraFinalServicio()
-
-            If Await GetCita.InsertCita(CodigoCita, FechaHoraIncioCita, FechaHoraFinCita, False, IdMascota, IdDimensionMascota, IdTipoServicio, 1, False) = True Then
-                GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "La cita Se Agrego Correctamente")
-                Await ValidaCitas()
-                LsvCita.ItemsSource = Await ConsultaCitas()
+            If ValidaDatos() = True Then
+                Dim FechaHoraFinCita As String = ObtenerHoraFinalServicio()
+                If Await GetCita.InsertCita(CodigoCita, FechaHoraIncioCita, FechaHoraFinCita, False, IdMascota, IdDimensionMascota, IdTipoServicio, 1, False) = True Then
+                    GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "La cita Se Agrego Correctamente")
+                    Await ValidaCitas()
+                    LsvCita.ItemsSource = Await ConsultaCitas()
+                End If
             End If
         Catch ex As Exception
             GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
+
+    Public Function ValidaDatos() As Boolean
+        If getValidaciones.ValidaComboBoxVacio(CmbTIpoServicio) = False Then
+            GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un Tipo de Servicio valido", CmbTIpoServicio)
+            Return False
+            Exit Function
+        End If
+        If getValidaciones.ValidaComboBoxVacio(CmbMascota) = False Then
+            GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione una mascota valida", CmbMascota)
+            Return False
+            Exit Function
+        End If
+        If getValidaciones.ValidaComboBoxVacio(CmbDimensionMascota) = False Then
+            GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione una dimension valida", CmbDimensionMascota)
+            Return False
+            Exit Function
+        End If
+        If CdpFechaServicio.Date = Nothing Then
+            GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione una Hora Correcta", CdpFechaServicio)
+            Return False
+        End If
+        If TmpHoraServicio.SelectedTime Is Nothing Then
+            GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione una Hora Correcta", TmpHoraServicio)
+            Return False
+            Exit Function
+        End If
+        Return True
+    End Function
 
     Private Async Sub CdpFechaServicio_DateChanged(sender As CalendarDatePicker, args As CalendarDatePickerDateChangedEventArgs)
         Try
