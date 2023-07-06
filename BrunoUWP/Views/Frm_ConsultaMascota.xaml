@@ -115,7 +115,7 @@
                                                            FontStyle="Italic" 
                                                            FontWeight="SemiBold">
                                                     <Run Text="Fecha de Registro:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding FechaRegistro}"/>
+                                                    <Run Text="{Binding FechaRegistro_Mascota}"/>
                                                 </TextBlock>
                                             </StackPanel>
                                         </StackPanel>

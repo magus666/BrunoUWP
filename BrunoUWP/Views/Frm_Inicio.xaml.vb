@@ -30,6 +30,7 @@ Public NotInheritable Class Frm_Inicio
         Try
             Dim ContadorMascotas As Integer
             Dim ContadorCitas As Integer
+            Dim ContadorSpasRealizados As Integer
             Dim ContadorClientes As Integer
             Dim VentasTotales As Double
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
@@ -37,6 +38,8 @@ Public NotInheritable Class Frm_Inicio
                 Case "Hoy"
                     ContadorCitas = Await GetCita.ContadorCitasPendientes()
                     LblCitasPendientes.Text = ContadorCitas
+                    ContadorSpasRealizados = Await GetCita.ContadorCitasFinalizadas
+                    LblCantidadSpas.Text = ContadorSpasRealizados
                     ContadorClientes = Await GetClientes.CountClienteUltimoDia
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoDia

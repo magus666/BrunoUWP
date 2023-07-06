@@ -1,6 +1,5 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
-Imports Microsoft.Toolkit.Uwp.UI.Controls
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -11,6 +10,7 @@ Public NotInheritable Class Frm_ConsultaMascota
     Dim GetRaza As New Cl_RazaMascota
     Dim GetPersona As New Cl_Cliente
     Dim GetNotificaciones As New Cl_Notificaciones
+    Dim ListadoFinalMascotas As IEnumerable(Of Object)
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -34,15 +34,19 @@ Public NotInheritable Class Frm_ConsultaMascota
                                        Mas.Id_Raza Equals Rza.Id_Raza
                                   Join Ppo In Propietario On
                                        Mas.Id_Persona Equals Ppo.Id_Persona
-                                  Select New With {Mas.Codigo_Mascota,
-                                                   Tmc.Nombre_TipoMascota,
-                                                   Rza.Nombre_Raza,
-                                                   Mas.Nombre_Mascota,
-                                                   Mas.Edad_Mascota,
-                                                   Ppo.NombreCompleto_Persona,
-                                                   Mas.Observaciones_Mascota,
-                                                   .FechaRegistro = Mas.FechaRegistro_Mascota.ToShortDateString}).ToList
-            LsvMascota.ItemsSource = RetornoMascota
+                                  Order By Mas.Nombre_Mascota
+                                  Select New NewMascotaModel With {.Id_Mascota = Mas.Id_Mascota,
+                                      .Codigo_Mascota = Mas.Codigo_Mascota,
+                                      .Nombre_TipoMascota = Tmc.Nombre_TipoMascota,
+                                      .Nombre_Raza = Rza.Nombre_Raza,
+                                      .Nombre_Mascota = Mas.Nombre_Mascota,
+                                      .Edad_Mascota = Mas.Edad_Mascota,
+                                      .NombreCompleto_Persona = Ppo.NombreCompleto_Persona,
+                                      .Observaciones_Mascota = Mas.Observaciones_Mascota,
+                                      .FechaRegistro_Mascota = Mas.FechaRegistro_Mascota}).ToList
+
+            ListadoFinalMascotas = RetornoMascota
+            LsvMascota.ItemsSource = ListadoFinalMascotas
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -63,8 +67,23 @@ Public NotInheritable Class Frm_ConsultaMascota
         End Try
     End Sub
 
-    Private Sub AsbBusueda_TextChanged(sender As AutoSuggestBox, args As AutoSuggestBoxTextChangedEventArgs)
+    Private Async Sub AsbBusueda_TextChanged(sender As AutoSuggestBox, args As AutoSuggestBoxTextChangedEventArgs)
+        Try
+            If AsbBusueda.Text.Count = 0 Then
+                LsvMascota.ItemsSource = ListadoFinalMascotas
+            Else
+                If args.Reason = AutoSuggestionBoxTextChangeReason.UserInput Then
+                    Dim ListaMascotas = Await GetMascota.ConsultaMascotas()
+                    Dim RetornoListaMascotas = (From x In ListaMascotas
+                                                Where x.Nombre_Mascota.StartsWith(AsbBusueda.Text,
+                                                        StringComparison.OrdinalIgnoreCase)
+                                                Select x).ToList
+                    LsvMascota.ItemsSource = RetornoListaMascotas
+                End If
+            End If
+        Catch ex As Exception
 
+        End Try
     End Sub
 
     Private Sub LsvMascota_ItemClick(sender As Object, e As ItemClickEventArgs)

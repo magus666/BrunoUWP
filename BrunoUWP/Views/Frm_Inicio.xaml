@@ -74,7 +74,7 @@
                                     <Run Text="Citas Pendientes"/>
                                 </TextBlock>
                                 <TextBlock Margin="20,0,0,0"
-                                           FontSize="30" 
+                                           FontSize="30"
                                            FontStyle="Italic" 
                                            FontWeight="Medium">
                                     <Run x:Name="LblCitasPendientes"/>
