@@ -8,15 +8,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="516b4f82-94e6-4c31-b8e2-0d6dfcdcf047"
-    Publisher="CN=MetalZoneSolutions"
-    Version="1.0.14.0" />
+    Name="10009IvanMarinSolutions.2163263046897"
+    Publisher="CN=1EEAED1A-00E4-4498-80BD-4343A6BBAF14"
+    Version="1.0.16.0" />
 
-  <mp:PhoneIdentity PhoneProductId="516b4f82-94e6-4c31-b8e2-0d6dfcdcf047" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="41c1b62e-1774-4adb-bd7a-5fa319cdaedd" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Bruno Spa</DisplayName>
-    <PublisherDisplayName>black</PublisherDisplayName>
+    <PublisherDisplayName>Ivan Marin Solutions</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
