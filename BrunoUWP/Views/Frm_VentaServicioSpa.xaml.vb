@@ -38,7 +38,11 @@ Public NotInheritable Class Frm_VentaServicioSpa
             CmbTIpoServicio.ItemsSource = Await GetTipoServicio.ConsultaTipoServicio
             CmbTIpoServicio.DisplayMemberPath = "Nombre_TipoServicio"
 
-            CmbMascota.ItemsSource = Await GetMascota.ConsultaMascotas
+            Dim TraerMascotas = Await GetMascota.ConsultaMascotas
+            Dim MascotaOrdenada = (From Mas In TraerMascotas
+                                   Order By Mas.Nombre_Mascota
+                                   Select Mas)
+            CmbMascota.ItemsSource = MascotaOrdenada
             CmbMascota.DisplayMemberPath = "Nombre_Mascota"
 
             CmbDimensionMascota.ItemsSource = Await GetDimensionMascota.ConsultaDimensionMascota

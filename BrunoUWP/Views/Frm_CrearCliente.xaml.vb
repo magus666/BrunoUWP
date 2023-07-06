@@ -12,7 +12,7 @@ Public NotInheritable Class Frm_CrearCliente
     Dim GetIntegracionWhatsapp As New Cl_IntegracionWhatsapp
     Dim newViewId As Integer = 0
     Public GetSexo As New Cl_Sexo
-    Dim IdSexoSeleccionado As Integer
+    Dim IdSexo As Integer
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -78,7 +78,7 @@ Public NotInheritable Class Frm_CrearCliente
             PgrGuardarCliente.IsActive = True
             If Await GetCliente.InsertarCliente(TxtDocumento.Text, TxtNombres.Text, TxtApellidos.Text,
                                                  TxtDireccion.Text, TxtTelefono.Text, TxtCorreo.Text, NbbEdad.Text,
-                                                 IdSexoSeleccionado, CodigoCliente, True) = True Then
+                                                 IdSexo, CodigoCliente, True) = True Then
                 Dim NombreCompleto = TxtNombres.Text & " " & TxtApellidos.Text
                 MensajeWha = "Bienvenida/o " & NombreCompleto & " " & "y gracias por ser parte del Club Bruno Spa.
                                                                        Te esperan los mejores servicios y las mejores ofertas para el cuidado de tu peludito.
@@ -99,7 +99,11 @@ Public NotInheritable Class Frm_CrearCliente
         Try
             Dim ComboBoxSexo As ComboBox = CType(sender, ComboBox)
             Dim ItemSeleccionado As SexoModel = CType(ComboBoxSexo.SelectedItem, SexoModel)
-            IdSexoSeleccionado = ItemSeleccionado.Id_Sexo
+            If CmbSexo.SelectedIndex = -1 Then
+                IdSexo = 0
+            Else
+                IdSexo = ItemSeleccionado.Id_Sexo
+            End If
         Catch ex As Exception
             GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try

@@ -39,6 +39,7 @@
                                   HorizontalAlignment="Stretch" />
                         <ComboBox x:Name="CmbMascota"
                                   Header="Mascota"
+                                  IsEditable="True"
                                   PlaceholderText="Seleccione Mascota"
                                   HorizontalAlignment="Stretch"
                                   SelectionChanged="CmbMascota_SelectionChanged"/>

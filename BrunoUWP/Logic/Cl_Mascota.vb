@@ -123,7 +123,7 @@ Public Class Cl_Mascota
                                         Edad = Mas.Edad_Mascota,
                                         Dueño = Ppo.NombreCompleto_Persona,
                                         Observaciones = Mas.Observaciones_Mascota,
-                                        Fecha_Creacion = Mas.FechaRegistro_Mascota)
+                                        Fecha_Creacion = Mas.FechaRegistro_Mascota.ToShortDateString)
             ws.InsertRow(1, 1)
             ws.Cells("A1:H1").Merge = True
             ws.Cells("A1").Value = "Mascotas Bruno Spa"
