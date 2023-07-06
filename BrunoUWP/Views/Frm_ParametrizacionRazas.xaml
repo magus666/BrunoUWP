@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:my="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media" 
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded">
@@ -15,10 +16,15 @@
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
     </Page.Resources>
     <Grid>
-        <Grid Grid.Column="0"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.55*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
               ui:Effects.Shadow="{StaticResource CommonShadow}"
               Margin="50,10">
-            <StackPanel Orientation="Vertical"
+            <StackPanel x:Name="StpPrincipal" 
+                        Orientation="Vertical"
                     Margin="20,0,20,0">
                 <my:InfoBar x:Name="InfAlerta"/>
                 <ComboBox x:Name="CmbTipoMascota"
@@ -35,6 +41,46 @@
                     Content="Guardar"
                     HorizontalAlignment="Center"
                     Click="BtnGuardar_Click"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1"
+              ui:Effects.Shadow="{StaticResource CommonShadow}"
+              Margin="50,10">
+            <StackPanel Margin="20,0,20,0">
+                <my:RadioButtons x:Name="RdbTipoMascota"
+                                 Margin="10,10,0,0"
+                                 SelectedIndex="0"
+                                 SelectionChanged="RdbTipoMascota_SelectionChanged"
+                                 MaxColumns="3" 
+                                 Header="Seleccione el Tipo de Mascota:">
+                    <x:String>Perros</x:String>
+                    <x:String>Gatos</x:String>
+                    <x:String>Conejos</x:String>
+                </my:RadioButtons>
+                <ScrollViewer>
+                    <StackPanel x:Name="StpGrilla" 
+                        Orientation="Vertical">
+                        <controls:DataGrid x:Name="DtgRazaMascota"
+                                   Margin="10"
+                                   AutoGenerateColumns="False"
+                                   AreRowDetailsFrozen="True"
+                                   ColumnHeaderHeight="32"
+                                   CanUserReorderColumns="True"
+                                   CanUserResizeColumns="True"
+                                   CanUserSortColumns="True"
+                                   HeadersVisibility="Column"
+                                   IsReadOnly="True"
+                                   HorizontalAlignment="Stretch"
+                                   GridLinesVisibility="Horizontal"
+                                   SelectionMode="Extended">
+                            <controls:DataGrid.Columns>
+                                <controls:DataGridTextColumn Header="Tipo de Mascota" Tag="TipoMascota" Binding="{Binding Nombre_TipoMascota}" />
+                                <controls:DataGridTextColumn Header="Nombre de Raza" Tag="NombreRaza" Binding="{Binding Nombre_Raza}" />
+                                <controls:DataGridTextColumn Header="Descripcion" Tag="Descripcion" Binding="{Binding Descripcion_Raza}" />
+                            </controls:DataGrid.Columns>
+                        </controls:DataGrid>
+                    </StackPanel>
+                </ScrollViewer>
             </StackPanel>
         </Grid>
         <my:TeachingTip x:Name="TctAlerta"/>
