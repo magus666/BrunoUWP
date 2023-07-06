@@ -183,7 +183,10 @@
                         <TextBlock x:Name="LblHoraInicio" Text="Hora:"/>
                         <TextBlock x:Name="LblHoraFin" Text="Hora:"/>
                         <TextBlock x:Name="LblServicio" Text="Servicio:"/>
-                        <TextBlock x:Name="LblEstadoVenta" Text="Estado de la Venta:"/>
+                        <TextBlock>
+                            <Run Text="Estado de la Venta:"/>
+                            <Run x:Name="LblEstadoVenta"/>
+                        </TextBlock>
                         <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" Margin="0,5"/>
                         <TextBlock HorizontalAlignment="Right">
                         <Run Text="TOTAL:"/>

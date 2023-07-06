@@ -1,6 +1,7 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
 Imports Windows.ApplicationModel.Appointments
+Imports Windows.UI
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -231,7 +232,12 @@ Public NotInheritable Class Frm_VentaServicioSpa
             LblHoraInicio.Text = "Hora de Inicio: " & GetCitasModel.HoraInicio_Cita
             LblHoraFin.Text = "Hora estimada de Finalizacion: " & GetCitasModel.HoraFin_Cita
             LblServicio.Text = "Servicio: " & GetCitasModel.Nombre_TipoServicio
-            LblEstadoVenta.Text = "Estado del Pago: " & GetCitasModel.EstadoVenta_Cita
+            If GetCitasModel.EstadoVenta_Cita = "Pagada" Then
+                LblEstadoVenta.Foreground = New SolidColorBrush(Colors.Green)
+            Else
+                LblEstadoVenta.Foreground = New SolidColorBrush(Colors.Yellow)
+            End If
+            LblEstadoVenta.Text = GetCitasModel.EstadoVenta_Cita
             If GetCitasModel.EstadoVenta_Cita = "Por Pagar" Then
                 BtnFinalizarServicio.Visibility = Visibility.Visible
             Else
@@ -307,7 +313,8 @@ Public NotInheritable Class Frm_VentaServicioSpa
                 Await GetCita.ActualizarCita(GetIdCita, True)
 
                 LsvCita.ItemsSource = Await ConsultaCitas()
-                LblEstadoVenta.Text = "Estado del Pago: " & "Pagada"
+                LblEstadoVenta.Foreground = New SolidColorBrush(Colors.Green)
+                LblEstadoVenta.Text = "Pagada"
                 BtnFinalizarServicio.Visibility = Visibility.Collapsed
                 GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El Pago Se realizó Correctamente")
             End If
