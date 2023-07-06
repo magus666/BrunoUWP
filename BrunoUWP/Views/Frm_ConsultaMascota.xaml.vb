@@ -22,30 +22,7 @@ Public NotInheritable Class Frm_ConsultaMascota
 
     Public Async Function LlenarListview() As Task
         Try
-            Dim Mascota = Await GetMascota.ConsultaMascotas()
-            Dim TipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
-            Dim Raza = Await GetRaza.ConsultarRazaMascota()
-            Dim Propietario = Await GetPersona.ConsultaCliente()
-
-            Dim RetornoMascota = (From Mas In Mascota
-                                  Join Tmc In TipoMascota On
-                                       Mas.Id_TipoMascota Equals Tmc.Id_TipoMascota
-                                  Join Rza In Raza On
-                                       Mas.Id_Raza Equals Rza.Id_Raza
-                                  Join Ppo In Propietario On
-                                       Mas.Id_Persona Equals Ppo.Id_Persona
-                                  Order By Mas.Nombre_Mascota
-                                  Select New NewMascotaModel With {.Id_Mascota = Mas.Id_Mascota,
-                                      .Codigo_Mascota = Mas.Codigo_Mascota,
-                                      .Nombre_TipoMascota = Tmc.Nombre_TipoMascota,
-                                      .Nombre_Raza = Rza.Nombre_Raza,
-                                      .Nombre_Mascota = Mas.Nombre_Mascota,
-                                      .Edad_Mascota = Mas.Edad_Mascota,
-                                      .NombreCompleto_Persona = Ppo.NombreCompleto_Persona,
-                                      .Observaciones_Mascota = Mas.Observaciones_Mascota,
-                                      .FechaRegistro_Mascota = Mas.FechaRegistro_Mascota}).ToList
-
-            ListadoFinalMascotas = RetornoMascota
+            ListadoFinalMascotas = Await GetListaMascota()
             LsvMascota.ItemsSource = ListadoFinalMascotas
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -73,11 +50,11 @@ Public NotInheritable Class Frm_ConsultaMascota
                 LsvMascota.ItemsSource = ListadoFinalMascotas
             Else
                 If args.Reason = AutoSuggestionBoxTextChangeReason.UserInput Then
-                    Dim ListaMascotas = Await GetMascota.ConsultaMascotas()
-                    Dim RetornoListaMascotas = (From x In ListaMascotas
-                                                Where x.Nombre_Mascota.StartsWith(AsbBusueda.Text,
+                    Dim ListaMascota = Await GetListaMascota()
+                    Dim RetornoListaMascotas = (From Mas In ListaMascota
+                                                Where Mas.Nombre_Mascota.StartsWith(AsbBusueda.Text,
                                                         StringComparison.OrdinalIgnoreCase)
-                                                Select x).ToList
+                                                Select Mas)
                     LsvMascota.ItemsSource = RetornoListaMascotas
                 End If
             End If
@@ -85,6 +62,36 @@ Public NotInheritable Class Frm_ConsultaMascota
 
         End Try
     End Sub
+
+    Public Async Function GetListaMascota() As Task(Of List(Of NewMascotaModel))
+        Try
+            Dim Mascota = Await GetMascota.ConsultaMascotas()
+            Dim TipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
+            Dim Raza = Await GetRaza.ConsultarRazaMascota()
+            Dim Propietario = Await GetPersona.ConsultaCliente()
+
+            Dim RetornoMascota = (From Mas In Mascota
+                                  Join Tmc In TipoMascota On
+                                           Mas.Id_TipoMascota Equals Tmc.Id_TipoMascota
+                                  Join Rza In Raza On
+                                           Mas.Id_Raza Equals Rza.Id_Raza
+                                  Join Ppo In Propietario On
+                                           Mas.Id_Persona Equals Ppo.Id_Persona
+                                  Order By Mas.Nombre_Mascota
+                                  Select New NewMascotaModel With {.Id_Mascota = Mas.Id_Mascota,
+                                          .Codigo_Mascota = Mas.Codigo_Mascota,
+                                          .Nombre_TipoMascota = Tmc.Nombre_TipoMascota,
+                                          .Nombre_Raza = Rza.Nombre_Raza,
+                                          .Nombre_Mascota = Mas.Nombre_Mascota,
+                                          .Edad_Mascota = Mas.Edad_Mascota,
+                                          .NombreCompleto_Persona = Ppo.NombreCompleto_Persona,
+                                          .Observaciones_Mascota = Mas.Observaciones_Mascota,
+                                          .FechaRegistro_Mascota = Mas.FechaRegistro_Mascota}).ToList
+            Return RetornoMascota
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 
     Private Sub LsvMascota_ItemClick(sender As Object, e As ItemClickEventArgs)
 
