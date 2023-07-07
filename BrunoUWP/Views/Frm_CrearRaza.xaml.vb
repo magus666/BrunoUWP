@@ -4,7 +4,7 @@ Imports Microsoft.UI.Xaml.Controls
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
-Public NotInheritable Class Frm_ParametrizacionRazas
+Public NotInheritable Class Frm_CrearRaza
     Inherits Page
     Dim IdTipoMascota As Integer
     Dim GetValidaciones As New Cl_Validaciones
@@ -12,6 +12,17 @@ Public NotInheritable Class Frm_ParametrizacionRazas
     Dim GetRaza As New Cl_RazaMascota
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetTipoMascota As New CL_TipoMascota
+
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim ListaTipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
+            CmbTipoMascota.ItemsSource = ListaTipoMascota
+            CmbTipoMascota.DisplayMemberPath = "Nombre_TipoMascota"
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
             If ValidaDatos() = True Then
@@ -23,27 +34,6 @@ Public NotInheritable Class Frm_ParametrizacionRazas
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
-
-    Public Function ValidaDatos() As Boolean
-        Try
-            If GetValidaciones.ValidaComboBoxVacio(CmbTipoMascota) = False Then
-                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un tipo de Mascota valido", CmbTipoMascota)
-                Return False
-            End If
-            If GetValidaciones.ValidaTextBoxVacio(TxtNombreRaza) = False Then
-                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El campo Nombre de Raza no puede estar vacio", TxtNombreRaza)
-                Return False
-            End If
-            If GetValidaciones.ValidaTextBoxVacio(TxtDescripcionRaza) = False Then
-                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El campo de descripcion no puede estar vacio", TxtDescripcionRaza)
-                Return False
-            End If
-            Return True
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
-    End Function
-
     Private Sub CmbTipoMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
             Dim comboBox As ComboBox = CType(sender, ComboBox)
@@ -53,18 +43,6 @@ Public NotInheritable Class Frm_ParametrizacionRazas
             Else
                 IdTipoMascota = selectedItem.Id_TipoMascota
             End If
-        Catch ex As Exception
-            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
-        End Try
-    End Sub
-
-    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
-        Try
-            Dim ListaTipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
-            CmbTipoMascota.ItemsSource = ListaTipoMascota
-            CmbTipoMascota.DisplayMemberPath = "Nombre_TipoMascota"
-
-
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
@@ -89,7 +67,6 @@ Public NotInheritable Class Frm_ParametrizacionRazas
 
     Private Async Sub RdbTipoMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
-
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
             Select Case SeleccionRadio
                 Case "Perros"
@@ -115,8 +92,27 @@ Public NotInheritable Class Frm_ParametrizacionRazas
                     DtgRazaMascota.ItemsSource = RetornoMascota
             End Select
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
-
     End Sub
+
+    Public Function ValidaDatos() As Boolean
+        Try
+            If GetValidaciones.ValidaComboBoxVacio(CmbTipoMascota) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un tipo de Mascota valido", CmbTipoMascota)
+                Return False
+            End If
+            If GetValidaciones.ValidaTextBoxVacio(TxtNombreRaza) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El campo Nombre de Raza no puede estar vacio", TxtNombreRaza)
+                Return False
+            End If
+            If GetValidaciones.ValidaTextBoxVacio(TxtDescripcionRaza) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El campo de descripcion no puede estar vacio", TxtDescripcionRaza)
+                Return False
+            End If
+            Return True
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class
