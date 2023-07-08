@@ -12,23 +12,32 @@
             Dim Daviplata = (From x In GetMetodoPago
                              Where x.Nombre_MetodoPago = "DaviPlata"
                              Select x).Count
+            Dim Tarjeta = (From x In GetMetodoPago
+                           Where x.Nombre_MetodoPago = "Tarjeta"
+                           Select x).Count
             If Efectivo = 0 Then
-                Dim DimPequenio = New MetodoPagoModel With {
+                Dim ValorEfectivo = New MetodoPagoModel With {
                     .Nombre_MetodoPago = "Efectivo"
                 }
-                Dim Id = Await ConexionDB.InsertAsync(DimPequenio)
+                Dim Id = Await ConexionDB.InsertAsync(ValorEfectivo)
             End If
             If Nequi = 0 Then
-                Dim DimMediano = New MetodoPagoModel With {
+                Dim ValorNequi = New MetodoPagoModel With {
                     .Nombre_MetodoPago = "Nequi"
                 }
-                Dim Id = Await ConexionDB.InsertAsync(DimMediano)
+                Dim Id = Await ConexionDB.InsertAsync(ValorNequi)
             End If
             If Daviplata = 0 Then
-                Dim DimGrande = New MetodoPagoModel With {
+                Dim ValorDaviPlata = New MetodoPagoModel With {
                     .Nombre_MetodoPago = "DaviPlata"
                 }
-                Dim Id = Await ConexionDB.InsertAsync(DimGrande)
+                Dim Id = Await ConexionDB.InsertAsync(ValorDaviPlata)
+            End If
+            If Tarjeta = 0 Then
+                Dim ValorTarjeta = New MetodoPagoModel With {
+                    .Nombre_MetodoPago = "Tarjeta"
+                }
+                Dim Id = Await ConexionDB.InsertAsync(ValorTarjeta)
             End If
             Return True
         Catch ex As Exception
