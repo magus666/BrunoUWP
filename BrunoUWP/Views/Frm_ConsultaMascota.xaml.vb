@@ -14,20 +14,19 @@ Public NotInheritable Class Frm_ConsultaMascota
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Await LlenarListview()
+            ListadoFinalMascotas = Await GetListaMascota()
+            If ListadoFinalMascotas.Count = 0 Then
+                LblTituloCreacionMascota.Visibility = Visibility.Visible
+                LsvMascota.Visibility = Visibility.Collapsed
+            Else
+                LsvMascota.ItemsSource = ListadoFinalMascotas
+                LblTituloCreacionMascota.Visibility = Visibility.Collapsed
+                LsvMascota.Visibility = Visibility.Visible
+            End If
         Catch ex As Exception
 
         End Try
     End Sub
-
-    Public Async Function LlenarListview() As Task
-        Try
-            ListadoFinalMascotas = Await GetListaMascota()
-            LsvMascota.ItemsSource = ListadoFinalMascotas
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
-    End Function
 
     Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
         Try

@@ -52,6 +52,15 @@
                 
             </Grid>
             <Grid Grid.Row="1">
+                <TextBlock x:Name="LblTituloCreacionCliente"
+                           Margin="10,0,10,0"
+                           Text="No hay clientes registrados. por favor Agregue algunos en la pestaña Creacion de Clientes"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           FontSize="25"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Visibility="Collapsed"/>
                 <ScrollViewer VerticalScrollBarVisibility="Auto"
                       Grid.Column="0"
                       Padding="20">

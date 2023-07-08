@@ -13,7 +13,15 @@ Public NotInheritable Class Frm_ConsultaCliente
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
             ListadoFinalClientes = Await GetListaCliente()
-            LsvCliente.ItemsSource = ListadoFinalClientes
+            If ListadoFinalClientes.Count = 0 Then
+                LblTituloCreacionCliente.Visibility = Visibility.Visible
+                LsvCliente.Visibility = Visibility.Collapsed
+            Else
+                LsvCliente.ItemsSource = ListadoFinalClientes
+                LblTituloCreacionCliente.Visibility = Visibility.Collapsed
+                LsvCliente.Visibility = Visibility.Visible
+            End If
+
         Catch ex As Exception
 
         End Try

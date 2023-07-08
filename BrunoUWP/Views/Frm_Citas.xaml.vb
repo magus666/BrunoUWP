@@ -29,13 +29,22 @@ Public NotInheritable Class Frm_Citas
 
     Private Async Sub ClvCitas_SelectedDatesChanged(sender As CalendarView, args As CalendarViewSelectedDatesChangedEventArgs)
         Try
-            Dim metal = ClvCitas.SelectedDates
-            Dim Retorno = (From x In metal
+            Dim FechaSeleccionada = ClvCitas.SelectedDates
+            Dim Retorno = (From x In FechaSeleccionada
                            Select x.Date)
             FechaActual = Retorno(0).ToShortDateString
             Dim ContadorCitas = Await GetCita.ContadorCitasPorFecha(FechaActual)
             LblContadorCitas.Text = ContadorCitas
-            Await LlenaListViewCitas(FechaActual)
+            If ContadorCitas = 0 Then
+                LblTituloCitasAsignadas.Visibility = Visibility.Visible
+                lsvCitas.Visibility = Visibility.Collapsed
+            Else
+                Await LlenaListViewCitas(FechaActual)
+                LblTituloCitasAsignadas.Visibility = Visibility.Collapsed
+                lsvCitas.Visibility = Visibility.Visible
+            End If
+
+
         Catch ex As Exception
 
         End Try
@@ -73,7 +82,9 @@ Public NotInheritable Class Frm_Citas
                                  Visibilidad = Cit.EsVisible,
                                  TipoServ = Tps.Nombre_TipoServicio,
                                  NombreMascota = Msc.Nombre_Mascota,
+                                 Documento = Cli.Documento_Persona,
                                  Cliente = Cli.NombreCompleto_Persona,
+                                 Telefono = Cli.Telefono_Persona,
                                  HoraInicio = Cit.FechaHoraInicio_Cita.ToShortTimeString,
                                  HoraFin = Cit.FechaHoraFin_Cita.ToShortTimeString,
                                  Estado = If(Cit.Estado_Cita, "Terminado", "Pendiente")).ToList

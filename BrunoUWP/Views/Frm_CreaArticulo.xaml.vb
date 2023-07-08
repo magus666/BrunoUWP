@@ -7,6 +7,7 @@ Public NotInheritable Class Frm_CreaArticulo
     Inherits Page
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetNotificaciones As New Cl_Notificaciones
+    Dim GetValidaciones As New Cl_Validaciones
     Dim GetArticulo As New Cl_Articulo
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
@@ -28,13 +29,49 @@ Public NotInheritable Class Frm_CreaArticulo
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
             Dim CodigoArticulo As String = GetUtilitarios.GeneraCodigoArticulo()
-            If Await GetArticulo.InsertarArticulo(CodigoArticulo, TxtNombreArticulo.Text, TxtMarcaArticulo.Text,
+            If ValidaDatos() = True Then
+                If Await GetArticulo.InsertarArticulo(CodigoArticulo, TxtNombreArticulo.Text, TxtMarcaArticulo.Text,
                                                             TxtDescripcionArticulo.Text, TxtValorArticulo.Text,
                                                             NmbCantidadExistenciasArticulo.Text, Date.Now) = True Then
-                GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Exito", "El Articulo se ha creado con Exito.")
+                    GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El Articulo se ha creado con Exito.")
+                    GetUtilitarios.LimpiarControles(StpDatosArticulos)
+                End If
             End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
+
+    Public Function ValidaDatos() As Boolean
+        Try
+            If GetValidaciones.ValidaTextBoxVacio(TxtNombreArticulo) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El nombre del Articulo no puede estar Vacio", TxtNombreArticulo)
+                Return False
+                Exit Function
+            End If
+            If GetValidaciones.ValidaTextBoxVacio(TxtMarcaArticulo) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La marca del Articulo no puede estar Vacia", TxtMarcaArticulo)
+                Return False
+                Exit Function
+            End If
+            If GetValidaciones.ValidaTextBoxVacio(TxtDescripcionArticulo) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La descripcion del Articulo no puede estar Vacia", TxtDescripcionArticulo)
+                Return False
+                Exit Function
+            End If
+            If GetValidaciones.ValidaTextBoxVacio(TxtValorArticulo) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El valor del Articulo no puede estar Vacio", TxtValorArticulo)
+                Return False
+                Exit Function
+            End If
+            If NmbCantidadExistenciasArticulo.Value <= 0 Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La cantidad de existencias del Articulo no puede ser 0", NmbCantidadExistenciasArticulo)
+                Return False
+                Exit Function
+            End If
+            Return True
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

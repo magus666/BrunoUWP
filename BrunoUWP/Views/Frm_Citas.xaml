@@ -57,6 +57,15 @@
         <Grid Grid.Column="1"
               ui:Effects.Shadow="{StaticResource CommonShadow}"
               Margin="10,0,10,10">
+            <TextBlock x:Name="LblTituloCitasAsignadas"
+                           Margin="10,0,10,0"
+                           Text="No hay Citas Asignadas."
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           FontSize="25"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Visibility="Collapsed"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                       Grid.Column="0"
                       Padding="20">
@@ -88,8 +97,16 @@
                                                     <Run Text="{Binding Codigo}"/>
                                                 </TextBlock>
                                                 <TextBlock>
+                                                    <Run Text="Documento:"/>
+                                                    <Run Text="{Binding Documento}"/>
+                                                </TextBlock>
+                                                <TextBlock>
                                                     <Run Text="Cliente:"/>
                                                     <Run Text="{Binding Cliente}"/>
+                                                </TextBlock>
+                                                <TextBlock>
+                                                    <Run Text="Telefono:"/>
+                                                    <Run Text="{Binding Telefono}"/>
                                                 </TextBlock>
                                                 <TextBlock>
                                                     <Run Text="Hora de Inicio:"/>

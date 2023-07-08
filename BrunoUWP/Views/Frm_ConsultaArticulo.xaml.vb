@@ -5,5 +5,39 @@
 ''' </summary>
 Public NotInheritable Class Frm_ConsultaArticulo
     Inherits Page
+    Dim GetArticulos As New Cl_Articulo
+    Dim GetNotificaciones As New Cl_Notificaciones
 
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim CargaArticulos = Await GetArticulos.ConsultaArticulos()
+            If CargaArticulos.Count = 0 Then
+                LblTituloCreacionArticulo.Visibility = Visibility.Visible
+                DtgArticulos.Visibility = Visibility.Collapsed
+            Else
+                DtgArticulos.ItemsSource = CargaArticulos
+                LblTituloCreacionArticulo.Visibility = Visibility.Collapsed
+                DtgArticulos.Visibility = Visibility.Visible
+            End If
+
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            PgrGeneraExcel.IsActive = True
+            If Await GetArticulos.CreaExcelArticulo = True Then
+                PgrGeneraExcel.IsActive = False
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La informacion Se exportó con exito a Excel")
+            Else
+                GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Advertencia", "Se canceló la Exportacion a Excel")
+                PgrGeneraExcel.IsActive = False
+            End If
+
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
 End Class

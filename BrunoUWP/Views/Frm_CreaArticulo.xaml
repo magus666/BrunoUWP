@@ -18,14 +18,14 @@
     <Grid>
         <Grid ui:Effects.Shadow="{StaticResource CommonShadow}"
               Margin="50,10">
-            <StackPanel x:Name="StpDatosCliente"
+            <StackPanel x:Name="StpDatosArticulos"
                         Orientation="Vertical"
                         Padding="20">
                 <my:InfoBar x:Name="InfAlerta"/>
                 <TextBox x:Name="TxtNombreArticulo" Header="Nombre"/>
                 <TextBox x:Name="TxtMarcaArticulo" Header="Marca"/>
                 <TextBox x:Name="TxtDescripcionArticulo" Header="Descripcion"/>
-                <TextBox x:Name="TxtValorArticulo" Header="Valor"
+                <TextBox x:Name="TxtValorArticulo" Header="Valor Unitario"
                          BeforeTextChanging="TxtValorArticulo_BeforeTextChanging"/>
                 <my:NumberBox x:Name="NmbCantidadExistenciasArticulo" 
                               Header="Cantidad"

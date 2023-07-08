@@ -49,6 +49,15 @@
 
             </Grid>
             <Grid Grid.Row="1">
+                <TextBlock x:Name="LblTituloCreacionMascota"
+                           Margin="10,0,10,0"
+                           Text="No hay Mascotas registradas. por favor Agregue algunas en la pestaña Creacion de Mascotas"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           FontSize="25"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Visibility="Collapsed"/>
                 <ScrollViewer VerticalScrollBarVisibility="Auto"
                       Grid.Column="0"
                       Padding="20">
