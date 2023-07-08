@@ -174,6 +174,7 @@ Public NotInheritable Class Frm_CrearMascota
             Dim LstaRazaMascota = Await GetRazaMascota.ConsultaRazaMascotaId(IdTipoMascota)
             CmbRazaMascota.ItemsSource = LstaRazaMascota
             CmbRazaMascota.DisplayMemberPath = "Nombre_Raza"
+            LimpiaControlesContentDialog()
 
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
@@ -184,9 +185,25 @@ Public NotInheritable Class Frm_CrearMascota
         Try
             Dim comboBox As ComboBox = CType(sender, ComboBox)
             Dim selectedItem As TipoMascotaModel = CType(comboBox.SelectedItem, TipoMascotaModel)
-            IdTipoMascotaDialog = selectedItem.Id_TipoMascota
+            If CmbTipoMascotaDialog.SelectedIndex = -1 Then
+                IdTipoMascotaDialog = 0
+            Else
+                IdTipoMascotaDialog = selectedItem.Id_TipoMascota
+            End If
+
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
+
+    Public Function LimpiaControlesContentDialog() As Boolean
+        Try
+            CmbTipoMascotaDialog.SelectedIndex = -1
+            TxtNombreRazaDialog.Text = String.Empty
+            TxtDescripcionRazaDialog.Text = String.Empty
+            Return True
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

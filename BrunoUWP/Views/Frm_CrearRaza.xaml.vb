@@ -28,6 +28,14 @@ Public NotInheritable Class Frm_CrearRaza
             If ValidaDatos() = True Then
                 Await GetRaza.InsertarRaza(TxtNombreRaza.Text, TxtDescripcionRaza.Text, IdTipoMascota)
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La raza se ha Guardado con Exito.")
+                Select Case IdTipoMascota
+                    Case 1
+                        RdbTipoMascota.SelectedIndex = 0
+                    Case 2
+                        RdbTipoMascota.SelectedIndex = 1
+                    Case 3
+                        RdbTipoMascota.SelectedIndex = 2
+                End Select
                 GetUtilitarios.LimpiarControles(StpPrincipal)
             End If
         Catch ex As Exception

@@ -143,6 +143,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\AccountHelper.vb" />
+    <Compile Include="Logic\Cl_Articulo.vb" />
     <Compile Include="Logic\Cl_ColorLetraEstadoCita.vb" />
     <Compile Include="Logic\Cl_Auditoria.vb" />
     <Compile Include="Logic\Cl_BlobStorage.vb" />
@@ -162,6 +163,7 @@
     <Compile Include="Logic\Cl_VisibilidadBotonFinalizarCita.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
+    <Compile Include="Models\ArticuloModel.vb" />
     <Compile Include="Models\AuditoriaModel.vb" />
     <Compile Include="Models\CitaModel.vb" />
     <Compile Include="Models\ClienteModel.vb" />
@@ -189,6 +191,9 @@
     <Compile Include="Models\TipoTransaccionModel.vb" />
     <Compile Include="Models\Usuario.vb" />
     <Compile Include="Models\VentaModel.vb" />
+    <Compile Include="Views\Frm_Articulo.xaml.vb">
+      <DependentUpon>Frm_Articulo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_Citas.xaml.vb">
       <DependentUpon>Frm_Citas.xaml</DependentUpon>
     </Compile>
@@ -204,6 +209,9 @@
     <Compile Include="Views\Frm_ConfiguracionGlobal.xaml.vb">
       <DependentUpon>Frm_ConfiguracionGlobal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm_ConsultaArticulo.xaml.vb">
+      <DependentUpon>Frm_ConsultaArticulo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_ConsultaCliente.xaml.vb">
       <DependentUpon>Frm_ConsultaCliente.xaml</DependentUpon>
     </Compile>
@@ -212,6 +220,9 @@
     </Compile>
     <Compile Include="Views\Frm_ConsultaServicioSpa.xaml.vb">
       <DependentUpon>Frm_ConsultaServicioSpa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_CreaArticulo.xaml.vb">
+      <DependentUpon>Frm_CreaArticulo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_CrearCliente.xaml.vb">
       <DependentUpon>Frm_CrearCliente.xaml</DependentUpon>
@@ -227,9 +238,6 @@
     </Compile>
     <Compile Include="Views\Frm_Inicio.xaml.vb">
       <DependentUpon>Frm_Inicio.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm_Inventario.xaml.vb">
-      <DependentUpon>Frm_Inventario.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_Login.xaml.vb">
       <DependentUpon>Frm_Login.xaml</DependentUpon>
@@ -329,6 +337,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Frm_Articulo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frm_Citas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -349,6 +361,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Frm_ConsultaArticulo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frm_ConsultaCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -358,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_ConsultaServicioSpa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_CreaArticulo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -378,10 +398,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_Inicio.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Frm_Inventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

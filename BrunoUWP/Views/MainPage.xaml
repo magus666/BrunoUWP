@@ -46,6 +46,13 @@
                     <controls:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE679;" />
                     </controls:NavigationViewItem.Icon>
+                    <controls:NavigationViewItem.MenuItems>
+                        <controls:NavigationViewItem x:Name="NviArticulos" Content="Articulos" Tag="Articulos">
+                            <controls:NavigationViewItem.Icon>
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE912;" />
+                            </controls:NavigationViewItem.Icon>
+                        </controls:NavigationViewItem>
+                    </controls:NavigationViewItem.MenuItems>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
             <controls:NavigationView.PaneCustomContent>

@@ -26,6 +26,7 @@ Module Md_ParametrizacionSqlite
             Await ConexionDB.CreateTableAsync(Of TipoTransaccionModel)()
             Await ConexionDB.CreateTableAsync(Of VentaModel)()
             Await ConexionDB.CreateTableAsync(Of AuditoriaModel)()
+            Await ConexionDB.CreateTableAsync(Of ArticuloModel)()
             Return True
         Catch ex As Exception
             Throw New Exception(ex.Message)

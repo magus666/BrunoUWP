@@ -3,7 +3,7 @@
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
-Public NotInheritable Class Frm_Inventario
+Public NotInheritable Class Frm_ConsultaArticulo
     Inherits Page
 
 End Class
