@@ -10,6 +10,7 @@ Public NotInheritable Class Frm_Inicio
     Inherits Page
     Dim GetMascotas As New Cl_Mascota
     Dim GetClientes As New Cl_Cliente
+    Dim GetArticulos As New Cl_Articulo
     Dim GetVenta As New Cl_Venta
     Dim GetCita As New Cl_Cita
     Dim GetNotificaciones As New Cl_Notificaciones
@@ -32,6 +33,7 @@ Public NotInheritable Class Frm_Inicio
             Dim ContadorCitas As Integer
             Dim ContadorSpasRealizados As Integer
             Dim ContadorClientes As Integer
+            Dim ContadorArticulos As Integer
             Dim VentasTotales As Double
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
             Select Case SeleccionRadio
@@ -44,6 +46,8 @@ Public NotInheritable Class Frm_Inicio
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoDia
                     LblCantidadMascotas.Text = ContadorMascotas
+                    ContadorArticulos = Await GetArticulos.CountArticulosUltimoDia
+                    LblArticulosVendidos.Text = ContadorArticulos
                     VentasTotales = Await GetVenta.ConsultaVentaUltimoDia
                     If VentasTotales = 0 Then
                         LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
