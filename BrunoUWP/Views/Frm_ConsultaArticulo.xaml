@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BrunoUWP"
+    xmlns:MyClass="using:BrunoUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
@@ -13,6 +14,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded">
     <Page.Resources>
+        <MyClass:Cl_AgregaSignoPesos x:Key="Cl_AgregaSignoPesos"/>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
     </Page.Resources>
     <Grid>
@@ -54,7 +56,7 @@
                         <controls:DataGridTextColumn Header="Nombre" Tag="NombreArticulo" Binding="{Binding Nombre_Articulo}" />
                         <controls:DataGridTextColumn Header="Marca" Tag="MarcaArticulo" Binding="{Binding Marca_Articulo}" />
                         <controls:DataGridTextColumn Header="Descipcion" Tag="DescripcionArticulo" Binding="{Binding Descripcion_Articulo}" />
-                        <controls:DataGridTextColumn Header="Valor Unitario" Tag="ValorUnitarioArticulo" Binding="{Binding Valor_Articulo}" />
+                        <controls:DataGridTextColumn Header="Valor Unitario" Tag="ValorUnitarioArticulo" Binding="{Binding Valor_Articulo, Converter={StaticResource Cl_AgregaSignoPesos}}" />
                         <controls:DataGridTextColumn Header="Cantidad" Tag="CantidadArticulo" Binding="{Binding Cantidad_Articulo}" />
                     </controls:DataGrid.Columns>
                 </controls:DataGrid>

@@ -48,7 +48,7 @@ Public NotInheritable Class Frm_Inicio
                     LblCantidadMascotas.Text = ContadorMascotas
                     ContadorArticulos = Await GetArticulos.CountArticulosUltimoDia
                     LblArticulosVendidos.Text = ContadorArticulos
-                    VentasTotales = Await GetVenta.ConsultaVentaUltimoDia
+                    VentasTotales = Await GetVenta.ConsultaVentaUltimoDiaSpa
                     If VentasTotales = 0 Then
                         LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
                         LblGananciasTotales.Text = VentasTotales.ToString("c")
@@ -72,7 +72,7 @@ Public NotInheritable Class Frm_Inicio
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotas
                     LblCantidadMascotas.Text = ContadorMascotas
-                    VentasTotales = Await GetVenta.ConsultaVentaTotal
+                    VentasTotales = Await GetVenta.ConsultaVentaTotalSpa
                     If VentasTotales = 0 Then
                         LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
                         LblGananciasTotales.Text = VentasTotales.ToString("c")

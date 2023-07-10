@@ -307,7 +307,7 @@ Public NotInheritable Class Frm_VentaServicioSpa
         Try
             Dim CodigoVenta As String = GetUtilitarios.GenearCodigoVenta()
             Dim GetIdCita = IdCita
-            If Await GetVenta.InsertVenta(CodigoVenta, GetDateTime.ObtenerFechaActual, IdTipoServicio, 1,
+            If Await GetVenta.InsertVentaSpa(CodigoVenta, GetDateTime.ObtenerFechaActual, IdTipoServicio, 1,
                                           IdMascota, IdMetodoPago, RetornoValor) = True Then
 
                 Await GetCita.ActualizarCita(GetIdCita, True)

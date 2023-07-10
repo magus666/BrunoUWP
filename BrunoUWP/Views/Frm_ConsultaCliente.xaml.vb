@@ -1,5 +1,6 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
+Imports Microsoft.UI.Xaml.Controls
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -35,12 +36,33 @@ Public NotInheritable Class Frm_ConsultaCliente
             If AsbBusueda.Text.Count = 0 Then
                 LsvCliente.ItemsSource = ListadoFinalClientes
             Else
-                If args.Reason = AutoSuggestionBoxTextChangeReason.UserInput Then
-                    Dim RetornoListaBusqueda = (From Cli In GetListaClienteFiltro
-                                                Where Cli.Documento_Persona.Contains(AsbBusueda.Text)
-                                                Select Cli).ToList
-                    LsvCliente.ItemsSource = RetornoListaBusqueda
-                End If
+                Dim GetIndexRadioCliente As Integer = RdbFiltroBusquedaCliente.SelectedIndex
+                Select Case GetIndexRadioCliente
+                    Case 0
+                        If args.Reason = AutoSuggestionBoxTextChangeReason.UserInput Then
+                            Dim RetornoListaBusqueda = (From Cli In GetListaClienteFiltro
+                                                        Where Cli.Documento_Persona.Contains(AsbBusueda.Text)
+                                                        Select Cli).ToList
+                            LsvCliente.ItemsSource = RetornoListaBusqueda
+                        End If
+                    Case 1
+                        If args.Reason = AutoSuggestionBoxTextChangeReason.UserInput Then
+                            Dim RetornoListaBusqueda = (From Cli In GetListaClienteFiltro
+                                                        Where Cli.Codigo_Cliente.StartsWith(AsbBusueda.Text,
+                                                        StringComparison.OrdinalIgnoreCase)
+                                                        Select Cli).ToList
+                            LsvCliente.ItemsSource = RetornoListaBusqueda
+                        End If
+                    Case 2
+                        If args.Reason = AutoSuggestionBoxTextChangeReason.UserInput Then
+                            Dim RetornoListaBusqueda = (From Cli In GetListaClienteFiltro
+                                                        Where Cli.NombreCompleto_Persona.StartsWith(AsbBusueda.Text,
+                                                        StringComparison.OrdinalIgnoreCase)
+                                                        Select Cli).ToList
+                            LsvCliente.ItemsSource = RetornoListaBusqueda
+                        End If
+                End Select
+
             End If
         Catch ex As Exception
 
@@ -99,4 +121,19 @@ Public NotInheritable Class Frm_ConsultaCliente
         End Try
     End Function
 
+    Private Sub RdbFiltroBusquedaCliente_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
+            Select Case SeleccionRadio
+                Case "Documento"
+                    AsbBusueda.PlaceholderText = "Digite Documento"
+                Case "Codigo"
+                    AsbBusueda.PlaceholderText = "Digite Codigo"
+                Case "Nombre"
+                    AsbBusueda.PlaceholderText = "Digite Nombre"
+            End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

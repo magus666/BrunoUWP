@@ -16,8 +16,8 @@ Public NotInheritable Class Frm_ConsultaServicioSpa
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Dim VentaTotal As Double = Await GetVenta.ConsultaSumatoriaVentaPorTipoTransaccion(1)
-            Dim Venta = Await GetVenta.ConsultaVentaPorTipoTransaccion(1)
+            Dim VentaTotal As Double = Await GetVenta.ConsultaSumatoriaVentaPorTipoTransaccionSpa(1)
+            Dim Venta = Await GetVenta.ConsultaVentaPorTipoTransaccionSpa(1)
             Dim TipoServicio = Await GetTipoServicio.ConsultaTipoServicio()
             Dim TipoTransaccion = Await GetTipoTransaccion.ConsultaTipoTransaccion()
             Dim Mascota = Await GetMascota.ConsultaMascotas()
@@ -51,7 +51,7 @@ Public NotInheritable Class Frm_ConsultaServicioSpa
     Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
         Try
             PgrGeneraExcel.IsActive = True
-            If Await GetVenta.CrearExcelVenta() = True Then
+            If Await GetVenta.CrearExcelVentaSpa() = True Then
                 PgrGeneraExcel.IsActive = False
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La informacion Se exportó con exito a Excel")
             Else

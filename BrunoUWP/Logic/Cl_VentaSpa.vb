@@ -11,13 +11,13 @@ Public Class Cl_VentaSpa
     Dim GetMetodoPago As New Cl_MetodoPago
     Dim GetPickers As New Cl_Pickers
 
-    Public Async Function InsertVenta(CodigoVenta As String,
-                                      FechaVenta As Date,
-                                      IdTipoServicio As Integer,
-                                      IdTipoTransaccion As Integer,
-                                      IdMascota As Integer,
-                                      IdMetodoPago As Integer,
-                                      ValorVenta As Double) As Task(Of Boolean)
+    Public Async Function InsertVentaSpa(CodigoVenta As String,
+                                         FechaVenta As Date,
+                                         IdTipoServicio As Integer,
+                                         IdTipoTransaccion As Integer,
+                                         IdMascota As Integer,
+                                         IdMetodoPago As Integer,
+                                         ValorVenta As Double) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
             Dim Cita = New VentaSpaModel With {
@@ -36,7 +36,7 @@ Public Class Cl_VentaSpa
         End Try
     End Function
 
-    Public Async Function ConsultaVenta() As Task(Of List(Of VentaSpaModel))
+    Public Async Function ConsultaVentaSpa() As Task(Of List(Of VentaSpaModel))
         Try
             Await ConfiguraSqlite()
             Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
@@ -48,7 +48,7 @@ Public Class Cl_VentaSpa
         End Try
     End Function
 
-    Public Async Function ConsultaVentaTotal() As Task(Of Double)
+    Public Async Function ConsultaVentaTotalSpa() As Task(Of Double)
         Try
             Await ConfiguraSqlite()
             Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
@@ -60,7 +60,7 @@ Public Class Cl_VentaSpa
         End Try
     End Function
 
-    Public Async Function ConsultaVentaUltimoDia() As Task(Of Double)
+    Public Async Function ConsultaVentaUltimoDiaSpa() As Task(Of Double)
         Try
             Await ConfiguraSqlite()
             Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
@@ -73,7 +73,7 @@ Public Class Cl_VentaSpa
         End Try
     End Function
 
-    Public Async Function ConsultaVentaPorTipoTransaccion(IdTipoTransaccion As Integer) As Task(Of List(Of VentaSpaModel))
+    Public Async Function ConsultaVentaPorTipoTransaccionSpa(IdTipoTransaccion As Integer) As Task(Of List(Of VentaSpaModel))
         Try
             Await ConfiguraSqlite()
             Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
@@ -86,7 +86,7 @@ Public Class Cl_VentaSpa
         End Try
     End Function
 
-    Public Async Function ConsultaSumatoriaVentaPorTipoTransaccion(IdTipoTransaccion As Integer) As Task(Of Double)
+    Public Async Function ConsultaSumatoriaVentaPorTipoTransaccionSpa(IdTipoTransaccion As Integer) As Task(Of Double)
         Try
             Await ConfiguraSqlite()
             Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
@@ -99,15 +99,15 @@ Public Class Cl_VentaSpa
         End Try
     End Function
 
-    Public Async Function CrearExcelVenta() As Task(Of Boolean)
+    Public Async Function CrearExcelVentaSpa() As Task(Of Boolean)
         Try
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial
             Dim xlPackage As New ExcelPackage()
             Dim oBook As ExcelWorkbook = xlPackage.Workbook
             Dim ws As ExcelWorksheet = oBook.Worksheets.Add("Ventas")
 
-            Dim VentaTotal As Double = Await ConsultaSumatoriaVentaPorTipoTransaccion(1)
-            Dim Venta = Await ConsultaVentaPorTipoTransaccion(1)
+            Dim VentaTotal As Double = Await ConsultaSumatoriaVentaPorTipoTransaccionSpa(1)
+            Dim Venta = Await ConsultaVentaPorTipoTransaccionSpa(1)
             Dim TipoServicio = Await GetTipoServicio.ConsultaTipoServicio()
             Dim TipoTransaccion = Await GetTipoTransaccion.ConsultaTipoTransaccion()
             Dim Mascota = Await GetMascota.ConsultaMascotas()

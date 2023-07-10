@@ -143,6 +143,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\AccountHelper.vb" />
+    <Compile Include="Logic\Cl_AgregaSignoPesos.vb" />
     <Compile Include="Logic\Cl_Articulo.vb" />
     <Compile Include="Logic\Cl_ColorLetraEstadoCita.vb" />
     <Compile Include="Logic\Cl_Auditoria.vb" />
@@ -159,6 +160,7 @@
     <Compile Include="Logic\Cl_TipoTransaccion.vb" />
     <Compile Include="Logic\Cl_Utilitarios.vb" />
     <Compile Include="Logic\Cl_Validaciones.vb" />
+    <Compile Include="Logic\Cl_VentaArticulo.vb" />
     <Compile Include="Logic\Cl_VentaSpa.vb" />
     <Compile Include="Logic\Cl_VisibilidadBotonFinalizarCita.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
@@ -190,6 +192,7 @@
     <Compile Include="Models\TipoServicioModel.vb" />
     <Compile Include="Models\TipoTransaccionModel.vb" />
     <Compile Include="Models\Usuario.vb" />
+    <Compile Include="Models\VentaArticuloModel.vb" />
     <Compile Include="Models\VentaSpaModel.vb" />
     <Compile Include="Views\Frm_Articulo.xaml.vb">
       <DependentUpon>Frm_Articulo.xaml</DependentUpon>
