@@ -15,7 +15,7 @@ Public NotInheritable Class Frm_Citas
     Dim GetDimensionMascota As New Cl_DimensionMascota
     Dim GetMetodoPago As New Cl_MetodoPago
     Dim GetDateTime As New Cl_DateTime
-    Dim GetVenta As New Cl_Venta
+    Dim GetVenta As New Cl_VentaSpa
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim FechaActual As String
 

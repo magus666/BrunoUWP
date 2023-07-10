@@ -11,7 +11,7 @@ Public NotInheritable Class Frm_Inicio
     Dim GetMascotas As New Cl_Mascota
     Dim GetClientes As New Cl_Cliente
     Dim GetArticulos As New Cl_Articulo
-    Dim GetVenta As New Cl_Venta
+    Dim GetVenta As New Cl_VentaSpa
     Dim GetCita As New Cl_Cita
     Dim GetNotificaciones As New Cl_Notificaciones
 

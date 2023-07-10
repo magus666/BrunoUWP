@@ -3,7 +3,7 @@ Imports OfficeOpenXml.Style
 Imports OfficeOpenXml.Table
 Imports Windows.Storage
 
-Public Class Cl_Venta
+Public Class Cl_VentaSpa
     Dim GetCliente As New Cl_Cliente
     Dim GetTipoServicio As New Cl_TipoServicio
     Dim GetTipoTransaccion As New Cl_TipoTransaccion
@@ -20,14 +20,14 @@ Public Class Cl_Venta
                                       ValorVenta As Double) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
-            Dim Cita = New VentaModel With {
-                .Codigo_Venta = CodigoVenta,
-                .Fecha_Venta = FechaVenta,
-                .Id_TipoServicio = IdTipoServicio,
-                .Id_TipoTransaccion = IdTipoTransaccion,
-                .Id_Mascota = IdMascota,
-                .Id_MetodoPago = IdMetodoPago,
-                .Valor_Venta = ValorVenta
+            Dim Cita = New VentaSpaModel With {
+                .Codigo_VentaSpa = CodigoVenta,
+                .Fecha_VentaSpa = FechaVenta,
+                .Id_TipoServicioSpa = IdTipoServicio,
+                .Id_TipoTransaccionSpa = IdTipoTransaccion,
+                .Id_MascotaSpa = IdMascota,
+                .Id_MetodoPagoSpa = IdMetodoPago,
+                .Valor_VentaSpa = ValorVenta
             }
             Dim Id = Await ConexionDB.InsertAsync(Cita)
             Return True
@@ -36,10 +36,10 @@ Public Class Cl_Venta
         End Try
     End Function
 
-    Public Async Function ConsultaVenta() As Task(Of List(Of VentaModel))
+    Public Async Function ConsultaVenta() As Task(Of List(Of VentaSpaModel))
         Try
             Await ConfiguraSqlite()
-            Dim GetVenta = Await ConexionDB.Table(Of VentaModel)().ToListAsync()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
             Dim ListaVenta = (From x In GetVenta
                               Select x).ToList()
             Return ListaVenta
@@ -51,9 +51,9 @@ Public Class Cl_Venta
     Public Async Function ConsultaVentaTotal() As Task(Of Double)
         Try
             Await ConfiguraSqlite()
-            Dim GetVenta = Await ConexionDB.Table(Of VentaModel)().ToListAsync()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
             Dim ListaVenta = (From x In GetVenta
-                              Select x.Valor_Venta).Sum
+                              Select x.Valor_VentaSpa).Sum
             Return ListaVenta
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -63,22 +63,22 @@ Public Class Cl_Venta
     Public Async Function ConsultaVentaUltimoDia() As Task(Of Double)
         Try
             Await ConfiguraSqlite()
-            Dim GetVenta = Await ConexionDB.Table(Of VentaModel)().ToListAsync()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
             Dim ListaVenta = (From x In GetVenta
-                              Where x.Fecha_Venta.Date = Date.Today
-                              Select x.Valor_Venta).Sum
+                              Where x.Fecha_VentaSpa.Date = Date.Today
+                              Select x.Valor_VentaSpa).Sum
             Return ListaVenta
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
     End Function
 
-    Public Async Function ConsultaVentaPorTipoTransaccion(IdTipoTransaccion As Integer) As Task(Of List(Of VentaModel))
+    Public Async Function ConsultaVentaPorTipoTransaccion(IdTipoTransaccion As Integer) As Task(Of List(Of VentaSpaModel))
         Try
             Await ConfiguraSqlite()
-            Dim GetVenta = Await ConexionDB.Table(Of VentaModel)().ToListAsync()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
             Dim ListaVenta = (From x In GetVenta
-                              Where x.Id_TipoTransaccion = IdTipoTransaccion
+                              Where x.Id_TipoTransaccionSpa = IdTipoTransaccion
                               Select x).ToList()
             Return ListaVenta
         Catch ex As Exception
@@ -89,10 +89,10 @@ Public Class Cl_Venta
     Public Async Function ConsultaSumatoriaVentaPorTipoTransaccion(IdTipoTransaccion As Integer) As Task(Of Double)
         Try
             Await ConfiguraSqlite()
-            Dim GetVenta = Await ConexionDB.Table(Of VentaModel)().ToListAsync()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
             Dim ListaVenta = (From x In GetVenta
-                              Where x.Id_TipoTransaccion = IdTipoTransaccion
-                              Select x.Valor_Venta).Sum()
+                              Where x.Id_TipoTransaccionSpa = IdTipoTransaccion
+                              Select x.Valor_VentaSpa).Sum()
             Return ListaVenta
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -115,22 +115,22 @@ Public Class Cl_Venta
             Dim MetodoPagao = Await GetMetodoPago.ConsultaMetodoPago()
             Dim RetornoFiltroVenta = (From Vtn In Venta
                                       Join Tps In TipoServicio On
-                                              Vtn.Id_TipoServicio Equals Tps.Id_TipoSerivicio
+                                              Vtn.Id_TipoServicioSpa Equals Tps.Id_TipoSerivicio
                                       Join Ttc In TipoTransaccion On
-                                          Vtn.Id_TipoTransaccion Equals Ttc.Id_TipoTransaccion
+                                          Vtn.Id_TipoTransaccionSpa Equals Ttc.Id_TipoTransaccion
                                       Join Msc In Mascota On
-                                          Vtn.Id_Mascota Equals Msc.Id_Mascota
+                                          Vtn.Id_MascotaSpa Equals Msc.Id_Mascota
                                       Join Cli In Cliente On
                                           Msc.Id_Persona Equals Cli.Id_Persona
                                       Join Mdp In MetodoPagao On
-                                          Vtn.Id_MetodoPago Equals Mdp.Id_MetodoPago
-                                      Select New With {.Codigo = Vtn.Codigo_Venta,
-                                                       .Fecha = Vtn.Fecha_Venta.ToShortDateString,
+                                          Vtn.Id_MetodoPagoSpa Equals Mdp.Id_MetodoPago
+                                      Select New With {.Codigo = Vtn.Codigo_VentaSpa,
+                                                       .Fecha = Vtn.Fecha_VentaSpa.ToShortDateString,
                                                        .Tipo_de_Servicio = Tps.Nombre_TipoServicio,
                                                        .Mascota = Msc.Nombre_Mascota,
                                                        .Propietario = Cli.NombreCompleto_Persona,
                                                        .Metodo_de_Pago = Mdp.Nombre_MetodoPago,
-                                                       .Varlor_Total = CDbl(Vtn.Valor_Venta)})
+                                                       .Varlor_Total = CDbl(Vtn.Valor_VentaSpa)})
             ws.InsertRow(1, 1)
             ws.Cells("A1:G1").Merge = True
             ws.Cells("A1").Value = "Ventas Bruno Spa"

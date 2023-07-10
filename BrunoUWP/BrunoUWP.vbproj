@@ -17,11 +17,11 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <PackageCertificateKeyFile>
     </PackageCertificateKeyFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>False</GenerateTestArtifacts>
     <AppxBundle>Auto</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
@@ -159,7 +159,7 @@
     <Compile Include="Logic\Cl_TipoTransaccion.vb" />
     <Compile Include="Logic\Cl_Utilitarios.vb" />
     <Compile Include="Logic\Cl_Validaciones.vb" />
-    <Compile Include="Logic\Cl_Venta.vb" />
+    <Compile Include="Logic\Cl_VentaSpa.vb" />
     <Compile Include="Logic\Cl_VisibilidadBotonFinalizarCita.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
@@ -190,7 +190,7 @@
     <Compile Include="Models\TipoServicioModel.vb" />
     <Compile Include="Models\TipoTransaccionModel.vb" />
     <Compile Include="Models\Usuario.vb" />
-    <Compile Include="Models\VentaModel.vb" />
+    <Compile Include="Models\VentaSpaModel.vb" />
     <Compile Include="Views\Frm_Articulo.xaml.vb">
       <DependentUpon>Frm_Articulo.xaml</DependentUpon>
     </Compile>
@@ -250,6 +250,9 @@
     </Compile>
     <Compile Include="Views\Frm_Transacciones.xaml.vb">
       <DependentUpon>Frm_Transacciones.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_VentaArticulos.xaml.vb">
+      <DependentUpon>Frm_VentaArticulos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_VentaServicioSpa.xaml.vb">
       <DependentUpon>Frm_VentaServicioSpa.xaml</DependentUpon>
@@ -414,6 +417,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_Transacciones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_VentaArticulos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

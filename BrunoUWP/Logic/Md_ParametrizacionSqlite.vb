@@ -24,7 +24,7 @@ Module Md_ParametrizacionSqlite
             Await ConexionDB.CreateTableAsync(Of MetodoPagoModel)()
             Await ConexionDB.CreateTableAsync(Of PagosModel)()
             Await ConexionDB.CreateTableAsync(Of TipoTransaccionModel)()
-            Await ConexionDB.CreateTableAsync(Of VentaModel)()
+            Await ConexionDB.CreateTableAsync(Of VentaSpaModel)()
             Await ConexionDB.CreateTableAsync(Of AuditoriaModel)()
             Await ConexionDB.CreateTableAsync(Of ArticuloModel)()
             Return True

@@ -18,7 +18,7 @@ Public NotInheritable Class Frm_VentaServicioSpa
     Dim GetDimensionMascota As New Cl_DimensionMascota
     Dim GetMetodoPago As New Cl_MetodoPago
     Dim GetDateTime As New Cl_DateTime
-    Dim GetVenta As New Cl_Venta
+    Dim GetVenta As New Cl_VentaSpa
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim FechaCalendarPicker As String
     Dim IdCita As Integer

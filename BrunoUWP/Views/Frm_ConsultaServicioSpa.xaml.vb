@@ -5,7 +5,7 @@
 ''' </summary>
 Public NotInheritable Class Frm_ConsultaServicioSpa
     Inherits Page
-    Dim GetVenta As New Cl_Venta
+    Dim GetVenta As New Cl_VentaSpa
     Dim GetTipoServicio As New Cl_TipoServicio
     Dim GetTipoTransaccion As New Cl_TipoTransaccion
     Dim GetMascota As New Cl_Mascota
@@ -25,22 +25,22 @@ Public NotInheritable Class Frm_ConsultaServicioSpa
             Dim MetodoPagao = Await GetMetodoPago.ConsultaMetodoPago()
             Dim RetornoFiltroVenta = (From Vtn In Venta
                                       Join Tps In TipoServicio On
-                                              Vtn.Id_TipoServicio Equals Tps.Id_TipoSerivicio
+                                              Vtn.Id_TipoServicioSpa Equals Tps.Id_TipoSerivicio
                                       Join Ttc In TipoTransaccion On
-                                          Vtn.Id_TipoTransaccion Equals Ttc.Id_TipoTransaccion
+                                          Vtn.Id_TipoTransaccionSpa Equals Ttc.Id_TipoTransaccion
                                       Join Msc In Mascota On
-                                          Vtn.Id_Mascota Equals Msc.Id_Mascota
+                                          Vtn.Id_MascotaSpa Equals Msc.Id_Mascota
                                       Join Cli In Cliente On
                                           Msc.Id_Persona Equals Cli.Id_Persona
                                       Join Mdp In MetodoPagao On
-                                          Vtn.Id_MetodoPago Equals Mdp.Id_MetodoPago
-                                      Select New With {.Codigo = Vtn.Codigo_Venta,
-                                                       .Fecha = Vtn.Fecha_Venta.ToShortDateString,
+                                          Vtn.Id_MetodoPagoSpa Equals Mdp.Id_MetodoPago
+                                      Select New With {.Codigo = Vtn.Codigo_VentaSpa,
+                                                       .Fecha = Vtn.Fecha_VentaSpa.ToShortDateString,
                                                        .TipoServicio = Tps.Nombre_TipoServicio,
                                                        .Mascota = Msc.Nombre_Mascota,
                                                        .Propietario = Cli.NombreCompleto_Persona,
                                                        .MetodoPago = Mdp.Nombre_MetodoPago,
-                                                       .VarlorTotal = Vtn.Valor_Venta.ToString("c")})
+                                                       .VarlorTotal = Vtn.Valor_VentaSpa.ToString("c")})
             DtgVentaServicioSpa.ItemsSource = RetornoFiltroVenta
                 LblVentaTotal.Text = "Ventas Totales: " & VentaTotal.ToString("c")
         Catch ex As Exception
