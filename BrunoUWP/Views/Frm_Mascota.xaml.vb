@@ -5,6 +5,7 @@
 ''' </summary>
 Public NotInheritable Class Frm_Mascota
     Inherits Page
+    Dim GetMascota As New Cl_Mascota
 
     Private Sub NvvMascota_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
         Try
@@ -21,11 +22,19 @@ Public NotInheritable Class Frm_Mascota
         End Try
     End Sub
 
-    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            NvvMascota.SelectedItem = NvvConsultaMascota
-            MarcoTrabajo = FrmContenido
-            MarcoTrabajo.Navigate(GetType(Frm_ConsultaMascota))
+            Dim ObtenerMascota = Await GetMascota.ConsultaMascotas
+            If ObtenerMascota.Count = 0 Then
+                NvvMascota.SelectedItem = NvvParametrizacionRaza
+                MarcoTrabajo = FrmContenido
+                MarcoTrabajo.Navigate(GetType(Frm_CrearRaza))
+            Else
+                NvvMascota.SelectedItem = NvvConsultaMascota
+                MarcoTrabajo = FrmContenido
+                MarcoTrabajo.Navigate(GetType(Frm_ConsultaMascota))
+            End If
+
         Catch ex As Exception
 
         End Try

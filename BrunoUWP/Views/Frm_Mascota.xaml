@@ -18,7 +18,7 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NvvConsultaMascota" Content="Consulta de Mascotas" Tag="ConsultamMascota" />
                 <NavigationViewItem x:Name="NvvCrearMascota" Content="Creacion de Mascotas" Tag="CreacionMascotas" />
-                <NavigationViewItem  Content="Parametrizacion de Razas" Tag="CreacionRazas" />
+                <NavigationViewItem x:Name="NvvParametrizacionRaza" Content="Parametrizacion de Razas" Tag="CreacionRazas" />
             </NavigationView.MenuItems>
             <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
         </NavigationView>

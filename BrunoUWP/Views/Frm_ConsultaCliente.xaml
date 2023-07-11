@@ -75,8 +75,8 @@
                            VerticalAlignment="Center"
                            Visibility="Collapsed"/>
                 <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      Grid.Column="0"
-                      Padding="20">
+                              Grid.Column="0"
+                              Padding="20">
                     <StackPanel Orientation="Vertical">
                         <ListView x:Name="LsvCliente" 
                                   IsItemClickEnabled="True"

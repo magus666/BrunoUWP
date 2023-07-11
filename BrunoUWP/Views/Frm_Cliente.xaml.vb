@@ -5,6 +5,7 @@
 ''' </summary>
 Public NotInheritable Class Frm_Cliente
     Inherits Page
+    Dim GetCliente As New Cl_Cliente
 
     Private Sub NvvCliente_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
         Try
@@ -19,11 +20,19 @@ Public NotInheritable Class Frm_Cliente
         End Try
     End Sub
 
-    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            NvvCliente.SelectedItem = NvmConsultaCliente
-            MarcoTrabajo = FrmContenido
-            MarcoTrabajo.Navigate(GetType(Frm_ConsultaCliente))
+            Dim ObtenerCliente = Await GetCliente.ConsultaCliente
+            If ObtenerCliente.Count = 0 Then
+                NvvCliente.SelectedItem = NvmNuevoCliente
+                MarcoTrabajo = FrmContenido
+                MarcoTrabajo.Navigate(GetType(Frm_CrearCliente))
+            Else
+                NvvCliente.SelectedItem = NvmConsultaCliente
+                MarcoTrabajo = FrmContenido
+                MarcoTrabajo.Navigate(GetType(Frm_ConsultaCliente))
+            End If
+
         Catch ex As Exception
 
         End Try

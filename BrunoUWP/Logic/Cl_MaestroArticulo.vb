@@ -30,4 +30,26 @@
         End Try
     End Function
 
+    Public Async Function ActualizarMaestroArticulo(IdMaestroArticulo As Integer,
+                                                   NombreMaestroArticulo As String,
+                                                   DescripcionMaestroArticulo As String) As Task(Of Boolean)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetMaestroArticulo = Await ConexionDB.Table(Of MaestroArticuloModel)().ToListAsync()
+            Dim MaestroArticulo = (From x In GetMaestroArticulo
+                                   Where x.Id_MaestroArticulo = IdMaestroArticulo
+                                   Select x).FirstOrDefault
+            If MaestroArticulo IsNot Nothing Then
+                MaestroArticulo.Nombre_MaestroArticulo = NombreMaestroArticulo
+                MaestroArticulo.Descripcion_MaestroArticulo = DescripcionMaestroArticulo
+                Await ConexionDB.UpdateAsync(MaestroArticulo)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
 End Class

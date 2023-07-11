@@ -42,31 +42,45 @@
                           PlaceholderText="Seleccione el tipo de Articulo a Filtrar"
                           SelectionChanged="CmbMaestroArticulo_SelectionChanged"/>
                 <controls:DataGrid x:Name="DtgArticulos"
-                               Margin="10"
-                               ClipboardCopyMode="IncludeHeader"
-                               AutoGenerateColumns="False"
-                               AreRowDetailsFrozen="True"
-                               ColumnHeaderHeight="32"
-                               CanUserReorderColumns="True"
-                               CanUserResizeColumns="True"
-                               CanUserSortColumns="True"
-                               HeadersVisibility="Column"
-                               IsReadOnly="True"
-                               HorizontalAlignment="Stretch"
-                               GridLinesVisibility="Horizontal"
-                                SelectionMode="Extended">
+                                   Margin="10"
+                                   ClipboardCopyMode="IncludeHeader"
+                                   AutoGenerateColumns="False"
+                                   AreRowDetailsFrozen="True"
+                                   ColumnHeaderHeight="32"
+                                   CanUserReorderColumns="True"
+                                   CanUserResizeColumns="True"
+                                   CanUserSortColumns="True"
+                                   HeadersVisibility="Column"
+                                   IsReadOnly="True"
+                                   HorizontalAlignment="Stretch"
+                                   GridLinesVisibility="Horizontal"
+                                   HorizontalScrollBarVisibility="Auto"
+                                   SelectionMode="Extended"
+                                   DoubleTapped="DtgArticulos_DoubleTapped">
                     <controls:DataGrid.Columns>
-                        <controls:DataGridTextColumn Header="Codigo" Tag="Codigo" Binding="{Binding Codigo_Articulo}" />
-                        <controls:DataGridTextColumn Header="Nombre" Tag="NombreArticulo" Binding="{Binding Nombre_Articulo}" />
-                        <controls:DataGridTextColumn Header="Marca" Tag="MarcaArticulo" Binding="{Binding Marca_Articulo}" />
-                        <controls:DataGridTextColumn Header="Descipcion" Tag="DescripcionArticulo" Binding="{Binding Descripcion_Articulo}" />
-                        <controls:DataGridTextColumn Header="Valor Unitario" Tag="ValorUnitarioArticulo" Binding="{Binding Valor_Articulo, Converter={StaticResource Cl_AgregaSignoPesos}}" />
-                        <controls:DataGridTextColumn Header="Cantidad" Tag="CantidadArticulo" Binding="{Binding Cantidad_Articulo}" />
+                        <controls:DataGridTextColumn Header="Codigo" Tag="Codigo" Width="*" Binding="{Binding Codigo_Articulo}" />
+                        <controls:DataGridTextColumn Header="Nombre" Tag="NombreArticulo" Width="2*" Binding="{Binding Nombre_Articulo}" />
+                        <controls:DataGridTextColumn Header="Marca" Tag="MarcaArticulo" Width="*" Binding="{Binding Marca_Articulo}" />
+                        <controls:DataGridTextColumn Header="Descipcion" Tag="DescripcionArticulo" Width="3*" Binding="{Binding Descripcion_Articulo}" />
+                        <controls:DataGridTextColumn Header="Valor Unitario" Tag="ValorUnitarioArticulo" Width="*" Binding="{Binding Valor_Articulo, Converter={StaticResource Cl_AgregaSignoPesos}}" />
+                        <controls:DataGridTextColumn Header="Cantidad" Tag="CantidadArticulo" Width="*" Binding="{Binding Cantidad_Articulo}" />
                     </controls:DataGrid.Columns>
                 </controls:DataGrid>
-                <TextBlock x:Name="LblVentaTotal"
-                           HorizontalAlignment="Right"/>
             </StackPanel>
+            <ContentDialog x:Name="CtdModificaArticulo"
+                           Title="Modificar Articulo"
+                           PrimaryButtonText="Guardar"
+                           PrimaryButtonClick="CtdModificaArticulo_PrimaryButtonClick"
+                           SecondaryButtonText="Cancelar">
+                <StackPanel Orientation="Vertical">
+                    <TextBox x:Name="TxtValorArticuloDialog"
+                             PlaceholderText="Escriba el Nuevo Valor" 
+                             Header="Nuevo Valor" />
+                    <TextBox x:Name="TxtCantidadArticuloDialog"
+                             PlaceholderText="Escriba la nueva Cantidad" 
+                             Header="Nueva Cantidad" />
+                </StackPanel>
+            </ContentDialog>
         </Grid>
         <Grid Grid.Row="1"
               Padding="10"

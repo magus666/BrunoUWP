@@ -9,17 +9,44 @@ Public NotInheritable Class Frm_VentaArticulos
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetValidaciones As New Cl_Validaciones
     Dim GetNotificaciones As New Cl_Notificaciones
+    Dim GetMaestroArticulos As New Cl_MaestroArticulo
     Dim GetArticulos As New Cl_Articulo
     Dim Existencias As Integer
+    Dim IdMaestroArticulo As Integer
     Dim IdArticulo As Integer
     Dim ValorArticulo As Double
     Dim NombreArticulo As String
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            CmbArticulo.ItemsSource = Await GetArticulos.ConsultaArticulos()
-            CmbArticulo.DisplayMemberPath = "Nombre_Articulo"
+            CmbTipoArticulo.ItemsSource = Await GetMaestroArticulos.ConsultaMaestroArticulos()
+            CmbTipoArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
+            CmbArticulo.IsEnabled = False
+
             NbmCantidadVentaArticulo.IsEnabled = False
+            LblExistenciasArticulo.Visibility = Visibility.Collapsed
+            BtnVerificar.IsEnabled = False
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Async Sub CmbTipoArticulo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim ComboBoxSexo As ComboBox = CType(sender, ComboBox)
+            Dim ItemSeleccionado As MaestroArticuloModel = CType(ComboBoxSexo.SelectedItem, MaestroArticuloModel)
+            If CmbTipoArticulo.SelectedIndex = -1 Then
+                IdMaestroArticulo = 0
+            Else
+                CmbArticulo.IsEnabled = True
+                IdMaestroArticulo = ItemSeleccionado.Id_MaestroArticulo
+                Dim ObtenerArticulos = Await GetArticulos.ConsultaArticulos()
+                Dim GetListaArticulos = (From Art In ObtenerArticulos
+                                         Where Art.Id_MaestroArticulo = IdMaestroArticulo)
+
+                CmbArticulo.ItemsSource = GetListaArticulos
+                CmbArticulo.DisplayMemberPath = "Nombre_Articulo"
+            End If
         Catch ex As Exception
 
         End Try
@@ -43,7 +70,9 @@ Public NotInheritable Class Frm_VentaArticulos
                 Existencias = GetUnicoArticulo.Cantidad_Articulo
                 NombreArticulo = GetUnicoArticulo.Nombre_Articulo
                 ValorArticulo = GetUnicoArticulo.Valor_Articulo
+                LblExistenciasArticulo.Visibility = Visibility.Visible
                 LlenarExistencias()
+                BtnVerificar.IsEnabled = True
             End If
         Catch ex As Exception
 
@@ -66,8 +95,6 @@ Public NotInheritable Class Frm_VentaArticulos
             Dim ValorTotal As Double = CantidadVenta * ValorArticulo
             LblValorTotal.Text = ValorTotal.ToString("C")
 
-            GetUtilitarios.LimpiarControles(StpDatosArticulos)
-
         Catch ex As Exception
 
         End Try
@@ -76,15 +103,15 @@ Public NotInheritable Class Frm_VentaArticulos
     Public Function LlenarExistencias() As Boolean
         Try
             NbmCantidadVentaArticulo.Maximum = Existencias
-            LblExistenciasArticulo.Text = Existencias
+            LblCountExistenciasArticulo.Text = Existencias
 
             Select Case Existencias
                 Case >= 10
-                    LblExistenciasArticulo.Foreground = New SolidColorBrush(Colors.Green)
+                    LblCountExistenciasArticulo.Foreground = New SolidColorBrush(Colors.Green)
                 Case >= 5
-                    LblExistenciasArticulo.Foreground = New SolidColorBrush(Colors.Yellow)
+                    LblCountExistenciasArticulo.Foreground = New SolidColorBrush(Colors.Yellow)
                 Case >= 1
-                    LblExistenciasArticulo.Foreground = New SolidColorBrush(Colors.Red)
+                    LblCountExistenciasArticulo.Foreground = New SolidColorBrush(Colors.Red)
             End Select
             Return True
         Catch ex As Exception
@@ -109,6 +136,7 @@ Public NotInheritable Class Frm_VentaArticulos
             Dim ValorPagar As Double
             ValorPagar = 4200
             Await GetUtilitarios.CrearContentDialogMetodoPago(ValorPagar)
+            GetUtilitarios.LimpiarControles(StpDatosArticulos)
         Catch ex As Exception
 
         End Try

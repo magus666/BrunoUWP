@@ -87,12 +87,7 @@
                                          Header="Escriba la Descripcion" />
                             </StackPanel>
                         </ContentDialog>
-
-
-
                     </Grid>
-
-
                     <TextBox x:Name="TxtNombreMascota" 
                          PlaceholderText="Digite el Nombre"
                          Header="Nombre de la Mascota"/>
@@ -120,8 +115,6 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="Guardar"/>
-
-
                 </StackPanel>
             </Grid>
         </ScrollViewer>

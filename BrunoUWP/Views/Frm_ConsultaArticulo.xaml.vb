@@ -9,6 +9,7 @@ Public NotInheritable Class Frm_ConsultaArticulo
     Dim GetArticulos As New Cl_Articulo
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim IdMaestroArticulo As Integer
+    Dim IdArticulo As Integer
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -61,5 +62,22 @@ Public NotInheritable Class Frm_ConsultaArticulo
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Async Sub DtgArticulos_DoubleTapped(sender As Object, e As DoubleTappedRoutedEventArgs)
+        Try
+            Dim ObtenerArticulo As New ArticuloModel
+            ObtenerArticulo = DtgArticulos.SelectedItem
+            IdArticulo = ObtenerArticulo.Id_Articulo
+            TxtValorArticuloDialog.Text = ObtenerArticulo.Valor_Articulo
+            TxtCantidadArticuloDialog.Text = ObtenerArticulo.Cantidad_Articulo
+            Await CtdModificaArticulo.ShowAsync()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub CtdModificaArticulo_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
+
     End Sub
 End Class
