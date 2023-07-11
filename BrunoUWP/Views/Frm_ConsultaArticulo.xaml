@@ -73,6 +73,9 @@
                            PrimaryButtonClick="CtdModificaArticulo_PrimaryButtonClick"
                            SecondaryButtonText="Cancelar">
                 <StackPanel Orientation="Vertical">
+                    <TextBox x:Name="txtNombreArticuloDialog"
+                             Header="Nombre del Articulo"
+                             IsEnabled="False"/>
                     <TextBox x:Name="TxtValorArticuloDialog"
                              PlaceholderText="Escriba el Nuevo Valor" 
                              Header="Nuevo Valor" />

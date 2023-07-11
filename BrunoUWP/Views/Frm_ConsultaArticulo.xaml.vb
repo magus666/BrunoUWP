@@ -69,6 +69,7 @@ Public NotInheritable Class Frm_ConsultaArticulo
             Dim ObtenerArticulo As New ArticuloModel
             ObtenerArticulo = DtgArticulos.SelectedItem
             IdArticulo = ObtenerArticulo.Id_Articulo
+            txtNombreArticuloDialog.Text = ObtenerArticulo.Nombre_Articulo
             TxtValorArticuloDialog.Text = ObtenerArticulo.Valor_Articulo
             TxtCantidadArticuloDialog.Text = ObtenerArticulo.Cantidad_Articulo
             Await CtdModificaArticulo.ShowAsync()
