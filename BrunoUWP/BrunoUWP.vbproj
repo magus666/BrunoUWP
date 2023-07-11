@@ -150,6 +150,7 @@
     <Compile Include="Logic\Cl_BlobStorage.vb" />
     <Compile Include="Logic\Cl_Cita.vb" />
     <Compile Include="Logic\Cl_Cliente.vb" />
+    <Compile Include="Logic\Cl_ColorLetraExistencias.vb" />
     <Compile Include="Logic\Cl_DimensionMascota.vb" />
     <Compile Include="Logic\Cl_IntegracionWhatsapp.vb" />
     <Compile Include="Logic\Cl_MaestroArticulo.vb" />
@@ -281,6 +282,7 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\BoxerJuguete.jpg" />
     <Content Include="Assets\Calendario.png" />
     <Content Include="Assets\Clientes.png" />
     <Content Include="Assets\Juguetes.png" />
