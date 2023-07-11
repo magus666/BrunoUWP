@@ -12,7 +12,8 @@ Public Class Cl_Articulo
                                            DescripcionArticulo As String,
                                            ValorArticulo As Double,
                                            CantidadArticulo As Integer,
-                                           FechaCreacionArticulo As Date) As Task(Of Boolean)
+                                           FechaCreacionArticulo As Date,
+                                           IdMaestroArticulo As Integer) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
             Dim Articulo = New ArticuloModel With {
@@ -22,7 +23,8 @@ Public Class Cl_Articulo
                 .Descripcion_Articulo = DescripcionArticulo,
                 .Valor_Articulo = ValorArticulo,
                 .Cantidad_Articulo = CantidadArticulo,
-                .FechaCreacion_Articulo = FechaCreacionArticulo
+                .FechaCreacion_Articulo = FechaCreacionArticulo,
+                .Id_MaestroArticulo = IdMaestroArticulo
             }
             Dim Id = Await ConexionDB.InsertAsync(Articulo)
             Return True

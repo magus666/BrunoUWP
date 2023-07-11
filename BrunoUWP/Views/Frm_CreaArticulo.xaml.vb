@@ -8,14 +8,14 @@ Public NotInheritable Class Frm_CreaArticulo
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetValidaciones As New Cl_Validaciones
+    Dim GetMaestroArticulo As New Cl_MaestroArticulo
     Dim GetArticulo As New Cl_Articulo
+    Dim IdMaestroArticulo As Integer
 
-    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            If String.IsNullOrEmpty(TxtValorArticulo.Text) Then
-                TxtValorArticulo.Text = "$"
-                TxtValorArticulo.SelectionStart = TxtValorArticulo.Text.Length
-            End If
+            CmbMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
+            CmbMaestroArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
@@ -31,8 +31,8 @@ Public NotInheritable Class Frm_CreaArticulo
             Dim CodigoArticulo As String = GetUtilitarios.GeneraCodigoArticulo()
             If ValidaDatos() = True Then
                 If Await GetArticulo.InsertarArticulo(CodigoArticulo, TxtNombreArticulo.Text, TxtMarcaArticulo.Text,
-                                                            TxtDescripcionArticulo.Text, TxtValorArticulo.Text,
-                                                            NmbCantidadExistenciasArticulo.Text, Date.Now) = True Then
+                                                      TxtDescripcionArticulo.Text, TxtValorArticulo.Text,
+                                                      NmbCantidadExistenciasArticulo.Text, Date.Now, IdMaestroArticulo) = True Then
                     GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El Articulo se ha creado con Exito.")
                     GetUtilitarios.LimpiarControles(StpDatosArticulos)
                 End If
@@ -74,4 +74,18 @@ Public NotInheritable Class Frm_CreaArticulo
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+    Private Sub CmbMaestroArticulo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            Dim selectedItem As MaestroArticuloModel = CType(comboBox.SelectedItem, MaestroArticuloModel)
+            If CmbMaestroArticulo.SelectedIndex = -1 Then
+                IdMaestroArticulo = 0
+            Else
+                IdMaestroArticulo = selectedItem.Id_MaestroArticulo
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

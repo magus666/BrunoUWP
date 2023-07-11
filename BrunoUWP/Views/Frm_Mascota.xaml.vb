@@ -12,7 +12,7 @@ Public NotInheritable Class Frm_Mascota
                 Case "Consulta de Mascotas"
                     FrmContenido.Navigate(GetType(Frm_ConsultaMascota))
                 Case "Creacion de Mascotas"
-                    FrmContenido.Navigate(GetType(Frm_CrearMascota))
+                    FrmContenido.Navigate(GetType(Frm_CreaMascota))
                 Case "Parametrizacion de Razas"
                     FrmContenido.Navigate(GetType(Frm_CrearRaza))
             End Select

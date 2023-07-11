@@ -5,12 +5,22 @@
 ''' </summary>
 Public NotInheritable Class Frm_Articulo
     Inherits Page
+    Dim GetMaestroArticulo As New Cl_MaestroArticulo
 
-    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            NvvArticulo.SelectedItem = NvmConsultaArticulo
-            MarcoTrabajo = FrmContenido
-            MarcoTrabajo.Navigate(GetType(Frm_ConsultaArticulo))
+
+            Dim ContadorMaestroArticulo = Await GetMaestroArticulo.ConsultaMaestroArticulos()
+            If ContadorMaestroArticulo.Count = 0 Then
+                MarcoTrabajo = FrmContenido
+                NvvArticulo.SelectedItem = NvmMaestroArticulo
+                MarcoTrabajo.Navigate(GetType(Frm_CreaMaestroArticulo))
+            Else
+                MarcoTrabajo = FrmContenido
+                NvvArticulo.SelectedItem = NvmConsultaArticulo
+                MarcoTrabajo.Navigate(GetType(Frm_ConsultaArticulo))
+            End If
+
         Catch ex As Exception
 
         End Try
@@ -23,6 +33,8 @@ Public NotInheritable Class Frm_Articulo
                     FrmContenido.Navigate(GetType(Frm_ConsultaArticulo))
                 Case "Creacion de Articulos"
                     FrmContenido.Navigate(GetType(Frm_CreaArticulo))
+                Case "Parametrizacion Maestro Articulos"
+                    FrmContenido.Navigate(GetType(Frm_CreaMaestroArticulo))
             End Select
         Catch ex As Exception
 

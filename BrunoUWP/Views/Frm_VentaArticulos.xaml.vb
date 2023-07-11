@@ -104,4 +104,14 @@ Public NotInheritable Class Frm_VentaArticulos
         End Try
     End Function
 
+    Private Async Sub BtnPagar_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim ValorPagar As Double
+            ValorPagar = 4200
+            Await GetUtilitarios.CrearContentDialogMetodoPago(ValorPagar)
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
 End Class

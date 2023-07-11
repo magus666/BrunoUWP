@@ -5,8 +5,10 @@
 ''' </summary>
 Public NotInheritable Class Frm_ConsultaArticulo
     Inherits Page
+    Dim GetMaestroArticulo As New Cl_MaestroArticulo
     Dim GetArticulos As New Cl_Articulo
     Dim GetNotificaciones As New Cl_Notificaciones
+    Dim IdMaestroArticulo As Integer
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -18,8 +20,9 @@ Public NotInheritable Class Frm_ConsultaArticulo
                 DtgArticulos.ItemsSource = CargaArticulos
                 LblTituloCreacionArticulo.Visibility = Visibility.Collapsed
                 DtgArticulos.Visibility = Visibility.Visible
+                CmbMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
+                CmbMaestroArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
             End If
-
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
@@ -38,6 +41,25 @@ Public NotInheritable Class Frm_ConsultaArticulo
 
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Private Async Sub CmbMaestroArticulo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            Dim selectedItem As MaestroArticuloModel = CType(comboBox.SelectedItem, MaestroArticuloModel)
+            If CmbMaestroArticulo.SelectedIndex = -1 Then
+                IdMaestroArticulo = 0
+            Else
+                IdMaestroArticulo = selectedItem.Id_MaestroArticulo
+                Dim Articulo = Await GetArticulos.ConsultaArticulos
+                Dim ListaRetornoArticulo = (From Mar In Articulo
+                                            Where Mar.Id_MaestroArticulo = IdMaestroArticulo
+                                            Select Mar).ToList
+                DtgArticulos.ItemsSource = ListaRetornoArticulo
+            End If
+        Catch ex As Exception
+
         End Try
     End Sub
 End Class

@@ -152,6 +152,7 @@
     <Compile Include="Logic\Cl_Cliente.vb" />
     <Compile Include="Logic\Cl_DimensionMascota.vb" />
     <Compile Include="Logic\Cl_IntegracionWhatsapp.vb" />
+    <Compile Include="Logic\Cl_MaestroArticulo.vb" />
     <Compile Include="Logic\Cl_ManipulacionImagenes.vb" />
     <Compile Include="Logic\Cl_MetodoPago.vb" />
     <Compile Include="Logic\Cl_Pickers.vb" />
@@ -172,6 +173,7 @@
     <Compile Include="Logic\Cl_DateTime.vb" />
     <Compile Include="Logic\Cl_Mascota.vb" />
     <Compile Include="Models\DimensionMascotaModel.vb" />
+    <Compile Include="Models\MaestroArticuloModel.vb" />
     <Compile Include="Models\MascotaModel.vb" />
     <Compile Include="Logic\Cl_Notificaciones.vb" />
     <Compile Include="Models\MetodoPagoModel.vb" />
@@ -230,8 +232,8 @@
     <Compile Include="Views\Frm_CrearCliente.xaml.vb">
       <DependentUpon>Frm_CrearCliente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Frm_CrearMascota.xaml.vb">
-      <DependentUpon>Frm_CrearMascota.xaml</DependentUpon>
+    <Compile Include="Views\Frm_CreaMascota.xaml.vb">
+      <DependentUpon>Frm_CreaMascota.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_CrearRaza.xaml.vb">
       <DependentUpon>Frm_CrearRaza.xaml</DependentUpon>
@@ -244,6 +246,9 @@
     </Compile>
     <Compile Include="Views\Frm_Login.xaml.vb">
       <DependentUpon>Frm_Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_CreaMaestroArticulo.xaml.vb">
+      <DependentUpon>Frm_CreaMaestroArticulo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_Mascota.xaml.vb">
       <DependentUpon>Frm_Mascota.xaml</DependentUpon>
@@ -391,7 +396,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Frm_CrearMascota.xaml">
+    <Page Include="Views\Frm_CreaMascota.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -408,6 +413,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_CreaMaestroArticulo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

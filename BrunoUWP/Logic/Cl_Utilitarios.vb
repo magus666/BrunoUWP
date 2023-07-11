@@ -75,6 +75,20 @@ Public Class Cl_Utilitarios
         RetornoCodigo = Iniciales & codigo
         Return RetornoCodigo
     End Function
+    Public Function GeneraCodigoMaestroArticulo() As String
+        Dim Iniciales As String = "MAR-"
+        Dim RetornoCodigo As String
+        Dim Longitud As Integer = 6
+        Dim caracteres As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        Dim codigo As String = ""
+        Dim rnd As New Random()
+        For i As Integer = 1 To Longitud
+            Dim index As Integer = rnd.Next(0, caracteres.Length)
+            codigo &= caracteres.Substring(index, 1)
+        Next
+        RetornoCodigo = Iniciales & codigo
+        Return RetornoCodigo
+    End Function
 
     Public Sub LimpiarControles(StpDatos As StackPanel)
         Try
@@ -94,4 +108,31 @@ Public Class Cl_Utilitarios
         End Try
     End Sub
 
+    Public Async Function CrearContentDialogMetodoPago(ValorPago As Double) As Task
+        Try
+            Dim GetMetodosPago As New Cl_MetodoPago
+            Dim container As New StackPanel()
+
+            Dim LblDescripcionPago As New TextBlock()
+            LblDescripcionPago.Text = "Valor total a Pagar: " & ValorPago.ToString("C")
+            container.Children.Add(LblDescripcionPago)
+
+            Dim CmbMetodoPago As New ComboBox()
+            CmbMetodoPago.Header = "Por Favor Seleccione un Metodo de Pago"
+            CmbMetodoPago.PlaceholderText = "Metodo de Pago"
+            CmbMetodoPago.ItemsSource = Await GetMetodosPago.ConsultaMetodoPago
+            CmbMetodoPago.DisplayMemberPath = "Nombre_MetodoPago"
+            container.Children.Add(CmbMetodoPago)
+
+            Dim contentDialog As New ContentDialog With {
+                .Title = "Pagar",
+                .Content = container,
+                .PrimaryButtonText = "Pagar",
+                .CloseButtonText = "Cancelar"
+            }
+            Await contentDialog.ShowAsync()
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

@@ -100,6 +100,9 @@
                         <Run Text="Valor Total:"/>
                         <Run x:Name="LblValorTotal"/>
                 </TextBlock>
+                <Button x:Name="BtnPagar"
+                        Content="Pagar"
+                        Click="BtnPagar_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

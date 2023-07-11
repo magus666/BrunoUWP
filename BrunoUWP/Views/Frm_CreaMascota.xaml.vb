@@ -4,7 +4,7 @@ Imports Windows.Storage
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
-Public NotInheritable Class Frm_CrearMascota
+Public NotInheritable Class Frm_CreaMascota
     Inherits Page
     Dim GetValidaciones As New Cl_Validaciones
     Dim GetNotificaciones As New Cl_Notificaciones

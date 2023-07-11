@@ -37,6 +37,10 @@
                            Visibility="Collapsed"/>
             <StackPanel>
                 <my:InfoBar x:Name="InfAlerta"/>
+                <ComboBox x:Name="CmbMaestroArticulo"
+                          Header="Tipo de Articulo"
+                          PlaceholderText="Seleccione el tipo de Articulo a Filtrar"
+                          SelectionChanged="CmbMaestroArticulo_SelectionChanged"/>
                 <controls:DataGrid x:Name="DtgArticulos"
                                Margin="10"
                                ClipboardCopyMode="IncludeHeader"
