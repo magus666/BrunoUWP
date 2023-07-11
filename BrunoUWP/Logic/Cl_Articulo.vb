@@ -33,6 +33,28 @@ Public Class Cl_Articulo
         End Try
     End Function
 
+    Public Async Function ActualizarArticulo(IdArticulo As Integer,
+                                             ValorArticulo As Double,
+                                             CantidadArticulo As Integer) As Task(Of Boolean)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetArticulo = Await ConexionDB.Table(Of ArticuloModel)().ToListAsync()
+            Dim Articulo = (From x In GetArticulo
+                            Where x.Id_MaestroArticulo = IdArticulo
+                            Select x).FirstOrDefault
+            If Articulo IsNot Nothing Then
+                Articulo.Valor_Articulo = ValorArticulo
+                Articulo.Cantidad_Articulo = CantidadArticulo
+                Await ConexionDB.UpdateAsync(Articulo)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
     Public Async Function ConsultaArticulos() As Task(Of List(Of ArticuloModel))
         Try
             Await ConfiguraSqlite()

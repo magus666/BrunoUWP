@@ -60,7 +60,7 @@ Public NotInheritable Class Frm_ConsultaArticulo
                 DtgArticulos.ItemsSource = ListaRetornoArticulo
             End If
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -74,11 +74,19 @@ Public NotInheritable Class Frm_ConsultaArticulo
             TxtCantidadArticuloDialog.Text = ObtenerArticulo.Cantidad_Articulo
             Await CtdModificaArticulo.ShowAsync()
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
-    Private Sub CtdModificaArticulo_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
-
+    Private Async Sub CtdModificaArticulo_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
+        Try
+            If Await GetArticulos.ActualizarArticulo(IdArticulo, TxtValorArticuloDialog.Text,
+                                                     TxtCantidadArticuloDialog.Text) = True Then
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El articulo se ha Actualizado con exito")
+                DtgArticulos.ItemsSource = Await GetArticulos.ConsultaArticulos()
+            End If
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
     End Sub
 End Class
