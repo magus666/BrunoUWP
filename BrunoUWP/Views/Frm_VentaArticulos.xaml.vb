@@ -21,7 +21,8 @@ Public NotInheritable Class Frm_VentaArticulos
         Try
             CmbTipoArticulo.ItemsSource = Await GetMaestroArticulos.ConsultaMaestroArticulos()
             CmbTipoArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
-            GrdListaArticulos.Visibility = Visibility.Collapsed
+            LblMensajeArticulo.Visibility = Visibility.Visible
+            GrvListadoArticulos.Visibility = Visibility.Collapsed
         Catch ex As Exception
 
         End Try
@@ -34,7 +35,8 @@ Public NotInheritable Class Frm_VentaArticulos
             If CmbTipoArticulo.SelectedIndex = -1 Then
                 IdMaestroArticulo = 0
             Else
-                GrdListaArticulos.Visibility = Visibility.Visible
+                LblMensajeArticulo.Visibility = Visibility.Collapsed
+                GrvListadoArticulos.Visibility = Visibility.Visible
                 IdMaestroArticulo = ItemSeleccionado.Id_MaestroArticulo
                 Dim ObtenerArticulos = Await GetArticulos.ConsultaArticulos()
                 Dim GetListaArticulos = (From Art In ObtenerArticulos

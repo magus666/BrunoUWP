@@ -46,6 +46,14 @@
               ui:Effects.Shadow="{StaticResource CommonShadow}"
               Grid.Row="1"
               Margin="50,0,50,10">
+            <TextBlock x:Name="LblMensajeArticulo"
+                       Text="Para continuar Seleccione una Categoria en el Desplegable de arriba "
+                       FontSize="35"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"/>
             <GridView x:Name="GrvListadoArticulos"
                       HorizontalAlignment="Center"
                       IsItemClickEnabled="True"

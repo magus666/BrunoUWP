@@ -12,6 +12,7 @@ Public Class Cl_Articulo
                                            DescripcionArticulo As String,
                                            ValorArticulo As Double,
                                            CantidadArticulo As Integer,
+                                           CantidadTotalVentaArticulo As Integer,
                                            FechaCreacionArticulo As Date,
                                            IdMaestroArticulo As Integer) As Task(Of Boolean)
         Try
@@ -23,6 +24,7 @@ Public Class Cl_Articulo
                 .Descripcion_Articulo = DescripcionArticulo,
                 .Valor_Articulo = ValorArticulo,
                 .Cantidad_Articulo = CantidadArticulo,
+                .CantidadTotalVenta_Articulo = CantidadTotalVentaArticulo,
                 .FechaCreacion_Articulo = FechaCreacionArticulo,
                 .Id_MaestroArticulo = IdMaestroArticulo
             }
@@ -35,16 +37,18 @@ Public Class Cl_Articulo
 
     Public Async Function ActualizarArticulo(IdArticulo As Integer,
                                              ValorArticulo As Double,
-                                             CantidadArticulo As Integer) As Task(Of Boolean)
+                                             CantidadArticulo As Integer,
+                                             CantidadTotalVentaArticulo As Integer) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
             Dim GetArticulo = Await ConexionDB.Table(Of ArticuloModel)().ToListAsync()
             Dim Articulo = (From x In GetArticulo
-                            Where x.Id_MaestroArticulo = IdArticulo
+                            Where x.Id_Articulo = IdArticulo
                             Select x).FirstOrDefault
             If Articulo IsNot Nothing Then
                 Articulo.Valor_Articulo = ValorArticulo
                 Articulo.Cantidad_Articulo = CantidadArticulo
+                Articulo.CantidadTotalVenta_Articulo = CantidadTotalVentaArticulo
                 Await ConexionDB.UpdateAsync(Articulo)
                 Return True
             Else
@@ -96,7 +100,8 @@ Public Class Cl_Articulo
                                         Marca = x.Marca_Articulo,
                                         Descripcion = x.Descripcion_Articulo,
                                         Valor_Unitario = x.Valor_Articulo,
-                                        Cantidad = x.Cantidad_Articulo)
+                                        Articulos_Vendidos = x.CantidadTotalVenta_Articulo,
+                                        Existencias_Actuales = x.Cantidad_Articulo)
             ws.InsertRow(1, 1)
             ws.Cells("A1:F1").Merge = True
             ws.Cells("A1").Value = "Articulos Bruno Spa"

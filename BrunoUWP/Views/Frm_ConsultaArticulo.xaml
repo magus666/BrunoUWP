@@ -59,11 +59,12 @@
                                    DoubleTapped="DtgArticulos_DoubleTapped">
                     <controls:DataGrid.Columns>
                         <controls:DataGridTextColumn Header="Codigo" Tag="Codigo" Width="*" Binding="{Binding Codigo_Articulo}" />
-                        <controls:DataGridTextColumn Header="Nombre" Tag="NombreArticulo" Width="2*" Binding="{Binding Nombre_Articulo}" />
+                        <controls:DataGridTextColumn Header="Nombre" Tag="NombreArticulo" Width="*" Binding="{Binding Nombre_Articulo}" />
                         <controls:DataGridTextColumn Header="Marca" Tag="MarcaArticulo" Width="*" Binding="{Binding Marca_Articulo}" />
-                        <controls:DataGridTextColumn Header="Descipcion" Tag="DescripcionArticulo" Width="3*" Binding="{Binding Descripcion_Articulo}" />
+                        <controls:DataGridTextColumn Header="Descipcion" Tag="DescripcionArticulo" Width="2*" Binding="{Binding Descripcion_Articulo}" />
                         <controls:DataGridTextColumn Header="Valor Unitario" Tag="ValorUnitarioArticulo" Width="*" Binding="{Binding Valor_Articulo, Converter={StaticResource Cl_AgregaSignoPesos}}" />
-                        <controls:DataGridTextColumn Header="Cantidad" Tag="CantidadArticulo" Width="*" Binding="{Binding Cantidad_Articulo}" />
+                        <controls:DataGridTextColumn Header="Existencias" Tag="ExistenciasArticulo" Width="*" Binding="{Binding Cantidad_Articulo}" />
+                        <controls:DataGridTextColumn Header="Articulos Venddos" Tag="VentaArticulo" Binding="{Binding CantidadTotalVenta_Articulo}" />
                     </controls:DataGrid.Columns>
                 </controls:DataGrid>
             </StackPanel>

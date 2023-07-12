@@ -80,8 +80,15 @@ Public NotInheritable Class Frm_ConsultaArticulo
 
     Private Async Sub CtdModificaArticulo_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
         Try
+            Dim CargaArticulos = Await GetArticulos.ConsultaArticulos()
+            Dim RetornoArticulos = (From Art In CargaArticulos
+                                    Where Art.Id_Articulo = IdArticulo
+                                    Select Art).FirstOrDefault
+
+            Dim CantidadNuevaArticulos = CInt(TxtCantidadArticuloDialog.Text)
+            Dim CantidadTotalArticulos As Integer = RetornoArticulos.CantidadTotalVenta_Articulo
             If Await GetArticulos.ActualizarArticulo(IdArticulo, TxtValorArticuloDialog.Text,
-                                                     TxtCantidadArticuloDialog.Text) = True Then
+                                                     CantidadNuevaArticulos, CantidadTotalArticulos) = True Then
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El articulo se ha Actualizado con exito")
                 DtgArticulos.ItemsSource = Await GetArticulos.ConsultaArticulos()
             End If

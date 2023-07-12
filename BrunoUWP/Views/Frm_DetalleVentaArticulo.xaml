@@ -70,7 +70,6 @@
               Margin="10,10,10,10"
               ui:Effects.Shadow="{StaticResource CommonShadow}">
             <TextBlock x:Name="LblMensajeVenta"
-                       Text="Por Favor Confirme la Venta en el Panel Izquierdo para ver Los detalles y proceder al Pago..."
                        TextWrapping="Wrap"
                        FontSize="35"
                        TextAlignment="Center"

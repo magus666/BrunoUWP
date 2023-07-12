@@ -9,6 +9,7 @@ Public Class ArticuloModel
     Public Property Descripcion_Articulo As String
     Public Property Valor_Articulo As Double
     Public Property Cantidad_Articulo As Integer
+    Public Property CantidadTotalVenta_Articulo As Integer
     Public Property FechaCreacion_Articulo As Date
     Public Property Id_MaestroArticulo As Integer
 

@@ -12,6 +12,7 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
     Dim GetVentaArticulo As New Cl_VentaArticulo
     Dim IdArticulo As Integer
     Dim ExistenciasDisponibles As Integer
+    Dim CantidadVentaArticulo As Integer
     Dim ValorUnitario As Integer
     Dim ValorTotal As Integer
     Dim ExistenciasNuevo As Integer
@@ -44,10 +45,12 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
                 NbbCantidadArticulos.IsEnabled = False
                 CmbMetodoPago.IsEnabled = False
                 BtnConfirmar.IsEnabled = False
+                LblMensajeVenta.Text = "No hay mas existencias del Articulo " & NombreArticulo & ". Por favor agreguelas desde el Modulo Inventario."
             Else
                 NbbCantidadArticulos.IsEnabled = True
                 CmbMetodoPago.IsEnabled = True
                 BtnConfirmar.IsEnabled = True
+                LblMensajeVenta.Text = "Por Favor Confirme la Venta en el Panel Izquierdo para ver Los detalles y proceder al Pago..."
             End If
             EstableceImagen()
             LblTituloNombreArticulo.Text = NombreArticulo
@@ -129,7 +132,13 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
 
     Private Async Sub BtnGuardarVenta_Click(sender As Object, e As RoutedEventArgs)
         Try
-            Await GetArticulo.ActualizarArticulo(IdArticulo, ValorUnitario, ExistenciasNuevo)
+            Dim ObtenerArticulo = Await GetArticulo.ConsultaArticulos
+            Dim RetornoArticulo = (From Art In ObtenerArticulo
+                                   Where Art.Id_Articulo = IdArticulo
+                                   Select Art).FirstOrDefault
+            Dim GetExsitenciaArticulo = RetornoArticulo.CantidadTotalVenta_Articulo
+            Dim NumeroRealVentaArticulo = GetExsitenciaArticulo + CantidadComprada
+            Await GetArticulo.ActualizarArticulo(IdArticulo, ValorUnitario, ExistenciasNuevo, NumeroRealVentaArticulo)
 
             Dim CodigoVenta As String = GetUtilitarios.GenearCodigoVenta
             If Await GetVentaArticulo.InsertVenta(CodigoVenta, Date.Now, 2, CantidadComprada, IdMetodoPago, ValorTotal, IdArticulo) = True Then

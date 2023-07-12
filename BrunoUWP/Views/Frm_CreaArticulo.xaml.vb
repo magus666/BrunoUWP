@@ -30,9 +30,11 @@ Public NotInheritable Class Frm_CreaArticulo
         Try
             Dim CodigoArticulo As String = GetUtilitarios.GeneraCodigoArticulo()
             If ValidaDatos() = True Then
+                Dim CantidadExistencias = NmbCantidadExistenciasArticulo.Value
+                Dim CantidadExistenciasVendidas = 0
                 If Await GetArticulo.InsertarArticulo(CodigoArticulo, TxtNombreArticulo.Text, TxtMarcaArticulo.Text,
                                                       TxtDescripcionArticulo.Text, TxtValorArticulo.Text,
-                                                      NmbCantidadExistenciasArticulo.Text, Date.Now, IdMaestroArticulo) = True Then
+                                                      CantidadExistencias, CantidadExistenciasVendidas, Date.Now, IdMaestroArticulo) = True Then
                     GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El Articulo se ha creado con Exito.")
                     GetUtilitarios.LimpiarControles(StpDatosArticulos)
                 End If
