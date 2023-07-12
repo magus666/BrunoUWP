@@ -18,6 +18,7 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NviConfig" Content="Configuracion de la Aplicacion" Tag="ConfiguracionAplicacion" />
                 <NavigationViewItem x:Name="NviConfigEntorno" Content="Configuraciones Global" Tag="ConfiguracionesEntorno" />
+                <NavigationViewItem x:Name="NviConfigAcercaDe" Content="Acerca De" Tag="AcercaDe" />
             </NavigationView.MenuItems>
             <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
         </NavigationView>

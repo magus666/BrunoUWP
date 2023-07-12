@@ -210,6 +210,9 @@
     <Compile Include="Views\Frm_Configuracion.xaml.vb">
       <DependentUpon>Frm_Configuracion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm_ConfiguracionAcercaDe.xaml.vb">
+      <DependentUpon>Frm_ConfiguracionAcercaDe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_ConfiguracionAplicacion.xaml.vb">
       <DependentUpon>Frm_ConfiguracionAplicacion.xaml</DependentUpon>
     </Compile>
@@ -252,8 +255,8 @@
     <Compile Include="Views\Frm_Login.xaml.vb">
       <DependentUpon>Frm_Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Frm_CreaMaestroArticulo.xaml.vb">
-      <DependentUpon>Frm_CreaMaestroArticulo.xaml</DependentUpon>
+    <Compile Include="Views\Frm_CreaCategoriaArticulo.xaml.vb">
+      <DependentUpon>Frm_CreaCategoriaArticulo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_Mascota.xaml.vb">
       <DependentUpon>Frm_Mascota.xaml</DependentUpon>
@@ -370,6 +373,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Frm_ConfiguracionAcercaDe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frm_ConfiguracionAplicacion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -426,7 +433,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Frm_CreaMaestroArticulo.xaml">
+    <Page Include="Views\Frm_CreaCategoriaArticulo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

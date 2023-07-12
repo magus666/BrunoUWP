@@ -19,7 +19,7 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NvmConsultaArticulo" Content="Consulta de Articulos" Tag="ComsultaArtiulos" />
                 <NavigationViewItem x:Name="NvmNuevoArticulo" Content="Creacion de Articulos" Tag="CreacionArticulos" />
-                <NavigationViewItem x:Name="NvmMaestroArticulo" Content="Parametrizacion Maestro Articulos" Tag="MaestroArticulos" />
+                <NavigationViewItem x:Name="NvmCategoriaArticulo" Content="Parametrizacion de Categorias" Tag="CategoriaArticulos" />
             </NavigationView.MenuItems>
             <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
         </NavigationView>

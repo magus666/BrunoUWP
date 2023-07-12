@@ -21,8 +21,27 @@ Public NotInheritable Class Frm_ConsultaArticulo
                 DtgArticulos.ItemsSource = CargaArticulos
                 LblTituloCreacionArticulo.Visibility = Visibility.Collapsed
                 DtgArticulos.Visibility = Visibility.Visible
-                CmbMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
-                CmbMaestroArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
+                CmbCategoriaArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
+                CmbCategoriaArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
+            End If
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Private Async Sub CmbCategoriaArticulo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            Dim selectedItem As MaestroArticuloModel = CType(comboBox.SelectedItem, MaestroArticuloModel)
+            If CmbCategoriaArticulo.SelectedIndex = -1 Then
+                IdMaestroArticulo = 0
+            Else
+                IdMaestroArticulo = selectedItem.Id_MaestroArticulo
+                Dim Articulo = Await GetArticulos.ConsultaArticulos
+                Dim ListaRetornoArticulo = (From Mar In Articulo
+                                            Where Mar.Id_MaestroArticulo = IdMaestroArticulo
+                                            Select Mar).ToList
+                DtgArticulos.ItemsSource = ListaRetornoArticulo
             End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
@@ -40,25 +59,6 @@ Public NotInheritable Class Frm_ConsultaArticulo
                 PgrGeneraExcel.IsActive = False
             End If
 
-        Catch ex As Exception
-            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
-        End Try
-    End Sub
-
-    Private Async Sub CmbMaestroArticulo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-        Try
-            Dim comboBox As ComboBox = CType(sender, ComboBox)
-            Dim selectedItem As MaestroArticuloModel = CType(comboBox.SelectedItem, MaestroArticuloModel)
-            If CmbMaestroArticulo.SelectedIndex = -1 Then
-                IdMaestroArticulo = 0
-            Else
-                IdMaestroArticulo = selectedItem.Id_MaestroArticulo
-                Dim Articulo = Await GetArticulos.ConsultaArticulos
-                Dim ListaRetornoArticulo = (From Mar In Articulo
-                                            Where Mar.Id_MaestroArticulo = IdMaestroArticulo
-                                            Select Mar).ToList
-                DtgArticulos.ItemsSource = ListaRetornoArticulo
-            End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
@@ -96,4 +96,6 @@ Public NotInheritable Class Frm_ConsultaArticulo
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
+
+
 End Class

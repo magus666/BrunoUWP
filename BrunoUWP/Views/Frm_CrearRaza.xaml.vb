@@ -35,6 +35,8 @@ Public NotInheritable Class Frm_CrearRaza
                         RdbTipoMascota.SelectedIndex = 1
                     Case 3
                         RdbTipoMascota.SelectedIndex = 2
+                    Case 4
+                        RdbTipoMascota.SelectedIndex = 3
                 End Select
                 GetUtilitarios.LimpiarControles(StpPrincipal)
             End If
@@ -78,26 +80,32 @@ Public NotInheritable Class Frm_CrearRaza
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
             Select Case SeleccionRadio
                 Case "Perros"
-                    Dim Mascota = Await GetRazaMascota()
-                    Dim RetornoMascota = (From Msc In Mascota
-                                          Where Msc.Id_TipoMascota = 1
-                                          Order By Msc.Nombre_Raza
-                                          Select Msc)
-                    DtgRazaMascota.ItemsSource = RetornoMascota
+                    Dim Raza = Await GetRazaMascota()
+                    Dim RetornoRazaPerro = (From Msc In Raza
+                                            Where Msc.Id_TipoMascota = 1
+                                            Order By Msc.Nombre_Raza
+                                            Select Msc)
+                    DtgRazaMascota.ItemsSource = RetornoRazaPerro
                 Case "Gatos"
-                    Dim Mascota = Await GetRazaMascota()
-                    Dim RetornoMascota = (From Msc In Mascota
-                                          Where Msc.Id_TipoMascota = 2
-                                          Order By Msc.Nombre_Raza
-                                          Select Msc)
-                    DtgRazaMascota.ItemsSource = RetornoMascota
+                    Dim Raza = Await GetRazaMascota()
+                    Dim RetornoRazaGato = (From Msc In Raza
+                                           Where Msc.Id_TipoMascota = 2
+                                           Order By Msc.Nombre_Raza
+                                           Select Msc)
+                    DtgRazaMascota.ItemsSource = RetornoRazaGato
                 Case "Conejos"
-                    Dim Mascota = Await GetRazaMascota()
-                    Dim RetornoMascota = (From Msc In Mascota
-                                          Where Msc.Id_TipoMascota = 3
-                                          Order By Msc.Nombre_Raza
-                                          Select Msc)
-                    DtgRazaMascota.ItemsSource = RetornoMascota
+                    Dim Raza = Await GetRazaMascota()
+                    Dim RetornoRazaConejo = (From Msc In Raza
+                                             Where Msc.Id_TipoMascota = 3
+                                             Order By Msc.Nombre_Raza
+                                             Select Msc)
+                    DtgRazaMascota.ItemsSource = RetornoRazaConejo
+                Case "Todas"
+                    Dim Raza = Await GetRazaMascota()
+                    Dim RetornoRazaTodas = (From Msc In Raza
+                                            Order By Msc.Nombre_Raza
+                                            Select Msc)
+                    DtgRazaMascota.ItemsSource = RetornoRazaTodas
             End Select
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)

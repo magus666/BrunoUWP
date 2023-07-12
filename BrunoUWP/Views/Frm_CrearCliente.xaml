@@ -33,12 +33,18 @@
                         Orientation="Vertical"
                         Padding="20">
                     <my:InfoBar x:Name="InfAlerta"/>
-                    <TextBox x:Name="TxtDocumento" Header="Documento"/>
-                    <TextBox x:Name="TxtNombres" Header="Nombres"/>
-                    <TextBox x:Name="TxtApellidos" Header="Apellidos"/>
-                    <TextBox x:Name="TxtDireccion" Header="Direccion"/>
-                    <TextBox x:Name="TxtTelefono" Header="Telefono"/>
-                    <TextBox x:Name="TxtCorreo" Header="Correo Electronico"/>
+                    <TextBox x:Name="TxtDocumento" Header="Documento" 
+                             PlaceholderText="Digite Documento"/>
+                    <TextBox x:Name="TxtNombres" Header="Nombres"
+                             PlaceholderText="Digite Nombres"/>
+                    <TextBox x:Name="TxtApellidos" Header="Apellidos"
+                             PlaceholderText="Digite Apellidos"/>
+                    <TextBox x:Name="TxtDireccion" Header="Direccion"
+                             PlaceholderText="Digite Direccion"/>
+                    <TextBox x:Name="TxtTelefono" Header="Telefono"
+                             PlaceholderText="Digite Telefono"/>
+                    <TextBox x:Name="TxtCorreo" Header="Correo Electronico"
+                             PlaceholderText="Digite Correo Electronico"/>
                     <my:NumberBox x:Name="NbbEdad"
                               Header="Edad"
                               Value="1"

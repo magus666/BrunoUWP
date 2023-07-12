@@ -100,10 +100,10 @@ Public Class Cl_Articulo
                                         Marca = x.Marca_Articulo,
                                         Descripcion = x.Descripcion_Articulo,
                                         Valor_Unitario = x.Valor_Articulo,
-                                        Articulos_Vendidos = x.CantidadTotalVenta_Articulo,
-                                        Existencias_Actuales = x.Cantidad_Articulo)
+                                        Existencias_Actuales = x.Cantidad_Articulo,
+                                        Articulos_Vendidos = x.CantidadTotalVenta_Articulo)
             ws.InsertRow(1, 1)
-            ws.Cells("A1:F1").Merge = True
+            ws.Cells("A1:G1").Merge = True
             ws.Cells("A1").Value = "Articulos Bruno Spa"
             With ws.Cells("A1")
                 .Style.Font.Bold = True

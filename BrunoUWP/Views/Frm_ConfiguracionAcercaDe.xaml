@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="BrunoUWP.Frm_ConfiguracionAcercaDe"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BrunoUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    Margin="10,10,0,0">
+            <TextBlock Text="Bruno Spa 1.0.1.0."
+                       FontWeight="Bold"/>
+            <TextBlock Text="@ 2023 Ivan Marin Solutions."/>
+            <TextBlock Text="Todos los derechos reservados."/>
+            <TextBlock Margin="0,20,0,0">
+                <Hyperlink x:Name="HplAcercaDe"
+                           TextDecorations="None"
+                           NavigateUri="https://www.privacypolicies.com/live/ca03ce45-b341-4246-86e7-aba4563f5b04">
+                    Politica de Privacidad
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+        
+    </Grid>
+</Page>

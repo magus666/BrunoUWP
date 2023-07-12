@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="BrunoUWP.Frm_CreaMaestroArticulo"
+    x:Class="BrunoUWP.Frm_CreaCategoriaArticulo"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BrunoUWP"
@@ -30,9 +30,11 @@
                             Margin="20,10,20,10">
                     <my:InfoBar x:Name="InfAlerta"/>
                     <TextBox x:Name="TxtNombreMaestroArticulo" 
-                             Header="Nombre"/>
+                             Header="Nombre"
+                             PlaceholderText="Digite Nombre"/>
                     <TextBox x:Name="TxtDescripcionMaestroArticulo" 
-                             Header="Descripcion"/>
+                             Header="Descripcion"
+                             PlaceholderText="Digite Descripcion"/>
                     <Button x:Name="BtnGuardar"
                             Margin="0,10,0,0"
                             Content="Guardar"

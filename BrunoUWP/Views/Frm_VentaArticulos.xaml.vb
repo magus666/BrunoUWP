@@ -11,6 +11,7 @@ Public NotInheritable Class Frm_VentaArticulos
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetMaestroArticulos As New Cl_MaestroArticulo
     Dim GetArticulos As New Cl_Articulo
+    Dim GetCategorias As New Cl_MaestroArticulo
     Dim Existencias As Integer
     Dim IdMaestroArticulo As Integer
     Dim IdArticulo As Integer
@@ -19,10 +20,19 @@ Public NotInheritable Class Frm_VentaArticulos
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            CmbTipoArticulo.ItemsSource = Await GetMaestroArticulos.ConsultaMaestroArticulos()
-            CmbTipoArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
-            LblMensajeArticulo.Visibility = Visibility.Visible
-            GrvListadoArticulos.Visibility = Visibility.Collapsed
+            Dim ObtenerCategoria = Await GetCategorias.ConsultaMaestroArticulos()
+            Dim RetonoCategoria = ObtenerCategoria.Count
+            If RetonoCategoria = 0 Then
+                LblMensajeVacioArticulo.Visibility = Visibility.Visible
+                LblMensajeArticulo.Visibility = Visibility.Collapsed
+                GrvListadoArticulos.Visibility = Visibility.Collapsed
+            Else
+                CmbTipoArticulo.ItemsSource = Await GetMaestroArticulos.ConsultaMaestroArticulos()
+                CmbTipoArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
+                LblMensajeVacioArticulo.Visibility = Visibility.Collapsed
+                LblMensajeArticulo.Visibility = Visibility.Visible
+                GrvListadoArticulos.Visibility = Visibility.Collapsed
+            End If
         Catch ex As Exception
 
         End Try

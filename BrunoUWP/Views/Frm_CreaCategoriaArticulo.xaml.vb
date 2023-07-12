@@ -3,9 +3,10 @@
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
-Public NotInheritable Class Frm_CreaMaestroArticulo
+Public NotInheritable Class Frm_CreaCategoriaArticulo
     Inherits Page
     Dim GetUtilitarios As New Cl_Utilitarios
+    Dim GetValidaciones As New Cl_Validaciones
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetMaestroArticulo As New Cl_MaestroArticulo
     Dim IdMaestroArticulo As Integer
@@ -14,22 +15,43 @@ Public NotInheritable Class Frm_CreaMaestroArticulo
         Try
             DtgMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
             Dim CodigoMastroArticulo As String = GetUtilitarios.GeneraCodigoMaestroArticulo
-            If Await GetMaestroArticulo.InsertarMaestroArticulo(CodigoMastroArticulo, TxtNombreMaestroArticulo.Text,
+            If ValidaDatos() = True Then
+                If Await GetMaestroArticulo.InsertarMaestroArticulo(CodigoMastroArticulo, TxtNombreMaestroArticulo.Text,
                                                                 TxtDescripcionMaestroArticulo.Text, Date.Now) = True Then
-                Dim Retorno = "Buena la Ñola"
-                DtgMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
+                    GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "Se guardo la Categoria Correctamente.")
+                    GetUtilitarios.LimpiarControles(StpPrincipal)
+                    DtgMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
+                End If
             End If
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
+
+    Public Function ValidaDatos() As Boolean
+        Try
+            If GetValidaciones.ValidaTextBoxVacio(TxtNombreMaestroArticulo) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Aviso", "El Nombre no puede Estar Vacio.", TxtNombreMaestroArticulo)
+                Return False
+                Exit Function
+            End If
+            If GetValidaciones.ValidaTextBoxVacio(TxtDescripcionMaestroArticulo) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Aviso", "El Nombre no puede Estar Vacio.", TxtDescripcionMaestroArticulo)
+                Return False
+                Exit Function
+            End If
+            Return True
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 
     Private Async Sub DtgMaestroArticulo_DoubleTapped(sender As Object, e As DoubleTappedRoutedEventArgs)
         Try
@@ -40,7 +62,7 @@ Public NotInheritable Class Frm_CreaMaestroArticulo
             TxtDescripcionMaestroArticuloDialog.Text = ObtenerMaestroArticulo.Descripcion_MaestroArticulo
             Await CtdModificaArticuloMaestro.ShowAsync()
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -52,7 +74,7 @@ Public NotInheritable Class Frm_CreaMaestroArticulo
                 DtgMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
             End If
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 End Class

@@ -13,8 +13,8 @@ Public NotInheritable Class Frm_Articulo
             Dim ContadorMaestroArticulo = Await GetMaestroArticulo.ConsultaMaestroArticulos()
             If ContadorMaestroArticulo.Count = 0 Then
                 MarcoTrabajo = FrmContenido
-                NvvArticulo.SelectedItem = NvmMaestroArticulo
-                MarcoTrabajo.Navigate(GetType(Frm_CreaMaestroArticulo))
+                NvvArticulo.SelectedItem = NvmCategoriaArticulo
+                MarcoTrabajo.Navigate(GetType(Frm_CreaCategoriaArticulo))
             Else
                 MarcoTrabajo = FrmContenido
                 NvvArticulo.SelectedItem = NvmConsultaArticulo
@@ -33,8 +33,8 @@ Public NotInheritable Class Frm_Articulo
                     FrmContenido.Navigate(GetType(Frm_ConsultaArticulo))
                 Case "Creacion de Articulos"
                     FrmContenido.Navigate(GetType(Frm_CreaArticulo))
-                Case "Parametrizacion Maestro Articulos"
-                    FrmContenido.Navigate(GetType(Frm_CreaMaestroArticulo))
+                Case "Parametrizacion de Categorias"
+                    FrmContenido.Navigate(GetType(Frm_CreaCategoriaArticulo))
             End Select
         Catch ex As Exception
 

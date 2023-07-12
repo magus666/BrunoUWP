@@ -33,9 +33,11 @@
                       HorizontalAlignment="Stretch"
                       SelectionChanged="CmbTipoMascota_SelectionChanged"/>
                 <TextBox x:Name="TxtNombreRaza" 
-                     Header="Nombre"/>
+                         Header="Nombre"
+                         PlaceholderText="Digite Nombre"/>
                 <TextBox x:Name="TxtDescripcionRaza" 
-                     Header="Descripcion"/>
+                         Header="Descripcion"
+                         PlaceholderText="Digite Descripcion"/>
                 <Button x:Name="BtnGuardar"
                     Margin="0,10,0,0"
                     Content="Guardar"
@@ -49,13 +51,14 @@
             <StackPanel Margin="20,0,20,0">
                 <my:RadioButtons x:Name="RdbTipoMascota"
                                  Margin="10,10,0,0"
-                                 SelectedIndex="0"
+                                 SelectedIndex="3"
                                  SelectionChanged="RdbTipoMascota_SelectionChanged"
-                                 MaxColumns="3" 
+                                 MaxColumns="4" 
                                  Header="Seleccione el Tipo de Mascota:">
                     <x:String>Perros</x:String>
                     <x:String>Gatos</x:String>
                     <x:String>Conejos</x:String>
+                    <x:String>Todas</x:String>
                 </my:RadioButtons>
                 <ScrollViewer>
                     <StackPanel x:Name="StpGrilla" 
