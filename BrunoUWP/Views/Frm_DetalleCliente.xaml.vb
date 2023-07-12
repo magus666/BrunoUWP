@@ -28,7 +28,6 @@ Public NotInheritable Class Frm_DetalleCliente
                 Case "Inactivo"
                     TgsEstadoCliente.IsOn = False
             End Select
-
         End If
     End Sub
 

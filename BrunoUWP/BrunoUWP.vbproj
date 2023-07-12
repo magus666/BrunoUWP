@@ -242,6 +242,9 @@
     <Compile Include="Views\Frm_DetalleCliente.xaml.vb">
       <DependentUpon>Frm_DetalleCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm_DetalleVentaArticulo.xaml.vb">
+      <DependentUpon>Frm_DetalleVentaArticulo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_Inicio.xaml.vb">
       <DependentUpon>Frm_Inicio.xaml</DependentUpon>
     </Compile>
@@ -407,6 +410,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_DetalleCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_DetalleVentaArticulo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

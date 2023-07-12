@@ -46,6 +46,12 @@ Public NotInheritable Class Frm_VentaArticulos
         End Try
     End Sub
 
+    Private Sub GrvListadoArticulos_ItemClick(sender As Object, e As ItemClickEventArgs)
+        Dim GetArticulo As New ArticuloModel
+        GetArticulo = e.ClickedItem
+        Frame.Navigate(GetType(Frm_DetalleVentaArticulo), GetArticulo)
+    End Sub
+
     'Private Async Sub CmbArticulo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
     '    Try
     '        NbmCantidadVentaArticulo.IsEnabled = True

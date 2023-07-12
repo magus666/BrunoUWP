@@ -1,0 +1,125 @@
+﻿<Page xmlns:my="using:Microsoft.UI.Xaml.Controls" 
+    x:Class="BrunoUWP.Frm_DetalleVentaArticulo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BrunoUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
+    <Page.Resources>
+        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0"
+              Margin="10,10,0,10"
+              ui:Effects.Shadow="{StaticResource CommonShadow}">
+            <StackPanel Margin="10,10,10,0">
+                <Image x:Name="ImgArticulo"
+                   VerticalAlignment="Top"
+                   Width="300" 
+                   Height="400"/>
+                <TextBlock x:Name="LblTituloNombreArticulo" 
+                           FontSize="25"
+                           FontWeight="Bold"/>
+                <TextBlock x:Name="LblDescripcionArticulo"
+                           Margin="0,10,0,0"
+                           FontSize="18"
+                           TextWrapping="Wrap"
+                           FontWeight="Bold"/>
+                <TextBlock x:Name="LblExistencias"
+                           Margin="0,10,0,0"/>
+                <TextBlock x:Name="LblValorUnitaro"
+                           Margin="0,0,0,0"/>
+                <TextBlock x:Name="LblValorTotal"
+                           Margin="0,0,0,0"/>
+                <my:NumberBox x:Name="NbbCantidadArticulos"
+                              Margin="0,10,0,0"
+                              Value="0"
+                              ValueChanged="NbbCantidadArticulos_ValueChanged"
+                              SpinButtonPlacementMode="Inline"
+                              SmallChange="1" Minimum="0"/>
+                <Button x:Name="BtnConfirmar"
+                        Margin="0,10,0,0"
+                        Content="Confirmar"
+                        HorizontalAlignment="Center"
+                        Click="BtnConfirmar_Click"/>
+            </StackPanel>
+            
+        </Grid>
+        <Grid Grid.Column="1"
+              Margin="10,10,10,10"
+              ui:Effects.Shadow="{StaticResource CommonShadow}">
+            <TextBlock x:Name="LblMensajeVenta"
+                       Text="Por Favor Confirme la Venta en el Panel Izquierdo para ver Los detalles y proceder al Pago..."
+                       TextWrapping="Wrap"
+                       FontSize="35"
+                       TextAlignment="Center"
+                       Visibility="Visible"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            <StackPanel x:Name="StpDetallesVenta" 
+                        Margin="10,0,0,0"
+                        Visibility="Collapsed">
+                <TextBlock Text="Detalles de la Venta"
+                           HorizontalAlignment="Center"
+                           FontSize="35"
+                           Margin="0,0,0,40"
+                           FontWeight="Bold"/>
+                <TextBlock x:Name="LblTituloNombreArticuloDetalle" 
+                           FontSize="30"
+                           FontWeight="Bold"/>
+                <TextBlock x:Name="LblDescripcionArticuloDetalle"
+                           Margin="0,10,0,0"
+                           FontSize="25"
+                           TextWrapping="Wrap"
+                           FontWeight="Bold"/>
+                <TextBlock Margin="0,40,10,0"
+                           HorizontalAlignment="Right"
+                           FontSize="22">
+                    <Run Text="Cantidad:"/>
+                    <Run x:Name="LblCantidadDetalle"/>
+                </TextBlock>
+                <TextBlock Margin="0,0,10,0"
+                           HorizontalAlignment="Right"
+                           FontSize="22">
+                    <Run Text="Existencias luego de la Venta:"/>
+                    <Run x:Name="LblExistenciasDetalle"/>
+                </TextBlock>
+                <TextBlock FontSize="22"
+                           Margin="0,0,10,0"
+                           HorizontalAlignment="Right">
+                    <Run Text="Valor Unitario:"/>
+                    <Run x:Name="LblValorUnitaroDetalle"/>
+                </TextBlock>
+                <TextBlock FontSize="22"
+                           Margin="0,0,10,0"
+                           HorizontalAlignment="Right">
+                    <Run Text="Descuento:"/>
+                    <Run Text="No Aplica"/>
+                </TextBlock>
+                <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" Margin="0,5"/>
+                <TextBlock FontSize="22"
+                           Margin="0,0,10,0"
+                           HorizontalAlignment="Right">
+                    <Run Text="Valor Total:"/>
+                    <Run x:Name="LblValorTotalDetalle"/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

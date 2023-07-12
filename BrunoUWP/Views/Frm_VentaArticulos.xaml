@@ -46,7 +46,9 @@
               Grid.Row="1"
               Margin="50,0,50,10">
             <GridView x:Name="GrvListadoArticulos"
-                      HorizontalAlignment="Center">
+                      HorizontalAlignment="Center"
+                      IsItemClickEnabled="True"
+                      ItemClick="GrvListadoArticulos_ItemClick">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical"
