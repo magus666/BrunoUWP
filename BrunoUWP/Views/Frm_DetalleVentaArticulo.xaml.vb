@@ -4,6 +4,12 @@
 ''' </summary>
 Public NotInheritable Class Frm_DetalleVentaArticulo
     Inherits Page
+    Dim GetNotificaciones As New Cl_Notificaciones
+    Dim GetUtilitarios As New Cl_Utilitarios
+    Dim GetValidaciones As New Cl_Validaciones
+    Dim GetMetodoPago As New Cl_MetodoPago
+    Dim GetArticulo As New Cl_Articulo
+    Dim GetVentaArticulo As New Cl_VentaArticulo
     Dim IdArticulo As Integer
     Dim ExistenciasDisponibles As Integer
     Dim ValorUnitario As Integer
@@ -12,6 +18,8 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
     Dim NombreArticulo As String
     Dim DescripcionArticulo As String
     Dim CantidadComprada As Integer
+    Dim IdMetodoPago As Integer
+    Dim NombreMetodoPago As String
 
     Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
         Try
@@ -25,22 +33,33 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
                 NbbCantidadArticulos.Maximum = ExistenciasDisponibles
             End If
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
-    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
+
+            If ExistenciasDisponibles = 0 Then
+                NbbCantidadArticulos.IsEnabled = False
+                CmbMetodoPago.IsEnabled = False
+                BtnConfirmar.IsEnabled = False
+            Else
+                NbbCantidadArticulos.IsEnabled = True
+                CmbMetodoPago.IsEnabled = True
+                BtnConfirmar.IsEnabled = True
+            End If
             EstableceImagen()
             LblTituloNombreArticulo.Text = NombreArticulo
             LblDescripcionArticulo.Text = DescripcionArticulo
             LblExistencias.Text = "Existencias: " & ExistenciasDisponibles
             LblValorUnitaro.Text = "Valor Unitario: " & ValorUnitario
             LblValorTotal.Text = "Valor Total: " & ValorTotal
+            CmbMetodoPago.ItemsSource = Await GetMetodoPago.ConsultaMetodoPago
+            CmbMetodoPago.DisplayMemberPath = "Nombre_MetodoPago"
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
-
     End Sub
 
     Public Function EstableceImagen() As Boolean
@@ -60,27 +79,71 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
             ExistenciasNuevo = ExistenciasDisponibles - ValorNumber
             ValorTotal = ValorUnitario * ValorNumber
             LblExistencias.Text = "Existencias: " & ExistenciasNuevo
-            LblValorTotal.Text = "Valor Total a Pagar: " & ValorTotal.ToString("c")
+            LblValorTotal.Text = "Valor Total: " & ValorTotal.ToString("c")
             CantidadComprada = NbbCantidadArticulos.Value
 
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
     Private Sub BtnConfirmar_Click(sender As Object, e As RoutedEventArgs)
         Try
-            LblMensajeVenta.Visibility = Visibility.Collapsed
-            StpDetallesVenta.Visibility = Visibility.Visible
-
-            LblTituloNombreArticuloDetalle.Text = NombreArticulo
-            LblDescripcionArticuloDetalle.Text = DescripcionArticulo
-            LblExistenciasDetalle.Text = ExistenciasNuevo
-            LblCantidadDetalle.Text = CantidadComprada
-            LblValorUnitaroDetalle.Text = ValorUnitario.ToString("c")
-            LblValorTotalDetalle.Text = ValorTotal.ToString("c")
+            If GetValidaciones.ValidaComboBoxVacio(CmbMetodoPago) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Aviso", "Seleccione un Metodo de Pago", CmbMetodoPago)
+                Exit Sub
+            End If
+            If NbbCantidadArticulos.Value <= 0 Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Aviso", "La cantidad no puede ser 0", NbbCantidadArticulos)
+                Exit Sub
+            Else
+                LblMensajeVenta.Visibility = Visibility.Collapsed
+                StpDetallesVenta.Visibility = Visibility.Visible
+                LblTituloNombreArticuloDetalle.Text = NombreArticulo
+                LblDescripcionArticuloDetalle.Text = DescripcionArticulo
+                LblExistenciasDetalle.Text = ExistenciasNuevo
+                LblCantidadDetalle.Text = CantidadComprada
+                LblMetodoPagoDetalle.Text = NombreMetodoPago
+                LblValorUnitaroDetalle.Text = ValorUnitario.ToString("c")
+                LblValorTotalDetalle.Text = ValorTotal.ToString("c")
+            End If
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
+    End Sub
+
+    Private Sub CmbMetodoPago_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            Dim selectedItem As MetodoPagoModel = CType(comboBox.SelectedItem, MetodoPagoModel)
+            If CmbMetodoPago.SelectedIndex = -1 Then
+                IdMetodoPago = 0
+            Else
+                IdMetodoPago = selectedItem.Id_MetodoPago
+                NombreMetodoPago = selectedItem.Nombre_MetodoPago
+            End If
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Private Async Sub BtnGuardarVenta_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            Await GetArticulo.ActualizarArticulo(IdArticulo, ValorUnitario, ExistenciasNuevo)
+
+            Dim CodigoVenta As String = GetUtilitarios.GenearCodigoVenta
+            If Await GetVentaArticulo.InsertVenta(CodigoVenta, Date.Now, 2, CantidadComprada, IdMetodoPago, ValorTotal, IdArticulo) = True Then
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La venta se realizó con Exito")
+                VolverAtras()
+            End If
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Public Sub VolverAtras()
+        If Frame.CanGoBack Then
+            Frame.GoBack()
+        End If
     End Sub
 End Class

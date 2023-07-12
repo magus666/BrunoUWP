@@ -1,16 +1,14 @@
 ﻿Imports Windows.UI
 
-Public Class Cl_ColorLetraExistencias
+Public Class Cl_DeshabilitarItemVenta
     Implements IValueConverter
 
     Public Function Convert(value As Object, targetType As Type, parameter As Object, language As String) As Object Implements IValueConverter.Convert
         Dim Existencias As Integer = CType(value, Integer)
-        If Existencias >= 10 Then
-            Return New SolidColorBrush(Colors.Green)
-        ElseIf Existencias >= 6 Then
-            Return New SolidColorBrush(Colors.Yellow)
-        ElseIf Existencias >= 0 Then
-            Return New SolidColorBrush(Colors.Red)
+        If Existencias <= 0 Then
+            Return False
+        Else
+            Return True
         End If
     End Function
 

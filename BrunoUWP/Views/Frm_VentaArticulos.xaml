@@ -14,6 +14,7 @@
     Loaded="Page_Loaded">
     <Page.Resources>
         <MyClass:Cl_ColorLetraExistencias x:Key="Cl_ColorLetraExistencias"/>
+        <MyClass:Cl_DeshabilitarItemVenta x:Key="Cl_DeshabilitarItemVenta"/>
         <MyClass:Cl_AgregaSignoPesos x:Key="Cl_AgregaSignoPesos"/>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
     </Page.Resources>
