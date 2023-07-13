@@ -93,6 +93,12 @@ Public NotInheritable Class Frm_ConsultaMascota
     End Function
 
     Private Sub LsvMascota_ItemClick(sender As Object, e As ItemClickEventArgs)
+        Try
+            Dim GetMascota As New NewMascotaModel
+            GetMascota = e.ClickedItem
+            Frame.Navigate(GetType(Frm_DetalleMascota), GetMascota)
+        Catch ex As Exception
 
+        End Try
     End Sub
 End Class

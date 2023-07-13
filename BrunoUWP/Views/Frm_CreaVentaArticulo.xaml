@@ -73,7 +73,7 @@
                             <Image x:Name="ImgArticulo"
                                    Height="250"
                                    Width="200"
-                                   Source="/Assets/BoxerJuguete.jpg" />
+                                   Source="/Assets/ImagenJuguete.jpeg" />
                             <TextBlock>
                                 <Run Text="Nombre:"/>
                                 <Run x:Name="LblNombreArticulo"

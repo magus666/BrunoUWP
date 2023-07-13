@@ -36,6 +36,30 @@ Public Class Cl_Mascota
         End Try
     End Function
 
+    Public Async Function ActualizarMascota(IdMascota As Integer,
+                                            NombreMascota As String,
+                                            EdadMascota As Integer,
+                                            ObservacionesMascota As String) As Task(Of Boolean)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetMascota = Await ConexionDB.Table(Of MascotaModel)().ToListAsync()
+            Dim Mascota = (From x In GetMascota
+                           Where x.Id_Mascota = IdMascota
+                           Select x).FirstOrDefault
+            If Mascota IsNot Nothing Then
+                Mascota.Nombre_Mascota = NombreMascota
+                Mascota.Edad_Mascota = EdadMascota
+                Mascota.Observaciones_Mascota = ObservacionesMascota
+                Await ConexionDB.UpdateAsync(Mascota)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
     Public Async Function ConsultaMascotas() As Task(Of List(Of MascotaModel))
         Try
             Await ConfiguraSqlite()

@@ -5,9 +5,23 @@
 ''' </summary>
 Public NotInheritable Class Frm_VentaArticulo
     Inherits Page
+    Dim GetVentaArticulo As New Cl_VentaArticulo
 
-    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim ObtenerVentaArticulo = Await GetVentaArticulo.ConsultaVenta
+            If ObtenerVentaArticulo.Count = 0 Then
+                NvvVentaArticulo.SelectedItem = NvmCreaVentaArticulo
+                MarcoTrabajo = FrmContenido
+                MarcoTrabajo.Navigate(GetType(Frm_CreaVentaArticulo))
+            Else
+                NvvVentaArticulo.SelectedItem = NvmConsultaVentaArticulo
+                MarcoTrabajo = FrmContenido
+                MarcoTrabajo.Navigate(GetType(Frm_ConsultaVentaArticulo))
+            End If
+        Catch ex As Exception
 
+        End Try
     End Sub
 
     Private Sub NvvVentaArticulo_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)

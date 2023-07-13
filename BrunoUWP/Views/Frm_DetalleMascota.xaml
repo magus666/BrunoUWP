@@ -1,17 +1,16 @@
 ﻿<Page
-    x:Class="BrunoUWP.Frm_DetalleCliente"
+    x:Class="BrunoUWP.Frm_DetalleMascota"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BrunoUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:my="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Page.Resources>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
     </Page.Resources>
@@ -27,12 +26,11 @@
 
         <Grid Grid.Row="0" >
             <TextBlock x:Name="TxtTituloDetalle"
-                       Text="Detalle del Cliente"
+                       Text="Detalle de la Mascota"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontSize="22"/>
         </Grid>
-
         <Grid Grid.Row="1">
             <ScrollViewer>
                 <Grid ui:Effects.Shadow="{StaticResource CommonShadow}"
@@ -42,8 +40,7 @@
                         Padding="20">
                         <my:InfoBar x:Name="InfAlerta"/>
                         <TextBox x:Name="TxtCodigo" Header="Codigo" IsEnabled="False" />
-                        <TextBox x:Name="TxtDocumento" Header="Documento" IsEnabled="False"/>
-                        <TextBox x:Name="TxtNombreCompleto" Header="Nombres" IsEnabled="False"/>
+                        <TextBox x:Name="TxtRaza" Header="Raza" IsEnabled="False"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="9*"/>
@@ -52,15 +49,15 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBox x:Name="TxtDireccion"
+                            <TextBox x:Name="TxtNombre"
                                  Grid.Column="0"
-                                 Header="Direccion" IsEnabled="False"/>
-                            <Button x:Name="BtnEditarDireccion"
-                                Grid.Column="1"
-                                Click="BtnEditarDireccion_Click"
-                                ToolTipService.ToolTip="Editar Direccion"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom">
+                                 Header="Nombre" IsEnabled="False"/>
+                            <Button x:Name="BtnEditarNombre"
+                                    Grid.Column="1"
+                                    ToolTipService.ToolTip="Editar Nombre"
+                                    HorizontalAlignment="Right"
+                                    Click="BtnEditarNombre_Click"
+                                    VerticalAlignment="Bottom">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
                                 </StackPanel>
@@ -74,22 +71,26 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBox x:Name="TxtTelefono"
-                                 Grid.Column="0"
-                                 Header="Telefono" 
-                                 IsEnabled="False"/>
-                            <Button x:Name="BtnEditarTelefono"
-                                Grid.Column="1"
-                                Click="BtnEditarTelefono_Click"
-                                ToolTipService.ToolTip="Editar Telefono"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom">
+                            <my:NumberBox x:Name="NbbEdad"
+                                          Grid.Column="0"
+                                          SpinButtonPlacementMode="Inline"
+                                          SmallChange="1"
+                                          Maximum="20"
+                                          Minimum="1"
+                                          Header="Edad" 
+                                          IsEnabled="False"/>
+                            <Button x:Name="BtnEditarEdad"
+                                    Grid.Column="1"
+                                    ToolTipService.ToolTip="Editar Edad"
+                                    HorizontalAlignment="Right"
+                                    Click="BtnEditarEdad_Click"
+                                    VerticalAlignment="Bottom">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
                                 </StackPanel>
                             </Button>
                         </Grid>
-
+                        <TextBox x:Name="TxtPropietario" Header="Dueño" IsEnabled="False"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="9*"/>
@@ -98,48 +99,29 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBox x:Name="TxtCorreo"
-                                 Grid.Column="0"
-                                 Header="Correo Electronico" 
-                                 IsEnabled="False"/>
-                            <Button x:Name="BtnEditarCorreo"
-                                Grid.Column="1"
-                                Click="BtnEditarCorreo_Click"
-                                ToolTipService.ToolTip="Editar Correo"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom">
+                            <TextBox x:Name="TxtObservaciones"
+                                     Grid.Column="0"
+                                     Height="100"
+                                     TextWrapping="Wrap"
+                                     Header="Observaciones" 
+                                     IsEnabled="False"/>
+                            <Button x:Name="BtnEditarObservaciones"
+                                    Grid.Column="1"
+                                    Height="73"
+                                    ToolTipService.ToolTip="Editar Observaciones"
+                                    HorizontalAlignment="Right"
+                                    Click="BtnEditarObservaciones_Click"
+                                    VerticalAlignment="Bottom">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
                                 </StackPanel>
                             </Button>
                         </Grid>
-                        <TextBox x:Name="TxtEdad" Header="Edad" IsEnabled="False"/>
-                        <TextBox x:Name="TxtSexo" Header="Sexo" IsEnabled="False"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="9*"/>
-                                <ColumnDefinition Width="100"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <TextBlock x:Name="LblEstadoCliente"
-                                       Grid.Column="0"
-                                       Margin="0,10,0,0"
-                                       VerticalAlignment="Top"
-                                       FontSize="14"
-                                       Text="Estado Actual del Cliente" />
-                            <ToggleSwitch x:Name="TgsEstadoCliente"
-                                          Grid.Column="1"
-                                          VerticalAlignment="Center"
-                                          OnContent="Activo"
-                                          RelativePanel.AlignRightWithPanel="True"
-                                          OffContent="Inactivo"/>
-                        </Grid>
-                        <StackPanel HorizontalAlignment="Center">
-                            <Button x:Name="BtnActualizarCliente"
+                        <StackPanel HorizontalAlignment="Center"
+                                    Margin="0,10,0,0">
+                            <Button x:Name="BtnActualizarMascota"
                                     Content="Actualizar"
-                                    Click="BtnActualizarCliente_Click"/>
+                                    Click="BtnActualizarMascota_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

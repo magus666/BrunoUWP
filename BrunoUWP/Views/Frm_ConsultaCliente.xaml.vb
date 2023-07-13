@@ -73,7 +73,7 @@ Public NotInheritable Class Frm_ConsultaCliente
         Try
             Dim GetClienteModel As New NewPersonaModel
             GetClienteModel = e.ClickedItem
-            Frame.Navigate(GetType(Frm_DetalleVentaArticulo), GetClienteModel)
+            Frame.Navigate(GetType(Frm_DetalleCliente), GetClienteModel)
         Catch ex As Exception
 
         End Try

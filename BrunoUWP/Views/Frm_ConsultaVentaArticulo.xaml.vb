@@ -6,6 +6,7 @@
 Public NotInheritable Class Frm_ConsultaVentaArticulo
     Inherits Page
     Dim GetVentaArticulo As New Cl_VentaArticulo
+    Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetMetodoPago As New Cl_MetodoPago
     Dim GetTipoTransaccion As New Cl_TipoTransaccion
     Dim GetArticulo As New Cl_Articulo
@@ -37,11 +38,22 @@ Public NotInheritable Class Frm_ConsultaVentaArticulo
                                                          .ValorTotal = Var.Valor_VentaArticulo.ToString("c")})
             DtgVentaArticulo.ItemsSource = RetornoVentaArticulo
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
-    Private Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
-
+    Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            PgrGeneraExcel.IsActive = True
+            If Await GetVentaArticulo.CreaExcelVentaArticulo = True Then
+                PgrGeneraExcel.IsActive = False
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La informacion Se exportó con exito a Excel")
+            Else
+                GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Advertencia", "Se canceló la Exportacion a Excel")
+                PgrGeneraExcel.IsActive = False
+            End If
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
     End Sub
 End Class

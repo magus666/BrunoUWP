@@ -121,7 +121,7 @@ Public Class Cl_Articulo
                     Await xlPackage.SaveAsAsync(stream.AsStream())
                 End Using
                 Dim status = Await CachedFileManager.CompleteUpdatesAsync(file)
-                'Dim success = Await Windows.System.Launcher.LaunchFileAsync(file)
+                Dim success = Await Windows.System.Launcher.LaunchFileAsync(file)
                 Return True
             Else
                 Return False

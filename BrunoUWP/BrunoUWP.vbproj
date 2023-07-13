@@ -250,6 +250,9 @@
     <Compile Include="Views\Frm_DetalleCliente.xaml.vb">
       <DependentUpon>Frm_DetalleCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm_DetalleMascota.xaml.vb">
+      <DependentUpon>Frm_DetalleMascota.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_DetalleVentaArticulo.xaml.vb">
       <DependentUpon>Frm_DetalleVentaArticulo.xaml</DependentUpon>
     </Compile>
@@ -299,6 +302,7 @@
     <Content Include="Assets\BoxerJuguete.jpg" />
     <Content Include="Assets\Calendario.png" />
     <Content Include="Assets\Clientes.png" />
+    <Content Include="Assets\ImagenJuguete.jpeg" />
     <Content Include="Assets\Juguetes.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
@@ -429,6 +433,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Frm_DetalleCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_DetalleMascota.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -68,7 +68,7 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
     Public Function EstableceImagen() As Boolean
         Try
             Dim bitmapImage As New BitmapImage()
-            bitmapImage.UriSource = New Uri("ms-appx:///Assets/BoxerJuguete.jpg")
+            bitmapImage.UriSource = New Uri("ms-appx:///Assets/ImagenJuguete.jpeg")
             ImgArticulo.Source = bitmapImage
             Return True
         Catch ex As Exception
