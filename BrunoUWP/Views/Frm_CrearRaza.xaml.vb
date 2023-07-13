@@ -114,38 +114,10 @@ Public NotInheritable Class Frm_CrearRaza
 
     Private Async Sub CtdModificaRaza_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
         Try
-            Dim RadioSeleccionado = RdbTipoMascota.SelectedIndex
+            Dim RadioSeleccionado = RdbTipoMascota.SelectedItem.ToString
             If Await GetRaza.ActualizarRaza(IdRaza, TxtNombreRazaDialog.Text, TxtDescripcionRazaDialog.Text) = True Then
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Raza se Actualizó Correctamente.")
-                Select Case RadioSeleccionado
-                    Case 0
-                        Dim Raza = Await GetRazaMascota()
-                        Dim RetornoRazaPerro = (From Msc In Raza
-                                                Where Msc.Nombre_TipoMascota = "Perro"
-                                                Order By Msc.Nombre_Raza
-                                                Select Msc).ToList
-                        DtgRazaMascota.ItemsSource = RetornoRazaPerro
-                    Case 1
-                        Dim Raza = Await GetRazaMascota()
-                        Dim RetornoRazaGato = (From Msc In Raza
-                                               Where Msc.Nombre_TipoMascota = "Gato"
-                                               Order By Msc.Nombre_Raza
-                                               Select Msc).ToList
-                        DtgRazaMascota.ItemsSource = RetornoRazaGato
-                    Case 2
-                        Dim Raza = Await GetRazaMascota()
-                        Dim RetornoRazaConejo = (From Msc In Raza
-                                                 Where Msc.Nombre_TipoMascota = "Conejo"
-                                                 Order By Msc.Nombre_Raza
-                                                 Select Msc).ToList
-                        DtgRazaMascota.ItemsSource = RetornoRazaConejo
-                    Case 3
-                        Dim Raza = Await GetRazaMascota()
-                        Dim RetornoRazaTodas = (From Msc In Raza
-                                                Order By Msc.Nombre_Raza
-                                                Select Msc).ToList
-                        DtgRazaMascota.ItemsSource = RetornoRazaTodas
-                End Select
+                Await GetElementosRadioTipoMascota(RadioSeleccionado)
             End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
@@ -155,7 +127,15 @@ Public NotInheritable Class Frm_CrearRaza
     Private Async Sub RdbTipoMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
-            Select Case SeleccionRadio
+            Await GetElementosRadioTipoMascota(SeleccionRadio)
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Public Async Function GetElementosRadioTipoMascota(RadioSeleccionado As String) As Task
+        Try
+            Select Case RadioSeleccionado
                 Case "Perros"
                     Dim Raza = Await GetRazaMascota()
                     Dim RetornoRazaPerro = (From Msc In Raza
@@ -187,5 +167,5 @@ Public NotInheritable Class Frm_CrearRaza
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
-    End Sub
+    End Function
 End Class
