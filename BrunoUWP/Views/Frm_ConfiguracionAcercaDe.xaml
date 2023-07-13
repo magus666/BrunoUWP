@@ -6,15 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
 
     <Grid>
         <StackPanel Orientation="Vertical"
                     Margin="10,10,0,0">
-            <TextBlock Text="Bruno Spa 1.0.1.0."
+            <TextBlock Text="Bruno Spa"
+                       FontSize="18"
                        FontWeight="Bold"/>
-            <TextBlock Text="@ 2023 Ivan Marin Solutions."/>
-            <TextBlock Text="Todos los derechos reservados."/>
+            <TextBlock>
+                <Run Text="Version"/>
+                <Run x:Name="LblVersionAplicacion"/>
+            </TextBlock>
+            <TextBlock Text="Ivan Marin Solutions."/>
+            <TextBlock Text="@ 2023 Todos los Derechos Reservados."/>
             <TextBlock Margin="0,20,0,0">
                 <Hyperlink x:Name="HplAcercaDe"
                            TextDecorations="None"

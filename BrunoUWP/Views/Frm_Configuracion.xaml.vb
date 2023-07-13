@@ -13,7 +13,7 @@ Public NotInheritable Class Frm_Configuracion
                     sender.Content = New Frm_ConfiguracionAplicacion()
                 Case "Configuraciones Global"
                     sender.Content = New Frm_ConfiguracionGlobal()
-                Case "Acerca De"
+                Case "Acerca de"
                     sender.Content = New Frm_ConfiguracionAcercaDe()
             End Select
         Catch ex As Exception

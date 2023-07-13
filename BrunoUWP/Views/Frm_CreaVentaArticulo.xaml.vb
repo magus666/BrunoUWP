@@ -4,14 +4,13 @@ Imports Windows.UI
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
-Public NotInheritable Class Frm_VentaArticulos
+Public NotInheritable Class Frm_CreaVentaArticulo
     Inherits Page
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetValidaciones As New Cl_Validaciones
     Dim GetNotificaciones As New Cl_Notificaciones
-    Dim GetMaestroArticulos As New Cl_MaestroArticulo
+    Dim GetCategoriaArticulo As New Cl_CategoriaArticulo
     Dim GetArticulos As New Cl_Articulo
-    Dim GetCategorias As New Cl_MaestroArticulo
     Dim Existencias As Integer
     Dim IdMaestroArticulo As Integer
     Dim IdArticulo As Integer
@@ -20,14 +19,14 @@ Public NotInheritable Class Frm_VentaArticulos
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Dim ObtenerCategoria = Await GetCategorias.ConsultaMaestroArticulos()
+            Dim ObtenerCategoria = Await GetCategoriaArticulo.ConsultaCategoriaArticulo()
             Dim RetonoCategoria = ObtenerCategoria.Count
             If RetonoCategoria = 0 Then
                 LblMensajeVacioArticulo.Visibility = Visibility.Visible
                 LblMensajeArticulo.Visibility = Visibility.Collapsed
                 GrvListadoArticulos.Visibility = Visibility.Collapsed
             Else
-                CmbTipoArticulo.ItemsSource = Await GetMaestroArticulos.ConsultaMaestroArticulos()
+                CmbTipoArticulo.ItemsSource = Await GetCategoriaArticulo.ConsultaCategoriaArticulo()
                 CmbTipoArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
                 LblMensajeVacioArticulo.Visibility = Visibility.Collapsed
                 LblMensajeArticulo.Visibility = Visibility.Visible
@@ -41,7 +40,7 @@ Public NotInheritable Class Frm_VentaArticulos
     Private Async Sub CmbTipoArticulo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
             Dim ComboBoxSexo As ComboBox = CType(sender, ComboBox)
-            Dim ItemSeleccionado As MaestroArticuloModel = CType(ComboBoxSexo.SelectedItem, MaestroArticuloModel)
+            Dim ItemSeleccionado As CategoriaArticuloModel = CType(ComboBoxSexo.SelectedItem, CategoriaArticuloModel)
             If CmbTipoArticulo.SelectedIndex = -1 Then
                 IdMaestroArticulo = 0
             Else

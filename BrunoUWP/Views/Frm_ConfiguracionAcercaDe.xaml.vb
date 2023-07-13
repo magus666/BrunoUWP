@@ -6,4 +6,9 @@
 Public NotInheritable Class Frm_ConfiguracionAcercaDe
     Inherits Page
 
+    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        Dim GetVersionAplicacion = Package.Current.Id.Version
+        Dim VersionAplicacion As String = $"{GetVersionAplicacion.Major}.{GetVersionAplicacion.Minor}.{GetVersionAplicacion.Build}.{GetVersionAplicacion.Revision}"
+        LblVersionAplicacion.Text = VersionAplicacion
+    End Sub
 End Class

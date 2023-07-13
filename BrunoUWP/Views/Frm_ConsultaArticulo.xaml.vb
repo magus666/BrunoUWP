@@ -5,7 +5,7 @@
 ''' </summary>
 Public NotInheritable Class Frm_ConsultaArticulo
     Inherits Page
-    Dim GetMaestroArticulo As New Cl_MaestroArticulo
+    Dim GetCategoriaArticulo As New Cl_CategoriaArticulo
     Dim GetArticulos As New Cl_Articulo
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim IdMaestroArticulo As Integer
@@ -21,7 +21,7 @@ Public NotInheritable Class Frm_ConsultaArticulo
                 DtgArticulos.ItemsSource = CargaArticulos
                 LblTituloCreacionArticulo.Visibility = Visibility.Collapsed
                 DtgArticulos.Visibility = Visibility.Visible
-                CmbCategoriaArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
+                CmbCategoriaArticulo.ItemsSource = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
                 CmbCategoriaArticulo.DisplayMemberPath = "Nombre_MaestroArticulo"
             End If
         Catch ex As Exception
@@ -32,7 +32,7 @@ Public NotInheritable Class Frm_ConsultaArticulo
     Private Async Sub CmbCategoriaArticulo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         Try
             Dim comboBox As ComboBox = CType(sender, ComboBox)
-            Dim selectedItem As MaestroArticuloModel = CType(comboBox.SelectedItem, MaestroArticuloModel)
+            Dim selectedItem As CategoriaArticuloModel = CType(comboBox.SelectedItem, CategoriaArticuloModel)
             If CmbCategoriaArticulo.SelectedIndex = -1 Then
                 IdMaestroArticulo = 0
             Else

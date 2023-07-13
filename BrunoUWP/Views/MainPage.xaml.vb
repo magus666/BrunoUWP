@@ -31,7 +31,7 @@ Public NotInheritable Class MainPage
                         Case "Articulos"
                             ContenFrameMenu.Navigate(GetType(Frm_Articulo))
                         Case "Venta de Articulos"
-                            ContenFrameMenu.Navigate(GetType(Frm_VentaArticulos))
+                            ContenFrameMenu.Navigate(GetType(Frm_VentaArticulo))
                     End Select
             End Select
         Catch ex As Exception

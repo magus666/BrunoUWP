@@ -19,7 +19,6 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NvmServicios" Content="Servicios Spa" Tag="ServiciosSpa" />
                 <NavigationViewItem x:Name="NvmVentaArticulos" Content="Venta de Articulos" Tag="VentaArticulos" />
-                <NavigationViewItem x:Name="NvmConsultas" Content="Consultas" Tag="Consultas" />
             </NavigationView.MenuItems>
             <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
         </NavigationView>

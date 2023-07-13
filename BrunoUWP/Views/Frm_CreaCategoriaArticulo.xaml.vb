@@ -8,12 +8,12 @@ Public NotInheritable Class Frm_CreaCategoriaArticulo
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetValidaciones As New Cl_Validaciones
     Dim GetNotificaciones As New Cl_Notificaciones
-    Dim GetMaestroArticulo As New Cl_MaestroArticulo
+    Dim GetCategoriaArticulo As New Cl_CategoriaArticulo
     Dim IdMaestroArticulo As Integer
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            DtgMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
+            DtgMaestroArticulo.ItemsSource = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
@@ -23,11 +23,11 @@ Public NotInheritable Class Frm_CreaCategoriaArticulo
         Try
             Dim CodigoMastroArticulo As String = GetUtilitarios.GeneraCodigoMaestroArticulo
             If ValidaDatos() = True Then
-                If Await GetMaestroArticulo.InsertarMaestroArticulo(CodigoMastroArticulo, TxtNombreMaestroArticulo.Text,
+                If Await GetCategoriaArticulo.InsertarCategoriaArticulo(CodigoMastroArticulo, TxtNombreMaestroArticulo.Text,
                                                                 TxtDescripcionMaestroArticulo.Text, Date.Now) = True Then
                     GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "Se guardo la Categoria Correctamente.")
                     GetUtilitarios.LimpiarControles(StpPrincipal)
-                    DtgMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
+                    DtgMaestroArticulo.ItemsSource = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
                 End If
             End If
         Catch ex As Exception
@@ -55,7 +55,7 @@ Public NotInheritable Class Frm_CreaCategoriaArticulo
 
     Private Async Sub DtgMaestroArticulo_DoubleTapped(sender As Object, e As DoubleTappedRoutedEventArgs)
         Try
-            Dim ObtenerMaestroArticulo As New MaestroArticuloModel
+            Dim ObtenerMaestroArticulo As New CategoriaArticuloModel
             ObtenerMaestroArticulo = DtgMaestroArticulo.SelectedItem
             IdMaestroArticulo = ObtenerMaestroArticulo.Id_MaestroArticulo
             TxtNombreMaestroArticuloDialog.Text = ObtenerMaestroArticulo.Nombre_MaestroArticulo
@@ -68,10 +68,10 @@ Public NotInheritable Class Frm_CreaCategoriaArticulo
 
     Private Async Sub CtdModificaArticuloMaestro_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
         Try
-            If Await GetMaestroArticulo.ActualizarMaestroArticulo(IdMaestroArticulo, TxtNombreMaestroArticuloDialog.Text,
+            If Await GetCategoriaArticulo.ActualizarCategoriaArticulo(IdMaestroArticulo, TxtNombreMaestroArticuloDialog.Text,
                                                             TxtDescripcionMaestroArticuloDialog.Text) = True Then
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El Articulo maestro fue Actualizado con Exito.")
-                DtgMaestroArticulo.ItemsSource = Await GetMaestroArticulo.ConsultaMaestroArticulos
+                DtgMaestroArticulo.ItemsSource = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
             End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)

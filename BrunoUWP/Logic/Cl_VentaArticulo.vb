@@ -25,4 +25,16 @@
         End Try
     End Function
 
+    Public Async Function ConsultaVenta() As Task(Of List(Of VentaArticuloModel))
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVentaArticulo = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim ListaVentaArticulo = (From x In GetVentaArticulo
+                                      Select x).ToList()
+            Return ListaVentaArticulo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
 End Class

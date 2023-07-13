@@ -5,12 +5,12 @@
 ''' </summary>
 Public NotInheritable Class Frm_Articulo
     Inherits Page
-    Dim GetMaestroArticulo As New Cl_MaestroArticulo
+    Dim GetCategoriaArticulo As New Cl_CategoriaArticulo
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
 
-            Dim ContadorMaestroArticulo = Await GetMaestroArticulo.ConsultaMaestroArticulos()
+            Dim ContadorMaestroArticulo = Await GetCategoriaArticulo.ConsultaCategoriaArticulo()
             If ContadorMaestroArticulo.Count = 0 Then
                 MarcoTrabajo = FrmContenido
                 NvvArticulo.SelectedItem = NvmCategoriaArticulo

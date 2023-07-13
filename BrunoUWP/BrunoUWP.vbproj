@@ -154,7 +154,7 @@
     <Compile Include="Logic\Cl_DeshabilitarItemVenta.vb" />
     <Compile Include="Logic\Cl_DimensionMascota.vb" />
     <Compile Include="Logic\Cl_IntegracionWhatsapp.vb" />
-    <Compile Include="Logic\Cl_MaestroArticulo.vb" />
+    <Compile Include="Logic\Cl_CategoriaArticulo.vb" />
     <Compile Include="Logic\Cl_ManipulacionImagenes.vb" />
     <Compile Include="Logic\Cl_MetodoPago.vb" />
     <Compile Include="Logic\Cl_Pickers.vb" />
@@ -175,7 +175,7 @@
     <Compile Include="Logic\Cl_DateTime.vb" />
     <Compile Include="Logic\Cl_Mascota.vb" />
     <Compile Include="Models\DimensionMascotaModel.vb" />
-    <Compile Include="Models\MaestroArticuloModel.vb" />
+    <Compile Include="Models\CategoriaArticuloModel.vb" />
     <Compile Include="Models\MascotaModel.vb" />
     <Compile Include="Logic\Cl_Notificaciones.vb" />
     <Compile Include="Models\MetodoPagoModel.vb" />
@@ -232,6 +232,9 @@
     <Compile Include="Views\Frm_ConsultaServicioSpa.xaml.vb">
       <DependentUpon>Frm_ConsultaServicioSpa.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm_ConsultaVentaArticulo.xaml.vb">
+      <DependentUpon>Frm_ConsultaVentaArticulo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Frm_CreaArticulo.xaml.vb">
       <DependentUpon>Frm_CreaArticulo.xaml</DependentUpon>
     </Compile>
@@ -268,8 +271,11 @@
     <Compile Include="Views\Frm_Transacciones.xaml.vb">
       <DependentUpon>Frm_Transacciones.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Frm_VentaArticulos.xaml.vb">
-      <DependentUpon>Frm_VentaArticulos.xaml</DependentUpon>
+    <Compile Include="Views\Frm_VentaArticulo.xaml.vb">
+      <DependentUpon>Frm_VentaArticulo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Frm_CreaVentaArticulo.xaml.vb">
+      <DependentUpon>Frm_CreaVentaArticulo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Frm_VentaServicioSpa.xaml.vb">
       <DependentUpon>Frm_VentaServicioSpa.xaml</DependentUpon>
@@ -402,6 +408,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Frm_ConsultaVentaArticulo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Frm_CreaArticulo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -450,7 +460,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Frm_VentaArticulos.xaml">
+    <Page Include="Views\Frm_VentaArticulo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Frm_CreaVentaArticulo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

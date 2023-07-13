@@ -1,11 +1,11 @@
-﻿Public Class Cl_MaestroArticulo
-    Public Async Function InsertarMaestroArticulo(CodigoMaestroArticulo As String,
+﻿Public Class Cl_CategoriaArticulo
+    Public Async Function InsertarCategoriaArticulo(CodigoMaestroArticulo As String,
                                                   NombreMaestroArticulo As String,
                                                   DescripcionMaestroArticulo As String,
                                                   FechaCreacionMaestroArticulo As Date) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
-            Dim Articulo = New MaestroArticuloModel With {
+            Dim Articulo = New CategoriaArticuloModel With {
                 .Codigo_MaestroArticulo = CodigoMaestroArticulo,
                 .Nombre_MaestroArticulo = NombreMaestroArticulo,
                 .Descripcion_MaestroArticulo = DescripcionMaestroArticulo,
@@ -18,10 +18,10 @@
         End Try
     End Function
 
-    Public Async Function ConsultaMaestroArticulos() As Task(Of List(Of MaestroArticuloModel))
+    Public Async Function ConsultaCategoriaArticulo() As Task(Of List(Of CategoriaArticuloModel))
         Try
             Await ConfiguraSqlite()
-            Dim GetMaestroArticulo = Await ConexionDB.Table(Of MaestroArticuloModel)().ToListAsync()
+            Dim GetMaestroArticulo = Await ConexionDB.Table(Of CategoriaArticuloModel)().ToListAsync()
             Dim ListaMaestroArticulo = (From x In GetMaestroArticulo
                                         Select x).ToList
             Return ListaMaestroArticulo
@@ -30,12 +30,12 @@
         End Try
     End Function
 
-    Public Async Function ActualizarMaestroArticulo(IdMaestroArticulo As Integer,
+    Public Async Function ActualizarCategoriaArticulo(IdMaestroArticulo As Integer,
                                                    NombreMaestroArticulo As String,
                                                    DescripcionMaestroArticulo As String) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
-            Dim GetMaestroArticulo = Await ConexionDB.Table(Of MaestroArticuloModel)().ToListAsync()
+            Dim GetMaestroArticulo = Await ConexionDB.Table(Of CategoriaArticuloModel)().ToListAsync()
             Dim MaestroArticulo = (From x In GetMaestroArticulo
                                    Where x.Id_MaestroArticulo = IdMaestroArticulo
                                    Select x).FirstOrDefault
