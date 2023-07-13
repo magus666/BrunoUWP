@@ -182,6 +182,7 @@
     <Compile Include="Models\NewCitaModel.vb" />
     <Compile Include="Models\NewMascotaModel.vb" />
     <Compile Include="Models\NewPersonaModel.vb" />
+    <Compile Include="Models\NewRazaModel.vb" />
     <Compile Include="Models\PagosModel.vb" />
     <Compile Include="Models\PersonaModel.vb" />
     <Compile Include="Logic\Cl_RazaMascota.vb" />

@@ -64,19 +64,21 @@
                     <StackPanel x:Name="StpGrilla" 
                         Orientation="Vertical">
                         <controls:DataGrid x:Name="DtgRazaMascota"
-                                   Margin="10"
-                                   AutoGenerateColumns="False"
-                                   AreRowDetailsFrozen="True"
-                                   ColumnHeaderHeight="32"
-                                   CanUserReorderColumns="True"
-                                   CanUserResizeColumns="True"
-                                   CanUserSortColumns="True"
-                                   HeadersVisibility="Column"
-                                   IsReadOnly="True"
-                                   HorizontalAlignment="Stretch"
-                                   GridLinesVisibility="Horizontal"
-                                   SelectionMode="Extended">
+                                           Margin="10"
+                                           AutoGenerateColumns="False"
+                                           AreRowDetailsFrozen="True"
+                                           ColumnHeaderHeight="32"
+                                           CanUserReorderColumns="True"
+                                           CanUserResizeColumns="True"
+                                           CanUserSortColumns="True"
+                                           HeadersVisibility="Column"
+                                           IsReadOnly="True"
+                                           HorizontalAlignment="Stretch"
+                                           GridLinesVisibility="Horizontal"
+                                           DoubleTapped="DtgRazaMascota_DoubleTapped"
+                                           SelectionMode="Extended">
                             <controls:DataGrid.Columns>
+                                <controls:DataGridTextColumn Header="Codigo" Tag="TipoMascota" Binding="{Binding Codigo_Raza}" />
                                 <controls:DataGridTextColumn Header="Tipo de Mascota" Tag="TipoMascota" Binding="{Binding Nombre_TipoMascota}" />
                                 <controls:DataGridTextColumn Header="Nombre de Raza" Tag="NombreRaza" Binding="{Binding Nombre_Raza}" />
                                 <controls:DataGridTextColumn Header="Descripcion" Tag="Descripcion" Binding="{Binding Descripcion_Raza}" />
@@ -84,6 +86,20 @@
                         </controls:DataGrid>
                     </StackPanel>
                 </ScrollViewer>
+                <ContentDialog x:Name="CtdModificaRaza"
+                               Title="Modificar Raza"
+                               PrimaryButtonText="Guardar"
+                               PrimaryButtonClick="CtdModificaRaza_PrimaryButtonClick"
+                               SecondaryButtonText="Cancelar">
+                    <StackPanel Orientation="Vertical">
+                        <TextBox x:Name="TxtNombreRazaDialog"
+                                 PlaceholderText="Escriba el Nuevo Nombre" 
+                                 Header="Nombre" />
+                        <TextBox x:Name="TxtDescripcionRazaDialog"
+                                 PlaceholderText="Escriba la nueva Descripcion" 
+                                 Header="Descripcion" />
+                    </StackPanel>
+                </ContentDialog>
             </StackPanel>
         </Grid>
         <my:TeachingTip x:Name="TctAlerta"/>

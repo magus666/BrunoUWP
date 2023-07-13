@@ -12,6 +12,7 @@ Public Class Cl_ColorLetraExistencias
         ElseIf Existencias >= 0 Then
             Return New SolidColorBrush(Colors.Red)
         End If
+        Return Nothing
     End Function
 
     Public Function ConvertBack(value As Object, targetType As Type, parameter As Object, language As String) As Object Implements IValueConverter.ConvertBack

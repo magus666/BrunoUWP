@@ -169,7 +169,8 @@ Public NotInheritable Class Frm_CreaMascota
 
     Private Async Sub CtdNuevaRaza_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
         Try
-            Await GetRazaMascota.InsertarRaza(TxtNombreRazaDialog.Text, TxtDescripcionRazaDialog.Text, IdTipoMascotaDialog)
+            Dim CogigoRaza As String = GetUtilitarios.GenerarCodigoRaza
+            Await GetRazaMascota.InsertarRaza(CogigoRaza, TxtNombreRazaDialog.Text, TxtDescripcionRazaDialog.Text, IdTipoMascotaDialog)
 
             Dim LstaRazaMascota = Await GetRazaMascota.ConsultaRazaMascotaId(IdTipoMascota)
             CmbRazaMascota.ItemsSource = LstaRazaMascota

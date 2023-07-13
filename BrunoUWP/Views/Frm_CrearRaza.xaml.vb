@@ -12,6 +12,7 @@ Public NotInheritable Class Frm_CrearRaza
     Dim GetRaza As New Cl_RazaMascota
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetTipoMascota As New CL_TipoMascota
+    Dim IdRaza As Integer
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
@@ -25,8 +26,9 @@ Public NotInheritable Class Frm_CrearRaza
 
     Private Async Sub BtnGuardar_Click(sender As Object, e As RoutedEventArgs)
         Try
+            Dim CodigoRaza As String = GetUtilitarios.GenerarCodigoRaza
             If ValidaDatos() = True Then
-                Await GetRaza.InsertarRaza(TxtNombreRaza.Text, TxtDescripcionRaza.Text, IdTipoMascota)
+                Await GetRaza.InsertarRaza(CodigoRaza, TxtNombreRaza.Text, TxtDescripcionRaza.Text, IdTipoMascota)
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La raza se ha Guardado con Exito.")
                 Select Case IdTipoMascota
                     Case 1
@@ -65,52 +67,17 @@ Public NotInheritable Class Frm_CrearRaza
             Dim RetornoRaza = (From Rza In Raza
                                Join Tpm In TipoMascota On
                                    Rza.Id_TipoMascota Equals Tpm.Id_TipoMascota
-                               Select Tpm.Nombre_TipoMascota,
-                                   Rza.Id_TipoMascota,
-                                   Rza.Nombre_Raza,
-                                   Rza.Descripcion_Raza)
+                               Select New NewRazaModel With {.Id_Raza = Rza.Id_Raza,
+                                                             .Codigo_Raza = Rza.Codigo_raza,
+                                                             .Nombre_Raza = Rza.Nombre_Raza,
+                                                             .Id_TipoMascota = Rza.Id_TipoMascota,
+                                                             .Nombre_TipoMascota = Tpm.Nombre_TipoMascota,
+                                                             .Descripcion_Raza = Rza.Descripcion_Raza}).ToList
             Return RetornoRaza
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
     End Function
-
-    Private Async Sub RdbTipoMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-        Try
-            Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
-            Select Case SeleccionRadio
-                Case "Perros"
-                    Dim Raza = Await GetRazaMascota()
-                    Dim RetornoRazaPerro = (From Msc In Raza
-                                            Where Msc.Id_TipoMascota = 1
-                                            Order By Msc.Nombre_Raza
-                                            Select Msc)
-                    DtgRazaMascota.ItemsSource = RetornoRazaPerro
-                Case "Gatos"
-                    Dim Raza = Await GetRazaMascota()
-                    Dim RetornoRazaGato = (From Msc In Raza
-                                           Where Msc.Id_TipoMascota = 2
-                                           Order By Msc.Nombre_Raza
-                                           Select Msc)
-                    DtgRazaMascota.ItemsSource = RetornoRazaGato
-                Case "Conejos"
-                    Dim Raza = Await GetRazaMascota()
-                    Dim RetornoRazaConejo = (From Msc In Raza
-                                             Where Msc.Id_TipoMascota = 3
-                                             Order By Msc.Nombre_Raza
-                                             Select Msc)
-                    DtgRazaMascota.ItemsSource = RetornoRazaConejo
-                Case "Todas"
-                    Dim Raza = Await GetRazaMascota()
-                    Dim RetornoRazaTodas = (From Msc In Raza
-                                            Order By Msc.Nombre_Raza
-                                            Select Msc)
-                    DtgRazaMascota.ItemsSource = RetornoRazaTodas
-            End Select
-        Catch ex As Exception
-            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
-        End Try
-    End Sub
 
     Public Function ValidaDatos() As Boolean
         Try
@@ -131,4 +98,94 @@ Public NotInheritable Class Frm_CrearRaza
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+    Private Async Sub DtgRazaMascota_DoubleTapped(sender As Object, e As DoubleTappedRoutedEventArgs)
+        Try
+            Dim ObtenerRaza As New NewRazaModel
+            ObtenerRaza = DtgRazaMascota.SelectedItem
+            IdRaza = ObtenerRaza.Id_Raza
+            TxtNombreRazaDialog.Text = ObtenerRaza.Nombre_Raza
+            TxtDescripcionRazaDialog.Text = ObtenerRaza.Descripcion_Raza
+            Await CtdModificaRaza.ShowAsync()
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Private Async Sub CtdModificaRaza_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
+        Try
+            Dim RadioSeleccionado = RdbTipoMascota.SelectedIndex
+            If Await GetRaza.ActualizarRaza(IdRaza, TxtNombreRazaDialog.Text, TxtDescripcionRazaDialog.Text) = True Then
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Raza se Actualizó Correctamente.")
+                Select Case RadioSeleccionado
+                    Case 0
+                        Dim Raza = Await GetRazaMascota()
+                        Dim RetornoRazaPerro = (From Msc In Raza
+                                                Where Msc.Nombre_TipoMascota = "Perro"
+                                                Order By Msc.Nombre_Raza
+                                                Select Msc).ToList
+                        DtgRazaMascota.ItemsSource = RetornoRazaPerro
+                    Case 1
+                        Dim Raza = Await GetRazaMascota()
+                        Dim RetornoRazaGato = (From Msc In Raza
+                                               Where Msc.Nombre_TipoMascota = "Gato"
+                                               Order By Msc.Nombre_Raza
+                                               Select Msc).ToList
+                        DtgRazaMascota.ItemsSource = RetornoRazaGato
+                    Case 2
+                        Dim Raza = Await GetRazaMascota()
+                        Dim RetornoRazaConejo = (From Msc In Raza
+                                                 Where Msc.Nombre_TipoMascota = "Conejo"
+                                                 Order By Msc.Nombre_Raza
+                                                 Select Msc).ToList
+                        DtgRazaMascota.ItemsSource = RetornoRazaConejo
+                    Case 3
+                        Dim Raza = Await GetRazaMascota()
+                        Dim RetornoRazaTodas = (From Msc In Raza
+                                                Order By Msc.Nombre_Raza
+                                                Select Msc).ToList
+                        DtgRazaMascota.ItemsSource = RetornoRazaTodas
+                End Select
+            End If
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Private Async Sub RdbTipoMascota_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
+        Try
+            Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
+            Select Case SeleccionRadio
+                Case "Perros"
+                    Dim Raza = Await GetRazaMascota()
+                    Dim RetornoRazaPerro = (From Msc In Raza
+                                            Where Msc.Nombre_TipoMascota = "Perro"
+                                            Order By Msc.Nombre_Raza
+                                            Select Msc).ToList
+                    DtgRazaMascota.ItemsSource = RetornoRazaPerro
+                Case "Gatos"
+                    Dim Raza = Await GetRazaMascota()
+                    Dim RetornoRazaGato = (From Msc In Raza
+                                           Where Msc.Nombre_TipoMascota = "Gato"
+                                           Order By Msc.Nombre_Raza
+                                           Select Msc).ToList
+                    DtgRazaMascota.ItemsSource = RetornoRazaGato
+                Case "Conejos"
+                    Dim Raza = Await GetRazaMascota()
+                    Dim RetornoRazaConejo = (From Msc In Raza
+                                             Where Msc.Nombre_TipoMascota = "Conejo"
+                                             Order By Msc.Nombre_Raza
+                                             Select Msc).ToList
+                    DtgRazaMascota.ItemsSource = RetornoRazaConejo
+                Case "Todas"
+                    Dim Raza = Await GetRazaMascota()
+                    Dim RetornoRazaTodas = (From Msc In Raza
+                                            Order By Msc.Nombre_Raza
+                                            Select Msc).ToList
+                    DtgRazaMascota.ItemsSource = RetornoRazaTodas
+            End Select
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
 End Class
