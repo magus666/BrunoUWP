@@ -140,6 +140,8 @@ Public NotInheritable Class Frm_ConsultaCliente
                     AsbBusueda.PlaceholderText = "Digite Codigo"
                 Case "Nombre"
                     AsbBusueda.PlaceholderText = "Digite Nombre"
+                Case "Telefono"
+                    AsbBusueda.PlaceholderText = "Digite Telefono"
             End Select
         Catch ex As Exception
 
