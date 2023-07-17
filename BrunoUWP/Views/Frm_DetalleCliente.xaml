@@ -42,8 +42,78 @@
                         Padding="20">
                         <my:InfoBar x:Name="InfAlerta"/>
                         <TextBox x:Name="TxtCodigo" Header="Codigo" IsEnabled="False" />
-                        <TextBox x:Name="TxtDocumento" Header="Documento" IsEnabled="False"/>
-                        <TextBox x:Name="TxtNombreCompleto" Header="Nombres" IsEnabled="False"/>
+
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="9*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="TxtDocumento"
+                                     Grid.Column="0"
+                                     Header="Documento" 
+                                     IsEnabled="False"/>
+                            <Button x:Name="BtnEditarDocumento"
+                                Grid.Column="1"
+                                Click="BtnEditarDocumento_Click"
+                                ToolTipService.ToolTip="Editar Documento"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="9*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="TxtNombres"
+                                     Grid.Column="0"
+                                     Header="Nombres" 
+                                     IsEnabled="False"/>
+                            <Button x:Name="BtnEditarNombres"
+                                Grid.Column="1"
+                                Click="BtnEditarNombres_Click"
+                                ToolTipService.ToolTip="Editar Nombres"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="9*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="TxtApellidos"
+                                     Grid.Column="0"
+                                     Header="Nombres" 
+                                     IsEnabled="False"/>
+                            <Button x:Name="BtnEditarApellidos"
+                                Grid.Column="1"
+                                Click="BtnEditarApellidos_Click"
+                                ToolTipService.ToolTip="Editar Apellidos"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="9*"/>
@@ -89,7 +159,6 @@
                                 </StackPanel>
                             </Button>
                         </Grid>
-
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="9*"/>
@@ -113,7 +182,29 @@
                                 </StackPanel>
                             </Button>
                         </Grid>
-                        <TextBox x:Name="TxtEdad" Header="Edad" IsEnabled="False"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="9*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="TxtEdad"
+                                     Grid.Column="0"
+                                     Header="Edad" 
+                                     IsEnabled="False"/>
+                            <Button x:Name="BtnEditarEdad"
+                                Grid.Column="1"
+                                Click="BtnEditarEdad_Click"
+                                ToolTipService.ToolTip="Editar Edad"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
                         <TextBox x:Name="TxtSexo" Header="Sexo" IsEnabled="False"/>
                         <Grid>
                             <Grid.ColumnDefinitions>

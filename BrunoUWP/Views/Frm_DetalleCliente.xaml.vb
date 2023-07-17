@@ -15,7 +15,8 @@ Public NotInheritable Class Frm_DetalleCliente
             IdCliente = DatosCliente.Id_Cliente
             TxtCodigo.Text = DatosCliente.Codigo_Cliente
             TxtDocumento.Text = DatosCliente.Documento_Persona
-            TxtNombreCompleto.Text = DatosCliente.NombreCompleto_Persona
+            TxtNombres.Text = DatosCliente.Nombre_Persona
+            TxtApellidos.Text = DatosCliente.Apellido_Persona
             TxtDireccion.Text = DatosCliente.Direccion_Persona
             TxtTelefono.Text = DatosCliente.Telefono_Persona
             TxtCorreo.Text = DatosCliente.Correo_Persona
@@ -54,6 +55,38 @@ Public NotInheritable Class Frm_DetalleCliente
         End Try
     End Sub
 
+    Private Sub BtnEditarDocumento_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            TxtDocumento.IsEnabled = True
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub BtnEditarNombres_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            TxtNombres.IsEnabled = True
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub BtnEditarApellidos_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            TxtApellidos.IsEnabled = True
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub BtnEditarEdad_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            TxtEdad.IsEnabled = True
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Private Async Sub BtnActualizarCliente_Click(sender As Object, e As RoutedEventArgs)
         Try
             Dim GetDataToggle As Boolean
@@ -70,4 +103,6 @@ Public NotInheritable Class Frm_DetalleCliente
 
         End Try
     End Sub
+
+
 End Class

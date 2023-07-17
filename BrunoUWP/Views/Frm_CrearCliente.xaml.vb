@@ -19,6 +19,7 @@ Public NotInheritable Class Frm_CrearCliente
             Await GetSexo.InsertaActualizaSexo()
             CmbSexo.ItemsSource = Await GetSexo.ConsultaSexo()
             CmbSexo.DisplayMemberPath = "Nombre_Sexo"
+            ValoresIniciales()
             Dim CodigoAleatrorio As String = GetUtilitarios.GenerarCodigoCliente()
         Catch ex As Exception
             GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
@@ -51,52 +52,60 @@ Public NotInheritable Class Frm_CrearCliente
         End Try
     End Sub
 
+    Public Sub ValoresIniciales()
+        Dim DocumentoCliente As String = GetUtilitarios.GenerarNumeroDocumento()
+        TxtDocumento.Text = DocumentoCliente
+        TxtDireccion.Text = "N/A"
+        TxtCorreo.Text = "N/A"
+        NbbEdad.Value = 18
+    End Sub
+
     Public Function ValidaDatos() As Boolean
         Try
             If GetValidaciones.ValidaTextBoxVacio(TxtDocumento) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Documento no puede estar Vacio", TxtDocumento)
+                Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtNombres) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Nombre no puede estar Vacio", TxtNombres)
+                Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtApellidos) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Apellido no puede estar Vacio", TxtApellidos)
-                Exit Function
-            End If
-            If GetValidaciones.ValidarApellidos(TxtApellidos.Text) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Debe contener dos Apellidos Validos", TxtApellidos)
+                Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtDireccion) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La Direccion no puede estar Vacia", TxtDireccion)
+                Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtTelefono) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no puede estar Vacio", TxtTelefono)
+                Return False
                 Exit Function
             End If
 
             If GetValidaciones.ValidarNumeroTelefonico(TxtTelefono.Text) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no tiene el Formato correcto", TxtTelefono)
+                Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtCorreo) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Correo no puede estar Vacio", TxtCorreo)
+                Return False
                 Exit Function
             End If
-            If GetValidaciones.ValidaCorreo(TxtCorreo.Text) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Correo no Tiene el formato Correcto", TxtCorreo)
-                Exit Function
-            End If
-
             If NbbEdad.Text < 14 Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "No puede Ser Menor de 14 años", NbbEdad)
+                Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaComboBoxVacio(CmbSexo) = False Then
                 GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un Sexo Correcto", CmbSexo)
+                Return False
                 Exit Function
             End If
             Return True

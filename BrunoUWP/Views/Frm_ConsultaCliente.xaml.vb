@@ -107,6 +107,8 @@ Public NotInheritable Class Frm_ConsultaCliente
                                   Select New NewPersonaModel With {.Id_Cliente = Cli.Id_Persona,
                                                                    .Codigo_Cliente = Cli.Codigo_Cliente,
                                                                     .Documento_Persona = Cli.Documento_Persona,
+                                                                    .Nombre_Persona = Cli.Nombre_Persona,
+                                                                    .Apellido_Persona = Cli.Apellido_Persona,
                                                                     .NombreCompleto_Persona = Cli.NombreCompleto_Persona,
                                                                     .Direccion_Persona = Cli.Direccion_Persona,
                                                                     .Telefono_Persona = Cli.Telefono_Persona,

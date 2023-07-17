@@ -1,6 +1,20 @@
-﻿Imports Microsoft.UI.Xaml.Controls
+﻿Imports System.Text
+Imports Microsoft.UI.Xaml.Controls
 
 Public Class Cl_Utilitarios
+
+    Public Function GenerarNumeroDocumento() As String
+        Dim Minimo As Integer = 6
+        Dim Maximo As Integer = 10
+        Dim Aleatorio As New Random()
+        Dim length As Integer = Aleatorio.Next(Minimo, Maximo + 1)
+        Dim Creador As New StringBuilder(length)
+        Creador.Append(Aleatorio.Next(1, 10))
+        For i = 1 To length - 1
+            Creador.Append(Aleatorio.Next(0, 10))
+        Next
+        Return Creador.ToString()
+    End Function
 
     Public Function GenerarCodigoCliente() As String
         Dim Iniciales As String = "CLI-"
