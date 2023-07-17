@@ -101,7 +101,7 @@
                             </Grid.RowDefinitions>
                             <TextBox x:Name="TxtApellidos"
                                      Grid.Column="0"
-                                     Header="Nombres" 
+                                     Header="Apellidos" 
                                      IsEnabled="False"/>
                             <Button x:Name="BtnEditarApellidos"
                                 Grid.Column="1"

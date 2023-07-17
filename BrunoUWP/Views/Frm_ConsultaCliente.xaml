@@ -47,10 +47,11 @@
                                  Margin="70,0,0,0"
                                  SelectedIndex="0"
                                  SelectionChanged="RdbFiltroBusquedaCliente_SelectionChanged"
-                                 MaxColumns="3">
+                                 MaxColumns="4">
                             <x:String>Documento</x:String>
                             <x:String>Codigo</x:String>
                             <x:String>Nombre</x:String>
+                            <x:String>Telefono</x:String>
                         </my:RadioButtons>
                         <AutoSuggestBox x:Name="AsbBusueda"
                             Height="35"

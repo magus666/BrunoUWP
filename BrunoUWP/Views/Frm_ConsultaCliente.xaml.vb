@@ -61,6 +61,13 @@ Public NotInheritable Class Frm_ConsultaCliente
                                                         Select Cli).ToList
                             LsvCliente.ItemsSource = RetornoListaBusqueda
                         End If
+                    Case 3
+                        If args.Reason = AutoSuggestionBoxTextChangeReason.UserInput Then
+                            Dim RetornoListaBusqueda = (From Cli In GetListaClienteFiltro
+                                                        Where Cli.Telefono_Persona.Contains(AsbBusueda.Text)
+                                                        Select Cli).ToList
+                            LsvCliente.ItemsSource = RetornoListaBusqueda
+                        End If
                 End Select
 
             End If
