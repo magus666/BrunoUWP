@@ -164,4 +164,15 @@ Public Class Cl_Utilitarios
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+    Public Async Function CrearLogErrores(ErrorLog As String) As Task(Of Boolean)
+        Try
+            Dim storageFolder As Windows.Storage.StorageFolder = Windows.Storage.ApplicationData.Current.LocalFolder
+            Dim LogBrunoSpa As Windows.Storage.StorageFile = Await storageFolder.CreateFileAsync("LogBruno.txt", Windows.Storage.CreationCollisionOption.ReplaceExisting)
+            Await Windows.Storage.FileIO.WriteTextAsync(LogBrunoSpa, ErrorLog)
+            Return True
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

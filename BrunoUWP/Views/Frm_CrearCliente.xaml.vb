@@ -7,9 +7,10 @@ Public NotInheritable Class Frm_CrearCliente
     Inherits Page
     Dim GetValidaciones As New Cl_Validaciones
     Dim GetUtilitarios As New Cl_Utilitarios
-    Dim GetNotificacionas As New Cl_Notificaciones
+    Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetCliente As New Cl_Cliente
     Dim GetIntegracionWhatsapp As New Cl_IntegracionWhatsapp
+    Dim MensajeError As String
     Dim newViewId As Integer = 0
     Public GetSexo As New Cl_Sexo
     Dim IdSexo As Integer
@@ -22,7 +23,8 @@ Public NotInheritable Class Frm_CrearCliente
             ValoresIniciales()
             Dim CodigoAleatrorio As String = GetUtilitarios.GenerarCodigoCliente()
         Catch ex As Exception
-            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+            MensajeError = "[" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
 
@@ -42,13 +44,14 @@ Public NotInheritable Class Frm_CrearCliente
                     Await GetIntegracionWhatsapp.EnviaMensajeWhatsapp(TxtTelefono.Text, MensajeWha)
                     GetUtilitarios.LimpiarControles(StpDatosCliente)
                     PgrGuardarCliente.IsActive = False
-                    GetNotificacionas.AlertaExitoInfoBar(InfAlerta, "Exito", "El cliente se ha guardado con Exito")
+                    GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El cliente se ha guardado con Exito")
                 Else
-                    GetNotificacionas.AlertaAdvertenciaInfoBar(InfAlerta, "Atemcion", "El cliente no puedo ser Guardado.")
+                    GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Atemcion", "El cliente no puedo ser Guardado.")
                 End If
             End If
         Catch ex As Exception
-            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+            MensajeError = "[" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
 
@@ -63,48 +66,48 @@ Public NotInheritable Class Frm_CrearCliente
     Public Function ValidaDatos() As Boolean
         Try
             If GetValidaciones.ValidaTextBoxVacio(TxtDocumento) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Documento no puede estar Vacio", TxtDocumento)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Documento no puede estar Vacio", TxtDocumento)
                 Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtNombres) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Nombre no puede estar Vacio", TxtNombres)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Nombre no puede estar Vacio", TxtNombres)
                 Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtApellidos) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Apellido no puede estar Vacio", TxtApellidos)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Apellido no puede estar Vacio", TxtApellidos)
                 Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtDireccion) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La Direccion no puede estar Vacia", TxtDireccion)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La Direccion no puede estar Vacia", TxtDireccion)
                 Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtTelefono) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no puede estar Vacio", TxtTelefono)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no puede estar Vacio", TxtTelefono)
                 Return False
                 Exit Function
             End If
 
             If GetValidaciones.ValidarNumeroTelefonico(TxtTelefono.Text) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no tiene el Formato correcto", TxtTelefono)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Telefono no tiene el Formato correcto", TxtTelefono)
                 Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtCorreo) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Correo no puede estar Vacio", TxtCorreo)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El Correo no puede estar Vacio", TxtCorreo)
                 Return False
                 Exit Function
             End If
             If NbbEdad.Text < 14 Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "No puede Ser Menor de 14 años", NbbEdad)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "No puede Ser Menor de 14 años", NbbEdad)
                 Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaComboBoxVacio(CmbSexo) = False Then
-                GetNotificacionas.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un Sexo Correcto", CmbSexo)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un Sexo Correcto", CmbSexo)
                 Return False
                 Exit Function
             End If
@@ -124,7 +127,11 @@ Public NotInheritable Class Frm_CrearCliente
                 IdSexo = ItemSeleccionado.Id_Sexo
             End If
         Catch ex As Exception
-            GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
+    End Sub
+
+    Private Async Sub BtnInforme_Click(sender As Object, e As RoutedEventArgs)
+        Await GetUtilitarios.CrearLogErrores(MensajeError)
     End Sub
 End Class
