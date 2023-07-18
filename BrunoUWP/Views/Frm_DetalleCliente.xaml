@@ -19,26 +19,28 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <TextBlock
-                x:Name="TxtTituloDetalle"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="22"
-                Text="Detalle del Cliente" />
+            <StackPanel>
+                <my:InfoBar x:Name="InfAlerta" />
+                <TextBlock
+                    x:Name="TxtTituloDetalle"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="22"
+                    Text="Detalle del Cliente" />
+            </StackPanel>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,15,0,0">
             <ScrollViewer>
                 <Grid Margin="50,10" ui:Effects.Shadow="{StaticResource CommonShadow}">
                     <StackPanel
                         x:Name="StpDatosCliente"
                         Padding="20"
                         Orientation="Vertical">
-                        <my:InfoBar x:Name="InfAlerta" />
                         <TextBox
                             x:Name="TxtCodigo"
                             Header="Codigo"
@@ -201,11 +203,15 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <TextBox
-                                x:Name="TxtEdad"
+                            <my:NumberBox
+                                x:Name="NbbEdad"
                                 Grid.Column="0"
                                 Header="Edad"
-                                IsEnabled="False" />
+                                IsEnabled="False"
+                                Maximum="90"
+                                Minimum="1"
+                                SmallChange="1"
+                                SpinButtonPlacementMode="Inline" />
                             <Button
                                 x:Name="BtnEditarEdad"
                                 Grid.Column="1"

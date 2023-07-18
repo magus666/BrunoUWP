@@ -6,6 +6,8 @@
 Public NotInheritable Class Frm_DetalleCliente
     Inherits Page
     Dim GetCliente As New Cl_Cliente
+    Dim GetNotificaciones As New Cl_Notificaciones
+    Dim MensajeError As String
     Dim IdCliente As Integer
 
     Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
@@ -20,7 +22,7 @@ Public NotInheritable Class Frm_DetalleCliente
             TxtDireccion.Text = DatosCliente.Direccion_Persona
             TxtTelefono.Text = DatosCliente.Telefono_Persona
             TxtCorreo.Text = DatosCliente.Correo_Persona
-            TxtEdad.Text = DatosCliente.Edad_Persona
+            NbbEdad.Value = DatosCliente.Edad_Persona
             TxtSexo.Text = DatosCliente.Nombre_Sexo
             Dim EstadoCliente = DatosCliente.NombreEstado_Cliente
             Select Case EstadoCliente
@@ -36,7 +38,8 @@ Public NotInheritable Class Frm_DetalleCliente
         Try
             TxtTelefono.IsEnabled = True
         Catch ex As Exception
-
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
 
@@ -44,14 +47,16 @@ Public NotInheritable Class Frm_DetalleCliente
         Try
             TxtDireccion.IsEnabled = True
         Catch ex As Exception
-
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
     Private Sub BtnEditarCorreo_Click(sender As Object, e As RoutedEventArgs)
         Try
             TxtCorreo.IsEnabled = True
         Catch ex As Exception
-
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
 
@@ -59,7 +64,8 @@ Public NotInheritable Class Frm_DetalleCliente
         Try
             TxtDocumento.IsEnabled = True
         Catch ex As Exception
-
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
 
@@ -67,7 +73,8 @@ Public NotInheritable Class Frm_DetalleCliente
         Try
             TxtNombres.IsEnabled = True
         Catch ex As Exception
-
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
 
@@ -75,15 +82,17 @@ Public NotInheritable Class Frm_DetalleCliente
         Try
             TxtApellidos.IsEnabled = True
         Catch ex As Exception
-
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
 
     Private Sub BtnEditarEdad_Click(sender As Object, e As RoutedEventArgs)
         Try
-            TxtEdad.IsEnabled = True
+            NbbEdad.IsEnabled = True
         Catch ex As Exception
-
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
 
@@ -95,12 +104,14 @@ Public NotInheritable Class Frm_DetalleCliente
             Else
                 GetDataToggle = False
             End If
-            If Await GetCliente.ActualizarCliente(IdCliente, TxtDireccion.Text, TxtTelefono.Text,
-                                         TxtCorreo.Text, GetDataToggle) = True Then
-                Dim Respuesta = "Buena Gonorra"
+            If Await GetCliente.ActualizarCliente(IdCliente, TxtDocumento.Text, TxtNombres.Text,
+                                                  TxtApellidos.Text, TxtDireccion.Text, TxtTelefono.Text,
+                                                  TxtCorreo.Text, NbbEdad.Value, GetDataToggle) = True Then
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "Cliente actualizado con Exito.")
             End If
         Catch ex As Exception
-
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
 

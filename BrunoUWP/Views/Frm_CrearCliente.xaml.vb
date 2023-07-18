@@ -23,8 +23,8 @@ Public NotInheritable Class Frm_CrearCliente
             ValoresIniciales()
             Dim CodigoAleatrorio As String = GetUtilitarios.GenerarCodigoCliente()
         Catch ex As Exception
-            MensajeError = "[" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
-            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlertaError, "Error", MensajeError)
         End Try
     End Sub
 
@@ -50,8 +50,8 @@ Public NotInheritable Class Frm_CrearCliente
                 End If
             End If
         Catch ex As Exception
-            MensajeError = "[" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
-            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlertaError, "Error", MensajeError)
         End Try
     End Sub
 
@@ -127,11 +127,12 @@ Public NotInheritable Class Frm_CrearCliente
                 IdSexo = ItemSeleccionado.Id_Sexo
             End If
         Catch ex As Exception
-            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlertaError, "Error", MensajeError)
         End Try
     End Sub
 
     Private Async Sub BtnInforme_Click(sender As Object, e As RoutedEventArgs)
-        Await GetUtilitarios.CrearLogErrores(MensajeError)
+        Await GetUtilitarios.CrearLogErrores(MensajeError & vbCrLf)
     End Sub
 End Class

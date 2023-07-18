@@ -168,8 +168,9 @@ Public Class Cl_Utilitarios
     Public Async Function CrearLogErrores(ErrorLog As String) As Task(Of Boolean)
         Try
             Dim storageFolder As Windows.Storage.StorageFolder = Windows.Storage.ApplicationData.Current.LocalFolder
-            Dim LogBrunoSpa As Windows.Storage.StorageFile = Await storageFolder.CreateFileAsync("LogBruno.txt", Windows.Storage.CreationCollisionOption.ReplaceExisting)
-            Await Windows.Storage.FileIO.WriteTextAsync(LogBrunoSpa, ErrorLog)
+            Dim LogBrunoSpa As Windows.Storage.StorageFile = Await storageFolder.CreateFileAsync("LogBruno.txt", Windows.Storage.CreationCollisionOption.OpenIfExists)
+            Await Windows.Storage.FileIO.AppendTextAsync(LogBrunoSpa, ErrorLog)
+            Await Windows.System.Launcher.LaunchFileAsync(LogBrunoSpa)
             Return True
         Catch ex As Exception
             Throw New Exception(ex.Message)

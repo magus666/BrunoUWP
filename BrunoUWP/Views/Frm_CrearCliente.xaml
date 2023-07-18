@@ -31,9 +31,13 @@
                     x:Name="StpDatosCliente"
                     Padding="20"
                     Orientation="Vertical">
-                    <my:InfoBar x:Name="InfAlerta">
+                    <my:InfoBar x:Name="InfAlerta" />
+                    <my:InfoBar x:Name="InfAlertaError">
                         <my:InfoBar.ActionButton>
-                            <Button x:Name="BtnInforme" Content="Crear Informe" Click="BtnInforme_Click" />
+                            <Button
+                                x:Name="BtnInforme"
+                                Click="BtnInforme_Click"
+                                Content="Crear Informe" />
                         </my:InfoBar.ActionButton>
                     </my:InfoBar>
                     <TextBox

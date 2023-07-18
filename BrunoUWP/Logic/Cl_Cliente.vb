@@ -40,9 +40,13 @@ Public Class Cl_Cliente
     End Function
 
     Public Async Function ActualizarCliente(IdCliente As Integer,
+                                            DocumentoCliente As String,
+                                            NombreCliente As String,
+                                            ApellidoCliente As String,
                                             DireccionCLiente As String,
                                             TelefonoCliente As String,
                                             CorreoCliente As String,
+                                            EdadCliente As Integer,
                                             EstadoCliente As Boolean) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
@@ -51,9 +55,13 @@ Public Class Cl_Cliente
                            Where x.Id_Persona = IdCliente
                            Select x).FirstOrDefault
             If Cliente IsNot Nothing Then
+                Cliente.Documento_Persona = DocumentoCliente
+                Cliente.Nombre_Persona = NombreCliente
+                Cliente.Apellido_Persona = ApellidoCliente
                 Cliente.Direccion_Persona = DireccionCLiente
                 Cliente.Telefono_Persona = TelefonoCliente
                 Cliente.Correo_Persona = CorreoCliente
+                Cliente.Edad_Persona = EdadCliente
                 Cliente.Estado_Cliente = EstadoCliente
                 Cliente.NombreCompleto_Persona = Cliente.Nombre_Persona & " " & Cliente.Apellido_Persona
                 Await ConexionDB.UpdateAsync(Cliente)
