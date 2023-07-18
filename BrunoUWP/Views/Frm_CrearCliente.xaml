@@ -40,10 +40,33 @@
                                 Content="Crear Informe" />
                         </my:InfoBar.ActionButton>
                     </my:InfoBar>
-                    <TextBox
-                        x:Name="TxtDocumento"
-                        Header="Documento"
-                        PlaceholderText="Digite Documento" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBox
+                            x:Name="TxtDocumento"
+                            Grid.Column="0"
+                            Header="Documento"
+                            IsEnabled="False"
+                            PlaceholderText="Digite Documento" />
+                        <Button
+                            x:Name="BtnEditarDocumento"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Click="BtnEditarDocumento_Click"
+                            ToolTipService.ToolTip="Editar Documento">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                     <TextBox
                         x:Name="TxtNombres"
                         Header="Nombres"
@@ -52,33 +75,95 @@
                         x:Name="TxtApellidos"
                         Header="Apellidos"
                         PlaceholderText="Digite Apellidos" />
-                    <TextBox
-                        x:Name="TxtDireccion"
-                        Header="Direccion"
-                        PlaceholderText="Digite Direccion" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBox
+                            x:Name="TxtDireccion"
+                            Grid.Column="0"
+                            Header="Direccion"
+                            IsEnabled="False"
+                            PlaceholderText="Digite Direccion" />
+                        <Button
+                            x:Name="BtnEditarDireccion"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Click="BtnEditarDireccion_Click"
+                            ToolTipService.ToolTip="Editar Direccion">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                     <TextBox
                         x:Name="TxtTelefono"
                         Header="Telefono"
                         PlaceholderText="Digite Telefono" />
-                    <TextBox
-                        x:Name="TxtCorreo"
-                        Header="Correo Electronico"
-                        PlaceholderText="Digite Correo Electronico" />
-                    <my:NumberBox
-                        x:Name="NbbEdad"
-                        Header="Edad"
-                        LargeChange="20"
-                        Maximum="90"
-                        Minimum="1"
-                        SmallChange="1"
-                        SpinButtonPlacementMode="Inline"
-                        Value="1" />
-                    <ComboBox
-                        x:Name="CmbSexo"
-                        HorizontalAlignment="Stretch"
-                        Header="Sexo"
-                        PlaceholderText="Seleccione Sexo"
-                        SelectionChanged="CmbSexo_SelectionChanged" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBox
+                            x:Name="TxtCorreo"
+                            Grid.Column="0"
+                            Header="Correo Electronico"
+                            IsEnabled="False"
+                            PlaceholderText="Digite Correo Electronico" />
+                        <Button
+                            x:Name="BtnEditarCorreo"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Click="BtnEditarCorreo_Click"
+                            ToolTipService.ToolTip="Editar Correo">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <my:NumberBox
+                            x:Name="NbbEdad"
+                            Grid.Column="0"
+                            Header="Edad"
+                            IsEnabled="False"
+                            LargeChange="20"
+                            Maximum="90"
+                            Minimum="1"
+                            SmallChange="1"
+                            SpinButtonPlacementMode="Inline"
+                            Value="1" />
+                        <Button
+                            x:Name="BtnEditarEdad"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Click="BtnEditarEdad_Click"
+                            ToolTipService.ToolTip="Editar Edad">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE104;" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button
                             x:Name="BtnGuardar"

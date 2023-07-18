@@ -23,7 +23,6 @@ Public NotInheritable Class Frm_DetalleCliente
             TxtTelefono.Text = DatosCliente.Telefono_Persona
             TxtCorreo.Text = DatosCliente.Correo_Persona
             NbbEdad.Value = DatosCliente.Edad_Persona
-            TxtSexo.Text = DatosCliente.Nombre_Sexo
             Dim EstadoCliente = DatosCliente.NombreEstado_Cliente
             Select Case EstadoCliente
                 Case "Activo"

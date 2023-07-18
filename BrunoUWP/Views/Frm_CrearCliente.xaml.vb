@@ -15,11 +15,8 @@ Public NotInheritable Class Frm_CrearCliente
     Public GetSexo As New Cl_Sexo
     Dim IdSexo As Integer
 
-    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Await GetSexo.InsertaActualizaSexo()
-            CmbSexo.ItemsSource = Await GetSexo.ConsultaSexo()
-            CmbSexo.DisplayMemberPath = "Nombre_Sexo"
             ValoresIniciales()
             Dim CodigoAleatrorio As String = GetUtilitarios.GenerarCodigoCliente()
         Catch ex As Exception
@@ -36,7 +33,7 @@ Public NotInheritable Class Frm_CrearCliente
                 PgrGuardarCliente.IsActive = True
                 If Await GetCliente.InsertarCliente(TxtDocumento.Text, TxtNombres.Text, TxtApellidos.Text,
                                                      TxtDireccion.Text, TxtTelefono.Text, TxtCorreo.Text, NbbEdad.Text,
-                                                     IdSexo, CodigoCliente, True) = True Then
+                                                     1, CodigoCliente, True) = True Then
                     Dim NombreCompleto = TxtNombres.Text & " " & TxtApellidos.Text
                     MensajeWha = "Bienvenida/o " & NombreCompleto & " " & "y gracias por ser parte del Club Bruno Spa.
                                                                        Te esperan los mejores servicios y las mejores ofertas para el cuidado de tu peludito.
@@ -106,33 +103,29 @@ Public NotInheritable Class Frm_CrearCliente
                 Return False
                 Exit Function
             End If
-            If GetValidaciones.ValidaComboBoxVacio(CmbSexo) = False Then
-                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "Seleccione un Sexo Correcto", CmbSexo)
-                Return False
-                Exit Function
-            End If
             Return True
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
     End Function
 
-    Private Sub CmbSexo_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-        Try
-            Dim ComboBoxSexo As ComboBox = CType(sender, ComboBox)
-            Dim ItemSeleccionado As SexoModel = CType(ComboBoxSexo.SelectedItem, SexoModel)
-            If CmbSexo.SelectedIndex = -1 Then
-                IdSexo = 0
-            Else
-                IdSexo = ItemSeleccionado.Id_Sexo
-            End If
-        Catch ex As Exception
-            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
-            GetNotificaciones.AlertaErrorInfoBar(InfAlertaError, "Error", MensajeError)
-        End Try
-    End Sub
-
     Private Async Sub BtnInforme_Click(sender As Object, e As RoutedEventArgs)
         Await GetUtilitarios.CrearLogErrores(MensajeError & vbCrLf)
+    End Sub
+
+    Private Sub BtnEditarDocumento_Click(sender As Object, e As RoutedEventArgs)
+        TxtDocumento.IsEnabled = True
+    End Sub
+
+    Private Sub BtnEditarDireccion_Click(sender As Object, e As RoutedEventArgs)
+        TxtDireccion.IsEnabled = True
+    End Sub
+
+    Private Sub BtnEditarCorreo_Click(sender As Object, e As RoutedEventArgs)
+        TxtCorreo.IsEnabled = True
+    End Sub
+
+    Private Sub BtnEditarEdad_Click(sender As Object, e As RoutedEventArgs)
+        NbbEdad.IsEnabled = True
     End Sub
 End Class

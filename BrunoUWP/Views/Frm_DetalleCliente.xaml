@@ -224,10 +224,6 @@
                                 </StackPanel>
                             </Button>
                         </Grid>
-                        <TextBox
-                            x:Name="TxtSexo"
-                            Header="Sexo"
-                            IsEnabled="False" />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="9*" />
