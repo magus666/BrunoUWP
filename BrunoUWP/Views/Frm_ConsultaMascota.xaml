@@ -2,129 +2,139 @@
     x:Class="BrunoUWP.Frm_ConsultaMascota"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BrunoUWP"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BrunoUWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" 
     xmlns:my="using:Microsoft.UI.Xaml.Controls"
-    mc:Ignorable="d"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
     <Page.Resources>
-        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
+        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4" />
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-              Margin="0,0,10,10">
-
+        <Grid
+            Grid.Row="0"
+            Margin="0,0,10,10"
+            ui:Effects.Shadow="{StaticResource CommonShadow}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="8*" />
             </Grid.RowDefinitions>
-
-
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Vertical">
-                    <my:InfoBar x:Name="InfAlerta"/>
-                    <AutoSuggestBox x:Name="AsbBusueda"
-                            Height="35"
-                            Width="250"
-                            Margin="0,10,25,0"
-                            TextChanged="AsbBusueda_TextChanged"
-                            HorizontalAlignment="Right"
-                            PlaceholderText="Digite Nombre"
-                            QueryIcon="Find"/>
+                    <my:InfoBar x:Name="InfAlerta" />
+                    <AutoSuggestBox
+                        x:Name="AsbBusueda"
+                        Width="250"
+                        Height="35"
+                        Margin="0,10,25,0"
+                        HorizontalAlignment="Right"
+                        PlaceholderText="Digite Nombre"
+                        QueryIcon="Find"
+                        TextChanged="AsbBusueda_TextChanged" />
                 </StackPanel>
-
             </Grid>
             <Grid Grid.Row="1">
-                <TextBlock x:Name="LblTituloCreacionMascota"
-                           Margin="10,0,10,0"
-                           Text="No hay Mascotas registradas. por favor Agregue algunas en la pestaña Creacion de Mascotas"
-                           TextWrapping="Wrap"
-                           TextAlignment="Center"
-                           FontSize="25"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Visibility="Collapsed"/>
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      Grid.Column="0"
-                      Padding="20">
+                <TextBlock
+                    x:Name="LblTituloCreacionMascota"
+                    Margin="10,0,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Text="No hay Mascotas registradas. por favor Agregue algunas en la pestaña Creacion de Mascotas"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"
+                    Visibility="Collapsed" />
+                <ScrollViewer
+                    Grid.Column="0"
+                    Padding="20"
+                    VerticalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Vertical">
-                        <ListView x:Name="LsvMascota" 
-                                  IsItemClickEnabled="True"
-                                  ItemClick="LsvMascota_ItemClick">
+                        <ListView
+                            x:Name="LsvMascota"
+                            IsItemClickEnabled="True"
+                            ItemClick="LsvMascota_ItemClick">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="0,12,0,12">
                                         <StackPanel Orientation="Horizontal">
-                                            <my:PersonPicture x:Name="PrpCliente"
-                                                              Margin="0,0,10,0"
-                                                              ProfilePicture="/Assets/Mascotas2.png"
-                                                              Height="130"
-                                                              Width="130"/>
+                                            <my:PersonPicture
+                                                x:Name="PrpCliente"
+                                                Width="130"
+                                                Height="130"
+                                                Margin="0,0,10,0"
+                                                ProfilePicture="/Assets/Mascotas2.png" />
                                             <StackPanel Orientation="Vertical">
-                                                <TextBlock FontSize="14" 
-                                                           FontStyle="Italic" 
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="Codigo:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding Codigo_Mascota}"/>
+                                                <TextBlock
+                                                    FontSize="14"
+                                                    FontStyle="Italic"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="SemiBold" Text="Codigo:" />
+                                                    <Run Text="{Binding Codigo_Mascota}" />
                                                 </TextBlock>
-                                                <TextBlock FontSize="14" 
-                                                           FontStyle="Italic" 
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="Nombre:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding Nombre_Mascota}"/>
+                                                <TextBlock
+                                                    FontSize="14"
+                                                    FontStyle="Italic"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="SemiBold" Text="Nombre:" />
+                                                    <Run Text="{Binding Nombre_Mascota}" />
                                                 </TextBlock>
-                                                <TextBlock FontSize="14" 
-                                                           FontStyle="Italic" 
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="Tipo de Mascota:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding Nombre_TipoMascota}"/>
-                                                </TextBlock>
-
-                                                <TextBlock FontSize="14" 
-                                                           FontStyle="Italic" 
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="Raza:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding Nombre_Raza}"/>
+                                                <TextBlock
+                                                    FontSize="14"
+                                                    FontStyle="Italic"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="SemiBold" Text="Tipo de Mascota:" />
+                                                    <Run Text="{Binding Nombre_TipoMascota}" />
                                                 </TextBlock>
 
-                                                <TextBlock FontSize="14" 
-                                                           FontStyle="Italic" 
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="Edad:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding Edad_Mascota}"/>
-                                                    <Run Text="Años"/>
+                                                <TextBlock
+                                                    FontSize="14"
+                                                    FontStyle="Italic"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="SemiBold" Text="Raza:" />
+                                                    <Run Text="{Binding Nombre_Raza}" />
                                                 </TextBlock>
-                                                <TextBlock FontSize="14" 
-                                                           FontStyle="Italic" 
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="Propietario:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding NombreCompleto_Persona}"/>
+
+                                                <TextBlock
+                                                    FontSize="14"
+                                                    FontStyle="Italic"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="SemiBold" Text="Edad:" />
+                                                    <Run Text="{Binding Edad_Mascota}" />
+                                                    <Run Text="Años" />
                                                 </TextBlock>
-                                                <TextBlock FontSize="14"
-                                                           FontStyle="Italic" 
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="Observaciones:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding Observaciones_Mascota}"/>
+                                                <TextBlock
+                                                    FontSize="14"
+                                                    FontStyle="Italic"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="SemiBold" Text="Propietario:" />
+                                                    <Run Text="{Binding NombreCompleto_Persona}" />
                                                 </TextBlock>
-                                                <TextBlock FontSize="14" 
-                                                           FontStyle="Italic" 
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="Fecha de Registro:" FontWeight="SemiBold"/>
-                                                    <Run Text="{Binding FechaRegistro_Mascota}"/>
+                                                <TextBlock
+                                                    FontSize="14"
+                                                    FontStyle="Italic"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="SemiBold" Text="Observaciones:" />
+                                                    <Run Text="{Binding Observaciones_Mascota}" />
+                                                </TextBlock>
+                                                <TextBlock
+                                                    FontSize="14"
+                                                    FontStyle="Italic"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="SemiBold" Text="Fecha de Registro:" />
+                                                    <Run Text="{Binding FechaRegistro_Mascota}" />
                                                 </TextBlock>
                                             </StackPanel>
                                         </StackPanel>
@@ -136,18 +146,18 @@
                 </ScrollViewer>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-                  Padding="10"
-                  Margin="0,0,10,10">
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                <my:ProgressRing x:Name="PgrGeneraExcel"
-                                 IsActive="False"/>
-                <AppBarButton Label="Exportar"
-                              HorizontalAlignment="Right"
-                              VerticalAlignment="Center"
-                          Click="AppBarButton_Click">
+        <Grid
+            Grid.Row="1"
+            Margin="0,0,10,10"
+            Padding="10"
+            ui:Effects.Shadow="{StaticResource CommonShadow}">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <my:ProgressRing x:Name="PgrGeneraExcel" IsActive="False" />
+                <AppBarButton
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Click="AppBarButton_Click"
+                    Label="Exportar">
                     <AppBarButton.Icon>
                         <FontIcon FontFamily="Wingdings 2" Glyph="&#x002E;" />
                     </AppBarButton.Icon>

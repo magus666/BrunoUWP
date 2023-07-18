@@ -2,106 +2,129 @@
     x:Class="BrunoUWP.Frm_CrearRaza"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BrunoUWP"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BrunoUWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:my="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media" 
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
     <Page.Resources>
-        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
+        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4" />
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="1.55*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1.55*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-              Margin="50,10">
-            <StackPanel x:Name="StpPrincipal" 
-                        Orientation="Vertical"
-                    Margin="20,0,20,0">
-                <my:InfoBar x:Name="InfAlerta"/>
-                <ComboBox x:Name="CmbTipoMascota"
-                      Header="Tipo de Mascota"
-                      PlaceholderText="Seleccione Tipo de Mascota"
-                      HorizontalAlignment="Stretch"
-                      SelectionChanged="CmbTipoMascota_SelectionChanged"/>
-                <TextBox x:Name="TxtNombreRaza" 
-                         Header="Nombre"
-                         PlaceholderText="Digite Nombre"/>
-                <TextBox x:Name="TxtDescripcionRaza" 
-                         Header="Descripcion"
-                         PlaceholderText="Digite Descripcion"/>
-                <Button x:Name="BtnGuardar"
+        <Grid
+            Grid.Row="0"
+            Margin="50,10"
+            ui:Effects.Shadow="{StaticResource CommonShadow}">
+            <StackPanel
+                x:Name="StpPrincipal"
+                Margin="20,0,20,0"
+                Orientation="Vertical">
+                <my:InfoBar x:Name="InfAlerta" />
+                <ComboBox
+                    x:Name="CmbTipoMascota"
+                    HorizontalAlignment="Stretch"
+                    Header="Tipo de Mascota"
+                    PlaceholderText="Seleccione Tipo de Mascota"
+                    SelectionChanged="CmbTipoMascota_SelectionChanged" />
+                <TextBox
+                    x:Name="TxtNombreRaza"
+                    Header="Nombre"
+                    PlaceholderText="Digite Nombre" />
+                <TextBox
+                    x:Name="TxtDescripcionRaza"
+                    Header="Descripcion"
+                    PlaceholderText="Digite Descripcion" />
+                <Button
+                    x:Name="BtnGuardar"
                     Margin="0,10,0,0"
-                    Content="Guardar"
                     HorizontalAlignment="Center"
-                    Click="BtnGuardar_Click"/>
+                    Click="BtnGuardar_Click"
+                    Content="Guardar" />
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-              Margin="50,10">
+        <Grid
+            Grid.Row="1"
+            Margin="50,10"
+            ui:Effects.Shadow="{StaticResource CommonShadow}">
             <StackPanel Margin="20,0,20,0">
-                <my:RadioButtons x:Name="RdbTipoMascota"
-                                 Margin="10,10,0,0"
-                                 SelectedIndex="3"
-                                 SelectionChanged="RdbTipoMascota_SelectionChanged"
-                                 MaxColumns="4" 
-                                 Header="Seleccione el Tipo de Mascota:">
+                <my:RadioButtons
+                    x:Name="RdbTipoMascota"
+                    Margin="10,10,0,0"
+                    Header="Seleccione el Tipo de Mascota:"
+                    MaxColumns="4"
+                    SelectedIndex="3"
+                    SelectionChanged="RdbTipoMascota_SelectionChanged">
                     <x:String>Perros</x:String>
                     <x:String>Gatos</x:String>
                     <x:String>Conejos</x:String>
                     <x:String>Todas</x:String>
                 </my:RadioButtons>
                 <ScrollViewer>
-                    <StackPanel x:Name="StpGrilla" 
-                        Orientation="Vertical">
-                        <controls:DataGrid x:Name="DtgRazaMascota"
-                                           Margin="10"
-                                           AutoGenerateColumns="False"
-                                           AreRowDetailsFrozen="True"
-                                           ColumnHeaderHeight="32"
-                                           CanUserReorderColumns="True"
-                                           CanUserResizeColumns="True"
-                                           CanUserSortColumns="True"
-                                           HeadersVisibility="Column"
-                                           IsReadOnly="True"
-                                           HorizontalAlignment="Stretch"
-                                           GridLinesVisibility="Horizontal"
-                                           DoubleTapped="DtgRazaMascota_DoubleTapped"
-                                           SelectionMode="Extended">
+                    <StackPanel x:Name="StpGrilla" Orientation="Vertical">
+                        <controls:DataGrid
+                            x:Name="DtgRazaMascota"
+                            Margin="10"
+                            HorizontalAlignment="Stretch"
+                            AreRowDetailsFrozen="True"
+                            AutoGenerateColumns="False"
+                            CanUserReorderColumns="True"
+                            CanUserResizeColumns="True"
+                            CanUserSortColumns="True"
+                            ColumnHeaderHeight="32"
+                            DoubleTapped="DtgRazaMascota_DoubleTapped"
+                            GridLinesVisibility="Horizontal"
+                            HeadersVisibility="Column"
+                            IsReadOnly="True"
+                            SelectionMode="Extended">
                             <controls:DataGrid.Columns>
-                                <controls:DataGridTextColumn Header="Codigo" Tag="TipoMascota" Binding="{Binding Codigo_Raza}" />
-                                <controls:DataGridTextColumn Header="Tipo de Mascota" Tag="TipoMascota" Binding="{Binding Nombre_TipoMascota}" />
-                                <controls:DataGridTextColumn Header="Nombre de Raza" Tag="NombreRaza" Binding="{Binding Nombre_Raza}" />
-                                <controls:DataGridTextColumn Header="Descripcion" Tag="Descripcion" Binding="{Binding Descripcion_Raza}" />
+                                <controls:DataGridTextColumn
+                                    Binding="{Binding Codigo_Raza}"
+                                    Header="Codigo"
+                                    Tag="TipoMascota" />
+                                <controls:DataGridTextColumn
+                                    Binding="{Binding Nombre_TipoMascota}"
+                                    Header="Tipo de Mascota"
+                                    Tag="TipoMascota" />
+                                <controls:DataGridTextColumn
+                                    Binding="{Binding Nombre_Raza}"
+                                    Header="Nombre de Raza"
+                                    Tag="NombreRaza" />
+                                <controls:DataGridTextColumn
+                                    Binding="{Binding Descripcion_Raza}"
+                                    Header="Descripcion"
+                                    Tag="Descripcion" />
                             </controls:DataGrid.Columns>
                         </controls:DataGrid>
                     </StackPanel>
                 </ScrollViewer>
-                <ContentDialog x:Name="CtdModificaRaza"
-                               Title="Modificar Raza"
-                               PrimaryButtonText="Guardar"
-                               PrimaryButtonClick="CtdModificaRaza_PrimaryButtonClick"
-                               SecondaryButtonText="Cancelar">
+                <ContentDialog
+                    x:Name="CtdModificaRaza"
+                    Title="Modificar Raza"
+                    PrimaryButtonClick="CtdModificaRaza_PrimaryButtonClick"
+                    PrimaryButtonText="Guardar"
+                    SecondaryButtonText="Cancelar">
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="TxtNombreRazaDialog"
-                                 PlaceholderText="Escriba el Nuevo Nombre" 
-                                 Header="Nombre" />
-                        <TextBox x:Name="TxtDescripcionRazaDialog"
-                                 PlaceholderText="Escriba la nueva Descripcion" 
-                                 Header="Descripcion" />
+                        <TextBox
+                            x:Name="TxtNombreRazaDialog"
+                            Header="Nombre"
+                            PlaceholderText="Escriba el Nuevo Nombre" />
+                        <TextBox
+                            x:Name="TxtDescripcionRazaDialog"
+                            Header="Descripcion"
+                            PlaceholderText="Escriba la nueva Descripcion" />
                     </StackPanel>
                 </ContentDialog>
             </StackPanel>
         </Grid>
-        <my:TeachingTip x:Name="TctAlerta"/>
+        <my:TeachingTip x:Name="TctAlerta" />
     </Grid>
 </Page>

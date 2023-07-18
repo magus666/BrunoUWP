@@ -2,33 +2,33 @@
     x:Class="BrunoUWP.Frm_ConfiguracionAcercaDe"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BrunoUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BrunoUWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
-
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
     <Grid>
-        <StackPanel Orientation="Vertical"
-                    Margin="10,10,0,0">
-            <TextBlock Text="Bruno Spa"
-                       FontSize="18"
-                       FontWeight="Bold"/>
+        <StackPanel Margin="10,10,0,0" Orientation="Vertical">
+            <TextBlock
+                FontSize="18"
+                FontWeight="Bold"
+                Text="Bruno Spa" />
             <TextBlock>
-                <Run Text="Version"/>
-                <Run x:Name="LblVersionAplicacion"/>
+                <Run Text="Version" />
+                <Run x:Name="LblVersionAplicacion" />
             </TextBlock>
-            <TextBlock Text="Ivan Marin Solutions."/>
-            <TextBlock Text="@ 2023 Todos los Derechos Reservados."/>
+            <TextBlock Text="Ivan Marin Solutions." />
+            <TextBlock Text="@ 2023 Todos los Derechos Reservados." />
             <TextBlock Margin="0,20,0,0">
-                <Hyperlink x:Name="HplAcercaDe"
-                           TextDecorations="None"
-                           NavigateUri="https://www.privacypolicies.com/live/ca03ce45-b341-4246-86e7-aba4563f5b04">
+                <Hyperlink
+                    x:Name="HplAcercaDe"
+                    NavigateUri="https://www.privacypolicies.com/live/ca03ce45-b341-4246-86e7-aba4563f5b04"
+                    TextDecorations="None">
                     Politica de Privacidad
                 </Hyperlink>
             </TextBlock>
         </StackPanel>
-        
+
     </Grid>
 </Page>

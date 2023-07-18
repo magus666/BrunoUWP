@@ -2,25 +2,31 @@
     x:Class="BrunoUWP.Frm_Cliente"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BrunoUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BrunoUWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
-
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
     <Grid>
-        <NavigationView x:Name="NvvCliente"
-                        PaneDisplayMode="Top"
-                        IsSettingsVisible="False"
-                        IsBackButtonVisible="Collapsed"
-                        IsBackEnabled="False"
-                        ItemInvoked="NvvCliente_ItemInvoked">
+        <NavigationView
+            x:Name="NvvCliente"
+            IsBackButtonVisible="Collapsed"
+            IsBackEnabled="False"
+            IsSettingsVisible="False"
+            ItemInvoked="NvvCliente_ItemInvoked"
+            PaneDisplayMode="Top">
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="NvmConsultaCliente" Content="Consulta de Clientes" Tag="ComsultaCliente" />
-                <NavigationViewItem x:Name="NvmNuevoCliente" Content="Creacion de Clientes" Tag="CreacionCliente" />
+                <NavigationViewItem
+                    x:Name="NvmConsultaCliente"
+                    Content="Consulta de Clientes"
+                    Tag="ComsultaCliente" />
+                <NavigationViewItem
+                    x:Name="NvmNuevoCliente"
+                    Content="Creacion de Clientes"
+                    Tag="CreacionCliente" />
             </NavigationView.MenuItems>
-            <Frame x:Name="FrmContenido" x:FieldModifier="Public"/>
+            <Frame x:Name="FrmContenido" x:FieldModifier="Public" />
         </NavigationView>
     </Grid>
 </Page>

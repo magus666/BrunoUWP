@@ -2,108 +2,119 @@
     x:Class="BrunoUWP.Frm_VentaServicioSpa"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BrunoUWP"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BrunoUWP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:my="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
     <Page.Resources>
-            <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
-        </Page.Resources>
+        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4" />
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.51*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.51*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <ScrollViewer>
-                <Grid Grid.Column="0"
-                      ui:Effects.Shadow="{StaticResource CommonShadow}"
-                      Margin="10,10">
-                    <StackPanel x:Name="StpDatosCliente"
-                        Orientation="Vertical"
-                        Padding="20">
-                        <my:InfoBar x:Name="InfAlerta"/>
-                        <ComboBox x:Name="CmbTIpoServicio"
-                                  Header="Tio de Servicio"
-                                  PlaceholderText="Seleccione Tipo de Servicio"
-                                  SelectionChanged="CmbTIpoServicio_SelectionChanged"
-                                  HorizontalAlignment="Stretch" />
-                        <ComboBox x:Name="CmbMascota"
-                                  Header="Mascota"
-                                  IsEditable="True"
-                                  PlaceholderText="Seleccione Mascota"
-                                  HorizontalAlignment="Stretch"
-                                  SelectionChanged="CmbMascota_SelectionChanged"/>
-                        <ComboBox x:Name="CmbDimensionMascota"
-                                  Header="Tamaño"
-                                  PlaceholderText="Seleccione el Tamaño de la Mascota"
-                                  HorizontalAlignment="Stretch"
-                                  SelectionChanged="CmbDimensionMascota_SelectionChanged"/>
-                        <CalendarDatePicker x:Name="CdpFechaServicio" 
-                                            Header="Fecha"
-                                            DateChanged="CdpFechaServicio_DateChanged"
-                                            HorizontalAlignment="Stretch"/>
-                        <TimePicker x:Name="TmpHoraServicio" 
-                                    Header="Hora" 
-                                    MinuteIncrement="30"/>
-                        <Button x:Name="BtnComprobar"
-                              HorizontalAlignment="Right"
-                              Content="Verificar Agenda"
-                              Click="BtnComprobar_Click"/>
+                <Grid
+                    Grid.Column="0"
+                    Margin="10,10"
+                    ui:Effects.Shadow="{StaticResource CommonShadow}">
+                    <StackPanel
+                        x:Name="StpDatosCliente"
+                        Padding="20"
+                        Orientation="Vertical">
+                        <my:InfoBar x:Name="InfAlerta" />
+                        <ComboBox
+                            x:Name="CmbTIpoServicio"
+                            HorizontalAlignment="Stretch"
+                            Header="Tio de Servicio"
+                            PlaceholderText="Seleccione Tipo de Servicio"
+                            SelectionChanged="CmbTIpoServicio_SelectionChanged" />
+                        <ComboBox
+                            x:Name="CmbMascota"
+                            HorizontalAlignment="Stretch"
+                            Header="Mascota"
+                            IsEditable="True"
+                            PlaceholderText="Seleccione Mascota"
+                            SelectionChanged="CmbMascota_SelectionChanged" />
+                        <ComboBox
+                            x:Name="CmbDimensionMascota"
+                            HorizontalAlignment="Stretch"
+                            Header="Tamaño"
+                            PlaceholderText="Seleccione el Tamaño de la Mascota"
+                            SelectionChanged="CmbDimensionMascota_SelectionChanged" />
+                        <CalendarDatePicker
+                            x:Name="CdpFechaServicio"
+                            HorizontalAlignment="Stretch"
+                            DateChanged="CdpFechaServicio_DateChanged"
+                            Header="Fecha" />
+                        <TimePicker
+                            x:Name="TmpHoraServicio"
+                            Header="Hora"
+                            MinuteIncrement="30" />
+                        <Button
+                            x:Name="BtnComprobar"
+                            HorizontalAlignment="Right"
+                            Click="BtnComprobar_Click"
+                            Content="Verificar Agenda" />
                     </StackPanel>
-                    <my:TeachingTip x:Name="TctAlerta"/>
+                    <my:TeachingTip x:Name="TctAlerta" />
                 </Grid>
             </ScrollViewer>
         </Grid>
-        <Grid Grid.Row="1"
-              Margin="10,0,10,10">
+        <Grid Grid.Row="1" Margin="10,0,10,10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <Grid Grid.Column="0"
-                  Margin="0,0,10,0"
-                  ui:Effects.Shadow="{StaticResource CommonShadow}">
+            <Grid
+                Grid.Column="0"
+                Margin="0,0,10,0"
+                ui:Effects.Shadow="{StaticResource CommonShadow}">
                 <StackPanel Margin="0,0,0,0">
-                    <TextBlock x:Name="LblTituloCitas"
-                               FontSize="25"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
+                    <TextBlock
+                        x:Name="LblTituloCitas"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="25" />
                 </StackPanel>
-
-                <StackPanel x:Name="StpContenidoCitas" 
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                    <TextBlock x:Name="LblInformacionCitas"
-                               Text="No hay Ninguna Cita Asignada para esta Fecha"
-                               FontSize="25"
-                               TextWrapping="Wrap"
-                               TextAlignment="Center"/>
+                <StackPanel
+                    x:Name="StpContenidoCitas"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        x:Name="LblInformacionCitas"
+                        FontSize="25"
+                        Text="No hay Ninguna Cita Asignada para esta Fecha"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap" />
                 </StackPanel>
-                <ScrollViewer x:Name="ScvCitas"
-                                  VerticalScrollBarVisibility="Auto"
-                                  Grid.Column="0"
-                                  Visibility="Collapsed"
-                                  Margin="0,17,0,0"
-                                  Padding="20">
+                <ScrollViewer
+                    x:Name="ScvCitas"
+                    Grid.Column="0"
+                    Margin="0,17,0,0"
+                    Padding="20"
+                    VerticalScrollBarVisibility="Auto"
+                    Visibility="Collapsed">
                     <StackPanel Orientation="Vertical">
-                        <ListView x:Name="LsvCita" 
-                                  IsItemClickEnabled="True"
-                                  Margin="0,0,0,0"
-                                  ItemClick="LsvCita_ItemClick">
+                        <ListView
+                            x:Name="LsvCita"
+                            Margin="0,0,0,0"
+                            IsItemClickEnabled="True"
+                            ItemClick="LsvCita_ItemClick">
                             <ListView.Resources>
                                 <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="SlateGray" />
                                 <SolidColorBrush x:Key="ListViewItemBackground" Color="DimGray" />
@@ -112,31 +123,35 @@
                                 <DataTemplate>
                                     <Grid Margin="0,12,0,12">
                                         <StackPanel Orientation="Horizontal">
-                                            <ContentControl VerticalAlignment="Center"
-                                                            Margin="0,0,10,0">
+                                            <ContentControl Margin="0,0,10,0" VerticalAlignment="Center">
                                                 <ContentControl.Content>
-                                                    <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE930;" 
-                                                              FontSize="55" />
+                                                    <FontIcon
+                                                        FontFamily="Segoe Fluent Icons"
+                                                        FontSize="55"
+                                                        Glyph="&#xE930;" />
                                                 </ContentControl.Content>
                                             </ContentControl>
                                             <StackPanel Orientation="Vertical">
-                                                <TextBlock FontSize="12" 
-                                                       FontStyle="Normal" 
-                                                       FontWeight="SemiBold">
-                                                <Run Text="Mascota:" FontWeight="Bold"/>
-                                                <Run Text="{Binding Nombre_Mascota}"/>
+                                                <TextBlock
+                                                    FontSize="12"
+                                                    FontStyle="Normal"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="Bold" Text="Mascota:" />
+                                                    <Run Text="{Binding Nombre_Mascota}" />
                                                 </TextBlock>
-                                                <TextBlock FontSize="12" 
-                                                       FontStyle="Normal" 
-                                                       FontWeight="SemiBold">
-                                                <Run Text="Hora:" FontWeight="Bold"/>
-                                                <Run Text="{Binding HoraInicio_Cita}"/>
+                                                <TextBlock
+                                                    FontSize="12"
+                                                    FontStyle="Normal"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="Bold" Text="Hora:" />
+                                                    <Run Text="{Binding HoraInicio_Cita}" />
                                                 </TextBlock>
-                                                <TextBlock FontSize="12" 
-                                                       FontStyle="Normal" 
-                                                       FontWeight="SemiBold">
-                                                <Run Text="Tipo de Servicio:" FontWeight="Bold"/>
-                                                <Run Text="{Binding Nombre_TipoServicio}"/>
+                                                <TextBlock
+                                                    FontSize="12"
+                                                    FontStyle="Normal"
+                                                    FontWeight="SemiBold">
+                                                    <Run FontWeight="Bold" Text="Tipo de Servicio:" />
+                                                    <Run Text="{Binding Nombre_TipoServicio}" />
                                                 </TextBlock>
                                             </StackPanel>
                                         </StackPanel>
@@ -146,77 +161,92 @@
                         </ListView>
                     </StackPanel>
                 </ScrollViewer>
-                <TextBlock x:Name="LblCantidadCitas" 
-                               Margin="0,0,20,3"
-                               FontSize="10"
-                               VerticalAlignment="Bottom"
-                               HorizontalAlignment="Right"/>
+                <TextBlock
+                    x:Name="LblCantidadCitas"
+                    Margin="0,0,20,3"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    FontSize="10" />
             </Grid>
-            <Grid x:Name="GrdDetalleServicio"
-                  Grid.Column="1"
-                  Margin="0,0,0,0"
-                  ui:Effects.Shadow="{StaticResource CommonShadow}">
+            <Grid
+                x:Name="GrdDetalleServicio"
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                ui:Effects.Shadow="{StaticResource CommonShadow}">
 
-                <StackPanel x:Name="StpMensajeServicio"
-                            Visibility="Visible"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                    <TextBlock FontSize="25"
-                               TextWrapping="Wrap"
-                               TextAlignment="Center"
-                               Text="Seleccione una Cita de la Izquierda para mas Detalles" />
+                <StackPanel
+                    x:Name="StpMensajeServicio"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="Visible">
+                    <TextBlock
+                        FontSize="25"
+                        Text="Seleccione una Cita de la Izquierda para mas Detalles"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap" />
                 </StackPanel>
-
                 <ScrollViewer>
-                    <StackPanel x:Name="StpFinalizarServicio"
-                                Visibility="Collapsed"
-                                Padding="10,0,10,10">
-                        <TextBlock Margin="0,0,0,0"
-                               Text="Detalle del Servicio"
-                               FontSize="25"
-                               HorizontalAlignment="Center"/>
+                    <StackPanel
+                        x:Name="StpFinalizarServicio"
+                        Padding="10,0,10,10"
+                        Visibility="Collapsed">
+                        <TextBlock
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="25"
+                            Text="Detalle del Servicio" />
                         <TextBlock x:Name="LblTipoMascota" Text="Tipo de Mascota:" />
                         <TextBlock x:Name="LblNombreMascota" Text="Nombre:" />
                         <TextBlock x:Name="LblNombreCliente" Text="Dueño:" />
-                        <TextBlock x:Name="LblDimension" Text="Tamaño:"/>
-                        <TextBlock x:Name="LblFechaInicio" Text="Fecha:"/>
-                        <TextBlock x:Name="LblHoraInicio" Text="Hora:"/>
-                        <TextBlock x:Name="LblHoraFin" Text="Hora:"/>
-                        <TextBlock x:Name="LblServicio" Text="Servicio:"/>
+                        <TextBlock x:Name="LblDimension" Text="Tamaño:" />
+                        <TextBlock x:Name="LblFechaInicio" Text="Fecha:" />
+                        <TextBlock x:Name="LblHoraInicio" Text="Hora:" />
+                        <TextBlock x:Name="LblHoraFin" Text="Hora:" />
+                        <TextBlock x:Name="LblServicio" Text="Servicio:" />
                         <TextBlock>
-                            <Run Text="Estado de la Venta:"/>
-                            <Run x:Name="LblEstadoVenta"/>
+                            <Run Text="Estado de la Venta:" />
+                            <Run x:Name="LblEstadoVenta" />
                         </TextBlock>
-                        <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" Margin="0,5"/>
+                        <Border
+                            Margin="0,5"
+                            BorderBrush="{ThemeResource SystemAccentColor}"
+                            BorderThickness="0,0,0,1" />
                         <TextBlock HorizontalAlignment="Right">
-                        <Run Text="TOTAL:"/>
-                        <Run x:Name="LblValorTotal"/>
+                            <Run Text="TOTAL:" />
+                            <Run x:Name="LblValorTotal" />
                         </TextBlock>
-                        <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" Margin="0,5"/>
-                        <Button x:Name="BtnFinalizarServicio"
+                        <Border
+                            Margin="0,5"
+                            BorderBrush="{ThemeResource SystemAccentColor}"
+                            BorderThickness="0,0,0,1" />
+                        <Button
+                            x:Name="BtnFinalizarServicio"
                             Margin="0,10,0,0"
-                              HorizontalAlignment="Center"
-                              Content="Ir a Pagar"
-                              Click="BtnFinalizarServicio_Click"/>
+                            HorizontalAlignment="Center"
+                            Click="BtnFinalizarServicio_Click"
+                            Content="Ir a Pagar" />
                     </StackPanel>
                 </ScrollViewer>
-                <ContentDialog x:Name="CtdFinalizaPago"
-                                       Title="Pagar"
-                                       PrimaryButtonText="Pagar"
-                                       PrimaryButtonClick="CtdFinalizaPago_PrimaryButtonClick"
-                                       SecondaryButtonText="Cancelar">
+                <ContentDialog
+                    x:Name="CtdFinalizaPago"
+                    Title="Pagar"
+                    PrimaryButtonClick="CtdFinalizaPago_PrimaryButtonClick"
+                    PrimaryButtonText="Pagar"
+                    SecondaryButtonText="Cancelar">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Margin="0,0,0,10">
-                                <Run Text="Valor total a Pagar: "/>
-                                <Run x:Name="LblValorTotalPago"
-                                     FontSize="14"
-                                     FontWeight="Bold"/>
+                            <Run Text="Valor total a Pagar: " />
+                            <Run
+                                x:Name="LblValorTotalPago"
+                                FontSize="14"
+                                FontWeight="Bold" />
                         </TextBlock>
-                        <ComboBox x:Name="CmbMetodoPago"
-                                      Header="Por favor seleccione un Metodo de Pago"
-                                      PlaceholderText="Metodo de Pago"
-                                      HorizontalAlignment="Stretch"
-                                      SelectionChanged="CmbMetodoPago_SelectionChanged"/>
+                        <ComboBox
+                            x:Name="CmbMetodoPago"
+                            HorizontalAlignment="Stretch"
+                            Header="Por favor seleccione un Metodo de Pago"
+                            PlaceholderText="Metodo de Pago"
+                            SelectionChanged="CmbMetodoPago_SelectionChanged" />
                     </StackPanel>
                 </ContentDialog>
             </Grid>

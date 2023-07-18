@@ -2,52 +2,76 @@
     x:Class="BrunoUWP.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BrunoUWP"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d"
+    xmlns:local="using:BrunoUWP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
     <Grid>
-        <controls:NavigationView x:Name="NvwBruno"
-                                 IsSettingsVisible="True"
-                                 ItemInvoked="NvwBruno_ItemInvoked"
-                                 PaneOpening="NvwBruno_PaneOpening"
-                                 PaneClosing="NvwBruno_PaneClosing"
-                                 IsBackButtonVisible="Visible"
-                                 IsBackEnabled="True"
-                                 BackRequested="NvwBruno_BackRequested"
-                                 Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}">
+        <controls:NavigationView
+            x:Name="NvwBruno"
+            BackRequested="NvwBruno_BackRequested"
+            Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+            IsBackButtonVisible="Visible"
+            IsBackEnabled="True"
+            IsSettingsVisible="True"
+            ItemInvoked="NvwBruno_ItemInvoked"
+            PaneClosing="NvwBruno_PaneClosing"
+            PaneOpening="NvwBruno_PaneOpening">
             <controls:NavigationView.MenuItems>
-                <controls:NavigationViewItem x:Name="NviInicio" Icon="Home" Content="Inicio" Tag="Inicio" />
-                <controls:NavigationViewItem Icon="People" Content="Clientes" Tag="Clientes" />
+                <controls:NavigationViewItem
+                    x:Name="NviInicio"
+                    Content="Inicio"
+                    Icon="Home"
+                    Tag="Inicio" />
+                <controls:NavigationViewItem
+                    Content="Clientes"
+                    Icon="People"
+                    Tag="Clientes" />
                 <controls:NavigationViewItem Content="Mascotas" Tag="Mascotas">
                     <controls:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Webdings" Glyph="&#xF0F5;" />
                     </controls:NavigationViewItem.Icon>
                 </controls:NavigationViewItem>
-                <controls:NavigationViewItem x:Name="NviTransaciones" Icon="World" Content="Transacciones" Tag="Transacciones">
+                <controls:NavigationViewItem
+                    x:Name="NviTransaciones"
+                    Content="Transacciones"
+                    Icon="World"
+                    Tag="Transacciones">
                     <controls:NavigationViewItem.MenuItems>
-                        <controls:NavigationViewItem x:Name="NviServicioSpa" Content="Servicio Spa" Tag="ServicioSpa">
+                        <controls:NavigationViewItem
+                            x:Name="NviServicioSpa"
+                            Content="Servicio Spa"
+                            Tag="ServicioSpa">
                             <controls:NavigationViewItem.Icon>
                                 <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE939;" />
                             </controls:NavigationViewItem.Icon>
                         </controls:NavigationViewItem>
-                        <controls:NavigationViewItem x:Name="NvmVentaArticulos" Content="Venta de Articulos" Tag="VentaArticulos">
+                        <controls:NavigationViewItem
+                            x:Name="NvmVentaArticulos"
+                            Content="Venta de Articulos"
+                            Tag="VentaArticulos">
                             <controls:NavigationViewItem.Icon>
                                 <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7BF;" />
                             </controls:NavigationViewItem.Icon>
                         </controls:NavigationViewItem>
                     </controls:NavigationViewItem.MenuItems>
                 </controls:NavigationViewItem>
-                    <controls:NavigationViewItem Icon="Calendar" Content="Citas" Tag="Citas" />
+                <controls:NavigationViewItem
+                    Content="Citas"
+                    Icon="Calendar"
+                    Tag="Citas" />
                 <controls:NavigationViewItem Content="Inventario" Tag="Inventario">
                     <controls:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE679;" />
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.MenuItems>
-                        <controls:NavigationViewItem x:Name="NviArticulos" Content="Articulos" Tag="Articulos">
+                        <controls:NavigationViewItem
+                            x:Name="NviArticulos"
+                            Content="Articulos"
+                            Tag="Articulos">
                             <controls:NavigationViewItem.Icon>
                                 <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE912;" />
                             </controls:NavigationViewItem.Icon>
@@ -56,9 +80,14 @@
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
             <controls:NavigationView.PaneCustomContent>
-                <Image x:Name="Header" Source="/Assets/LogoBruno.png" HorizontalAlignment="Center" Width="100" Height="100"/>
+                <Image
+                    x:Name="Header"
+                    Width="100"
+                    Height="100"
+                    HorizontalAlignment="Center"
+                    Source="/Assets/LogoBruno.png" />
             </controls:NavigationView.PaneCustomContent>
-            <Frame x:Name="ContenFrameMenu" x:FieldModifier="Public"/>
+            <Frame x:Name="ContenFrameMenu" x:FieldModifier="Public" />
         </controls:NavigationView>
     </Grid>
 </Page>

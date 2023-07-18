@@ -2,93 +2,117 @@
     x:Class="BrunoUWP.Frm_CreaCategoriaArticulo"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BrunoUWP"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BrunoUWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:my="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media" 
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
     <Page.Resources>
-        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
+        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4" />
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-              Margin="50,10">
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          Grid.Column="0">
-                <StackPanel x:Name="StpPrincipal" 
-                            Orientation="Vertical"
-                            Margin="20,10,20,10">
-                    <my:InfoBar x:Name="InfAlerta"/>
-                    <TextBox x:Name="TxtNombreMaestroArticulo" 
-                             Header="Nombre"
-                             PlaceholderText="Digite Nombre"/>
-                    <TextBox x:Name="TxtDescripcionMaestroArticulo" 
-                             Header="Descripcion"
-                             PlaceholderText="Digite Descripcion"/>
-                    <Button x:Name="BtnGuardar"
-                            Margin="0,10,0,0"
-                            Content="Guardar"
-                            HorizontalAlignment="Center"
-                            Click="BtnGuardar_Click"/>
+        <Grid
+            Grid.Row="0"
+            Margin="50,10"
+            ui:Effects.Shadow="{StaticResource CommonShadow}">
+            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                <StackPanel
+                    x:Name="StpPrincipal"
+                    Margin="20,10,20,10"
+                    Orientation="Vertical">
+                    <my:InfoBar x:Name="InfAlerta" />
+                    <TextBox
+                        x:Name="TxtNombreMaestroArticulo"
+                        Header="Nombre"
+                        PlaceholderText="Digite Nombre" />
+                    <TextBox
+                        x:Name="TxtDescripcionMaestroArticulo"
+                        Header="Descripcion"
+                        PlaceholderText="Digite Descripcion" />
+                    <Button
+                        x:Name="BtnGuardar"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"
+                        Click="BtnGuardar_Click"
+                        Content="Guardar" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Grid Grid.Row="1"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-              Margin="50,10">
+        <Grid
+            Grid.Row="1"
+            Margin="50,10"
+            ui:Effects.Shadow="{StaticResource CommonShadow}">
             <StackPanel Margin="20,0,20,0">
                 <ScrollViewer>
-                    <StackPanel x:Name="StpGrilla" 
-                        Orientation="Vertical">
-                        <controls:DataGrid x:Name="DtgMaestroArticulo"
-                                           Margin="10"
-                                           AutoGenerateColumns="False"
-                                           AreRowDetailsFrozen="True"
-                                           ColumnHeaderHeight="32"
-                                           CanUserReorderColumns="True"
-                                           CanUserResizeColumns="True"
-                                           CanUserSortColumns="True"
-                                           HeadersVisibility="Column"
-                                           IsReadOnly="True"
-                                           DoubleTapped="DtgMaestroArticulo_DoubleTapped"
-                                           HorizontalAlignment="Stretch"
-                                           GridLinesVisibility="All"
-                                           SelectionMode="Extended">
+                    <StackPanel x:Name="StpGrilla" Orientation="Vertical">
+                        <controls:DataGrid
+                            x:Name="DtgMaestroArticulo"
+                            Margin="10"
+                            HorizontalAlignment="Stretch"
+                            AreRowDetailsFrozen="True"
+                            AutoGenerateColumns="False"
+                            CanUserReorderColumns="True"
+                            CanUserResizeColumns="True"
+                            CanUserSortColumns="True"
+                            ColumnHeaderHeight="32"
+                            DoubleTapped="DtgMaestroArticulo_DoubleTapped"
+                            GridLinesVisibility="All"
+                            HeadersVisibility="Column"
+                            IsReadOnly="True"
+                            SelectionMode="Extended">
                             <controls:DataGrid.Columns>
-                                <controls:DataGridTextColumn Header="Codigo" Tag="TipoMascota" Width="*" Binding="{Binding Codigo_MaestroArticulo}" />
-                                <controls:DataGridTextColumn Header="Nombre" Tag="NombreRaza" Width="*" Binding="{Binding Nombre_MaestroArticulo}" />
-                                <controls:DataGridTextColumn Header="Descripcion" Tag="Descripcion" Width="2*" Binding="{Binding Descripcion_MaestroArticulo}" />
-                                <controls:DataGridTextColumn Header="Fecha de Creacion" Tag="FechaCreacion" Width="*" Binding="{Binding FechaCreacion_MaestroArticulo}" />
+                                <controls:DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding Codigo_MaestroArticulo}"
+                                    Header="Codigo"
+                                    Tag="TipoMascota" />
+                                <controls:DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding Nombre_MaestroArticulo}"
+                                    Header="Nombre"
+                                    Tag="NombreRaza" />
+                                <controls:DataGridTextColumn
+                                    Width="2*"
+                                    Binding="{Binding Descripcion_MaestroArticulo}"
+                                    Header="Descripcion"
+                                    Tag="Descripcion" />
+                                <controls:DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding FechaCreacion_MaestroArticulo}"
+                                    Header="Fecha de Creacion"
+                                    Tag="FechaCreacion" />
                             </controls:DataGrid.Columns>
                         </controls:DataGrid>
                     </StackPanel>
                 </ScrollViewer>
-                <ContentDialog x:Name="CtdModificaArticuloMaestro"
-                               Title="Modificar Articulo Maestro"
-                               PrimaryButtonText="Guardar"
-                               PrimaryButtonClick="CtdModificaArticuloMaestro_PrimaryButtonClick"
-                               SecondaryButtonText="Cancelar">
+                <ContentDialog
+                    x:Name="CtdModificaArticuloMaestro"
+                    Title="Modificar Articulo Maestro"
+                    PrimaryButtonClick="CtdModificaArticuloMaestro_PrimaryButtonClick"
+                    PrimaryButtonText="Guardar"
+                    SecondaryButtonText="Cancelar">
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="TxtNombreMaestroArticuloDialog"
-                                 PlaceholderText="Escriba el Nuevo Nombre" 
-                                 Header="Nombre" />
-                        <TextBox x:Name="TxtDescripcionMaestroArticuloDialog"
-                                 PlaceholderText="Escriba la nueva Descripcion" 
-                                 Header="Descripcion" />
+                        <TextBox
+                            x:Name="TxtNombreMaestroArticuloDialog"
+                            Header="Nombre"
+                            PlaceholderText="Escriba el Nuevo Nombre" />
+                        <TextBox
+                            x:Name="TxtDescripcionMaestroArticuloDialog"
+                            Header="Descripcion"
+                            PlaceholderText="Escriba la nueva Descripcion" />
                     </StackPanel>
                 </ContentDialog>
             </StackPanel>
         </Grid>
-        <my:TeachingTip x:Name="TctAlerta"/>
+        <my:TeachingTip x:Name="TctAlerta" />
     </Grid>
 </Page>

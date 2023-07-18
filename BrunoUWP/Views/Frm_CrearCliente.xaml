@@ -2,74 +2,86 @@
     x:Class="BrunoUWP.Frm_CrearCliente"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BrunoUWP"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BrunoUWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" 
     xmlns:my="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
-
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
     <Page.Resources>
-        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4"/>
+        <media:AttachedCardShadow x:Key="CommonShadow" Offset="4" />
     </Page.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <ScrollViewer>
-            <Grid Grid.Column="0"
-              ui:Effects.Shadow="{StaticResource CommonShadow}"
-              Margin="50,10">
-
-                <StackPanel x:Name="StpDatosCliente"
-                        Orientation="Vertical"
-                        Padding="20">
-                    <my:InfoBar x:Name="InfAlerta"/>
-                    <TextBox x:Name="TxtDocumento" Header="Documento" 
-                             PlaceholderText="Digite Documento"/>
-                    <TextBox x:Name="TxtNombres" Header="Nombres"
-                             PlaceholderText="Digite Nombres"/>
-                    <TextBox x:Name="TxtApellidos" Header="Apellidos"
-                             PlaceholderText="Digite Apellidos"/>
-                    <TextBox x:Name="TxtDireccion" Header="Direccion"
-                             PlaceholderText="Digite Direccion"/>
-                    <TextBox x:Name="TxtTelefono" Header="Telefono"
-                             PlaceholderText="Digite Telefono"/>
-                    <TextBox x:Name="TxtCorreo" Header="Correo Electronico"
-                             PlaceholderText="Digite Correo Electronico"/>
-                    <my:NumberBox x:Name="NbbEdad"
-                              Header="Edad"
-                              Value="1"
-                              SpinButtonPlacementMode="Inline"
-                              SmallChange="1"
-                              LargeChange="20"
-                              Maximum="90"
-                              Minimum="1"/>
-                    <ComboBox x:Name="CmbSexo"
-                          SelectionChanged="CmbSexo_SelectionChanged"
-                          PlaceholderText="Seleccione Sexo"
-                          Header="Sexo"
-                          HorizontalAlignment="Stretch"/>
-                    <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-                        <Button x:Name="BtnGuardar"
-                                Content="Guardar"
-                                HorizontalAlignment="Center"
-                                Margin="10"
-                                Click="BtnGuardar_Click"/>
-                        <my:ProgressRing x:Name="PgrGuardarCliente"
-                                         IsActive="False"/>
+            <Grid
+                Grid.Column="0"
+                Margin="50,10"
+                ui:Effects.Shadow="{StaticResource CommonShadow}">
+                <StackPanel
+                    x:Name="StpDatosCliente"
+                    Padding="20"
+                    Orientation="Vertical">
+                    <my:InfoBar x:Name="InfAlerta" />
+                    <TextBox
+                        x:Name="TxtDocumento"
+                        Header="Documento"
+                        PlaceholderText="Digite Documento" />
+                    <TextBox
+                        x:Name="TxtNombres"
+                        Header="Nombres"
+                        PlaceholderText="Digite Nombres" />
+                    <TextBox
+                        x:Name="TxtApellidos"
+                        Header="Apellidos"
+                        PlaceholderText="Digite Apellidos" />
+                    <TextBox
+                        x:Name="TxtDireccion"
+                        Header="Direccion"
+                        PlaceholderText="Digite Direccion" />
+                    <TextBox
+                        x:Name="TxtTelefono"
+                        Header="Telefono"
+                        PlaceholderText="Digite Telefono" />
+                    <TextBox
+                        x:Name="TxtCorreo"
+                        Header="Correo Electronico"
+                        PlaceholderText="Digite Correo Electronico" />
+                    <my:NumberBox
+                        x:Name="NbbEdad"
+                        Header="Edad"
+                        LargeChange="20"
+                        Maximum="90"
+                        Minimum="1"
+                        SmallChange="1"
+                        SpinButtonPlacementMode="Inline"
+                        Value="1" />
+                    <ComboBox
+                        x:Name="CmbSexo"
+                        HorizontalAlignment="Stretch"
+                        Header="Sexo"
+                        PlaceholderText="Seleccione Sexo"
+                        SelectionChanged="CmbSexo_SelectionChanged" />
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button
+                            x:Name="BtnGuardar"
+                            Margin="10"
+                            HorizontalAlignment="Center"
+                            Click="BtnGuardar_Click"
+                            Content="Guardar" />
+                        <my:ProgressRing x:Name="PgrGuardarCliente" IsActive="False" />
                     </StackPanel>
                 </StackPanel>
-                <my:TeachingTip x:Name="TctAlerta"/>
+                <my:TeachingTip x:Name="TctAlerta" />
             </Grid>
         </ScrollViewer>
     </Grid>
