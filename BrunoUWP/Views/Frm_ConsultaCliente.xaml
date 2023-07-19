@@ -138,7 +138,7 @@
                                                     FontStyle="Italic"
                                                     FontWeight="SemiBold"
                                                     Visibility="Collapsed">
-                                                    <Run FontWeight="Bold" Text="Nombre:" />
+                                                    <Run FontWeight="Bold" Text="Apellido:" />
                                                     <Run Text="{Binding Apellido_Persona}" />
                                                 </TextBlock>
                                                 <TextBlock
