@@ -76,16 +76,6 @@ Public NotInheritable Class Frm_ConsultaCliente
         End Try
     End Sub
 
-    Private Sub LsvCliente_ItemClick(sender As Object, e As ItemClickEventArgs)
-        Try
-            Dim GetClienteModel As New NewPersonaModel
-            GetClienteModel = e.ClickedItem
-            Frame.Navigate(GetType(Frm_DetalleCliente), GetClienteModel)
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
     Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
         Try
             PgrGeneraExcel.IsActive = True
@@ -116,6 +106,20 @@ Public NotInheritable Class Frm_ConsultaCliente
                 Case "Telefono"
                     AsbBusueda.PlaceholderText = "Digite Telefono"
             End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub LsvCliente_ItemClick(sender As Object, e As ItemClickEventArgs)
+        Try
+            Try
+                Dim GetClienteModel As New ClienteModel
+                GetClienteModel = e.ClickedItem
+                Frame.Navigate(GetType(Frm_DetalleCliente), GetClienteModel)
+            Catch ex As Exception
+
+            End Try
         Catch ex As Exception
 
         End Try

@@ -12,9 +12,9 @@ Public NotInheritable Class Frm_DetalleCliente
 
     Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
         MyBase.OnNavigatedTo(e)
-        Dim DatosCliente As NewPersonaModel = TryCast(e.Parameter, NewPersonaModel)
+        Dim DatosCliente As ClienteModel = TryCast(e.Parameter, ClienteModel)
         If DatosCliente IsNot Nothing Then
-            IdCliente = DatosCliente.Id_Cliente
+            IdCliente = DatosCliente.Id_Persona
             TxtCodigo.Text = DatosCliente.Codigo_Cliente
             TxtDocumento.Text = DatosCliente.Documento_Persona
             TxtNombres.Text = DatosCliente.Nombre_Persona
@@ -23,11 +23,11 @@ Public NotInheritable Class Frm_DetalleCliente
             TxtTelefono.Text = DatosCliente.Telefono_Persona
             TxtCorreo.Text = DatosCliente.Correo_Persona
             NbbEdad.Value = DatosCliente.Edad_Persona
-            Dim EstadoCliente = DatosCliente.NombreEstado_Cliente
+            Dim EstadoCliente = DatosCliente.Estado_Cliente
             Select Case EstadoCliente
-                Case "Activo"
+                Case 1
                     TgsEstadoCliente.IsOn = True
-                Case "Inactivo"
+                Case 0
                     TgsEstadoCliente.IsOn = False
             End Select
         End If
