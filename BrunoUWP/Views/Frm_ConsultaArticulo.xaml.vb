@@ -1,5 +1,6 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
+Imports Microsoft.Toolkit.Uwp.UI.Controls
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -97,5 +98,22 @@ Public NotInheritable Class Frm_ConsultaArticulo
         End Try
     End Sub
 
+    Private Async Sub DtgArticulos_Sorting(sender As Object, e As DataGridColumnEventArgs)
+        Try
+            Dim ObtenerDatos = Await GetArticulos.ConsultaArticulos
+            If e.Column.Tag.ToString() = "NombreArticulo" Then
+                If e.Column.SortDirection Is Nothing OrElse e.Column.SortDirection = DataGridSortDirection.Descending Then
+                    DtgArticulos.ItemsSource = (From item In ObtenerDatos
+                                                Order By item.Nombre_Articulo Ascending)
+                    e.Column.SortDirection = DataGridSortDirection.Ascending
+                Else
+                    DtgArticulos.ItemsSource = (From item In ObtenerDatos
+                                                Order By item.Nombre_Articulo Descending)
+                    e.Column.SortDirection = DataGridSortDirection.Descending
+                End If
+            End If
+        Catch ex As Exception
 
+        End Try
+    End Sub
 End Class

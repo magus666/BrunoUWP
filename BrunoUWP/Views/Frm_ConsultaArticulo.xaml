@@ -60,7 +60,8 @@
                     HeadersVisibility="Column"
                     HorizontalScrollBarVisibility="Auto"
                     IsReadOnly="True"
-                    SelectionMode="Extended">
+                    SelectionMode="Extended"
+                    Sorting="DtgArticulos_Sorting">
                     <controls:DataGrid.Columns>
                         <controls:DataGridTextColumn
                             Width="*"

@@ -1,5 +1,6 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
+Imports Microsoft.Toolkit.Uwp.UI.Controls
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -72,6 +73,26 @@ Public NotInheritable Class Frm_CreaCategoriaArticulo
                                                             TxtDescripcionMaestroArticuloDialog.Text) = True Then
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El Articulo maestro fue Actualizado con Exito.")
                 DtgMaestroArticulo.ItemsSource = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
+            End If
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
+
+    Private Async Sub DtgMaestroArticulo_Sorting(sender As Object, e As DataGridColumnEventArgs)
+        Try
+            Dim ObtenerDatos = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
+            If e.Column.Tag.ToString() = "NombreMaestroArticulo" Then
+                'Implement sort on the column "Range" using LINQ
+                If e.Column.SortDirection Is Nothing OrElse e.Column.SortDirection = DataGridSortDirection.Descending Then
+                    DtgMaestroArticulo.ItemsSource = (From item In ObtenerDatos
+                                                      Order By item.Nombre_MaestroArticulo Ascending)
+                    e.Column.SortDirection = DataGridSortDirection.Ascending
+                Else
+                    DtgMaestroArticulo.ItemsSource = (From item In ObtenerDatos
+                                                      Order By item.Nombre_MaestroArticulo Descending)
+                    e.Column.SortDirection = DataGridSortDirection.Descending
+                End If
             End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)

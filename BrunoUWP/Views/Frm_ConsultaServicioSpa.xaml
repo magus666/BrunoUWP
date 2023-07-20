@@ -41,7 +41,8 @@
                     GridLinesVisibility="Horizontal"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
-                    SelectionMode="Extended">
+                    SelectionMode="Extended"
+                    Sorting="DtgVentaServicioSpa_Sorting">
                     <controls:DataGrid.Columns>
                         <controls:DataGridTextColumn
                             Binding="{Binding Codigo}"
