@@ -13,54 +13,57 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
-
     <Page.Resources>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4" />
         <MyClass:Cl_ColorLetraEstadoCita x:Key="Cl_ColorLetraEstadoCita" />
         <MyClass:Cl_VisibilidadBotonFinalizarCita x:Key="Cl_VisibilidadBotonFinalizarCita" />
     </Page.Resources>
-
-    <Grid>
+    <Grid x:Name="GrdPrincipal">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid
+            x:Name="GrdCalendario"
             Grid.Column="0"
             Margin="10,0,0,10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
-            <StackPanel
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Orientation="Vertical">
-                <TextBlock
-                    x:Name="LblTituloCita"
-                    Margin="0,10,0,10"
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel
                     HorizontalAlignment="Center"
-                    FontSize="24"
-                    FontWeight="Bold"
-                    Text="Calendario de Citas" />
-                <CalendarView
-                    x:Name="ClvCitas"
-                    Language="es"
-                    SelectedDatesChanged="ClvCitas_SelectedDatesChanged" />
-                <TextBlock
-                    Margin="0,10,0,0"
-                    HorizontalAlignment="Center"
-                    FontSize="25"
-                    Text="Cantidad total de Citas" />
-                <TextBlock
-                    x:Name="LblContadorCitas"
-                    Margin="0,60,0,0"
-                    HorizontalAlignment="Center"
-                    FontSize="70"
-                    FontWeight="Bold" />
-            </StackPanel>
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <TextBlock
+                        x:Name="LblTituloCita"
+                        Margin="0,10,0,10"
+                        HorizontalAlignment="Center"
+                        FontSize="24"
+                        FontWeight="Bold"
+                        Text="Calendario de Citas" />
+                    <CalendarView
+                        x:Name="ClvCitas"
+                        Language="es"
+                        SelectedDatesChanged="ClvCitas_SelectedDatesChanged" />
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"
+                        FontSize="25"
+                        Text="Cantidad total de Citas" />
+                    <TextBlock
+                        x:Name="LblContadorCitas"
+                        Margin="0,60,0,0"
+                        HorizontalAlignment="Center"
+                        FontSize="70"
+                        FontWeight="Bold" />
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
         <Grid
+            x:Name="GrdDatosCitas"
             Grid.Column="1"
             Margin="10,0,10,10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
@@ -151,5 +154,38 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="VisGrande">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GrdPrincipal.Margin" Value="10" />
+                        <Setter Target="GrdPrincipal.RowDefinitions[1].Height" Value="auto" />
+                        <Setter Target="GrdPrincipal.ColumnDefinitions[1].Width" Value="2*" />
+                        <Setter Target="GrdCalendario.Margin" Value="0 0 6 0" />
+                        <Setter Target="GrdDatosCitas.Margin" Value="6 0 0 0" />
+                        <Setter Target="GrdDatosCitas.(Grid.Column)" Value="1" />
+                        <Setter Target="GrdDatosCitas.(Grid.Row)" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisReducido">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GrdPrincipal.Margin" Value="10" />
+                        <Setter Target="GrdCalendario.Margin" Value="0 0 0 6" />
+                        <Setter Target="GrdDatosCitas.Margin" Value="0 6 0 0" />
+                        <Setter Target="GrdPrincipal.RowDefinitions[0].Height" Value="2*" />
+                        <Setter Target="GrdPrincipal.RowDefinitions[1].Height" Value="*" />
+                        <Setter Target="GrdPrincipal.ColumnDefinitions[1].Width" Value="auto" />
+                        <Setter Target="GrdDatosCitas.(Grid.Column)" Value="0" />
+                        <Setter Target="GrdDatosCitas.(Grid.Row)" Value="1" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
