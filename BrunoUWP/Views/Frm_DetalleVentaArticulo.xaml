@@ -15,45 +15,48 @@
     <Page.Resources>
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4" />
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="GrdPrincipal">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid
+            x:Name="GrdGestionVenta"
             Grid.Column="0"
             Margin="10,10,0,10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
-            <StackPanel x:Name="StpDescripcionArticulo" Margin="10,10,10,0">
-                <Image
+            <ScrollViewer>
+                <StackPanel x:Name="StpDescripcionArticulo" Margin="10,10,10,0">
+                    <Image
                     x:Name="ImgArticulo"
                     Width="300"
                     Height="340"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top" />
-                <TextBlock
+                    <TextBlock
                     x:Name="LblTituloNombreArticulo"
                     FontSize="25"
                     FontWeight="Bold" />
-                <TextBlock
+                    <TextBlock
                     x:Name="LblDescripcionArticulo"
-                    Margin="0,10,0,0"
+                    Margin="0,0,0,0"
                     FontSize="18"
                     FontWeight="Bold"
                     TextWrapping="Wrap" />
-                <TextBlock x:Name="LblExistencias" Margin="0,10,0,0" />
-                <TextBlock x:Name="LblValorUnitaro" Margin="0,0,0,0" />
-                <TextBlock x:Name="LblValorTotal" Margin="0,0,0,0" />
-                <ComboBox
+                    <TextBlock x:Name="LblExistencias" Margin="0,10,0,0" />
+                    <TextBlock x:Name="LblValorUnitaro" Margin="0,0,0,0" />
+                    <TextBlock x:Name="LblValorTotal" Margin="0,0,0,0" />
+                    <ComboBox
                     x:Name="CmbMetodoPago"
                     Margin="0,10,0,0"
                     HorizontalAlignment="Stretch"
                     PlaceholderText="Seleccione Metodo de Pago"
                     SelectionChanged="CmbMetodoPago_SelectionChanged" />
-                <my:NumberBox
+                    <my:NumberBox
                     x:Name="NbbCantidadArticulos"
                     Margin="0,10,0,0"
                     Minimum="0"
@@ -61,21 +64,22 @@
                     SpinButtonPlacementMode="Inline"
                     ValueChanged="NbbCantidadArticulos_ValueChanged"
                     Value="0" />
-                <Button
+                    <Button
                     x:Name="BtnConfirmar"
                     Margin="0,10,0,0"
                     HorizontalAlignment="Center"
                     Click="BtnConfirmar_Click"
                     Content="Confirmar" />
-            </StackPanel>
-
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
         <Grid
+            x:Name="GrdDetalleVenta"
             Grid.Column="1"
             Margin="10,10,10,10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
             <TextBlock
-                x:Name="LblMensajeVenta"
+                x:Name="LblMensaBienvenidaVenta"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="35"
@@ -83,74 +87,76 @@
                 TextAlignment="Center"
                 TextWrapping="Wrap"
                 Visibility="Visible" />
-            <StackPanel
+
+            <ScrollViewer>
+                <StackPanel
                 x:Name="StpDetallesVenta"
-                Margin="10,0,0,0"
+                Margin="10,0,0,10"
                 Visibility="Collapsed">
-                <my:InfoBar x:Name="InfAlerta" />
-                <TextBlock
+                    <my:InfoBar x:Name="InfAlerta" />
+                    <TextBlock x:Name="LblTituloDetalleVenta"
                     Margin="0,0,0,40"
                     HorizontalAlignment="Center"
                     FontSize="35"
                     FontWeight="Bold"
                     Text="Detalles de la Venta" />
-                <TextBlock
+                    <TextBlock
                     x:Name="LblTituloNombreArticuloDetalle"
                     FontSize="30"
                     FontWeight="Bold" />
-                <TextBlock
+                    <TextBlock
                     x:Name="LblDescripcionArticuloDetalle"
-                    Margin="0,10,0,0"
+                    Margin="0,0,0,0"
                     FontSize="25"
                     FontWeight="Bold"
                     TextWrapping="Wrap" />
-                <TextBlock
+                    <TextBlock x:Name="LblCantidadTituloDetalle"
                     Margin="0,40,10,0"
                     HorizontalAlignment="Right"
                     FontSize="22">
                     <Run Text="Cantidad:" />
                     <Run x:Name="LblCantidadDetalle" />
-                </TextBlock>
-                <TextBlock
+                    </TextBlock>
+                    <TextBlock
                     Margin="0,0,10,0"
                     HorizontalAlignment="Right"
                     FontSize="22">
                     <Run Text="Existencias luego de la Venta:" />
                     <Run x:Name="LblExistenciasDetalle" />
-                </TextBlock>
-                <TextBlock
+                    </TextBlock>
+                    <TextBlock
                     Margin="0,0,10,0"
                     HorizontalAlignment="Right"
                     FontSize="22">
                     <Run Text="Valor Unitario:" />
                     <Run x:Name="LblValorUnitaroDetalle" />
-                </TextBlock>
-                <TextBlock
+                    </TextBlock>
+                    <TextBlock
                     Margin="0,0,10,0"
                     HorizontalAlignment="Right"
                     FontSize="22">
                     <Run Text="Descuento:" />
                     <Run Text="No Aplica" />
-                </TextBlock>
-                <TextBlock
+                    </TextBlock>
+                    <TextBlock
                     Margin="0,0,10,0"
                     HorizontalAlignment="Right"
                     FontSize="22">
                     <Run Text="Metodo de Pago:" />
                     <Run x:Name="LblMetodoPagoDetalle" />
-                </TextBlock>
-                <Border
+                    </TextBlock>
+                    <Border
                     Margin="0,5"
                     BorderBrush="{ThemeResource SystemAccentColor}"
                     BorderThickness="0,0,0,1" />
-                <TextBlock
+                    <TextBlock
                     Margin="0,0,10,0"
                     HorizontalAlignment="Right"
                     FontSize="22">
                     <Run Text="Valor Total:" />
                     <Run x:Name="LblValorTotalDetalle" />
-                </TextBlock>
-                <Button
+                    </TextBlock>
+                    <Button
                     x:Name="BtnGuardarVenta"
                     Width="100"
                     Height="50"
@@ -158,8 +164,54 @@
                     HorizontalAlignment="Center"
                     Click="BtnGuardarVenta_Click"
                     Content="Pagar" />
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
         <my:TeachingTip x:Name="TctAlerta" />
+
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="VisGrande">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GrdPrincipal.Margin" Value="10" />
+                        <Setter Target="GrdPrincipal.RowDefinitions[1].Height" Value="auto" />
+                        <Setter Target="GrdPrincipal.ColumnDefinitions[1].Width" Value="2*" />
+                        <Setter Target="GrdGestionVenta.Margin" Value="0 0 6 0" />
+                        <Setter Target="GrdDetalleVenta.Margin" Value="6 0 0 0" />
+                        <Setter Target="GrdDetalleVenta.(Grid.Column)" Value="1" />
+                        <Setter Target="GrdDetalleVenta.(Grid.Row)" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisReducido">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GrdPrincipal.Margin" Value="10" />
+                        <Setter Target="GrdGestionVenta.Margin" Value="0 0 0 6" />
+                        <Setter Target="GrdDetalleVenta.Margin" Value="0 6 0 0" />
+                        <Setter Target="GrdPrincipal.RowDefinitions[0].Height" Value="2*" />
+                        <Setter Target="GrdPrincipal.RowDefinitions[1].Height" Value="*" />
+                        <Setter Target="GrdPrincipal.ColumnDefinitions[1].Width" Value="auto" />
+                        <Setter Target="GrdDetalleVenta.(Grid.Column)" Value="0" />
+                        <Setter Target="GrdDetalleVenta.(Grid.Row)" Value="1" />
+                        <Setter Target="LblTituloNombreArticulo.FontSize" Value="20" />
+                        <Setter Target="ImgArticulo.Width" Value="90" />
+                        <Setter Target="ImgArticulo.Height" Value="120" />
+                        
+                        <Setter Target="LblMensaBienvenidaVenta.FontSize" Value="20" />
+                        <Setter Target="LblTituloDetalleVenta.FontSize" Value="20" />
+                        <Setter Target="LblTituloNombreArticuloDetalle.FontSize" Value="20" />
+                        <Setter Target="LblDescripcionArticuloDetalle.FontSize" Value="20" />
+                        <Setter Target="LblCantidadTituloDetalle.FontSize" Value="20" />
+                        
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

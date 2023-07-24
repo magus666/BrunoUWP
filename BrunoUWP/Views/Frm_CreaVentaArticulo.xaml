@@ -18,7 +18,7 @@
         <MyClass:Cl_AgregaSignoPesos x:Key="Cl_AgregaSignoPesos" />
         <media:AttachedCardShadow x:Key="CommonShadow" Offset="4" />
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="GrdPrincipal">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
@@ -27,6 +27,7 @@
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <Grid
+            x:Name="GrdGestionVenta"
             Grid.Row="0"
             Margin="50,10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">

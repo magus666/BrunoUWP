@@ -45,12 +45,12 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
                 NbbCantidadArticulos.IsEnabled = False
                 CmbMetodoPago.IsEnabled = False
                 BtnConfirmar.IsEnabled = False
-                LblMensajeVenta.Text = "No hay mas existencias del Articulo " & NombreArticulo & ". Por favor agreguelas desde el Modulo Inventario."
+                LblMensaBienvenidaVenta.Text = "No hay mas existencias del Articulo " & NombreArticulo & ". Por favor agreguelas desde el Modulo Inventario."
             Else
                 NbbCantidadArticulos.IsEnabled = True
                 CmbMetodoPago.IsEnabled = True
                 BtnConfirmar.IsEnabled = True
-                LblMensajeVenta.Text = "Por Favor Confirme la Venta en el Panel Izquierdo para ver Los detalles y proceder al Pago..."
+                LblMensaBienvenidaVenta.Text = "Por Favor Confirme la Venta en el Panel Izquierdo para ver Los detalles y proceder al Pago..."
             End If
             EstableceImagen()
             LblTituloNombreArticulo.Text = NombreArticulo
@@ -100,7 +100,7 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
                 GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Aviso", "La cantidad no puede ser 0", NbbCantidadArticulos)
                 Exit Sub
             Else
-                LblMensajeVenta.Visibility = Visibility.Collapsed
+                LblMensaBienvenidaVenta.Visibility = Visibility.Collapsed
                 StpDetallesVenta.Visibility = Visibility.Visible
                 LblTituloNombreArticuloDetalle.Text = NombreArticulo
                 LblDescripcionArticuloDetalle.Text = DescripcionArticulo

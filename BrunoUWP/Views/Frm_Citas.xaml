@@ -48,7 +48,8 @@
                         x:Name="ClvCitas"
                         Language="es"
                         SelectedDatesChanged="ClvCitas_SelectedDatesChanged" />
-                    <TextBlock x:Name="LblTituloCantidadCitas"
+                    <TextBlock
+                        x:Name="LblTituloCantidadCitas"
                         Margin="0,10,0,0"
                         HorizontalAlignment="Center"
                         FontSize="25"
@@ -65,7 +66,7 @@
         <Grid
             x:Name="GrdDatosCitas"
             Grid.Column="1"
-            Margin="10,0,10,10"
+            Margin="0,0,0,0"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
             <TextBlock
                 x:Name="LblTituloCitasAsignadas"
@@ -183,10 +184,9 @@
                         <Setter Target="GrdPrincipal.ColumnDefinitions[1].Width" Value="auto" />
                         <Setter Target="GrdDatosCitas.(Grid.Column)" Value="0" />
                         <Setter Target="GrdDatosCitas.(Grid.Row)" Value="1" />
-                        <Setter Target="LblTituloCantidadCitas.FontSize" Value="20"/>
-                        <Setter Target="LblContadorCitas.FontSize" Value="40"/>
-                        <Setter Target="LblContadorCitas.Margin" Value="0,10,0,10"/>
-                        
+                        <Setter Target="LblTituloCantidadCitas.FontSize" Value="20" />
+                        <Setter Target="LblContadorCitas.FontSize" Value="40" />
+                        <Setter Target="LblContadorCitas.Margin" Value="0,10,0,10" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
