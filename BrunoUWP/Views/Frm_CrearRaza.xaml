@@ -20,6 +20,12 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="1.55*" />
         </Grid.RowDefinitions>
+        <Image
+            Grid.RowSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Opacity="0.08"
+            Source="/Assets/LogoBruno.png" />
         <Grid
             Grid.Row="0"
             Margin="50,10"

@@ -31,7 +31,7 @@
             Source="/Assets/LogoBruno.png" />
         <Grid
             Grid.Row="0"
-            Margin="0,0,10,10"
+            Margin="10,10,10,10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
 
             <Grid.ColumnDefinitions>
@@ -187,7 +187,7 @@
         </Grid>
         <Grid
             Grid.Row="1"
-            Margin="0,0,10,10"
+            Margin="10,0,10,10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <my:ProgressRing x:Name="PgrGeneraExcel" IsActive="False" />

@@ -20,10 +20,15 @@
             <RowDefinition Height="6*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
+        <Image
+            Grid.RowSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Opacity="0.08"
+            Source="/Assets/LogoBruno.png" />
         <Grid
             Grid.Row="0"
-            Margin="0,0,10,10"
+            Margin="10,10,10,10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -148,7 +153,7 @@
         </Grid>
         <Grid
             Grid.Row="1"
-            Margin="0,0,10,10"
+            Margin="10,0,10,10"
             Padding="10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
