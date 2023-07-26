@@ -21,6 +21,13 @@ Public NotInheritable Class Frm_DetalleMascota
             NbbEdad.Value = DatosMascota.Edad_Mascota
             TxtPropietario.Text = DatosMascota.NombreCompleto_Persona
             TxtObservaciones.Text = DatosMascota.Observaciones_Mascota
+            Dim EstadoMascota = DatosMascota.Estado_Mascota
+            Select Case EstadoMascota
+                Case 1
+                    TgsEstadoMascota.IsOn = True
+                Case 0
+                    TgsEstadoMascota.IsOn = False
+            End Select
         End If
     End Sub
 
@@ -38,7 +45,13 @@ Public NotInheritable Class Frm_DetalleMascota
 
     Private Async Sub BtnActualizarMascota_Click(sender As Object, e As RoutedEventArgs)
         Try
-            If Await GetMascota.ActualizarMascota(IdMascota, TxtNombre.Text, NbbEdad.Value, TxtObservaciones.Text) = True Then
+            Dim GetDataToggle As Boolean
+            If TgsEstadoMascota.IsOn = True Then
+                GetDataToggle = True
+            Else
+                GetDataToggle = False
+            End If
+            If Await GetMascota.ActualizarMascota(IdMascota, TxtNombre.Text, NbbEdad.Value, GetDataToggle, TxtObservaciones.Text) = True Then
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota ha sido Actualizada.")
                 VolverAtras()
             End If

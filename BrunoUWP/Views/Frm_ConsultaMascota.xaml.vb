@@ -83,6 +83,7 @@ Public NotInheritable Class Frm_ConsultaMascota
                                           .Nombre_Raza = Rza.Nombre_Raza,
                                           .Nombre_Mascota = Mas.Nombre_Mascota,
                                           .Edad_Mascota = Mas.Edad_Mascota,
+                                          .Estado_Mascota = Mas.Estado_Mascota,
                                           .NombreCompleto_Persona = Ppo.NombreCompleto_Persona,
                                           .Observaciones_Mascota = Mas.Observaciones_Mascota,
                                           .FechaRegistro_Mascota = Mas.FechaRegistro_Mascota}).ToList
