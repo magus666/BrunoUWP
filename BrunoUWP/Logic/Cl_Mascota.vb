@@ -25,6 +25,7 @@ Public Class Cl_Mascota
                 .Id_Raza = IdRazaMascota,
                 .Nombre_Mascota = NombreMascota,
                 .Edad_Mascota = EdadMascota,
+                .Estado_Mascota = True,
                 .Id_Persona = IdPersona,
                 .Observaciones_Mascota = ObservacionesMenscota,
                 .FechaRegistro_Mascota = Date.Now
@@ -39,6 +40,7 @@ Public Class Cl_Mascota
     Public Async Function ActualizarMascota(IdMascota As Integer,
                                             NombreMascota As String,
                                             EdadMascota As Integer,
+                                            EstadoMascota As Boolean,
                                             ObservacionesMascota As String) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
@@ -50,6 +52,7 @@ Public Class Cl_Mascota
                 Mascota.Nombre_Mascota = NombreMascota
                 Mascota.Edad_Mascota = EdadMascota
                 Mascota.Observaciones_Mascota = ObservacionesMascota
+                Mascota.Estado_Mascota = EstadoMascota
                 Await ConexionDB.UpdateAsync(Mascota)
                 Return True
             Else

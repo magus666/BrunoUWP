@@ -65,6 +65,15 @@ Public Class Cl_Cliente
                 Cliente.Estado_Cliente = EstadoCliente
                 Cliente.NombreCompleto_Persona = Cliente.Nombre_Persona & " " & Cliente.Apellido_Persona
                 Await ConexionDB.UpdateAsync(Cliente)
+
+                Dim GetMascotas = Await ConexionDB.Table(Of MascotaModel)().ToListAsync()
+                Dim Mascotas = (From x In GetMascotas
+                                Where x.Id_Persona = IdCliente
+                                Select x).ToList()
+                For Each Mascota In Mascotas
+                    Mascota.Estado_Mascota = EstadoCliente
+                    Await ConexionDB.UpdateAsync(Mascota)
+                Next
                 Return True
             Else
                 Return False
