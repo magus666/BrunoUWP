@@ -7,8 +7,31 @@ Imports Windows.Media.Protection.PlayReady
 Public NotInheritable Class Frm_DetalleMascota
     Inherits Page
     Dim GetMascota As New Cl_Mascota
+    Dim GetImagenMascota As New Cl_ImagenMascota
     Dim GetNotificaciones As New Cl_Notificaciones
+    Dim ObtenerImagenMascota As List(Of ImagenMascotaModel)
     Dim IdMascota As Integer
+
+    Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        Try
+            ObtenerImagenMascota = Await GetImagenMascota.ConsultaImagenMascota(IdMascota)
+            If ObtenerImagenMascota.Count = 0 Then
+                LblmensajeImagen.Visibility = Visibility.Visible
+                FlvImagenMascota.Visibility = Visibility.Collapsed
+                PspNumeroImagnes.Visibility = Visibility.Collapsed
+            Else
+                LblmensajeImagen.Visibility = Visibility.Collapsed
+                FlvImagenMascota.Visibility = Visibility.Visible
+                FlvImagenMascota.ItemsSource = ObtenerImagenMascota
+                PspNumeroImagnes.Visibility = Visibility.Visible
+                PspNumeroImagnes.NumberOfPages = ObtenerImagenMascota.Count
+
+            End If
+
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
 
     Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
         MyBase.OnNavigatedTo(e)
@@ -66,5 +89,22 @@ Public NotInheritable Class Frm_DetalleMascota
         End If
     End Sub
 
-
+    Private Async Sub BtnGuardarImagenMascota_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            If Await GetImagenMascota.InsertImagenMascota(TxtDescripcionImagen.Text, TxtUrlImagen.Text, IdMascota) = True Then
+                ObtenerImagenMascota = Await GetImagenMascota.ConsultaImagenMascota(IdMascota)
+                LblmensajeImagen.Visibility = Visibility.Collapsed
+                FlvImagenMascota.Visibility = Visibility.Visible
+                PspNumeroImagnes.Visibility = Visibility.Visible
+                PspNumeroImagnes.NumberOfPages = ObtenerImagenMascota.Count
+                FlvImagenMascota.ItemsSource = ObtenerImagenMascota
+                FlvImagenMascota.UpdateLayout()
+                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La imagen se Guardó con Exito")
+            Else
+                GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Advertencia", "Error al Guardar")
+            End If
+        Catch ex As Exception
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
+        End Try
+    End Sub
 End Class

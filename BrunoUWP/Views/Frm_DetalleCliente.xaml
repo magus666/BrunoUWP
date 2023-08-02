@@ -22,11 +22,12 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
-        <Image Source="/Assets/LogoBruno.png"
-               Grid.RowSpan="2"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Opacity="0.08"/>
+        <Image
+            Grid.RowSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Opacity="0.08"
+            Source="/Assets/LogoBruno.png" />
         <Grid Grid.Row="0">
             <StackPanel>
                 <my:InfoBar x:Name="InfAlerta" />
