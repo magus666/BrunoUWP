@@ -14,7 +14,7 @@ Public NotInheritable Class Frm_DetalleMascota
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            ObtenerImagenMascota = Await GetImagenMascota.ConsultaImagenMascota(IdMascota)
+            ObtenerImagenMascota = Await GetImagenMascota.ConsultaImagenMascotaPorIdMascota(IdMascota)
             If ObtenerImagenMascota.Count = 0 Then
                 LblmensajeImagen.Visibility = Visibility.Visible
                 FlvImagenMascota.Visibility = Visibility.Collapsed
@@ -92,7 +92,7 @@ Public NotInheritable Class Frm_DetalleMascota
     Private Async Sub BtnGuardarImagenMascota_Click(sender As Object, e As RoutedEventArgs)
         Try
             If Await GetImagenMascota.InsertImagenMascota(TxtDescripcionImagen.Text, TxtUrlImagen.Text, IdMascota) = True Then
-                ObtenerImagenMascota = Await GetImagenMascota.ConsultaImagenMascota(IdMascota)
+                ObtenerImagenMascota = Await GetImagenMascota.ConsultaImagenMascotaPorIdMascota(IdMascota)
                 LblmensajeImagen.Visibility = Visibility.Collapsed
                 FlvImagenMascota.Visibility = Visibility.Visible
                 PspNumeroImagnes.Visibility = Visibility.Visible

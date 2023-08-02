@@ -49,9 +49,9 @@
                     x:Name="LblmensajeImagen"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
+                    FontSize="17"
                     HorizontalTextAlignment="Center"
                     Text="La mascota no tiene imagens"
-                    FontSize="17"
                     TextWrapping="Wrap"
                     Visibility="Visible" />
                 <StackPanel Margin="10">
