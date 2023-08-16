@@ -19,23 +19,15 @@
         End Try
     End Function
 
-    Public Async Function ActualizarMascota(IdMascota As Integer,
-                                            NombreMascota As String,
-                                            EdadMascota As Integer,
-                                            EstadoMascota As Boolean,
-                                            ObservacionesMascota As String) As Task(Of Boolean)
+    Public Async Function ActualizarModelo(Of T As {New, Imodelo})(Id As Integer) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
-            Dim GetMascota = Await ConexionDB.Table(Of MascotaModel)().ToListAsync()
-            Dim Mascota = (From x In GetMascota
-                           Where x.Id_Mascota = IdMascota
-                           Select x).FirstOrDefault
-            If Mascota IsNot Nothing Then
-                Mascota.Nombre_Mascota = NombreMascota
-                Mascota.Edad_Mascota = EdadMascota
-                Mascota.Observaciones_Mascota = ObservacionesMascota
-                Mascota.Estado_Mascota = EstadoMascota
-                Await ConexionDB.UpdateAsync(Mascota)
+            Dim GetModelo = Await ConexionDB.Table(Of T)().ToListAsync()
+            Dim Modelo = (From x In GetModelo
+                          Where x.Id = Id
+                          Select x).FirstOrDefault()
+            If Modelo IsNot Nothing Then
+                Await ConexionDB.UpdateAsync(Modelo)
                 Return True
             Else
                 Return False
@@ -44,6 +36,4 @@
             Throw New Exception(ex.Message)
         End Try
     End Function
-
-
 End Class

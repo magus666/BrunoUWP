@@ -169,6 +169,7 @@
     <Compile Include="Logic\Cl_VentaSpa.vb" />
     <Compile Include="Logic\Cl_VisibilidadBotonFinalizarCita.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
+    <Compile Include="Logic\Imodelo.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
     <Compile Include="Models\ArticuloModel.vb" />
     <Compile Include="Models\AuditoriaModel.vb" />
