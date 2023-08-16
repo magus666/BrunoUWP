@@ -151,6 +151,7 @@
     <Compile Include="Logic\Cl_Cita.vb" />
     <Compile Include="Logic\Cl_Cliente.vb" />
     <Compile Include="Logic\Cl_ColorLetraExistencias.vb" />
+    <Compile Include="Logic\Cl_CrudBrunoSpa.vb" />
     <Compile Include="Logic\Cl_DeshabilitarItemVenta.vb" />
     <Compile Include="Logic\Cl_DimensionMascota.vb" />
     <Compile Include="Logic\Cl_ImagenMascota.vb" />

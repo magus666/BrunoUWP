@@ -9,6 +9,7 @@ Public NotInheritable Class Frm_CreaMascota
     Dim GetValidaciones As New Cl_Validaciones
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetUtilitarios As New Cl_Utilitarios
+    Dim GetCrudBrunoSpa As New Cl_CrudBrunoSpa
     Dim GetMascota As New Cl_Mascota
     Dim GetCliente As New Cl_Cliente
     Dim GetRazaMascota As New Cl_RazaMascota
@@ -54,10 +55,26 @@ Public NotInheritable Class Frm_CreaMascota
         Try
             Dim CodigoMascota As String = GetUtilitarios.GenerarCodigoMascota
             If ValidaDatos() = True Then
-                Await GetMascota.InsertarMascota(CodigoMascota, IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
-                                             NbbEdad.Text, IdPropietario, TxtObservaciones.Text)
-                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
-                GetUtilitarios.LimpiarControles(StpPrincipal)
+                Dim GetMascotaModel As New MascotaModel With
+                {
+                    .Codigo_Mascota = CodigoMascota,
+                    .Id_TipoMascota = IdTipoMascota,
+                    .Id_Raza = IdRazaMascota,
+                    .Nombre_Mascota = TxtNombreMascota.Text,
+                    .Edad_Mascota = NbbEdad.Value,
+                    .Id_Persona = IdPropietario,
+                    .Observaciones_Mascota = TxtObservaciones.Text,
+                    .Estado_Mascota = True,
+                    .FechaRegistro_Mascota = Date.Now
+                }
+                If Await GetCrudBrunoSpa.InsertarModelo(GetMascotaModel) = True Then
+                    GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
+                    GetUtilitarios.LimpiarControles(StpPrincipal)
+                End If
+                'Await GetMascota.InsertarMascota(CodigoMascota, IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
+                '                                 NbbEdad.Text, IdPropietario, TxtObservaciones.Text)
+                '    GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
+                '    GetUtilitarios.LimpiarControles(StpPrincipal)
             End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)

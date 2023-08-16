@@ -9,22 +9,25 @@ Public NotInheritable Class Frm_ConsultaCliente
     Dim GetCliente As New Cl_Cliente
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetSexo As New Cl_Sexo
-    Dim ListadoFinalClientes As IEnumerable(Of Object)
+    Dim ListadoFinalClientes As List(Of ClienteModel)
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
             ListadoFinalClientes = Await GetCliente.ConsultaCliente()
+            Dim RetornoListadoFinalClientes = (From x In ListadoFinalClientes
+                                               Order By x.NombreCompleto_Persona
+                                               Select x).ToList()
             If ListadoFinalClientes.Count = 0 Then
                 LblTituloCreacionCliente.Visibility = Visibility.Visible
                 LsvCliente.Visibility = Visibility.Collapsed
             Else
-                LsvCliente.ItemsSource = ListadoFinalClientes
+                LsvCliente.ItemsSource = RetornoListadoFinalClientes
                 LblTituloCreacionCliente.Visibility = Visibility.Collapsed
                 LsvCliente.Visibility = Visibility.Visible
             End If
 
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
 
     End Sub
@@ -69,10 +72,9 @@ Public NotInheritable Class Frm_ConsultaCliente
                             LsvCliente.ItemsSource = RetornoListaBusqueda
                         End If
                 End Select
-
             End If
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -88,7 +90,7 @@ Public NotInheritable Class Frm_ConsultaCliente
             End If
 
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
 
     End Sub
@@ -107,7 +109,7 @@ Public NotInheritable Class Frm_ConsultaCliente
                     AsbBusueda.PlaceholderText = "Digite Telefono"
             End Select
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 
@@ -118,10 +120,9 @@ Public NotInheritable Class Frm_ConsultaCliente
                 GetClienteModel = e.ClickedItem
                 Frame.Navigate(GetType(Frm_DetalleCliente), GetClienteModel)
             Catch ex As Exception
-
             End Try
         Catch ex As Exception
-
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
     End Sub
 End Class

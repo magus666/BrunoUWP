@@ -38,7 +38,7 @@ Public NotInheritable Class Frm_Inicio
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
             Select Case SeleccionRadio
                 Case "Hoy"
-                    ContadorCitas = Await GetCita.ContadorCitasPendientes()
+                    ContadorCitas = Await GetCita.ContadorCitasPendientes
                     LblCitasPendientes.Text = ContadorCitas
                     ContadorSpasRealizados = Await GetCita.ContadorCitasFinalizadas
                     LblCantidadSpas.Text = ContadorSpasRealizados
@@ -58,16 +58,49 @@ Public NotInheritable Class Frm_Inicio
                     End If
 
                 Case "Ultima Semana"
+                    ContadorCitas = Await GetCita.ContadorCitasPendientes
+                    LblCitasPendientes.Text = ContadorCitas
+                    ContadorSpasRealizados = Await GetCita.ContadorCitasFinalizadas
+                    LblCantidadSpas.Text = ContadorSpasRealizados
                     ContadorClientes = Await GetClientes.CountClienteUltimaSemana
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimaSemana
                     LblCantidadMascotas.Text = ContadorMascotas
+                    ContadorArticulos = Await GetArticulos.CountArticulosUltimaSemana
+                    LblArticulosVendidos.Text = ContadorArticulos
+                    VentasTotales = Await GetVenta.ConsultaVentaUltimaSemana
+                    If VentasTotales = 0 Then
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    Else
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.LimeGreen)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    End If
                 Case "Ultimo Mes"
+                    ContadorCitas = Await GetCita.ContadorCitasPendientes
+                    LblCitasPendientes.Text = ContadorCitas
+                    ContadorSpasRealizados = Await GetCita.ContadorCitasFinalizadas
+                    LblCantidadSpas.Text = ContadorSpasRealizados
                     ContadorClientes = Await GetClientes.CountClienteUltimoMes
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoMes
                     LblCantidadMascotas.Text = ContadorMascotas
+                    ContadorArticulos = Await GetArticulos.CountArticulosUltimoMes
+                    LblArticulosVendidos.Text = ContadorArticulos
+                    VentasTotales = Await GetVenta.ConsultaVentaUltimoMes
+                    If VentasTotales = 0 Then
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    Else
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.LimeGreen)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    End If
+
                 Case "Siempre"
+                    ContadorCitas = Await GetCita.ContadorCitasPendientes
+                    LblCitasPendientes.Text = ContadorCitas
+                    ContadorSpasRealizados = Await GetCita.ContadorCitasFinalizadas
+                    LblCantidadSpas.Text = ContadorSpasRealizados
                     ContadorClientes = Await GetClientes.CountClienteTotal
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotas

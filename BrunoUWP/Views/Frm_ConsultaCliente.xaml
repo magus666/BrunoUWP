@@ -33,7 +33,6 @@
             Grid.Row="0"
             Margin="10,10,10,10"
             ui:Effects.Shadow="{StaticResource CommonShadow}">
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>

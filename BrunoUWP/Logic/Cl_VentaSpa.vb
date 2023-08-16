@@ -73,6 +73,32 @@ Public Class Cl_VentaSpa
         End Try
     End Function
 
+    Public Async Function ConsultaVentaUltimaSemana() As Task(Of Double)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
+            Dim ListaVenta = (From x In GetVenta
+                              Where x.Fecha_VentaSpa.Date >= Date.Now.AddDays(-7)
+                              Select x.Valor_VentaSpa).Sum
+            Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function ConsultaVentaUltimoMes() As Task(Of Double)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
+            Dim ListaVenta = (From x In GetVenta
+                              Where x.Fecha_VentaSpa.Date >= Date.Now.AddMonths(-1)
+                              Select x.Valor_VentaSpa).Sum
+            Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
     Public Async Function ConsultaVentaPorTipoTransaccionSpa(IdTipoTransaccion As Integer) As Task(Of List(Of VentaSpaModel))
         Try
             Await ConfiguraSqlite()

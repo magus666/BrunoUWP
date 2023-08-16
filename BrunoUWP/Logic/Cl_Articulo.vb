@@ -84,6 +84,32 @@ Public Class Cl_Articulo
         End Try
     End Function
 
+    Public Async Function CountArticulosUltimaSemana() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetArticulo = Await ConexionDB.Table(Of ArticuloModel)().ToListAsync()
+            Dim CountArticulo = (From x In GetArticulo
+                                 Where x.FechaCreacion_Articulo >= Date.Now.AddDays(-7)
+                                 Select x).Count
+            Return CountArticulo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function CountArticulosUltimoMes() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetArticulo = Await ConexionDB.Table(Of ArticuloModel)().ToListAsync()
+            Dim CountArticulo = (From x In GetArticulo
+                                 Where x.FechaCreacion_Articulo >= Date.Now.AddMonths(-1)
+                                 Select x).Count
+            Return CountArticulo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
     Public Async Function CreaExcelArticulo() As Task(Of Boolean)
         Try
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial
