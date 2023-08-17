@@ -1,5 +1,6 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
+Imports Windows.ApplicationModel.Core
 Imports Windows.Storage
 Imports Windows.System
 ''' <summary>
@@ -26,7 +27,13 @@ Public NotInheritable Class Frm_ConfiguracionGlobal
 
     End Sub
 
-    Private Async Sub BtnAbrirCarpeta_Click(sender As Object, e As RoutedEventArgs)
-        Await Launcher.LaunchFolderAsync(ApplicationData.Current.LocalFolder)
+    Private Async Sub BtnRestaurarBd_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            If Await RestaurarBaseDatos() = True Then
+                Dim appRestartResult As AppRestartFailureReason = Await CoreApplication.RequestRestartAsync(String.Empty)
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

@@ -53,6 +53,24 @@ Module Md_ParametrizacionSqlite
         End Try
     End Function
 
+    Public Async Function RestaurarBaseDatos() As Task(Of Boolean)
+        Try
+            Dim picturesFolder As StorageFolder = KnownFolders.PicturesLibrary
+            Dim backupFolder As StorageFolder = Await picturesFolder.GetFolderAsync("BackUpBd")
+            Dim file As StorageFile = Await backupFolder.GetFileAsync("BrunoUWP.db")
+
+            Dim localFolder As StorageFolder = ApplicationData.Current.LocalFolder
+            Await file.CopyAsync(localFolder, "BrunoUWP.db", NameCollisionOption.ReplaceExisting)
+            Return True
+        Catch ex As FileNotFoundException
+            ' Si no se encuentra el archivo, devolver False
+            Return False
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+
     Public Async Function BackUpDatabase() As Task(Of Boolean)
         Try
             Await GetAuditoria.InsertDataBaseStamp(Date.Now)

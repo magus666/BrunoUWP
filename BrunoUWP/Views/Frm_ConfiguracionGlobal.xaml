@@ -53,9 +53,9 @@
                         <RelativePanel Margin="0,10,0,0">
                             <StackPanel Orientation="Horizontal" RelativePanel.AlignRightWithPanel="True">
                                 <Button
-                                    x:Name="BtnAbrirCarpeta"
-                                    Click="BtnAbrirCarpeta_Click"
-                                    Content="Abrir Carpeta" />
+                                    x:Name="BtnRestaurarBd"
+                                    Click="BtnRestaurarBd_Click"
+                                    Content="Restaurar BD" />
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock
