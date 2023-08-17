@@ -170,7 +170,7 @@
     <Compile Include="Logic\Cl_VisibilidadBotonFinalizarCita.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\ICliente.vb" />
-    <Compile Include="Logic\Imodelo.vb" />
+    <Compile Include="Logic\IModelo.vb" />
     <Compile Include="Logic\MicrosoftPassportHelper.vb" />
     <Compile Include="Models\ArticuloModel.vb" />
     <Compile Include="Models\AuditoriaModel.vb" />
@@ -192,7 +192,7 @@
     <Compile Include="Models\PersonaModel.vb" />
     <Compile Include="Logic\Cl_RazaMascota.vb" />
     <Compile Include="Logic\CL_TipoMascota.vb" />
-    <Compile Include="Logic\In_FechaHora.vb" />
+    <Compile Include="Logic\IFechaHora.vb" />
     <Compile Include="Logic\Md_ParametrizacionSqlite.vb" />
     <Compile Include="Models\PropiedadesModel.vb" />
     <Compile Include="Models\RazaModel.vb" />

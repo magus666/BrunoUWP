@@ -1,4 +1,4 @@
-﻿Public Interface In_FechaHora
+﻿Public Interface IFechaHora
     Function ObtenerHoraActual() As String
     Function ObtenerFechaActual() As Date
 End Interface

@@ -2,8 +2,8 @@
 Imports Windows.ApplicationModel.Appointments
 
 Public Class Cl_DateTime
-    Implements In_FechaHora
-    Public Function ObtenerHoraActual() As String Implements In_FechaHora.ObtenerHoraActual
+    Implements IFechaHora
+    Public Function ObtenerHoraActual() As String Implements IFechaHora.ObtenerHoraActual
         Try
             Dim FechaHoraActual As Date = Date.Now
             Dim HoraActual As String = FechaHoraActual.ToString("hh:mm tt", CultureInfo.InvariantCulture)
@@ -13,7 +13,7 @@ Public Class Cl_DateTime
         End Try
     End Function
 
-    Public Function ObtenerFechaActual() As Date Implements In_FechaHora.ObtenerFechaActual
+    Public Function ObtenerFechaActual() As Date Implements IFechaHora.ObtenerFechaActual
         Try
             Dim FechaActual As Date
             FechaActual = Date.Now.Date
