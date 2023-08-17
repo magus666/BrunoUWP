@@ -1,6 +1,6 @@
 ﻿Imports Windows.Security.Credentials
 
-Public Class MicrosoftPassportHelper
+Public Class Cl_MicrosoftPassportHelper
 
     Async Function MicrosoftPassportAvailableCheckAsync() As Task(Of Boolean)
         Dim keyCredentialAvailable As Boolean = Await KeyCredentialManager.IsSupportedAsync()

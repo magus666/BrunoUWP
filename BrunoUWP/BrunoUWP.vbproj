@@ -171,7 +171,7 @@
     <Compile Include="Logic\Cl_WindowsHello.vb" />
     <Compile Include="Logic\ICliente.vb" />
     <Compile Include="Logic\IModelo.vb" />
-    <Compile Include="Logic\MicrosoftPassportHelper.vb" />
+    <Compile Include="Logic\Cl_MicrosoftPassportHelper.vb" />
     <Compile Include="Models\ArticuloModel.vb" />
     <Compile Include="Models\AuditoriaModel.vb" />
     <Compile Include="Models\CitaModel.vb" />

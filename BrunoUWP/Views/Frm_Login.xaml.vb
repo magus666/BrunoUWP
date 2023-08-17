@@ -7,7 +7,7 @@ Imports System.Security.Principal
 ''' </summary>
 Public NotInheritable Class Frm_Login
     Inherits Page
-    Public Gonorrita As New MicrosoftPassportHelper
+    Public Gonorrita As New Cl_MicrosoftPassportHelper
     Dim _account As New Usuario
     Dim Timer As DispatcherTimer = New DispatcherTimer
 
@@ -61,7 +61,7 @@ Public NotInheritable Class Frm_Login
             ' Create and add a new local account
             _account = AccountHelper.AddAccount("sampleUsername")
             Debug.WriteLine("Successfully signed in with traditional credentials and created local account instance!")
-            If Await MicrosoftPassportHelper.CreatePassportKeyAsync("sampleUsername") Then
+            If Await Cl_MicrosoftPassportHelper.CreatePassportKeyAsync("sampleUsername") Then
                 Return "Clave Correcta"
             Else
                 Return "Cancelo el Logueo"
