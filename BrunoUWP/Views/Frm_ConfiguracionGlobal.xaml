@@ -23,53 +23,75 @@
                             Margin="0,0,10,0"
                             FontFamily="MS Outlook"
                             Glyph="&#x0043;" />
-                        <TextBlock x:Name="LblHeader" Text="BackUp de la Base de Datos" />
+                        <TextBlock x:Name="LblHeader" Text="Gestión de la Base de Datos" />
                     </StackPanel>
                 </controls:Expander.Header>
                 <controls:Expander.Content>
-                    <StackPanel>
-                        <RelativePanel>
-                            <StackPanel Orientation="Horizontal" RelativePanel.AlignRightWithPanel="True">
-                                <my:ProgressRing x:Name="PgrBackUpBd" IsActive="False" />
-                                <Button
-                                    x:Name="BtnRespaldar"
-                                    Click="BtnRespaldar_Click"
-                                    Content="BackUp" />
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock
-                                    x:Name="LblNombreInicio"
-                                    VerticalAlignment="Center"
-                                    FontSize="14"
-                                    FontWeight="Bold"
-                                    Text="Respaldar Base de Datos" />
-                                <TextBlock
-                                    x:Name="LblDescripcion"
-                                    VerticalAlignment="Center"
-                                    FontSize="12"
-                                    Text="Da click en el Botón para Hacer una Copia de Seguridad de la Base de datos." />
-                            </StackPanel>
-                        </RelativePanel>
-                        <RelativePanel Margin="0,10,0,0">
-                            <StackPanel Orientation="Horizontal" RelativePanel.AlignRightWithPanel="True">
-                                <Button
-                                    x:Name="BtnRestaurarBd"
-                                    Click="BtnRestaurarBd_Click"
-                                    Content="Restaurar BD" />
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontSize="14"
-                                    FontWeight="Bold"
-                                    Text="Importar Base de Datos" />
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontSize="12"
-                                    Text="Da click en el Botón para abrir la carpeta de la aplicacion y luego mover la Base de Datos." />
-                            </StackPanel>
-                        </RelativePanel>
-                    </StackPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,0,10"
+                            Orientation="Vertical">
+                            <TextBlock
+                                x:Name="LblNombreInicio"
+                                VerticalAlignment="Center"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Text="Respaldar Base de Datos" />
+                            <TextBlock
+                                x:Name="LblDescripcion"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Text="Da click en el Botón para Hacer una Copia de Seguridad de la Base de datos."
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="0"
+                            HorizontalAlignment="Right"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                            <my:ProgressRing x:Name="PgrBackUpBd" IsActive="False" />
+                            <Button
+                                x:Name="BtnRespaldar"
+                                Click="BtnRespaldar_Click"
+                                Content="Respaldar" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Orientation="Vertical">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Text="Restaurar Base de Datos" />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Text="En caso de reinstalación de la aplicación da click en el Botón para Restaurar la Base de Datos."
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Right"
+                                    Grid.Column="1">
+                            <my:ProgressRing x:Name="RestaurarBackUpBd" IsActive="False" />
+                            <Button
+                                x:Name="BtnRestaurarBd"
+                                Click="BtnRestaurarBd_Click"
+                                Content="Restaurar" />
+                        </StackPanel>
+                    </Grid>
                 </controls:Expander.Content>
             </controls:Expander>
         </StackPanel>
