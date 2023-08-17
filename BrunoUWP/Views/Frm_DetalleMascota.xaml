@@ -23,7 +23,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
-         <Image
+        <Image
             Grid.RowSpan="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"

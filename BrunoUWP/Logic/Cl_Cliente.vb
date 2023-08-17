@@ -4,7 +4,20 @@ Imports OfficeOpenXml.Table
 Imports Windows.Storage
 
 Public Class Cl_Cliente
+    Implements ICliente
     Dim GetPickers As New Cl_Pickers
+
+    Public Async Function ConsultaCliente() As Task(Of List(Of ClienteModel)) Implements ICliente.ConsultaCliente
+        Try
+            Await ConfiguraSqlite()
+            Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
+            Dim ListaPersona = (From x In GetCliente
+                                Select x).ToList()
+            Return ListaPersona
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 
     Public Async Function InsertarCliente(DocumentoCliente As String,
                                           NombreCliente As String,
@@ -15,7 +28,7 @@ Public Class Cl_Cliente
                                           EdadCliente As Integer,
                                           SexoCliente As Integer,
                                           CodigoCliente As String,
-                                          EstadoCliente As Boolean) As Task(Of Boolean)
+                                          EstadoCliente As Boolean) As Task(Of Boolean) Implements ICliente.InsertarCliente
         Try
             Await ConfiguraSqlite()
             Dim Cliente = New ClienteModel With {
@@ -40,14 +53,14 @@ Public Class Cl_Cliente
     End Function
 
     Public Async Function ActualizarCliente(IdCliente As Integer,
-                                            DocumentoCliente As String,
-                                            NombreCliente As String,
-                                            ApellidoCliente As String,
-                                            DireccionCLiente As String,
-                                            TelefonoCliente As String,
-                                            CorreoCliente As String,
-                                            EdadCliente As Integer,
-                                            EstadoCliente As Boolean) As Task(Of Boolean)
+                                             DocumentoCliente As String,
+                                             NombreCliente As String,
+                                             ApellidoCliente As String,
+                                             DireccionCLiente As String,
+                                             TelefonoCliente As String,
+                                             CorreoCliente As String,
+                                             EdadCliente As Integer,
+                                             EstadoCliente As Boolean) As Task(Of Boolean) Implements ICliente.ActualizarCliente
         Try
             Await ConfiguraSqlite()
             Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
@@ -83,7 +96,7 @@ Public Class Cl_Cliente
         End Try
     End Function
 
-    Public Async Function ÉliminarCliente(IdCliente As Integer) As Task(Of Boolean)
+    Public Async Function EliminarCliente(IdCliente As Integer) As Task(Of Boolean) Implements ICliente.EliminarCliente
         Try
             Await ConfiguraSqlite()
             Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
@@ -96,18 +109,6 @@ Public Class Cl_Cliente
             Else
                 Return False
             End If
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
-    End Function
-
-    Public Async Function ConsultaCliente() As Task(Of List(Of ClienteModel))
-        Try
-            Await ConfiguraSqlite()
-            Dim GetCliente = Await ConexionDB.Table(Of ClienteModel)().ToListAsync()
-            Dim ListaPersona = (From x In GetCliente
-                                Select x).ToList()
-            Return ListaPersona
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try

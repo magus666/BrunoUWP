@@ -19,19 +19,11 @@
         End Try
     End Function
 
-    Public Async Function ActualizarModelo(Of T As {New, Imodelo})(Id As Integer) As Task(Of Boolean)
+    Public Async Function ActualizarModelo(Of T)(Modelo As T) As Task(Of Boolean)
         Try
             Await ConfiguraSqlite()
-            Dim GetModelo = Await ConexionDB.Table(Of T)().ToListAsync()
-            Dim Modelo = (From x In GetModelo
-                          Where x.Id = Id
-                          Select x).FirstOrDefault()
-            If Modelo IsNot Nothing Then
-                Await ConexionDB.UpdateAsync(Modelo)
-                Return True
-            Else
-                Return False
-            End If
+            Dim Id = Await ConexionDB.UpdateAsync(Modelo)
+            Return True
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
