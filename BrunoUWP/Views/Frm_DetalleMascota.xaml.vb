@@ -110,17 +110,19 @@ Public NotInheritable Class Frm_DetalleMascota
 
     Private Async Sub BtnGuardarImagenMascota_Click(sender As Object, e As RoutedEventArgs)
         Try
-            If Await GetImagenMascota.InsertImagenMascota(TxtDescripcionImagen.Text, TxtUrlImagen.Text, IdMascota) = True Then
-                ObtenerImagenMascota = Await GetImagenMascota.ConsultaImagenMascotaPorIdMascota(IdMascota)
-                LblmensajeImagen.Visibility = Visibility.Collapsed
-                FlvImagenMascota.Visibility = Visibility.Visible
-                PspNumeroImagnes.Visibility = Visibility.Visible
-                PspNumeroImagnes.NumberOfPages = ObtenerImagenMascota.Count
-                FlvImagenMascota.ItemsSource = ObtenerImagenMascota
-                FlvImagenMascota.UpdateLayout()
-                GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La imagen se Guardó con Exito")
-            Else
-                GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Advertencia", "Error al Guardar")
+            If ValidaDatos() = True Then
+                If Await GetImagenMascota.InsertImagenMascota(TxtDescripcionImagen.Text, TxtUrlImagen.Text, IdMascota) = True Then
+                    ObtenerImagenMascota = Await GetImagenMascota.ConsultaImagenMascotaPorIdMascota(IdMascota)
+                    LblmensajeImagen.Visibility = Visibility.Collapsed
+                    FlvImagenMascota.Visibility = Visibility.Visible
+                    PspNumeroImagnes.Visibility = Visibility.Visible
+                    PspNumeroImagnes.NumberOfPages = ObtenerImagenMascota.Count
+                    FlvImagenMascota.ItemsSource = ObtenerImagenMascota
+                    FlvImagenMascota.UpdateLayout()
+                    GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La imagen se Guardó con Exito")
+                Else
+                    GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Advertencia", "Error al Guardar")
+                End If
             End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
