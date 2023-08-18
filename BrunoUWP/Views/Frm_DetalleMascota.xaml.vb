@@ -6,6 +6,7 @@ Imports Windows.Media.Protection.PlayReady
 ''' </summary>
 Public NotInheritable Class Frm_DetalleMascota
     Inherits Page
+    Dim GetValidaciones As New Cl_Validaciones
     Dim GetMascota As New Cl_Mascota
     Dim GetImagenMascota As New Cl_ImagenMascota
     Dim GetNotificaciones As New Cl_Notificaciones
@@ -88,6 +89,24 @@ Public NotInheritable Class Frm_DetalleMascota
             Frame.GoBack()
         End If
     End Sub
+
+    Public Function ValidaDatos() As Boolean
+        Try
+            If GetValidaciones.ValidaTextBoxVacio(TxtDescripcionImagen) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El nombre de la mascota no puede estar Vacio", TxtDescripcionImagen)
+                Return False
+                Exit Function
+            End If
+            If GetValidaciones.ValidaTextBoxVacio(TxtUrlImagen) = False Then
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El nombre de la mascota no puede estar Vacio", TxtUrlImagen)
+                Return False
+                Exit Function
+            End If
+            Return True
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 
     Private Async Sub BtnGuardarImagenMascota_Click(sender As Object, e As RoutedEventArgs)
         Try

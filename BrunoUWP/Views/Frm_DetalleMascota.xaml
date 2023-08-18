@@ -228,5 +228,6 @@
                 </ScrollViewer>
             </Grid>
         </Grid>
+        <my:TeachingTip x:Name="TctAlerta" />
     </Grid>
 </Page>
