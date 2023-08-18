@@ -80,7 +80,7 @@
                                                 Width="130"
                                                 Height="130"
                                                 Margin="0,0,10,0"
-                                                ProfilePicture="/Assets/Mascotas2.png" />
+                                                ProfilePicture="{Binding UrlImagen_Mascota}" />
                                             <StackPanel Orientation="Vertical">
                                                 <TextBlock
                                                     FontSize="14"

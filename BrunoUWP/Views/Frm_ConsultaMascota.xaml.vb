@@ -6,6 +6,7 @@
 Public NotInheritable Class Frm_ConsultaMascota
     Inherits Page
     Dim GetMascota As New Cl_Mascota
+    Dim GetImagenMascota As New Cl_ImagenMascota
     Dim GetTipoMascota As New CL_TipoMascota
     Dim GetRaza As New Cl_RazaMascota
     Dim GetPersona As New Cl_Cliente
@@ -68,26 +69,52 @@ Public NotInheritable Class Frm_ConsultaMascota
             Dim TipoMascota = Await GetTipoMascota.ConsultarTipoMascota()
             Dim Raza = Await GetRaza.ConsultarRazaMascota()
             Dim Propietario = Await GetPersona.ConsultaCliente()
+            Dim ImagenMascota = Await GetImagenMascota.ConsultaImagenMascota()
 
-            Dim RetornoMascota = (From Mas In Mascota
-                                  Join Tmc In TipoMascota On
-                                           Mas.Id_TipoMascota Equals Tmc.Id_TipoMascota
-                                  Join Rza In Raza On
-                                           Mas.Id_Raza Equals Rza.Id_Raza
-                                  Join Ppo In Propietario On
-                                           Mas.Id_Persona Equals Ppo.Id_Persona
-                                  Order By Mas.Nombre_Mascota
-                                  Select New NewMascotaModel With {.Id_Mascota = Mas.Id_Mascota,
-                                          .Codigo_Mascota = Mas.Codigo_Mascota,
-                                          .Nombre_TipoMascota = Tmc.Nombre_TipoMascota,
-                                          .Nombre_Raza = Rza.Nombre_Raza,
-                                          .Nombre_Mascota = Mas.Nombre_Mascota,
-                                          .Edad_Mascota = Mas.Edad_Mascota,
-                                          .Estado_Mascota = Mas.Estado_Mascota,
-                                          .NombreCompleto_Persona = Ppo.NombreCompleto_Persona,
-                                          .Observaciones_Mascota = Mas.Observaciones_Mascota,
-                                          .FechaRegistro_Mascota = Mas.FechaRegistro_Mascota}).ToList
-            Return RetornoMascota
+            Dim PruebaImagen = (From Mas In Mascota
+                                Join Imm In ImagenMascota On
+                                        Mas.Id_Mascota Equals Imm.Id_Mascota
+                                Group Imm By Imm.Id_Mascota Into Group
+                                Join Mas In Mascota On
+                                        Group.FirstOrDefault().Id_Mascota Equals Mas.Id_Mascota
+                                Join Tmc In TipoMascota On
+                                        Mas.Id_TipoMascota Equals Tmc.Id_TipoMascota
+                                Join Rza In Raza On
+                                        Mas.Id_Raza Equals Rza.Id_Raza
+                                Join Ppo In Propietario On
+                                        Mas.Id_Persona Equals Ppo.Id_Persona
+                                Order By Mas.Nombre_Mascota
+                                Select New NewMascotaModel With {.Id_Mascota = Mas.Id_Mascota,
+                                                                 .UrlImagen_Mascota = Group.FirstOrDefault().Url_ImagenMascotaModel,
+                                                                 .Codigo_Mascota = Mas.Codigo_Mascota,
+                                                                 .Nombre_Mascota = Mas.Nombre_Mascota,
+                                                                 .Nombre_TipoMascota = Tmc.Nombre_TipoMascota,
+                                                                 .Nombre_Raza = Rza.Nombre_Raza,
+                                                                 .Edad_Mascota = Mas.Edad_Mascota,
+                                                                 .Estado_Mascota = Mas.Estado_Mascota,
+                                                                 .NombreCompleto_Persona = Ppo.NombreCompleto_Persona,
+                                                                 .Observaciones_Mascota = Mas.Observaciones_Mascota,
+                                                                 .FechaRegistro_Mascota = Mas.FechaRegistro_Mascota}).ToList
+
+            'Dim RetornoMascota = (From Mas In Mascota
+            '                      Join Tmc In TipoMascota On
+            '                               Mas.Id_TipoMascota Equals Tmc.Id_TipoMascota
+            '                      Join Rza In Raza On
+            '                               Mas.Id_Raza Equals Rza.Id_Raza
+            '                      Join Ppo In Propietario On
+            '                               Mas.Id_Persona Equals Ppo.Id_Persona
+            '                      Order By Mas.Nombre_Mascota
+            '                      Select New NewMascotaModel With {.Id_Mascota = Mas.Id_Mascota,
+            '                              .Codigo_Mascota = Mas.Codigo_Mascota,
+            '                              .Nombre_TipoMascota = Tmc.Nombre_TipoMascota,
+            '                              .Nombre_Raza = Rza.Nombre_Raza,
+            '                              .Nombre_Mascota = Mas.Nombre_Mascota,
+            '                              .Edad_Mascota = Mas.Edad_Mascota,
+            '                              .Estado_Mascota = Mas.Estado_Mascota,
+            '                              .NombreCompleto_Persona = Ppo.NombreCompleto_Persona,
+            '                              .Observaciones_Mascota = Mas.Observaciones_Mascota,
+            '                              .FechaRegistro_Mascota = Mas.FechaRegistro_Mascota}).ToList
+            Return PruebaImagen
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
