@@ -7,6 +7,7 @@ Imports Windows.Storage
 Public NotInheritable Class Frm_CreaMascota
     Inherits Page
     Dim GetValidaciones As New Cl_Validaciones
+    Dim GetImagenMascota As New Cl_ImagenMascota
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetCrudBrunoSpa As New Cl_CrudBrunoSpa
@@ -71,6 +72,12 @@ Public NotInheritable Class Frm_CreaMascota
                     GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
                     GetUtilitarios.LimpiarControles(StpPrincipal)
                 End If
+                Dim ObtenerMascotas = Await GetMascota.ConsultaMascotas()
+                Dim IdUltimaMascota = ObtenerMascotas.LastOrDefault().Id_Mascota
+                Await GetImagenMascota.InsertImagenMascota("Foto1", "https://sims4updates.net/wp-content/uploads/2018/03/7016-310x310.jpg", IdUltimaMascota)
+
+
+
                 'Await GetMascota.InsertarMascota(CodigoMascota, IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
                 '                                 NbbEdad.Text, IdPropietario, TxtObservaciones.Text)
                 '    GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
