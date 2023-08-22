@@ -11,7 +11,8 @@ Public NotInheritable Class Frm_Inicio
     Dim GetMascotas As New Cl_Mascota
     Dim GetClientes As New Cl_Cliente
     Dim GetArticulos As New Cl_Articulo
-    Dim GetVenta As New Cl_VentaSpa
+    Dim GetVentaSpa As New Cl_VentaSpa
+    Dim GetVentaArticulo As New Cl_VentaArticulo
     Dim GetCita As New Cl_Cita
     Dim GetNotificaciones As New Cl_Notificaciones
 
@@ -34,6 +35,8 @@ Public NotInheritable Class Frm_Inicio
             Dim ContadorSpasRealizados As Integer
             Dim ContadorClientes As Integer
             Dim ContadorArticulos As Integer
+            Dim VentasTotalesSpa As Double
+            Dim VentasTotalesArticulos As Double
             Dim VentasTotales As Double
             Dim SeleccionRadio As String = TryCast(TryCast(sender, RadioButtons).SelectedItem, String)
             Select Case SeleccionRadio
@@ -48,7 +51,25 @@ Public NotInheritable Class Frm_Inicio
                     LblCantidadMascotas.Text = ContadorMascotas
                     ContadorArticulos = Await GetArticulos.CountArticulosUltimoDia
                     LblArticulosVendidos.Text = ContadorArticulos
-                    VentasTotales = Await GetVenta.ConsultaVentaUltimoDiaSpa
+                    VentasTotalesSpa = Await GetVentaSpa.ConsultaVentaUltimoDiaSpa
+                    VentasTotalesArticulos = Await GetVentaArticulo.ConsultaVentaTotalArticulo
+                    VentasTotales = VentasTotalesSpa + VentasTotalesArticulos
+                    If VentasTotalesSpa = 0 Then
+                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
+                    Else
+                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.CadetBlue)
+                        LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
+                    End If
+
+                    If VentasTotalesArticulos = 0 Then
+                        LblGananciasTotalesArtculos.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotalesArtculos.Text = VentasTotalesArticulos.ToString("c")
+                    Else
+                        LblGananciasTotalesArtculos.Foreground = New SolidColorBrush(Colors.CadetBlue)
+                        LblGananciasTotalesArtculos.Text = VentasTotalesArticulos.ToString("c")
+                    End If
+
                     If VentasTotales = 0 Then
                         LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
                         LblGananciasTotales.Text = VentasTotales.ToString("c")
@@ -68,13 +89,13 @@ Public NotInheritable Class Frm_Inicio
                     LblCantidadMascotas.Text = ContadorMascotas
                     ContadorArticulos = Await GetArticulos.CountArticulosUltimaSemana
                     LblArticulosVendidos.Text = ContadorArticulos
-                    VentasTotales = Await GetVenta.ConsultaVentaUltimaSemana
-                    If VentasTotales = 0 Then
-                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
-                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    VentasTotalesSpa = Await GetVentaSpa.ConsultaVentaUltimaSemana
+                    If VentasTotalesSpa = 0 Then
+                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
                     Else
-                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.LimeGreen)
-                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.LimeGreen)
+                        LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
                     End If
                 Case "Ultimo Mes"
                     ContadorCitas = Await GetCita.ContadorCitasPendientes
@@ -87,13 +108,13 @@ Public NotInheritable Class Frm_Inicio
                     LblCantidadMascotas.Text = ContadorMascotas
                     ContadorArticulos = Await GetArticulos.CountArticulosUltimoMes
                     LblArticulosVendidos.Text = ContadorArticulos
-                    VentasTotales = Await GetVenta.ConsultaVentaUltimoMes
-                    If VentasTotales = 0 Then
-                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
-                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    VentasTotalesSpa = Await GetVentaSpa.ConsultaVentaUltimoMes
+                    If VentasTotalesSpa = 0 Then
+                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
                     Else
-                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.LimeGreen)
-                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.LimeGreen)
+                        LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
                     End If
 
                 Case "Siempre"
@@ -105,13 +126,13 @@ Public NotInheritable Class Frm_Inicio
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotas
                     LblCantidadMascotas.Text = ContadorMascotas
-                    VentasTotales = Await GetVenta.ConsultaVentaTotalSpa
-                    If VentasTotales = 0 Then
-                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
-                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    VentasTotalesSpa = Await GetVentaSpa.ConsultaVentaTotalSpa
+                    If VentasTotalesSpa = 0 Then
+                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
                     Else
-                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.LimeGreen)
-                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.LimeGreen)
+                        LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
                     End If
             End Select
         Catch ex As Exception

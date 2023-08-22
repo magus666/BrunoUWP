@@ -70,14 +70,21 @@ Public NotInheritable Class Frm_CreaMascota
                 }
                 If Await GetCrudBrunoSpa.InsertarModelo(GetMascotaModel) = True Then
                     GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")
+
+                    Dim ObtenerMascotas = Await GetMascota.ConsultaMascotas()
+                    Dim IdUltimaMascota = ObtenerMascotas.LastOrDefault().Id_Mascota
+
+                    Select Case IdTipoMascota
+                        Case 1
+                            Await GetImagenMascota.InsertImagenMascota("Foto1", "https://sims4updates.net/wp-content/uploads/2018/03/7016-310x310.jpg", IdUltimaMascota)
+                        Case 2
+                            Await GetImagenMascota.InsertImagenMascota("Foto1", "https://farm2.staticflickr.com/1919/45579541712_f58c1fd0ed_o.jpg", IdUltimaMascota)
+                        Case 3
+                            Await GetImagenMascota.InsertImagenMascota("Foto1", "https://www.conejos.wiki/Imagenes/conejo-blanco.jpg", IdUltimaMascota)
+                    End Select
+
                     GetUtilitarios.LimpiarControles(StpPrincipal)
                 End If
-                Dim ObtenerMascotas = Await GetMascota.ConsultaMascotas()
-                Dim IdUltimaMascota = ObtenerMascotas.LastOrDefault().Id_Mascota
-                Await GetImagenMascota.InsertImagenMascota("Foto1", "https://sims4updates.net/wp-content/uploads/2018/03/7016-310x310.jpg", IdUltimaMascota)
-
-
-
                 'Await GetMascota.InsertarMascota(CodigoMascota, IdTipoMascota, IdRazaMascota, TxtNombreMascota.Text,
                 '                                 NbbEdad.Text, IdPropietario, TxtObservaciones.Text)
                 '    GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La Mascota se ha Guardado Con Exito.")

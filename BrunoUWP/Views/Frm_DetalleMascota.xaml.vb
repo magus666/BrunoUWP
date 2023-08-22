@@ -6,6 +6,7 @@ Imports Windows.Media.Protection.PlayReady
 ''' </summary>
 Public NotInheritable Class Frm_DetalleMascota
     Inherits Page
+    Dim GetUtilitarios As New Cl_Utilitarios
     Dim GetValidaciones As New Cl_Validaciones
     Dim GetMascota As New Cl_Mascota
     Dim GetImagenMascota As New Cl_ImagenMascota
@@ -42,6 +43,7 @@ Public NotInheritable Class Frm_DetalleMascota
             TxtCodigo.Text = DatosMascota.Codigo_Mascota
             TxtRaza.Text = DatosMascota.Nombre_Raza
             TxtNombre.Text = DatosMascota.Nombre_Mascota
+            TxtTituloNombreMascota.Text = DatosMascota.Nombre_Mascota
             NbbEdad.Value = DatosMascota.Edad_Mascota
             TxtPropietario.Text = DatosMascota.NombreCompleto_Persona
             TxtObservaciones.Text = DatosMascota.Observaciones_Mascota
@@ -93,12 +95,12 @@ Public NotInheritable Class Frm_DetalleMascota
     Public Function ValidaDatos() As Boolean
         Try
             If GetValidaciones.ValidaTextBoxVacio(TxtDescripcionImagen) = False Then
-                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El nombre de la mascota no puede estar Vacio", TxtDescripcionImagen)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La descripcion de la Imagen no puede quedar Vacia", TxtDescripcionImagen)
                 Return False
                 Exit Function
             End If
             If GetValidaciones.ValidaTextBoxVacio(TxtUrlImagen) = False Then
-                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "El nombre de la mascota no puede estar Vacio", TxtUrlImagen)
+                GetNotificaciones.ValidacionControlesTeachingTip(TctAlerta, "Alerta", "La URL de la imagen es Obligatoria", TxtUrlImagen)
                 Return False
                 Exit Function
             End If
@@ -120,6 +122,7 @@ Public NotInheritable Class Frm_DetalleMascota
                     FlvImagenMascota.ItemsSource = ObtenerImagenMascota
                     FlvImagenMascota.UpdateLayout()
                     GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La imagen se Guardó con Exito")
+                    GetUtilitarios.LimpiarControles(StpImagen)
                 Else
                     GetNotificaciones.AlertaAdvertenciaInfoBar(InfAlerta, "Advertencia", "Error al Guardar")
                 End If

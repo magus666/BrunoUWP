@@ -48,6 +48,18 @@ Public Class Cl_VentaArticulo
         End Try
     End Function
 
+    Public Async Function ConsultaVentaTotalArticulo() As Task(Of Double)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim ListaVenta = (From x In GetVenta
+                              Select x.Valor_VentaArticulo).Sum
+            Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
     Public Async Function CreaExcelVentaArticulo() As Task(Of Boolean)
         Try
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial

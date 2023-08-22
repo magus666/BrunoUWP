@@ -24,11 +24,12 @@
                 <RowDefinition Height="1.1*" />
                 <RowDefinition Height="5*" />
             </Grid.RowDefinitions>
-            <Image Source="/Assets/LogoBruno.png"
-               Grid.RowSpan="2"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Opacity="0.08"/>
+            <Image
+                Grid.RowSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Opacity="0.08"
+                Source="/Assets/LogoBruno.png" />
             <Grid Grid.Row="0" Margin="10,0,10,0">
                 <my:RadioButtons
                     x:Name="RdbTiempo"
@@ -205,25 +206,86 @@
                                 Grid.Column="0"
                                 BorderThickness="0"
                                 ProfilePicture="/Assets/Ventas.png" />
-                            <StackPanel
-                                Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Orientation="Vertical">
-                                <TextBlock
-                                    Margin="20,0,0,0"
-                                    FontSize="16"
-                                    FontStyle="Italic"
-                                    FontWeight="SemiBold">
-                                    <Run Text="Ganancias Totales" />
-                                </TextBlock>
-                                <TextBlock
-                                    Margin="20,0,0,0"
-                                    FontSize="30"
-                                    FontStyle="Italic"
-                                    FontWeight="Medium">
-                                    <Run x:Name="LblGananciasTotales" Foreground="LimeGreen" />
-                                </TextBlock>
-                            </StackPanel>
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Grid.Column="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Margin="60,0,0,0"
+                                            FontSize="16"
+                                            FontStyle="Italic"
+                                            FontWeight="SemiBold">
+                                            <Run Text="Spas" />
+                                        </TextBlock>
+                                        <TextBlock
+                                            Margin="20,0,0,0"
+                                            FontSize="20"
+                                            FontStyle="Italic"
+                                            FontWeight="Medium">
+                                            <Run x:Name="LblGananciasTotalesSpas" Foreground="LimeGreen" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Margin="40,0,0,0"
+                                            FontSize="16"
+                                            FontStyle="Italic"
+                                            FontWeight="SemiBold">
+                                            <Run Text="Articulos" />
+                                        </TextBlock>
+                                        <TextBlock
+                                            Margin="20,0,0,0"
+                                            FontSize="20"
+                                            FontStyle="Italic"
+                                            FontWeight="Medium">
+                                            <Run x:Name="LblGananciasTotalesArtculos" Foreground="LimeGreen" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="0">
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Margin="85,0,0,0"
+                                            FontSize="16"
+                                            FontStyle="Italic"
+                                            FontWeight="SemiBold">
+                                            <Run Text="Ventas Totales" />
+                                        </TextBlock>
+                                        <TextBlock
+                                            Margin="72,0,0,0"
+                                            FontSize="23"
+                                            FontStyle="Italic"
+                                            FontWeight="Medium">
+                                            <Run x:Name="LblGananciasTotales" Foreground="LimeGreen" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Grid
                             Width="435"
