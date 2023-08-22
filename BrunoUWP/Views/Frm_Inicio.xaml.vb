@@ -127,12 +127,30 @@ Public NotInheritable Class Frm_Inicio
                     ContadorMascotas = Await GetMascotas.CountMascotas
                     LblCantidadMascotas.Text = ContadorMascotas
                     VentasTotalesSpa = Await GetVentaSpa.ConsultaVentaTotalSpa
+                    VentasTotalesArticulos = Await GetVentaArticulo.ConsultaVentaTotalArticulo
+                    VentasTotales = VentasTotalesSpa + VentasTotalesArticulos
                     If VentasTotalesSpa = 0 Then
                         LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.Yellow)
                         LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
                     Else
-                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.LimeGreen)
+                        LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.CadetBlue)
                         LblGananciasTotalesSpas.Text = VentasTotalesSpa.ToString("c")
+                    End If
+
+                    If VentasTotalesArticulos = 0 Then
+                        LblGananciasTotalesArtculos.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotalesArtculos.Text = VentasTotalesArticulos.ToString("c")
+                    Else
+                        LblGananciasTotalesArtculos.Foreground = New SolidColorBrush(Colors.CadetBlue)
+                        LblGananciasTotalesArtculos.Text = VentasTotalesArticulos.ToString("c")
+                    End If
+
+                    If VentasTotales = 0 Then
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.Yellow)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
+                    Else
+                        LblGananciasTotales.Foreground = New SolidColorBrush(Colors.LimeGreen)
+                        LblGananciasTotales.Text = VentasTotales.ToString("c")
                     End If
             End Select
         Catch ex As Exception
