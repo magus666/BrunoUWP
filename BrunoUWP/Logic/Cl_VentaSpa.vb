@@ -48,6 +48,7 @@ Public Class Cl_VentaSpa
         End Try
     End Function
 
+#Region "Metodos Sumatorio Ventas"
     Public Async Function ConsultaVentaTotalSpa() As Task(Of Double)
         Try
             Await ConfiguraSqlite()
@@ -60,7 +61,7 @@ Public Class Cl_VentaSpa
         End Try
     End Function
 
-    Public Async Function ConsultaVentaUltimoDiaSpa() As Task(Of Double)
+    Public Async Function ConsultaVentaUltimoDia() As Task(Of Double)
         Try
             Await ConfiguraSqlite()
             Dim GetVenta = Await ConexionDB.Table(Of VentaSpaModel)().ToListAsync()
@@ -98,6 +99,7 @@ Public Class Cl_VentaSpa
             Throw New Exception(ex.Message)
         End Try
     End Function
+#End Region
 
     Public Async Function ConsultaVentaPorTipoTransaccionSpa(IdTipoTransaccion As Integer) As Task(Of List(Of VentaSpaModel))
         Try

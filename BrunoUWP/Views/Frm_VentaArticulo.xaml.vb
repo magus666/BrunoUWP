@@ -9,7 +9,7 @@ Public NotInheritable Class Frm_VentaArticulo
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Dim ObtenerVentaArticulo = Await GetVentaArticulo.ConsultaCantidadVentasTotales
+            Dim ObtenerVentaArticulo = Await GetVentaArticulo.ConsultaListaVentasTotales
             If ObtenerVentaArticulo.Count = 0 Then
                 NvvVentaArticulo.SelectedItem = NvmCreaVentaArticulo
                 MarcoTrabajo = FrmContenido

@@ -10,7 +10,6 @@ Public Class Cl_VentaArticulo
     Dim GetArticulo As New Cl_Articulo
     Dim GetPickers As New Cl_Pickers
 
-
     Public Async Function InsertVenta(CodigoVentaArticulo As String,
                                       FechaVentaArticulo As Date,
                                       IdTIpoTransaccion As Integer,
@@ -36,6 +35,19 @@ Public Class Cl_VentaArticulo
         End Try
     End Function
 
+    Public Async Function ConsultaListaVentasTotales() As Task(Of List(Of VentaArticuloModel))
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVentaArticulo = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim ListaVentaArticulo = (From x In GetVentaArticulo
+                                      Select x).ToList()
+            Return ListaVentaArticulo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+#Region "Contador de Ventas"
     Public Async Function CountCantidadVentas() As Task(Of Integer)
         Try
             Await ConfiguraSqlite()
@@ -87,19 +99,9 @@ Public Class Cl_VentaArticulo
             Throw New Exception(ex.Message)
         End Try
     End Function
+#End Region
 
-    Public Async Function ConsultaCantidadVentasTotales() As Task(Of List(Of VentaArticuloModel))
-        Try
-            Await ConfiguraSqlite()
-            Dim GetVentaArticulo = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
-            Dim ListaVentaArticulo = (From x In GetVentaArticulo
-                                      Select x).ToList()
-            Return ListaVentaArticulo
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
-    End Function
-
+#Region "Sumatoria de Ventas"
     Public Async Function SumatoriaValorVentaTotalArticulo() As Task(Of Double)
         Try
             Await ConfiguraSqlite()
@@ -112,6 +114,47 @@ Public Class Cl_VentaArticulo
         End Try
     End Function
 
+    Public Async Function SumatoriaValorVentaTotalArticuloUtimoDia() As Task(Of Double)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim ListaVenta = (From x In GetVenta
+                              Where x.Fecha_VentaArticulo >= Date.Now.AddDays(-1)
+                              Select x.Valor_VentaArticulo).Sum
+            Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function SumatoriaValorVentaTotalArticuloUtimaSemana() As Task(Of Double)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim ListaVenta = (From x In GetVenta
+                              Where x.Fecha_VentaArticulo >= Date.Now.AddDays(-7)
+                              Select x.Valor_VentaArticulo).Sum
+            Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function SumatoriaValorVentaTotalArticuloUtimoMes() As Task(Of Double)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVenta = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim ListaVenta = (From x In GetVenta
+                              Where x.Fecha_VentaArticulo >= Date.Now.AddMonths(-1)
+                              Select x.Valor_VentaArticulo).Sum
+            Return ListaVenta
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+#End Region
+
+#Region "Metodos Generar Excel"
     Public Async Function CreaExcelVentaArticulo() As Task(Of Boolean)
         Try
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial
@@ -119,7 +162,7 @@ Public Class Cl_VentaArticulo
             Dim oBook As ExcelWorkbook = xlPackage.Workbook
             Dim ws As ExcelWorksheet = oBook.Worksheets.Add("Venta Articulos")
 
-            Dim ObtenerVentaArticulo = Await ConsultaCantidadVentasTotales()
+            Dim ObtenerVentaArticulo = Await ConsultaListaVentasTotales()
             Dim ObtenerMetodoPago = Await GetMetodoPago.ConsultaMetodoPago()
             Dim ObtenerCategoriaArticulo = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
             Dim ObtenerTipoTransaccion = Await GetTipoTransaccion.ConsultaTipoTransaccion()
@@ -169,5 +212,6 @@ Public Class Cl_VentaArticulo
             Throw New Exception(ex.Message)
         End Try
     End Function
+#End Region
 
 End Class
