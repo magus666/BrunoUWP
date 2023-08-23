@@ -10,11 +10,15 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Button
-            x:Name="BtnClick"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Click="BtnClick_Click"
-            Content="Entrar" />
+        <StackPanel>
+            <TextBox x:Name="TxtNombres" Header="Nombres" />
+            <TextBox x:Name="TxtApellidos" Header="Apellidos" />
+            <TextBox x:Name="TxtCorreoElectronico" Header="Correo Electronico" />
+            <Button
+                x:Name="BtnClick"
+                Click="BtnClick_Click"
+                Content="Entrar" />
+        </StackPanel>
+
     </Grid>
 </Page>

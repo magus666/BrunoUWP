@@ -201,7 +201,7 @@
     <Compile Include="Models\TipoMascotaModel.vb" />
     <Compile Include="Models\TipoServicioModel.vb" />
     <Compile Include="Models\TipoTransaccionModel.vb" />
-    <Compile Include="Models\Usuario.vb" />
+    <Compile Include="Models\UsuarioModel.vb" />
     <Compile Include="Models\VentaArticuloModel.vb" />
     <Compile Include="Models\VentaSpaModel.vb" />
     <Compile Include="Views\Frm_Articulo.xaml.vb">

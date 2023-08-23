@@ -8,7 +8,7 @@ Imports System.Security.Principal
 Public NotInheritable Class Frm_Login
     Inherits Page
     Public Gonorrita As New Cl_MicrosoftPassportHelper
-    Dim _account As New Usuario
+    Dim _account As New UsuarioModel
     Dim Timer As DispatcherTimer = New DispatcherTimer
 
     Protected Overrides Async Sub OnNavigatedTo(ByVal e As NavigationEventArgs)

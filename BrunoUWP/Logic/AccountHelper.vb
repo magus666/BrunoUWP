@@ -8,7 +8,7 @@ Public NotInheritable Class AccountHelper
     ' For this tutorial we will just be storing accounts locally.
     Private Const USER_ACCOUNT_LIST_FILE_NAME As String = "accountlist.txt"
     Private Shared _accountListPath As String = Path.Combine(ApplicationData.Current.LocalFolder.Path, USER_ACCOUNT_LIST_FILE_NAME)
-    Public Shared AccountList As New List(Of Usuario)()
+    Public Shared AccountList As New List(Of UsuarioModel)()
 
     ''' <summary>
     ''' Create and save a useraccount list file. (Updating the old one)
@@ -28,7 +28,7 @@ Public NotInheritable Class AccountHelper
     ''' Gets the useraccount list file and deserializes it from XML to a list of useraccount objects.
     ''' </summary>
     ''' <returns>List of useraccount objects</returns>
-    Public Shared Async Function LoadAccountListAsync() As Task(Of List(Of Usuario))
+    Public Shared Async Function LoadAccountListAsync() As Task(Of List(Of UsuarioModel))
         If File.Exists(_accountListPath) Then
             Dim accountsFile As StorageFile = Await StorageFile.GetFileFromPathAsync(_accountListPath)
             Dim accountsXml As String = Await FileIO.ReadTextAsync(accountsFile)
@@ -43,7 +43,7 @@ Public NotInheritable Class AccountHelper
     ''' </summary>
     ''' <returns>XML formatted list of accounts</returns>
     Public Shared Function SerializeAccountListToXml() As String
-        Dim xmlizer As New XmlSerializer(GetType(List(Of Usuario)))
+        Dim xmlizer As New XmlSerializer(GetType(List(Of UsuarioModel)))
         Dim writer As New StringWriter()
         xmlizer.Serialize(writer, AccountList)
         Return writer.ToString()
@@ -54,15 +54,15 @@ Public NotInheritable Class AccountHelper
     ''' </summary>
     ''' <param name="listAsXml">XML formatted list of accounts</param>
     ''' <returns>List object of accounts</returns>
-    Public Shared Function DeserializeXmlToAccountList(ByVal listAsXml As String) As List(Of Usuario)
-        Dim xmlizer As New XmlSerializer(GetType(List(Of Usuario)))
+    Public Shared Function DeserializeXmlToAccountList(ByVal listAsXml As String) As List(Of UsuarioModel)
+        Dim xmlizer As New XmlSerializer(GetType(List(Of UsuarioModel)))
         Dim textreader As TextReader = New StreamReader(New MemoryStream(Encoding.UTF8.GetBytes(listAsXml)))
-        Return TryCast(xmlizer.Deserialize(textreader), List(Of Usuario))
+        Return TryCast(xmlizer.Deserialize(textreader), List(Of UsuarioModel))
     End Function
 
-    Public Shared Function AddAccount(username As String) As Usuario
+    Public Shared Function AddAccount(username As String) As UsuarioModel
         ' Create a new account with the username
-        Dim account As New Usuario With {.UserName = username}
+        Dim account As New UsuarioModel With {.Nombre_Usuario = username}
         ' Add it to the local list of accounts
         AccountList.Add(account)
         ' SaveAccountList and return the account
@@ -70,7 +70,7 @@ Public NotInheritable Class AccountHelper
         Return account
     End Function
 
-    Public Shared Sub RemoveAccount(account As Usuario)
+    Public Shared Sub RemoveAccount(account As UsuarioModel)
         ' Remove the account from the accounts list
         AccountList.Remove(account)
         ' Re save the updated list
