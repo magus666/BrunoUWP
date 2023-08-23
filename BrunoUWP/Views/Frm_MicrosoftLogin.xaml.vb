@@ -9,27 +9,24 @@ Imports Windows.UI.Composition
 ''' </summary>
 Public NotInheritable Class Frm_MicrosoftLogin
     Inherits Page
+    Private Shared ClientId As String = "edcddeac-b608-4c15-9ebd-c64101845274"
+    Private Shared RedirectUri As String = "https://login.microsoftonline.com/common/oauth2/nativeclient"
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
 
     End Sub
 
     Public Async Function SignInWithMicrosoftAsync() As Task(Of String)
-        Dim clientId As String = "e25cb291-29f9-4841-8bae-a9269cfad602" ' Reemplaza con tu Client ID
-        Dim scopes() As String = {"User.Read"} ' Los permisos que necesitas
-
-        Dim app = PublicClientApplicationBuilder.Create(clientId) _
-            .WithRedirectUri("msale25cb291-29f9-4841-8bae-a9269cfad602://auth").Build()
-
-        Dim accounts = Await app.GetAccountsAsync()
-
         Try
-            Dim result = Await app.AcquireTokenInteractive(scopes).WithUseEmbeddedWebView(True).WithAccount(accounts.FirstOrDefault()).ExecuteAsync()
+            Dim app = PublicClientApplicationBuilder.Create(ClientId) _
+            .WithRedirectUri(RedirectUri) _
+            .Build()
+            Dim scopes = New String() {"User.Read"}
 
-            Return result.AccessToken
+            Dim result = Await app.AcquireTokenInteractive(scopes) _
+                .ExecuteAsync()
         Catch ex As MsalException
-            ' Maneja errores de inicio de sesión
-            Return Nothing
+            Dim Mensaje = ex.Message
         End Try
     End Function
 

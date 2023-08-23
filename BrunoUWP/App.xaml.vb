@@ -56,7 +56,7 @@ NotInheritable Class App
                 ' Cuando no se restaura la pila de navegación, navegar a la primera página,
                 ' configurando la nueva página pasándole la información requerida como
                 'parámetro de navegación
-                rootFrame.Navigate(GetType(MainPage), e.Arguments)
+                rootFrame.Navigate(GetType(Frm_MicrosoftLogin), e.Arguments)
             End If
 
             ' Asegurarse de que la ventana actual está activa.
