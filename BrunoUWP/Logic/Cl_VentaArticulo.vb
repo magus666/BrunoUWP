@@ -36,7 +36,59 @@ Public Class Cl_VentaArticulo
         End Try
     End Function
 
-    Public Async Function ConsultaVenta() As Task(Of List(Of VentaArticuloModel))
+    Public Async Function CountCantidadVentas() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVentaArticulo = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim CountVentaArticulo = (From x In GetVentaArticulo
+                                      Where x.Fecha_VentaArticulo >= Date.Now.AddMonths(-1)
+                                      Select x).Count
+            Return CountVentaArticulo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function CountCantidadVentasUltimoDia() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVentaArticulo = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim CountVentaArticulo = (From x In GetVentaArticulo
+                                      Where x.Fecha_VentaArticulo >= Date.Now.AddDays(-1)
+                                      Select x).Count
+            Return CountVentaArticulo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function CountCantidadVentasUltimaSemana() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVentaArticulo = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim CountVentaArticulo = (From x In GetVentaArticulo
+                                      Where x.Fecha_VentaArticulo >= Date.Now.AddDays(-7)
+                                      Select x).Count
+            Return CountVentaArticulo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function CountCantidadVentasUltimoMes() As Task(Of Integer)
+        Try
+            Await ConfiguraSqlite()
+            Dim GetVentaArticulo = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
+            Dim CountVentaArticulo = (From x In GetVentaArticulo
+                                      Where x.Fecha_VentaArticulo >= Date.Now.AddMonths(-1)
+                                      Select x).Count
+            Return CountVentaArticulo
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    Public Async Function ConsultaCantidadVentasTotales() As Task(Of List(Of VentaArticuloModel))
         Try
             Await ConfiguraSqlite()
             Dim GetVentaArticulo = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
@@ -48,7 +100,7 @@ Public Class Cl_VentaArticulo
         End Try
     End Function
 
-    Public Async Function ConsultaVentaTotalArticulo() As Task(Of Double)
+    Public Async Function SumatoriaValorVentaTotalArticulo() As Task(Of Double)
         Try
             Await ConfiguraSqlite()
             Dim GetVenta = Await ConexionDB.Table(Of VentaArticuloModel)().ToListAsync()
@@ -67,7 +119,7 @@ Public Class Cl_VentaArticulo
             Dim oBook As ExcelWorkbook = xlPackage.Workbook
             Dim ws As ExcelWorksheet = oBook.Worksheets.Add("Venta Articulos")
 
-            Dim ObtenerVentaArticulo = Await ConsultaVenta()
+            Dim ObtenerVentaArticulo = Await ConsultaCantidadVentasTotales()
             Dim ObtenerMetodoPago = Await GetMetodoPago.ConsultaMetodoPago()
             Dim ObtenerCategoriaArticulo = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
             Dim ObtenerTipoTransaccion = Await GetTipoTransaccion.ConsultaTipoTransaccion()

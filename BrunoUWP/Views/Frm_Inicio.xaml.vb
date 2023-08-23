@@ -34,7 +34,7 @@ Public NotInheritable Class Frm_Inicio
             Dim ContadorCitas As Integer
             Dim ContadorSpasRealizados As Integer
             Dim ContadorClientes As Integer
-            Dim ContadorArticulos As Integer
+            Dim ContadorArticulosVendidos As Integer
             Dim VentasTotalesSpa As Double
             Dim VentasTotalesArticulos As Double
             Dim VentasTotales As Double
@@ -49,10 +49,10 @@ Public NotInheritable Class Frm_Inicio
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoDia
                     LblCantidadMascotas.Text = ContadorMascotas
-                    ContadorArticulos = Await GetArticulos.CountArticulosUltimoDia
-                    LblArticulosVendidos.Text = ContadorArticulos
+                    ContadorArticulosVendidos = Await GetVentaArticulo.CountCantidadVentasUltimoDia
+                    LblArticulosVendidos.Text = ContadorArticulosVendidos
                     VentasTotalesSpa = Await GetVentaSpa.ConsultaVentaUltimoDiaSpa
-                    VentasTotalesArticulos = Await GetVentaArticulo.ConsultaVentaTotalArticulo
+                    VentasTotalesArticulos = Await GetVentaArticulo.SumatoriaValorVentaTotalArticulo
                     VentasTotales = VentasTotalesSpa + VentasTotalesArticulos
                     If VentasTotalesSpa = 0 Then
                         LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.Yellow)
@@ -87,8 +87,8 @@ Public NotInheritable Class Frm_Inicio
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimaSemana
                     LblCantidadMascotas.Text = ContadorMascotas
-                    ContadorArticulos = Await GetArticulos.CountArticulosUltimaSemana
-                    LblArticulosVendidos.Text = ContadorArticulos
+                    ContadorArticulosVendidos = Await GetVentaArticulo.CountCantidadVentasUltimaSemana
+                    LblArticulosVendidos.Text = ContadorArticulosVendidos
                     VentasTotalesSpa = Await GetVentaSpa.ConsultaVentaUltimaSemana
                     If VentasTotalesSpa = 0 Then
                         LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.Yellow)
@@ -106,8 +106,8 @@ Public NotInheritable Class Frm_Inicio
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotaUltimoMes
                     LblCantidadMascotas.Text = ContadorMascotas
-                    ContadorArticulos = Await GetArticulos.CountArticulosUltimoMes
-                    LblArticulosVendidos.Text = ContadorArticulos
+                    ContadorArticulosVendidos = Await GetVentaArticulo.CountCantidadVentasUltimoMes
+                    LblArticulosVendidos.Text = ContadorArticulosVendidos
                     VentasTotalesSpa = Await GetVentaSpa.ConsultaVentaUltimoMes
                     If VentasTotalesSpa = 0 Then
                         LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.Yellow)
@@ -126,8 +126,10 @@ Public NotInheritable Class Frm_Inicio
                     LblClientes.Text = ContadorClientes
                     ContadorMascotas = Await GetMascotas.CountMascotas
                     LblCantidadMascotas.Text = ContadorMascotas
+                    ContadorArticulosVendidos = Await GetVentaArticulo.CountCantidadVentas
+                    LblArticulosVendidos.Text = ContadorArticulosVendidos
                     VentasTotalesSpa = Await GetVentaSpa.ConsultaVentaTotalSpa
-                    VentasTotalesArticulos = Await GetVentaArticulo.ConsultaVentaTotalArticulo
+                    VentasTotalesArticulos = Await GetVentaArticulo.SumatoriaValorVentaTotalArticulo
                     VentasTotales = VentasTotalesSpa + VentasTotalesArticulos
                     If VentasTotalesSpa = 0 Then
                         LblGananciasTotalesSpas.Foreground = New SolidColorBrush(Colors.Yellow)

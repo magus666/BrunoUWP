@@ -14,7 +14,7 @@ Public NotInheritable Class Frm_ConsultaVentaArticulo
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Dim ObtenerVentaArticulo = Await GetVentaArticulo.ConsultaVenta()
+            Dim ObtenerVentaArticulo = Await GetVentaArticulo.ConsultaCantidadVentasTotales()
             Dim ObtenerMetodoPago = Await GetMetodoPago.ConsultaMetodoPago()
             Dim ObtenerCategoriaArticulo = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
             Dim ObtenerTipoTransaccion = Await GetTipoTransaccion.ConsultaTipoTransaccion()
