@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="BrunoUWP.Frm_MicrosoftLogin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BrunoUWP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel>
+            <TextBox x:Name="TxtNombres" Header="Nombres" />
+            <TextBox x:Name="TxtApellidos" Header="Apellidos" />
+            <TextBox x:Name="TxtCorreoElectronico" Header="Correo Electronico" />
+            <Button
+                x:Name="BtnClick"
+                Click="BtnClick_Click"
+                Content="Entrar" />
+        </StackPanel>
+
+    </Grid>
+</Page>
