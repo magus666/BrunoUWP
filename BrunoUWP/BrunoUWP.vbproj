@@ -145,6 +145,7 @@
     <Compile Include="Logic\AccountHelper.vb" />
     <Compile Include="Logic\Cl_AgregaSignoPesos.vb" />
     <Compile Include="Logic\Cl_Articulo.vb" />
+    <Compile Include="Logic\Cl_CambioMoneda.vb" />
     <Compile Include="Logic\Cl_ColorLetraEstadoCita.vb" />
     <Compile Include="Logic\Cl_Auditoria.vb" />
     <Compile Include="Logic\Cl_BlobStorage.vb" />
@@ -169,6 +170,7 @@
     <Compile Include="Logic\Cl_VentaSpa.vb" />
     <Compile Include="Logic\Cl_VisibilidadBotonFinalizarCita.vb" />
     <Compile Include="Logic\Cl_WindowsHello.vb" />
+    <Compile Include="Logic\ICambioMoneda.vb" />
     <Compile Include="Logic\ICliente.vb" />
     <Compile Include="Logic\IModelo.vb" />
     <Compile Include="Logic\Cl_MicrosoftPassportHelper.vb" />

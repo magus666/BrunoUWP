@@ -13,6 +13,7 @@ Public NotInheritable Class Frm_VentaServicioSpa
     Dim GetMascota As New Cl_Mascota
     Dim GetPersona As New Cl_Cliente
     Dim GetFechaHora As New Cl_DateTime
+    Dim GetCambioMoneda As New Cl_CambioMoneda
     Dim GetTipoServicio As New Cl_TipoServicio
     Dim GetTipoMascota As New CL_TipoMascota
     Dim GetDimensionMascota As New Cl_DimensionMascota
@@ -244,8 +245,9 @@ Public NotInheritable Class Frm_VentaServicioSpa
                 BtnFinalizarServicio.Visibility = Visibility.Collapsed
             End If
 
-            LblValorTotal.Text = CalculaValorServicio(IdTipoServicioCIta, IdDimenensionMascota).ToString("C0")
-
+            'LblValorTotal.Text = CalculaValorServicio(IdTipoServicioCIta, IdDimenensionMascota).ToString("C0")
+            RetornoValor = GetCambioMoneda.CalculaValorServicio(IdTipoServicioCIta, IdDimenensionMascota)
+            LblValorTotal.Text = RetornoValor.ToString("C0")
 
         Catch ex As Exception
             GetNotificacionas.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)

@@ -1,5 +1,6 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
+Imports System.Globalization
 Imports Microsoft.AppCenter.Analytics
 Imports Microsoft.UI.Xaml.Controls
 Imports Windows.UI
@@ -15,11 +16,12 @@ Public NotInheritable Class Frm_Inicio
     Dim GetVentaArticulo As New Cl_VentaArticulo
     Dim GetCita As New Cl_Cita
     Dim GetNotificaciones As New Cl_Notificaciones
+    Dim GetCambioMoneda As New Cl_CambioMoneda
 
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-
+            Dim ObtenerValor = GetCambioMoneda.ConvertirPesosAEuros(34500)
             Dim ContadorMascotas As Integer = Await GetMascotas.CountMascotas
             LblCantidadMascotas.Text = ContadorMascotas
         Catch ex As Exception
