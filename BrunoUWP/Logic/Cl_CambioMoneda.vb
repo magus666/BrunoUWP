@@ -1,8 +1,4 @@
 ﻿Imports System.Globalization
-Imports Newtonsoft.Json
-Imports System.Net
-Imports RestSharp
-Imports Newtonsoft.Json.Linq
 
 Public Class Cl_CambioMoneda
     Implements ICambioMoneda
