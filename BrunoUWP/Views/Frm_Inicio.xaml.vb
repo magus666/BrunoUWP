@@ -16,7 +16,7 @@ Public NotInheritable Class Frm_Inicio
     Dim GetVentaArticulo As New Cl_VentaArticulo
     Dim GetCita As New Cl_Cita
     Dim GetNotificaciones As New Cl_Notificaciones
-    Dim GetCambioMoneda As New Cl_CambioMoneda
+    Dim GetCambioMoneda As New Cl_OperacionesContables
 
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)

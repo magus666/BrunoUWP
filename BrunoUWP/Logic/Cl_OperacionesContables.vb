@@ -1,9 +1,9 @@
 ﻿Imports System.Globalization
 
-Public Class Cl_CambioMoneda
-    Implements ICambioMoneda
+Public Class Cl_OperacionesContables
+    Implements IOpereacionesContables
 
-    Public Function CalculaValorServicio(TipoServicio As Integer, Optional DimensionoPerro As Integer = 0) As Integer Implements ICambioMoneda.CalculaValorServicio
+    Public Function CalculaValorServicio(TipoServicio As Integer, Optional DimensionoPerro As Integer = 0) As Integer Implements IOpereacionesContables.CalculaValorServicio
         Try
             Dim RetornoValor As Double
             Select Case TipoServicio
@@ -43,7 +43,7 @@ Public Class Cl_CambioMoneda
         End Try
     End Function
 
-    Public Function ConvertirPesosAEuros(Cantidad As Double) As Double Implements ICambioMoneda.ConvertirPesosAEuros
+    Public Function ConvertirPesosAEuros(Cantidad As Double) As Double Implements IOpereacionesContables.ConvertirPesosAEuros
         Try
             Dim regionInfo As New RegionInfo(Threading.Thread.CurrentThread.CurrentUICulture.LCID)
             Dim currencySymbol As String = regionInfo.ISOCurrencySymbol
