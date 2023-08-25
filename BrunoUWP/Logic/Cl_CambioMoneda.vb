@@ -43,7 +43,7 @@ Public Class Cl_CambioMoneda
         End Try
     End Function
 
-    Public Function ConvertirPesosAEuros(Cantidad As Integer) As Double Implements ICambioMoneda.ConvertirPesosAEuros
+    Public Function ConvertirPesosAEuros(Cantidad As Double) As Double Implements ICambioMoneda.ConvertirPesosAEuros
         Try
             Dim regionInfo As New RegionInfo(Threading.Thread.CurrentThread.CurrentUICulture.LCID)
             Dim currencySymbol As String = regionInfo.ISOCurrencySymbol
