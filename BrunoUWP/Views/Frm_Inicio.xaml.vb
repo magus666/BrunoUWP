@@ -12,6 +12,7 @@ Public NotInheritable Class Frm_Inicio
     Dim GetMascotas As New Cl_Mascota
     Dim GetClientes As New Cl_Cliente
     Dim GetArticulos As New Cl_Articulo
+    Dim GetApis As New Cl_ConsumirApiRickAndMorty
     Dim GetVentaSpa As New Cl_VentaSpa
     Dim GetVentaArticulo As New Cl_VentaArticulo
     Dim GetCita As New Cl_Cita
@@ -21,6 +22,7 @@ Public NotInheritable Class Frm_Inicio
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
+            Dim Gonorra As New ClienteModel
             Dim ObtenerValor = GetCambioMoneda.ConvertirPesosAEuros(34500)
             Dim ContadorMascotas As Integer = Await GetMascotas.CountMascotas
             LblCantidadMascotas.Text = ContadorMascotas

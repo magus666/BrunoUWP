@@ -145,6 +145,7 @@
     <Compile Include="Logic\AccountHelper.vb" />
     <Compile Include="Logic\Cl_AgregaSignoPesos.vb" />
     <Compile Include="Logic\Cl_Articulo.vb" />
+    <Compile Include="Logic\Cl_ConsumirApiRickAndMorty.vb" />
     <Compile Include="Logic\Cl_OperacionesContables.vb" />
     <Compile Include="Logic\Cl_ColorLetraEstadoCita.vb" />
     <Compile Include="Logic\Cl_Auditoria.vb" />
@@ -198,6 +199,7 @@
     <Compile Include="Logic\Md_ParametrizacionSqlite.vb" />
     <Compile Include="Models\PropiedadesModel.vb" />
     <Compile Include="Models\RazaModel.vb" />
+    <Compile Include="Models\RickAndMortyModel.vb" />
     <Compile Include="Models\TipoServicioMascotaModel.vb" />
     <Compile Include="Models\SexoModel.vb" />
     <Compile Include="Models\TipoMascotaModel.vb" />

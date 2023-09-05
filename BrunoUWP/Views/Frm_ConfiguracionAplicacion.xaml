@@ -54,49 +54,6 @@
                     </RelativePanel>
                 </controls:Expander.Content>
             </controls:Expander>
-            <TextBlock
-                x:Name="LblTituloInicio"
-                Margin="0,10,0,0"
-                Text="Inicio Automatico" />
-            <controls:Expander
-                x:Name="Expander2"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Stretch"
-                IsExpanded="True">
-                <controls:Expander.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon
-                            Margin="0,0,10,0"
-                            FontFamily="Segoe Fluent Icons"
-                            Glyph="&#xE7F4;" />
-                        <TextBlock x:Name="LblHeader" Text="Configuracion de Inicio" />
-                    </StackPanel>
-                </controls:Expander.Header>
-                <controls:Expander.Content>
-                    <RelativePanel>
-                        <ToggleSwitch
-                            x:Name="TglInicioAplicacion"
-                            VerticalAlignment="Center"
-                            OffContent="Inicio Automatico Desactivado"
-                            OnContent="Inicio Automatico activado"
-                            RelativePanel.AlignRightWithPanel="True"
-                            Toggled="TglInicioAplicacion_Toggled" />
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock
-                                x:Name="LblNombreInicio"
-                                VerticalAlignment="Center"
-                                FontSize="14"
-                                FontWeight="Bold"
-                                Text="Iniciar Automaticamente" />
-                            <TextBlock
-                                x:Name="LblDescripcion"
-                                VerticalAlignment="Center"
-                                FontSize="12"
-                                Text="Activa la casilla para iniciar la aplicacion al iniciar Windows" />
-                        </StackPanel>
-                    </RelativePanel>
-                </controls:Expander.Content>
-            </controls:Expander>
         </StackPanel>
     </Grid>
 </Page>
