@@ -20,7 +20,8 @@ Public NotInheritable Class Frm_ConfiguracionAplicacion
                     Case "Configuracion del Sistema"
                         RdbTema.SelectedIndex = 2
                 End Select
-                Dim Honorra = RdbTema.SelectedIndex
+            Else
+                RdbTema.SelectedIndex = 2
             End If
         Catch ex As Exception
 
