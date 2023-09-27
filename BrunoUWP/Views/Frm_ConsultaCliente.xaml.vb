@@ -1,6 +1,7 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
 Imports Microsoft.UI.Xaml.Controls
+Imports Windows.UI.Core
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -10,6 +11,28 @@ Public NotInheritable Class Frm_ConsultaCliente
     Dim GetNotificaciones As New Cl_Notificaciones
     Dim GetSexo As New Cl_Sexo
     Dim ListadoFinalClientes As List(Of ClienteModel)
+
+    Public Sub New()
+
+        ' Esta llamada es exigida por el diseñador.
+        InitializeComponent()
+        Me.NavigationCacheMode = NavigationCacheMode.Enabled
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+    End Sub
+
+    Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
+        MyBase.OnNavigatedTo(e)
+
+        Dim currentView = SystemNavigationManager.GetForCurrentView()
+
+        If Frame.CanGoBack Then
+            currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible
+        Else
+            currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed
+        End If
+    End Sub
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try

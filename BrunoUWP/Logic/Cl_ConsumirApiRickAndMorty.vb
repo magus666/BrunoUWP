@@ -14,7 +14,7 @@ Public Class Cl_ConsumirApiRickAndMorty
             Dim content = Await response.Content.ReadAsStringAsync()
             Dim json = JObject.Parse(content)
             Dim results = json("results")
-            Dim characters As New List(Of RickAndMortyModel)()
+            Dim characters As New List(Of RickAndMortyModel)
             For Each Resultado In results
                 Dim character As New RickAndMortyModel With {
                         .Nombre_Personaje = Resultado("name").ToString(),

@@ -12,10 +12,8 @@
     <Grid>
         <controls:NavigationView
             x:Name="NvwBruno"
-            BackRequested="NvwBruno_BackRequested"
             Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
-            IsBackButtonVisible="Visible"
-            IsBackEnabled="True"
+            IsBackButtonVisible="Collapsed"
             IsSettingsVisible="True"
             ItemInvoked="NvwBruno_ItemInvoked"
             PaneClosing="NvwBruno_PaneClosing"

@@ -79,22 +79,6 @@ Public NotInheritable Class MainPage
 
         End Try
     End Sub
-
-    Private Sub NvwBruno_BackRequested(sender As Microsoft.UI.Xaml.Controls.NavigationView, args As Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs)
-        Try
-            If ContenFrameMenu.CanGoBack Then
-                ContenFrameMenu.GoBack()
-                NvwBruno.SelectedItem = NviInicio
-                If Not ContenFrameMenu.CanGoBack Then
-                    NvwBruno.IsBackEnabled = False
-                End If
-            Else
-                NvwBruno.IsBackEnabled = True
-            End If
-        Catch ex As Exception
-
-        End Try
-    End Sub
     Public Sub IniciarTimerBackUp()
         Dim Timer As New DispatcherTimer()
         AddHandler Timer.Tick, AddressOf Timer_Tick

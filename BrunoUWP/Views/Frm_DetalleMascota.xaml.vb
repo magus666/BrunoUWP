@@ -1,6 +1,7 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
 Imports Windows.Media.Protection.PlayReady
+Imports Windows.UI.Core
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -55,6 +56,13 @@ Public NotInheritable Class Frm_DetalleMascota
                     TgsEstadoMascota.IsOn = False
             End Select
         End If
+        Dim currentView = SystemNavigationManager.GetForCurrentView()
+        currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible
+        AddHandler currentView.BackRequested, AddressOf backButton_Tapped
+    End Sub
+
+    Private Sub backButton_Tapped(sender As Object, e As BackRequestedEventArgs)
+        If Frame.CanGoBack Then Frame.GoBack()
     End Sub
 
     Private Sub BtnEditarEdad_Click(sender As Object, e As RoutedEventArgs)
