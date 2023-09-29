@@ -12,33 +12,45 @@ Public NotInheritable Class Frm_DetalleCliente
     Dim IdCliente As Integer
 
     Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
-        MyBase.OnNavigatedTo(e)
-        Dim DatosCliente As ClienteModel = TryCast(e.Parameter, ClienteModel)
-        If DatosCliente IsNot Nothing Then
-            IdCliente = DatosCliente.Id_Persona
-            TxtCodigo.Text = DatosCliente.Codigo_Cliente
-            TxtDocumento.Text = DatosCliente.Documento_Persona
-            TxtNombres.Text = DatosCliente.Nombre_Persona
-            TxtApellidos.Text = DatosCliente.Apellido_Persona
-            TxtDireccion.Text = DatosCliente.Direccion_Persona
-            TxtTelefono.Text = DatosCliente.Telefono_Persona
-            TxtCorreo.Text = DatosCliente.Correo_Persona
-            NbbEdad.Value = DatosCliente.Edad_Persona
-            Dim EstadoCliente = DatosCliente.Estado_Cliente
-            Select Case EstadoCliente
-                Case 1
-                    TgsEstadoCliente.IsOn = True
-                Case 0
-                    TgsEstadoCliente.IsOn = False
-            End Select
-        End If
-        Dim currentView = SystemNavigationManager.GetForCurrentView()
-        currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible
-        AddHandler currentView.BackRequested, AddressOf backButton_Tapped
+        Try
+            MyBase.OnNavigatedTo(e)
+            Dim DatosCliente As ClienteModel = TryCast(e.Parameter, ClienteModel)
+            If DatosCliente IsNot Nothing Then
+                IdCliente = DatosCliente.Id_Persona
+                TxtCodigo.Text = DatosCliente.Codigo_Cliente
+                TxtDocumento.Text = DatosCliente.Documento_Persona
+                TxtNombres.Text = DatosCliente.Nombre_Persona
+                TxtApellidos.Text = DatosCliente.Apellido_Persona
+                TxtDireccion.Text = DatosCliente.Direccion_Persona
+                TxtTelefono.Text = DatosCliente.Telefono_Persona
+                TxtCorreo.Text = DatosCliente.Correo_Persona
+                NbbEdad.Value = DatosCliente.Edad_Persona
+                Dim EstadoCliente = DatosCliente.Estado_Cliente
+                Select Case EstadoCliente
+                    Case 1
+                        TgsEstadoCliente.IsOn = True
+                    Case 0
+                        TgsEstadoCliente.IsOn = False
+                End Select
+            End If
+            Dim currentView = SystemNavigationManager.GetForCurrentView()
+            currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible
+            AddHandler currentView.BackRequested, AddressOf backButton_Tapped
+        Catch ex As Exception
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
+        End Try
     End Sub
 
     Private Sub backButton_Tapped(sender As Object, e As BackRequestedEventArgs)
-        If Frame.CanGoBack Then Frame.GoBack()
+        Try
+            If Frame.CanGoBack Then
+                Frame.GoBack()
+            End If
+        Catch ex As Exception
+            MensajeError = "- [" & Date.Now & "]" & vbCrLf & "Metodo" & vbCrLf & Me.GetType.FullName() & vbCrLf & "Mensaje de Error" & vbCrLf & ex.Message
+            GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
+        End Try
     End Sub
 
     Private Sub BtnEditarTelefono_Click(sender As Object, e As RoutedEventArgs)
@@ -121,6 +133,4 @@ Public NotInheritable Class Frm_DetalleCliente
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", MensajeError)
         End Try
     End Sub
-
-
 End Class
