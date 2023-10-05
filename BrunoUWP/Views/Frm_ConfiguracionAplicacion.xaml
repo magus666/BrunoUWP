@@ -31,13 +31,34 @@
                 HorizontalContentAlignment="Stretch"
                 IsExpanded="True">
                 <controls:Expander.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon
-                            Margin="0,0,10,0"
-                            FontFamily="Segoe Fluent Icons"
-                            Glyph="&#xE2B1;" />
-                        <TextBlock x:Name="LblHeaderApariencia" Text="Tema de la Aplicacion" />
-                    </StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <FontIcon
+                                Margin="0,0,10,0"
+                                FontFamily="Segoe Fluent Icons"
+                                Glyph="&#xE2B1;" />
+                            <TextBlock
+                                x:Name="LblHeaderApariencia"
+                                VerticalAlignment="Center"
+                                Text="Tema de la Aplicacion" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                            <Button
+                                x:Name="BtnAbrirConfiguracion"
+                                Click="BtnAbrirConfiguracion_Click"
+                                Content="Abrir Configuracion" />
+                        </StackPanel>
+                    </Grid>
                 </controls:Expander.Header>
                 <controls:Expander.Content>
                     <RelativePanel>

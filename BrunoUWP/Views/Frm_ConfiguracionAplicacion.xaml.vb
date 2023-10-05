@@ -24,7 +24,7 @@ Public NotInheritable Class Frm_ConfiguracionAplicacion
                 RdbTema.SelectedIndex = 2
             End If
         Catch ex As Exception
-
+            Dim MensajeError = ex.Message
         End Try
     End Sub
 
@@ -43,6 +43,19 @@ Public NotInheritable Class Frm_ConfiguracionAplicacion
             Dim localSettings As ApplicationDataContainer = ApplicationData.Current.LocalSettings
             localSettings.Values("TemaSeleccionado") = SeleccionRadio
 
+        Catch ex As Exception
+            Dim MensajeError = ex.Message
+        End Try
+    End Sub
+
+    Private Async Sub BtnAbrirConfiguracion_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim NombreAplicacion = "ms-settings:personalization-colors"
+            Dim uri As New Uri(NombreAplicacion)
+            Dim success As Boolean = Await Windows.System.Launcher.LaunchUriAsync(uri)
+            If success = False Then
+                Dim RetornoMensaje = "No se puedo abrir"
+            End If
         Catch ex As Exception
             Dim MensajeError = ex.Message
         End Try
