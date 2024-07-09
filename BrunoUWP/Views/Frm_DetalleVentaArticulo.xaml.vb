@@ -1,4 +1,7 @@
 ﻿' La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
+Imports Microsoft.Toolkit.Uwp.Notifications
+Imports Microsoft
+
 ''' <summary>
 ''' Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 ''' </summary>
@@ -145,6 +148,7 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La venta se realizó con Exito")
                 VolverAtras()
             End If
+            CrearNotificacion()
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
         End Try
@@ -155,4 +159,22 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
             Frame.GoBack()
         End If
     End Sub
+
+    Public Sub CrearNotificacion()
+        Try
+            Dim ContenidoToast As New ToastContentBuilder()
+            ContenidoToast.AddArgument("Action", "Buena la rata")
+            ContenidoToast.AddArgument("IdToast", 12)
+            ContenidoToast.AddText("Exito")
+            ContenidoToast.AddText("Se generó el Pago Correctamente")
+            ContenidoToast.AddInlineImage(New Uri("ms-appx:///Assets/ImagenJuguete.jpeg"))
+            ContenidoToast.AddAppLogoOverride(New Uri("ms-appx:///Assets/mascotas.png"), ToastGenericAppLogoCrop.Circle)
+            ContenidoToast.Show()
+        Catch ex As Exception
+            Dim Mensaje = ex.Message
+            Dim Retorno = Mensaje
+        End Try
+    End Sub
+
+
 End Class
