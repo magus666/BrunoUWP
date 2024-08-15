@@ -1,11 +1,12 @@
 ﻿Public Class RickAndMortyModel
     Public Property Nombre_Personaje As String
+    Public Property name As String
+    Public Property status As String
     Public Property Imagen_Personaje As String
-    Public Property Origen_Personaje As Origen
-
-    Public Class Origen
-        Public Property Nombre_Origen As String
-        Public Property Imagen_Origen As String
+    Public Property origin As original
+    Public Class original
+        Public Property name As String
+        Public Property url As String
 
     End Class
 

@@ -19,9 +19,9 @@ Public Class Cl_ConsumirApiRickAndMorty
                 Dim character As New RickAndMortyModel With {
                         .Nombre_Personaje = Resultado("name").ToString(),
                         .Imagen_Personaje = Resultado("image").ToString(),
-                        .Origen_Personaje = New RickAndMortyModel.Origen With {
-                            .Nombre_Origen = Resultado("origin")("name").ToString(),
-                            .Imagen_Origen = Resultado("origin")("url").ToString()
+                        .origin = New RickAndMortyModel.original With {
+                            .name = Resultado("origin")("name").ToString(),
+                            .url = Resultado("origin")("url").ToString()
                         }
                 }
                 characters.Add(character)
@@ -88,5 +88,24 @@ Public Class Cl_ConsumirApiRickAndMorty
         Dim base64EncodedAuthenticationString As String = Convert.ToBase64String(Encoding.ASCII.GetBytes(authenticationString))
         client.DefaultRequestHeaders.Authorization = New AuthenticationHeaderValue("Basic", base64EncodedAuthenticationString)
         Return client
+    End Function
+
+    'Otra Forma de consumir Api
+    Private ReadOnly _httpClient As HttpClient
+    Public Sub New()
+        _httpClient = New HttpClient()
+    End Sub
+
+    Public Async Function GetCharacterAsync(characterId As Integer) As Task(Of RickAndMortyModel)
+        Dim apiUrl As String = $"https://rickandmortyapi.com/api/character/{characterId}"
+        Dim response = Await _httpClient.GetAsync(apiUrl)
+
+        If response.IsSuccessStatusCode Then
+            Dim content = Await response.Content.ReadAsStringAsync()
+            Dim Jason = JsonConvert.DeserializeObject(Of RickAndMortyModel)(content)
+            Return Jason
+        End If
+
+        Return Nothing ' Maneja errores según tus necesidades
     End Function
 End Class
