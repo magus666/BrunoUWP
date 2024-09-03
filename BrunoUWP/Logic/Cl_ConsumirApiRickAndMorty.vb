@@ -21,7 +21,7 @@ Public Class Cl_ConsumirApiRickAndMorty
                         .Imagen_Personaje = Resultado("image").ToString(),
                         .origin = New RickAndMortyModel.original With {
                             .name = Resultado("origin")("name").ToString(),
-                            .url = Resultado("origin")("url").ToString()
+                            .image = Resultado("origin")("image").ToString()
                         }
                 }
                 characters.Add(character)
