@@ -10,4 +10,8 @@
 
     End Class
 
+    Public Class RickAndMortyResponse
+        Public Property results As List(Of RickAndMortyModel)
+    End Class
+
 End Class

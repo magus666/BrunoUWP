@@ -32,6 +32,16 @@ Public Class Cl_ConsumirApiRickAndMorty
         End If
     End Function
 
+    'Funcion obtimizada para obtener a rick and morty
+    'Public Async Function GetRickAndMorty() As Task(Of RickAndMortyModel)
+    '    Dim Url As String = "https://rickandmortyapi.com/api/character"
+    '    Dim httpClient As New HttpClient()
+    '    Dim response As HttpResponseMessage = Await httpClient.GetAsync(Url)
+    '    Dim content = Await response.Content.ReadAsStringAsync()
+    '    Dim rickAndMorty = JsonSerializer.Deserialize(Of RickAndMortyModel)(content)
+    '    Return rickAndMorty
+    'End Function
+
     Public Async Function GetClienteAsync(Usuario As String, Clave As String) As Task(Of String)
         Try
             Dim NombreCliente As String = ""
