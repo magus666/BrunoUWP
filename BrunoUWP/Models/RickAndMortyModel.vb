@@ -4,14 +4,13 @@
     Public Property status As String
     Public Property Imagen_Personaje As String
     Public Property origin As original
+
     Public Class original
         Public Property name As String
-        Public Property url As String
-
+        Public Property image As String
     End Class
 
     Public Class RickAndMortyResponse
-        Public Property results As List(Of RickAndMortyModel)
+        Public Property results As ObservableCollection(Of RickAndMortyModel)
     End Class
-
 End Class
