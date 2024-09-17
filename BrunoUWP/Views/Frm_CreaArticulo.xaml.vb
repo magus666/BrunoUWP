@@ -32,7 +32,7 @@ Public NotInheritable Class Frm_CreaArticulo
             If ValidaDatos() = True Then
                 Dim CantidadExistencias = NmbCantidadExistenciasArticulo.Value
                 Dim CantidadExistenciasVendidas = 0
-                If Await GetArticulo.InsertarArticulo(CodigoArticulo, TxtNombreArticulo.Text, TxtMarcaArticulo.Text,
+                If Await GetArticulo.IArticulo_InsertarArticulo(CodigoArticulo, TxtNombreArticulo.Text, TxtMarcaArticulo.Text,
                                                       TxtDescripcionArticulo.Text, TxtValorArticulo.Text,
                                                       CantidadExistencias, CantidadExistenciasVendidas, Date.Now, IdMaestroArticulo) = True Then
                     GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El Articulo se ha creado con Exito.")

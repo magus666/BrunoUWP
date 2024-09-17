@@ -18,7 +18,7 @@ Public NotInheritable Class Frm_ConsultaVentaArticulo
             Dim ObtenerMetodoPago = Await GetMetodoPago.ConsultaMetodoPago()
             Dim ObtenerCategoriaArticulo = Await GetCategoriaArticulo.ConsultaCategoriaArticulo
             Dim ObtenerTipoTransaccion = Await GetTipoTransaccion.ConsultaTipoTransaccion()
-            Dim ObtenerArticulo = Await GetArticulo.ConsultaArticulos()
+            Dim ObtenerArticulo = Await GetArticulo.IArticulo_ConsultaArticulos()
             Dim RetornoVentaArticulo = (From Var In ObtenerVentaArticulo
                                         Join Mpg In ObtenerMetodoPago On
                                             Var.Id_MetodoPago Equals Mpg.Id_MetodoPago

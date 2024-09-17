@@ -135,13 +135,13 @@ Public NotInheritable Class Frm_DetalleVentaArticulo
 
     Private Async Sub BtnGuardarVenta_Click(sender As Object, e As RoutedEventArgs)
         Try
-            Dim ObtenerArticulo = Await GetArticulo.ConsultaArticulos
+            Dim ObtenerArticulo = Await GetArticulo.IArticulo_ConsultaArticulos
             Dim RetornoArticulo = (From Art In ObtenerArticulo
                                    Where Art.Id_Articulo = IdArticulo
                                    Select Art).FirstOrDefault
             Dim GetExsitenciaArticulo = RetornoArticulo.CantidadTotalVenta_Articulo
             Dim NumeroRealVentaArticulo = GetExsitenciaArticulo + CantidadComprada
-            Await GetArticulo.ActualizarArticulo(IdArticulo, ValorUnitario, ExistenciasNuevo, NumeroRealVentaArticulo)
+            Await GetArticulo.IArticulo_ActualizarArticulo(IdArticulo, ValorUnitario, ExistenciasNuevo, NumeroRealVentaArticulo)
 
             Dim CodigoVenta As String = GetUtilitarios.GenearCodigoVenta
             If Await GetVentaArticulo.InsertVenta(CodigoVenta, Date.Now, 2, CantidadComprada, IdMetodoPago, ValorTotal, IdArticulo) = True Then

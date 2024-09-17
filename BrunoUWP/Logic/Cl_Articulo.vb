@@ -4,17 +4,10 @@ Imports OfficeOpenXml.Table
 Imports Windows.Storage
 
 Public Class Cl_Articulo
+    Implements IArticulo
     Dim GetPickers As New Cl_Pickers
 
-    Public Async Function InsertarArticulo(CodigoArticulo As String,
-                                           NombreArticulo As String,
-                                           MarcaArticulo As String,
-                                           DescripcionArticulo As String,
-                                           ValorArticulo As Double,
-                                           CantidadArticulo As Integer,
-                                           CantidadTotalVentaArticulo As Integer,
-                                           FechaCreacionArticulo As Date,
-                                           IdMaestroArticulo As Integer) As Task(Of Boolean)
+    Public Async Function IArticulo_InsertarArticulo(CodigoArticulo As String, NombreArticulo As String, MarcaArticulo As String, DescripcionArticulo As String, ValorArticulo As Double, CantidadArticulo As Integer, CantidadTotalVentaArticulo As Integer, FechaCreacionArticulo As Date, IdMaestroArticulo As Integer) As Task(Of Boolean) Implements IArticulo.InsertarArticulo
         Try
             Await ConfiguraSqlite()
             Dim Articulo = New ArticuloModel With {
@@ -35,10 +28,7 @@ Public Class Cl_Articulo
         End Try
     End Function
 
-    Public Async Function ActualizarArticulo(IdArticulo As Integer,
-                                             ValorArticulo As Double,
-                                             CantidadArticulo As Integer,
-                                             CantidadTotalVentaArticulo As Integer) As Task(Of Boolean)
+    Public Async Function IArticulo_ActualizarArticulo(IdArticulo As Integer, ValorArticulo As Double, CantidadArticulo As Integer, CantidadTotalVentaArticulo As Integer) As Task(Of Boolean) Implements IArticulo.ActualizarArticulo
         Try
             Await ConfiguraSqlite()
             Dim GetArticulo = Await ConexionDB.Table(Of ArticuloModel)().ToListAsync()
@@ -59,7 +49,7 @@ Public Class Cl_Articulo
         End Try
     End Function
 
-    Public Async Function ConsultaArticulos() As Task(Of List(Of ArticuloModel))
+    Public Async Function IArticulo_ConsultaArticulos() As Task(Of List(Of ArticuloModel)) Implements IArticulo.ConsultaArticulos
         Try
             Await ConfiguraSqlite()
             Dim GetArticulo = Await ConexionDB.Table(Of ArticuloModel)().ToListAsync()
@@ -71,7 +61,7 @@ Public Class Cl_Articulo
         End Try
     End Function
 
-    Public Async Function CountArticulosUltimoDia() As Task(Of Integer)
+    Public Async Function IArticulo_CountArticulosUltimoDia() As Task(Of Integer) Implements IArticulo.CountArticulosUltimoDia
         Try
             Await ConfiguraSqlite()
             Dim GetArticulo = Await ConexionDB.Table(Of ArticuloModel)().ToListAsync()
@@ -84,7 +74,7 @@ Public Class Cl_Articulo
         End Try
     End Function
 
-    Public Async Function CountArticulosUltimaSemana() As Task(Of Integer)
+    Public Async Function IArticulo_CountArticulosUltimaSemana() As Task(Of Integer) Implements IArticulo.CountArticulosUltimaSemana
         Try
             Await ConfiguraSqlite()
             Dim GetArticulo = Await ConexionDB.Table(Of ArticuloModel)().ToListAsync()
@@ -97,7 +87,7 @@ Public Class Cl_Articulo
         End Try
     End Function
 
-    Public Async Function CountArticulosUltimoMes() As Task(Of Integer)
+    Public Async Function IArticulo_CountArticulosUltimoMes() As Task(Of Integer) Implements IArticulo.CountArticulosUltimoMes
         Try
             Await ConfiguraSqlite()
             Dim GetArticulo = Await ConexionDB.Table(Of ArticuloModel)().ToListAsync()
@@ -110,7 +100,7 @@ Public Class Cl_Articulo
         End Try
     End Function
 
-    Public Async Function CreaExcelArticulo() As Task(Of Boolean)
+    Public Async Function IArticulo_CreaExcelArticulo() As Task(Of Boolean) Implements IArticulo.CreaExcelArticulo
         Try
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial
             Dim xlPackage As New ExcelPackage()
@@ -118,7 +108,7 @@ Public Class Cl_Articulo
             Dim ws As ExcelWorksheet = oBook.Worksheets.Add("Clientes")
 
             Dim GetCLiente As New List(Of ClienteModel)
-            Dim ListaArticulos = Await ConsultaArticulos()
+            Dim ListaArticulos = Await IArticulo_ConsultaArticulos()
             Dim ListaFiltrada = (From x In ListaArticulos
                                  Order By x.Nombre_Articulo
                                  Select Codigo = x.Codigo_Articulo,

@@ -47,7 +47,7 @@ Public NotInheritable Class Frm_CreaVentaArticulo
                 LblMensajeArticulo.Visibility = Visibility.Collapsed
                 GrvListadoArticulos.Visibility = Visibility.Visible
                 IdMaestroArticulo = ItemSeleccionado.Id_MaestroArticulo
-                Dim ObtenerArticulos = Await GetArticulos.ConsultaArticulos()
+                Dim ObtenerArticulos = Await GetArticulos.IArticulo_ConsultaArticulos()
                 Dim GetListaArticulos = (From Art In ObtenerArticulos
                                          Where Art.Id_MaestroArticulo = IdMaestroArticulo).ToList
                 GrvListadoArticulos.ItemsSource = GetListaArticulos

@@ -14,7 +14,7 @@ Public NotInheritable Class Frm_ConsultaArticulo
 
     Private Async Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
         Try
-            Dim CargaArticulos = Await GetArticulos.ConsultaArticulos()
+            Dim CargaArticulos = Await GetArticulos.IArticulo_ConsultaArticulos()
             If CargaArticulos.Count = 0 Then
                 LblTituloCreacionArticulo.Visibility = Visibility.Visible
                 DtgArticulos.Visibility = Visibility.Collapsed
@@ -38,7 +38,7 @@ Public NotInheritable Class Frm_ConsultaArticulo
                 IdMaestroArticulo = 0
             Else
                 IdMaestroArticulo = selectedItem.Id_MaestroArticulo
-                Dim Articulo = Await GetArticulos.ConsultaArticulos
+                Dim Articulo = Await GetArticulos.IArticulo_ConsultaArticulos
                 Dim ListaRetornoArticulo = (From Mar In Articulo
                                             Where Mar.Id_MaestroArticulo = IdMaestroArticulo
                                             Select Mar).ToList
@@ -52,7 +52,7 @@ Public NotInheritable Class Frm_ConsultaArticulo
     Private Async Sub AppBarButton_Click(sender As Object, e As RoutedEventArgs)
         Try
             PgrGeneraExcel.IsActive = True
-            If Await GetArticulos.CreaExcelArticulo = True Then
+            If Await GetArticulos.IArticulo_CreaExcelArticulo = True Then
                 PgrGeneraExcel.IsActive = False
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "La informacion Se exportó con exito a Excel")
             Else
@@ -81,17 +81,17 @@ Public NotInheritable Class Frm_ConsultaArticulo
 
     Private Async Sub CtdModificaArticulo_PrimaryButtonClick(sender As ContentDialog, args As ContentDialogButtonClickEventArgs)
         Try
-            Dim CargaArticulos = Await GetArticulos.ConsultaArticulos()
+            Dim CargaArticulos = Await GetArticulos.IArticulo_ConsultaArticulos()
             Dim RetornoArticulos = (From Art In CargaArticulos
                                     Where Art.Id_Articulo = IdArticulo
                                     Select Art).FirstOrDefault
 
             Dim CantidadNuevaArticulos = CInt(TxtCantidadArticuloDialog.Text)
             Dim CantidadTotalArticulos As Integer = RetornoArticulos.CantidadTotalVenta_Articulo
-            If Await GetArticulos.ActualizarArticulo(IdArticulo, TxtValorArticuloDialog.Text,
+            If Await GetArticulos.IArticulo_ActualizarArticulo(IdArticulo, TxtValorArticuloDialog.Text,
                                                      CantidadNuevaArticulos, CantidadTotalArticulos) = True Then
                 GetNotificaciones.AlertaExitoInfoBar(InfAlerta, "Exito", "El articulo se ha Actualizado con exito")
-                DtgArticulos.ItemsSource = Await GetArticulos.ConsultaArticulos()
+                DtgArticulos.ItemsSource = Await GetArticulos.IArticulo_ConsultaArticulos()
             End If
         Catch ex As Exception
             GetNotificaciones.AlertaErrorInfoBar(InfAlerta, "Error", ex.Message)
@@ -100,7 +100,7 @@ Public NotInheritable Class Frm_ConsultaArticulo
 
     Private Async Sub DtgArticulos_Sorting(sender As Object, e As DataGridColumnEventArgs)
         Try
-            Dim ObtenerDatos = Await GetArticulos.ConsultaArticulos
+            Dim ObtenerDatos = Await GetArticulos.IArticulo_ConsultaArticulos
 
             Dim Columna As String = e.Column.Tag.ToString
 
