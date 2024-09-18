@@ -41,6 +41,7 @@
                     GridLinesVisibility="Horizontal"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
+                    Sorting="DtgVentaArticulo_Sorting"
                     SelectionMode="Extended">
                     <controls:DataGrid.Columns>
                         <controls:DataGridTextColumn
@@ -62,11 +63,11 @@
                         <controls:DataGridTextColumn
                             Binding="{Binding NombreArticulo}"
                             Header="Nombre Articulo"
-                            Tag="Mascota" />
+                            Tag="NombreArticulo" />
                         <controls:DataGridTextColumn
                             Binding="{Binding Cantidad}"
                             Header="Cantidad"
-                            Tag="Prpietario" />
+                            Tag="Cantidad" />
                         <controls:DataGridTextColumn
                             Binding="{Binding MetodoPago}"
                             Header="Metodo de Pago"
